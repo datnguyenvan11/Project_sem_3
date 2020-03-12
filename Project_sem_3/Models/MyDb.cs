@@ -14,7 +14,7 @@ namespace Project_sem_3.Models
         // For more information refer to the documentation:
         // http://msdn.microsoft.com/en-us/data/jj591621.aspx
 
-        public MyDb() : base("name=DefaultConnection")
+        public MyDb() : base("name=MyDbContext")
         {
         }
 
