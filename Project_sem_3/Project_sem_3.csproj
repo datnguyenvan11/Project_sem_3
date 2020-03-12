@@ -420,8 +420,6 @@
     <Content Include="Content\__MACOSX\sass\layout\.__header.scss" />
     <Content Include="Content\__MACOSX\sass\libs\._bootstrap-grid" />
     <Content Include="Content\__MACOSX\sass\libs\.__components.scss" />
-      
-
     <Content Include="Content\__MACOSX\sass\libs\.__global.scss" />
     <Content Include="Content\__MACOSX\sass\libs\.__mixins.scss" />
     <Content Include="Content\__MACOSX\sass\libs\.__normalize.scss" />
@@ -451,16 +449,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\HouseInsurance.cshtml" />
     <Content Include="Views\Home\MotorInsurance.cshtml" />
     <Content Include="Views\Home\MedicalInsurance.cshtml" />
     <Content Include="Views\Home\lifeInsurance.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Contract\Index.cshtml" />
@@ -472,10 +465,12 @@
     <Content Include="Views\MedicalInsurance\Information.cshtml" />
     <Content Include="Views\MedicalInsurance\Order.cshtml" />
     <Content Include="Views\Accounts\Login.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-      <Folder Include="Content\sass\pages\" />
+    <Folder Include="Content\sass\pages\" />
     <Folder Include="Views\AccoutRole\" />
   </ItemGroup>
   <ItemGroup>
