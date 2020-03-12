@@ -166,16 +166,37 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\AccoutRoleController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\HomeInsuranceController.cs" />
+    <Compile Include="Controllers\MedicalInsuranceController.cs" />
+    <Compile Include="Controllers\MotorInsuranceController.cs" />
+    <Compile Include="Controllers\MotorCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Migrations\202003120413377_tesst.cs" />
+    <Compile Include="Migrations\202003120413377_tesst.Designer.cs">
+      <DependentUpon>202003120413377_tesst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountRole.cs" />
+    <Compile Include="Models\Contract.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\MedicalInsurance.cs" />
+    <Compile Include="Models\HouseInsurance.cs" />
+    <Compile Include="Models\Insurance.cs" />
+    <Compile Include="Models\InsurancePackage.cs" />
+    <Compile Include="Models\LifeInsurance.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MotorCartItem.cs" />
+    <Compile Include="Models\MotorInsurance.cs" />
+    <Compile Include="Models\MotorShopingCart.cs" />
+    <Compile Include="Models\MyDb.cs" />
+    <Compile Include="Models\Programme.cs" />
+    <Compile Include="Models\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -399,6 +420,8 @@
     <Content Include="Content\__MACOSX\sass\layout\.__header.scss" />
     <Content Include="Content\__MACOSX\sass\libs\._bootstrap-grid" />
     <Content Include="Content\__MACOSX\sass\libs\.__components.scss" />
+      
+
     <Content Include="Content\__MACOSX\sass\libs\.__global.scss" />
     <Content Include="Content\__MACOSX\sass\libs\.__mixins.scss" />
     <Content Include="Content\__MACOSX\sass\libs\.__normalize.scss" />
@@ -428,26 +451,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\HouseInsurance.cshtml" />
@@ -455,11 +458,25 @@
     <Content Include="Views\Home\MedicalInsurance.cshtml" />
     <Content Include="Views\Home\lifeInsurance.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Contract\Index.cshtml" />
+    <Content Include="Views\HomeInsurance\Index.cshtml" />
+    <Content Include="Views\HomeInsurance\Order.cshtml" />
+    <Content Include="Views\MotorInsurance\Index.cshtml" />
+    <Content Include="Views\MotorInsurance\Order.cshtml" />
+    <Content Include="Views\MedicalInsurance\Index.cshtml" />
+    <Content Include="Views\MedicalInsurance\Information.cshtml" />
+    <Content Include="Views\MedicalInsurance\Order.cshtml" />
+    <Content Include="Views\Accounts\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\sass\pages\" />
-    <Folder Include="Views\Accounts\" />
+      <Folder Include="Content\sass\pages\" />
+    <Folder Include="Views\AccoutRole\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -469,6 +486,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003120413377_tesst.resx">
+      <DependentUpon>202003120413377_tesst.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
