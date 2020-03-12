@@ -1,17 +1,60 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+@*<h2>Contact</h2>*@
+<main class="main-content">
+    <div class="breadcrumbs">
+        <div class="container">
+            <a href="index.html">Home</a>
+            <span>Contact</span>
+        </div>
+    </div>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+    <div class="page">
+        <div class="container">
+            <div class="map"></div>
+            <iframe width="100%" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14896.072091128497!2d105.75194031858351!3d21.03196485423084!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454c7521d2d91%3A0xba6cdc3e1406ddfe!2zQ2F1IERpZW4sIFThu6sgTGnDqm0sIEhhbm9pLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1583334710262!5m2!1sen!2s" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            <div class="row">
+                <div class="col-md-3">
+                    <h2 class="section-title text-left">Address</h2>
+
+                    <div class="contact-detail">
+                        <address>
+                            <p>
+                                Company Name INC. <br>
+                                523 Burt Street, Omaha
+                            </p>
+
+                            <p>
+                                Phone: +1 823 424 9134
+                                info@company.com
+                            </p>
+                        </address>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <h2 class="section-title text-left">Contact form</h2>
+                    <form action="#" class="contact-form">
+                        <div class="row">
+                            <div class="col-md-4"><input type="text" placeholder="Your name..."></div>
+                            <div class="col-md-4"><input type="text" placeholder="Email..."></div>
+                            <div class="col-md-4"><input type="text" placeholder="Website..."></div>
+                        </div>
+
+                        <textarea placeholder="Message..."></textarea>
+
+                        <p class="text-right">
+                            <input type="submit" value="Send message">
+                        </p>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div> <!-- .page -->
+</main>
+
