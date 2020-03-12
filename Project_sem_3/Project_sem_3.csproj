@@ -169,6 +169,10 @@
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\AccoutRoleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomeInsuranceController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MedicalInsuranceController.cs" />
+    <Compile Include="Controllers\MotorInsuranceController.cs" />
     <Compile Include="Controllers\MotorCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -234,6 +238,13 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\HomeInsurance\Index.cshtml" />
+    <Content Include="Views\HomeInsurance\Order.cshtml" />
+    <Content Include="Views\MotorInsurance\Index.cshtml" />
+    <Content Include="Views\MotorInsurance\Order.cshtml" />
+    <Content Include="Views\MedicalInsurance\Index.cshtml" />
+    <Content Include="Views\MedicalInsurance\Information.cshtml" />
+    <Content Include="Views\MedicalInsurance\Order.cshtml" />
     <Content Include="Views\Accounts\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
