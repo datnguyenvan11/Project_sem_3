@@ -169,7 +169,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HomeInsuranceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MedicalInsuranceController.cs" />
+    <Compile Include="Controllers\MotorInsuranceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -235,6 +238,13 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\HomeInsurance\Index.cshtml" />
+    <Content Include="Views\HomeInsurance\Order.cshtml" />
+    <Content Include="Views\MotorInsurance\Index.cshtml" />
+    <Content Include="Views\MotorInsurance\Order.cshtml" />
+    <Content Include="Views\MedicalInsurance\Index.cshtml" />
+    <Content Include="Views\MedicalInsurance\Information.cshtml" />
+    <Content Include="Views\MedicalInsurance\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
