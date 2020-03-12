@@ -1,0 +1,499 @@
+﻿
+@{
+    ViewBag.Title = "Order";
+}
+
+<section>
+    <div class="subslide shadow">
+        <div class="thumb" style="        background-image: url(https://cdn.vietnambiz.vn/2019/9/4/jan-31-is-next-deadline-to-enroll-for-obamacare787x524-15675953121511744257074.jpg)"></div>
+    </div>
+</section>
+<div class="container">
+    <ul class="tab-pro">
+        <li class="nav-item "><a href="#">Information</a></li>
+        <li class="nav-item active"><a href="#">Order</a></li>
+        <li class="nav-item "><a href="#">Log in</a></li>
+        <li class="nav-item "><a href="#">Delivery & payment</a></li>
+    </ul>
+</div>
+<section class="main-content">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-9 col-md-12 col-sm-12">
+                <div class="hd-info-pro">ENTER THE INSURED'S INFORMATION TO CHARGE</div>
+
+                <div id="ctl18_DivOption2">
+                    <table class="table2 table-bordered table-hover table-donhang table-responsive-lg">
+                        <thead>
+                            <tr>
+                                <th class="text-center align-middle" style="width:5%" scope="col"></th>
+                                <th class="text-center align-middle" style="width:5%" scope="col">No.</th>
+                                <th class="text-center align-middle" style="width:20%" scope="col">Date of birth</th>
+                                <th class="text-center align-middle" style="width:20%" scope="col">Programme</th>
+                                <th class="text-center align-middle" style="width:15%" scope="col">Dental extension</th>
+                                <th class="text-center align-middle" style="width:15%" scope="col">Expanding maternity</th>
+                                <th class="text-center align-middle" style="width:20%" scope="col">Insurance fee (VAT exempt)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <tr>
+                                <th class="align-middle" scope="row">
+                                    <img id="imgStatus_1" onclick="checkAvailable(this, true);" src="https://baohiemtructuyen.com.vn/images/question.png" style="cursor: pointer; cursor: hand;" alt="Trạng thái" />
+                                </th>
+                                <td>
+                                    <span style="display: none;">
+                                        <input name="ctl18$rptPHA1$ctl00$txtPanelId" type="text" value="ctl18_rptPHA1_ctl00" id="ctl18_rptPHA1_ctl00_txtPanelId" />
+                                        <span id="ctl18_rptPHA1_ctl00_lblPersonId_">1</span>
+                                    </span>
+                                    1
+                                </td>
+                                <td class="align-middle pos-re">
+                                    <input name="ctl18$rptPHA1$ctl00$txtDateofBirth_" type="text" id="ctl18_rptPHA1_ctl00_txtDateofBirth_" class="form-control txt birthDay2" onblur="CalPHAPremium();" />
+                                </td>
+                                <td class="align-middle">
+                                    <select name="ctl18$rptPHA1$ctl00$ddlPackage_" id="ctl18_rptPHA1_ctl00_ddlPackage_" class="custom-select my-1 mr-sm-2 txt" onchange="CalPHAPremium();">
+                                        <option value="">Choose a program</option>
+                                        <option value="11">Standard</option>
+                                        <option value="12">Basic</option>
+                                        <option value="1">Copper</option>
+                                        <option value="2">Silver</option>
+                                        <option value="3">Gold</option>
+                                        <option value="4">Platinum</option>
+                                        <option value="5">Diamond</option>
+                                        <option value="14">Platinum Plus</option>
+                                        <option value="15">Diamond Plus</option>
+
+                                    </select>
+                                </td>
+                                <td class="align-middle">
+                                    <select name="ctl18$rptPHA$ctl00$ddlDentistry_" id="ctl18_rptPHA_ctl00_ddlDentistry_" class="custom-select my-1 mr-sm-2 txt" onchange="CalPHAPremium();">
+                                        <option value="">Choose to expand</option>
+                                        <option value="2">No</option>
+                                        <option value="1">Yes</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <select name="ctl18$rptPHA$ctl00$ddlMaternity_" id="ctl18_rptPHA_ctl00_ddlMaternity_" class="custom-select my-1 mr-sm-2 txt" onchange="CalPHAPremium();">
+                                        <option value="">Choose to expand</option>
+                                        <option value="2">No</option>
+                                        <option value="1">Yes</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <div class="price-pro"><input name="ctl18$rptPHA1$ctl00$txtPremium_" type="text" value="0" readonly="readonly" id="ctl18_rptPHA1_ctl00_txtPremium_" class="form-control txt text-right" /></div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="align-middle" scope="row">
+                                    <img id="imgStatus_2" onclick="checkAvailable(this, true);" src="https://baohiemtructuyen.com.vn/images/question.png" style="cursor: pointer; cursor: hand;" alt="Trạng thái" />
+                                </th>
+                                <td>
+                                    <span style="display: none;">
+                                        <input name="ctl18$rptPHA1$ctl01$txtPanelId" type="text" value="ctl18_rptPHA1_ctl01" id="ctl18_rptPHA1_ctl01_txtPanelId" />
+                                        <span id="ctl18_rptPHA1_ctl01_lblPersonId_">2</span>
+                                    </span>
+                                    2
+                                </td>
+                                <td class="align-middle pos-re">
+                                    <input name="ctl18$rptPHA1$ctl01$txtDateofBirth_" type="text" id="ctl18_rptPHA1_ctl01_txtDateofBirth_" class="form-control txt birthDay2" onblur="CalPHAPremium();" />
+                                </td>
+                                <td class="align-middle">
+                                    <select name="ctl18$rptPHA1$ctl01$ddlPackage_" id="ctl18_rptPHA1_ctl01_ddlPackage_" class="custom-select my-1 mr-sm-2 txt" onchange="CalPHAPremium();">
+                                        <option value="">Choose a program</option>
+                                        <option value="11">Standard</option>
+                                        <option value="12">Basic</option>
+                                        <option value="1">Copper</option>
+                                        <option value="2">Silver</option>
+                                        <option value="3">Gold</option>
+                                        <option value="4">Platinum</option>
+                                        <option value="5">Diamond</option>
+                                        <option value="14">Platinum Plus</option>
+                                        <option value="15">Diamond Plus</option>
+
+                                    </select>
+                                </td>
+                                <td class="align-middle">
+                                    <select name="ctl18$rptPHA1$ctl01$ddlDentistry_" id="ctl18_rptPHA1_ctl01_ddlDentistry_" class="custom-select my-1 mr-sm-2 txt" onchange="CalPHAPremium();">
+                                        <option value="">Choose to expand</option>
+                                        <option value="2">No</option>
+                                        <option value="1">Yes</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <select name="ctl18$rptPHA1$ctl01$ddlMaternity_" id="ctl18_rptPHA1_ctl01_ddlMaternity_" class="custom-select my-1 mr-sm-2 txt" onchange="CalPHAPremium();">
+                                        <option value="">Choose to expand</option>
+                                        <option value="2">No</option>
+                                        <option value="1">Yes</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <div class="price-pro"><input name="ctl18$rptPHA1$ctl01$txtPremium_" type="text" value="0" readonly="readonly" id="ctl18_rptPHA1_ctl01_txtPremium_" class="form-control txt text-right" /></div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="align-middle" scope="row">
+                                    <img id="imgStatus_3" onclick="checkAvailable(this, true);" src="https://baohiemtructuyen.com.vn/images/question.png" style="cursor: pointer; cursor: hand;" alt="Trạng thái" />
+                                </th>
+                                <td>
+                                    <span style="display: none;">
+                                        <input name="ctl18$rptPHA1$ctl02$txtPanelId" type="text" value="ctl18_rptPHA1_ctl02" id="ctl18_rptPHA1_ctl02_txtPanelId" />
+                                        <span id="ctl18_rptPHA1_ctl02_lblPersonId_">3</span>
+                                    </span>
+                                    3
+                                </td>
+                                <td class="align-middle pos-re">
+                                    <input name="ctl18$rptPHA1$ctl02$txtDateofBirth_" type="text" id="ctl18_rptPHA1_ctl02_txtDateofBirth_" class="form-control txt birthDay2" onblur="CalPHAPremium();" />
+                                </td>
+                                <td class="align-middle">
+                                    <select name="ctl18$rptPHA1$ctl02$ddlPackage_" id="ctl18_rptPHA1_ctl02_ddlPackage_" class="custom-select my-1 mr-sm-2 txt" onchange="CalPHAPremium();">
+                                        <option value="">Choose a program</option>
+                                        <option value="11">Standard</option>
+                                        <option value="12">Basic</option>
+                                        <option value="1">Copper</option>
+                                        <option value="2">Silver</option>
+                                        <option value="3">Gold</option>
+                                        <option value="4">Platinum</option>
+                                        <option value="5">Diamond</option>
+                                        <option value="14">Platinum Plus</option>
+                                        <option value="15">Diamond Plus</option>
+
+                                    </select>
+                                </td>
+                                <td class="align-middle">
+                                    <select name="ctl18$rptPHA1$ctl02$ddlDentistry_" id="ctl18_rptPHA1_ctl02_ddlDentistry_" class="custom-select my-1 mr-sm-2 txt" onchange="CalPHAPremium();">
+                                        <option value="">Choose to expand</option>
+                                        <option value="2">No</option>
+                                        <option value="1">Yes</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <select name="ctl18$rptPHA1$ctl02$ddlMaternity_" id="ctl18_rptPHA1_ctl02_ddlMaternity_" class="custom-select my-1 mr-sm-2 txt" onchange="CalPHAPremium();">
+                                        <option value="">Choose to expand</option>
+                                        <option value="2">No</option>
+                                        <option value="1">Yes</option>
+
+                                    </select>
+                                </td>
+                                <td class="text-center align-middle">
+                                    <div class="price-pro"><input name="ctl18$rptPHA1$ctl02$txtPremium_" type="text" value="0" readonly="readonly" id="ctl18_rptPHA1_ctl02_txtPremium_" class="form-control txt text-right" /></div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <i>
+                        (Date of birth in correct format: day / month / year, age: enter age from 1 to 65 years old)
+                    </i>
+                    <div class="c5"></div>
+                    <i>(Maternity extension is only applicable to customers from 19 to 45 years of age and participating in the Premium Plus package) </i>
+                    <div class="c5"></div>
+                </div>
+
+                <div class="text-center mr-top-20">
+                    <strong>Total net charge (VAT exempt):</strong>
+                    <p class="price-sum"><span id="ctl18_lblTotalPremiumPaid"></span>0 VNĐ</p>
+                </div>
+                <div class="grand_total">
+                    <div class="form_text">
+                        <strong class="fee"></strong><span id="ctl18_spancoupon"></span>
+                    </div>
+                </div>
+                <p class="form_button">
+                    <input type="submit" name="ctl18$btnContinue" value="Continue" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl18$btnContinue&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ctl18_btnContinue" class="btn-pro-buynow hvr-forward" />
+
+                    <input type="button" onclick="window.location.href='https://baohiemtructuyen.com.vn/default.aspx?mod=order&prod=PHA';" Class="btn-pro-buynow hvr-forward" value="Back" />
+                </p>
+                <div class="box-chuy">
+                    <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
+                    <div class="cotent-box-chuy">
+                        <div><i class="cotent-text"></i> You enter "Date of birth" of each insured, select "Insurance Program", choose "Dental Expansion", select "Expand maternity" for each insured.</div>
+
+                        <div><i class="cotent-text"></i> You enter in turn and accurate information for each participant, then you will see the total premiums of each person and the total premium of the group. </div>
+                        <div><i class="cotent-text"></i> After entering the correct and sufficient information, you press the [Continue] button to move to the next order.</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="hd-info-pro">INSURANCE FEES</div>
+                <div class="result">
+                    <div class="item-result">
+                        <span>Total fee (including VAT):</span>
+                        <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">0 VNĐ</label></strong>
+                    </div>
+                    <div id="ctl18_Promotions1_pnPromotions">
+
+
+                        <div class="item-result">
+                            <span>Discount amount:</span>
+                            <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">0 VNĐ</label></strong>
+                        </div>
+                        <div class="result-red">
+                            <div>Total net charge (including VAT) actually collected:</div>
+                            <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">0 VNĐ</label></strong>
+                        </div>
+                        <a id="ctl18_lbtBook" class="btn-pro-buynow" href="javascript:__doPostBack('ctl18$lbtBook','')">Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .thumb {
+        width: 1300px;
+        height: 300px;
+        background-color: #3e3e3e;
+        background-image: none;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .subslide {
+        max-width: fit-content;
+        position: relative;
+        margin: auto;
+    }
+
+    .shadow {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    }
+
+    .tab-pro {
+        font-size: large;
+        padding: 0;
+        text-align: center;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    .tab-pro li {
+        display: inline-block;
+    }
+
+        .tab-pro li.active a {
+            background-color: #0b665a;
+            color: #fff;
+        }
+
+        .tab-pro li a {
+            display: inline-block;
+            padding: 15px;
+            font-family: "HelB";
+        }
+
+            .tab-pro li a:hover {
+                background-color: #0b665a;
+                color: #fff;
+            }
+
+    a {
+        text-decoration: none;
+        transition: all 0.15s ease-in-out;
+    }
+
+    .main-content {
+        padding-top: 20px;
+    }
+
+    .hd-info-pro {
+        background-color: #0b665a;
+        color: #fff;
+        font-family: inherit;
+        text-transform: uppercase;
+        font-size: 15px;
+        padding: 15px;
+        border-bottom: solid 1px #fff;
+        font-weight: bold;
+    }
+
+    .table2 {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        font: inherit;
+        border: 1px solid #D9D9D9;
+    }
+
+        table tr {
+            border-bottom: 1px solid #D9D9D9;
+        }
+
+    .table-donhang thead th {
+        border-bottom-width: 1px;
+        background-color: #0b665a;
+        font-size: 14px;
+        color: #fff;
+    }
+
+    .table2 td, .table2 th {
+        padding: 1.75rem;
+        vertical-align: top;
+        line-height: 16px;
+        font-size: 14px;
+        line-height: 1.5;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table-donhang td, .table-donhang th {
+        background-color: #ececec;
+        border: 1px solid #dee2e6;
+    }
+
+    .my-1 {
+        margin-bottom: .25rem !important;
+    }
+
+    .custom-select {
+        display: inline-block;
+        width: 100%;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        vertical-align: middle;
+        /*background: url(https://previews.123rf.com/images/tifani1/tifani11801/tifani1180100316/94060669-set-icon-arrow-up-and-down-.jpg) no-repeat right .75rem center/62px 47px;*/
+        background-color: #fff;
+        border-radius: .25rem;
+        /*-webkit-appearance: none;*/
+        font-size: 17px;
+    }
+
+    .price-pro {
+        font-family: unset;
+        font-size: 18px;
+        color: #3e3e3e;
+        font-weight: bold;
+    }
+
+    .c5 {
+        height: 5px;
+        clear: both;
+    }
+
+    .mr-top-20 {
+        margin-top: 20px;
+    }
+
+    .price-sum {
+        font-size: 24px;
+        color: #ea212d;
+        font-family: "fantasy";
+    }
+
+    .box-chuy {
+        margin-top: 20px;
+    }
+
+        .box-chuy .title-box-chuy {
+            font-size: 16px;
+            font-family: serif;
+            text-transform: uppercase;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            background-color: #f5f5f5;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+    .icon-bell {
+        background: url(https://www.iconsdb.com/icons/preview/red/bell-3-xxl.png) no-repeat left .75rem center/15px 15px;
+        padding: 0px 0px 0px 30px;
+    }
+
+    .cotent-box-chuy {
+        font-size: 14px;
+        line-height: 22px;
+        padding-left: 10px;
+    }
+
+        .cotent-box-chuy > div {
+            margin-bottom: 7px;
+        }
+
+    .cotent-text {
+        background: url(https://baohiemtructuyen.com.vn/images/sub_menu_bullet.png) no-repeat 0 11px;
+        padding: 7px 0 5px 15px;
+    }
+
+    .btn-pro-buynow {
+        display: block;
+        width: 100%;
+        background-color: #0b665a;
+        padding: 11px;
+        padding-bottom: 14px;
+        padding-left: 0px;
+        padding-right: 0px;
+        border-radius: 5px;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        margin-top: 5px;
+        border: none;
+        font-size: large;
+    }
+
+        .btn-pro-buynow:hover {
+            background-color: #ea212d;
+            color: #fff;
+        }
+
+    input {
+        max-width: 100%;
+    }
+
+    .result {
+        background-color: #f7f7f7;
+    }
+
+        .result .item-result {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: solid 1px #c8c8c8;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+            .result .item-result span {
+                display: block;
+                font-size: 14px;
+                color: #7c7c7c;
+            }
+
+    .result-red {
+        background-color: #ea212d;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 0px;
+        padding-right: 0px;
+        font-size: large;
+    }
+
+        .result-red strong {
+            font-weight: normal;
+            font-size: 20px;
+        }
+</style>
+

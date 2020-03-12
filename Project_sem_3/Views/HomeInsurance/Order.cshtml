@@ -1,0 +1,393 @@
+﻿
+@{
+    ViewBag.Title = "Order";
+}
+
+<section>
+    <div class="subslide shadow">
+        <div class="thumb" style="        background-image: url(https://loveyhouse.com/wp-content/uploads/2019/11/House-and-Home-Insurance.jpg)"></div>
+    </div>
+
+</section>
+
+<div class="container">
+    <ul class="tab-pro">
+        <li class="nav-item active"><a href="#">Charge</a></li>
+        <li class="nav-item "><a href="#"> Log in</a></li>
+        <li class="nav-item "><a href="#">Delivery & payment</a></li>
+    </ul>
+</div>
+
+<section class="main-content">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-9 col-md-8 col-sm-12">
+                <div class="hd-info-pro">CALCULATE HOME INSURANCE PREMIUMS</div>
+                <div class="">
+                    <table class="table2 table-bordered table-hover table-info-pro">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Select coverage:</th>
+                                <td>
+                                    <span disabled="disabled"><input id="ctl18_chkCoverageBase" type="checkbox" name="ctl18$chkCoverageBase" checked="checked" disabled="disabled" onclick="premiumCalc();" /><label for="ctl18_chkCoverageBase"> Basic (fire, explosion)</label></span>
+                                    <br />
+                                    <input id="ctl18_chkCoverageExt1" type="checkbox" name="ctl18$chkCoverageExt1" onclick="premiumCalc();" />
+                                    Expand 1 (Thunderstorm, Storm, Flood, Overflow, Collide with home, Burglar)
+                                    <br />
+                                    <input id="ctl18_chkCoverageExt2" type="checkbox" name="ctl18$chkCoverageExt2" onclick="premiumCalc();" />
+                                    Expansion 2 (Site cleanup, firefighting, rent after losses)
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Type of house:</th>
+                                <td>
+                                    <div class="form_radio one_line">
+                                        <label>
+                                            <input type="radio" name="ClassofHouse" value="1" checked="checked" onclick="premiumCalc();" />
+                                            Terrace houses / Villas
+                                        </label>
+                                        <label>
+                                            <input type="radio" name="ClassofHouse" value="2" onclick="premiumCalc();" />Apartment
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">The house was used:</th>
+                                <td>
+                                    <select name="ctl18$ddlUsePeriod" id="ctl18_ddlUsePeriod" class="custom-select my-1 mr-sm-2" onchange="premiumCalc();">
+                                        <option selected="selected" value="15">01 – 15 years</option>
+                                        <option value="25">15 – 25 years</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">House insurance amount:</th>
+                                <td>
+                                    <select name="ctl18$ddlHouseSI" id="ctl18_ddlHouseSI" class="custom-select my-1 mr-sm-2" onchange="premiumCalc();">
+                                        <option selected="selected" value="300000000">300,000,000 VNĐ</option>
+                                        <option value="500000000">500,000,000 VNĐ</option>
+                                        <option value="750000000">750,000,000 VNĐ</option>
+                                        <option value="1000000000">1,000,000,000 VNĐ</option>
+                                        <option value="1500000000">1,500,000,000 VNĐ</option>
+                                        <option value="2000000000">2,000,000,000 VNĐ</option>
+                                        <option value="3000000000">3,000,000,000 VNĐ</option>
+                                        <option value="4000000000">4,000,000,000 VNĐ</option>
+                                        <option value="5000000000">5,000,000,000 VNĐ</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Property insurance amount:</th>
+                                <td>
+                                    <select name="ctl18$ddlAssetInHouseSI" id="ctl18_ddlAssetInHouseSI" class="custom-select my-1 mr-sm-2" onchange="premiumCalc();">
+                                        <option selected="selected" value="100000000">100,000,000 VNĐ</option>
+                                        <option value="300000000">300,000,000 VNĐ</option>
+                                        <option value="500000000">500,000,000 VNĐ</option>
+                                        <option value="750000000">750,000,000 VNĐ</option>
+                                        <option value="1000000000">1,000,000,000 VNĐ</option>
+
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Total charge (including VAT):</th>
+                                <td><strong><span id="ctl18_lblTotalPremium">357,500</span> VNĐ</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mr-top-20">
+                    <strong>Total net charge (without VAT):</strong>
+                    <p class="price-sum"><span id="ctl18_lblTotalPremiumPaid"></span> VNĐ</p>
+                    <span id="ctl18_spancoupon"></span>
+                    <input type="submit" name="ctl18$btnContinue" value="Continue" id="ctl18_btnContinue" class="btn-pro-buynow hvr-forward" />
+
+                </div>
+
+                <div class="box-chuy">
+                    <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
+                    <div class="cotent-box-chuy">
+                        <div class="cotent-text"> Select coverage: By default, when you buy private home insurance, you will have to buy basic benefits (fire, explosion). You can choose to buy 2 additional benefits 1, 2 by CHECK on benefits. </div>
+                        <div class="cotent-text"> You enter the required website information: the type of house, the number of years used, the amount of insurance for the house, the property in the house, you will see the total premium.</div>
+                        <div class="cotent-text"> If you agree to order, please click  <b>[Continue]</b> to move to the next order. </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="hd-info-pro">INSURANCE FEES</div>
+                <div class="result">
+                    <div class="item-result">
+                        <span>Total fee (including VAT):</span>
+                        <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">0 VNĐ</label></strong>
+                    </div>
+                    <div id="ctl18_Promotions1_pnPromotions">
+
+
+                        <div class="item-result">
+                            <span>Discount amount:</span>
+                            <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">0 VNĐ</label></strong>
+                        </div>
+                        <div class="result-red">
+                            <div>Total net charge (including VAT) actually collected:</div>
+                            <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">0 VNĐ</label></strong>
+                        </div>
+                        <a id="ctl18_lbtBook" class="btn-pro-buynow" href="javascript:__doPostBack('ctl18$lbtBook','')">Order</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .thumb {
+        width: 1300px;
+        height: 300px;
+        background-color: #3e3e3e;
+        background-image: none;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .subslide {
+        max-width: fit-content;
+        position: relative;
+        margin: auto;
+    }
+
+    .shadow {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    }
+
+    .tab-pro {
+        font-size: large;
+        padding: 0;
+        text-align: center;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    .tab-pro li {
+        display: inline-block;
+    }
+
+        .tab-pro li.active a {
+            background-color: #0b665a;
+            color: #fff;
+        }
+
+        .tab-pro li a {
+            display: inline-block;
+            padding: 15px;
+            font-family: "HelB";
+        }
+
+            .tab-pro li a:hover {
+                background-color: #0b665a;
+                color: #fff;
+            }
+
+    a {
+        text-decoration: none;
+        transition: all 0.15s ease-in-out;
+    }
+
+    .main-content {
+        padding-top: 20px;
+    }
+
+    .hd-info-pro {
+        background-color: #0b665a;
+        color: #fff;
+        font-family: inherit;
+        text-transform: uppercase;
+        font-size: 15px;
+        padding: 15px;
+        border-bottom: solid 1px #fff;
+    }
+
+    .table2 {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+    }
+
+    .table-info-pro {
+        font-size: 14px;
+        margin-bottom: 0;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        font: inherit;
+    }
+
+        table tr {
+            border-bottom: 1px solid #D9D9D9;
+        }
+
+    .table2 td, .table2 th {
+        padding: .75rem;
+        vertical-align: top;
+        font-size: 14px;
+        line-height: 2.5;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table-info-pro th {
+        background-color: #f7f7f7;
+        width: 40%;
+        text-align: right;
+        font-family: unset;
+        font-weight: normal;
+        font-size: 14px;
+        color: #3e3e3e;
+    }
+
+    .mr-top-20 {
+        margin-top: 20px;
+    }
+
+    .custom-select {
+        display: inline-block;
+        width: 100%;
+        height: calc(1.5em + .75rem + 2px);
+        padding: .375rem 1.75rem .375rem .75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        vertical-align: middle;
+        background: url(https://previews.123rf.com/images/tifani1/tifani11801/tifani1180100316/94060669-set-icon-arrow-up-and-down-.jpg) no-repeat right .75rem center/62px 47px;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        -webkit-appearance: none;
+        font-size: large;
+    }
+
+    .mb-1, .my-1 {
+        margin-bottom: .25rem !important;
+    }
+
+    .price-sum {
+        font-size: 24px;
+        color: #ea212d;
+        font-family: "HelB";
+    }
+
+    .btn-pro-buynow {
+        display: block;
+        width: 100%;
+        background-color: #0b665a;
+        padding: 11px;
+        padding-bottom: 14px;
+        padding-left: 0px;
+        padding-right: 0px;
+        border-radius: 5px;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        margin-top: 5px;
+        border: none;
+        font-size: large;
+    }
+
+    input {
+        max-width: 100%;
+    }
+
+    .btn-pro-buynow:hover {
+        background-color: #ea212d;
+        color: #fff;
+    }
+
+    .hvr-forward {
+        vertical-align: middle;
+        transform: perspective(1px) translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        transition-duration: 0.3s;
+        transition-property: transform;
+    }
+
+    .box-chuy {
+        margin-top: 20px;
+    }
+
+        .box-chuy .title-box-chuy {
+            font-size: 16px;
+            font-family: "unset";
+            text-transform: uppercase;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            background-color: #f5f5f5;
+            padding: 10px;
+        }
+
+    .icon-bell {
+        background: url(https://www.iconsdb.com/icons/preview/red/bell-3-xxl.png) no-repeat left .75rem center/15px 15px;
+        padding: 0px 0px 0px 30px;
+    }
+
+    .cotent-box-chuy {
+        font-size: 14px;
+        line-height: 22px;
+        padding-left: 10px;
+    }
+
+        .cotent-box-chuy > div {
+            margin-bottom: 7px;
+        }
+
+    .cotent-text {
+        background: url(https://baohiemtructuyen.com.vn/images/sub_menu_bullet.png) no-repeat 0 11px;
+        padding: 2px 0 5px 15px;
+    }
+
+    .result {
+        background-color: #f7f7f7;
+    }
+
+        .result .item-result {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: solid 1px #c8c8c8;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+            .result .item-result span {
+                display: block;
+                font-size: 14px;
+                color: #7c7c7c;
+            }
+
+    .result-red {
+        background-color: #ea212d;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 0px;
+        padding-right: 0px;
+        font-size: large;
+    }
+
+        .result-red strong {
+            font-weight: normal;
+            font-size: 20px;
+        }
+</style>
+
