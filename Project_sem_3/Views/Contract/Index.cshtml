@@ -1,0 +1,466 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .main-content {
+        padding-top: 20px;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        color: #363636;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    *, ::after, ::before {
+        box-sizing: border-box;
+    }
+
+    .container {
+        max-width: 1200px;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    div {
+        display: block;
+    }
+
+    .hd-info-pro {
+        background-color: #0b665a;
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 15px;
+        padding: 15px;
+        border-bottom: solid 1px #fff;
+    }
+
+    .box-border-pro {
+        position: relative;
+        background: #fff;
+        border: 1px solid #e4e4e4;
+        padding: 25px;
+    }
+
+    .mes-frm {
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .sub-hd-frm {
+        font-weight: bolder;
+        color: #ea212d;
+        text-transform: uppercase;
+        font-size: 18px;
+        border-left: solid 4px #0b665a;
+        padding-left: 10px;
+        background-color: #f5f5f5;
+        padding-top: 10px;
+        padding-bottom: 10px
+    }
+
+    .table2 {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+    }
+
+    .table-info-pay {
+        font-size: 14px;
+    }
+
+    .table-bordered {
+        border: 1px solid #dee2e6;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        font: inherit;
+        display: table;
+    }
+
+    tbody {
+        display: table-row-group;
+        vertical-align: middle;
+        border-color: inherit;
+    }
+
+    table tr {
+        border-bottom: 1px solid #D9D9D9;
+    }
+
+    tr {
+        display: table-row;
+        vertical-align: inherit;
+        border-color: inherit;
+    }
+
+    .table2 td, .table2 th {
+        padding: 0.75rem;
+        vertical-align: top;
+        font-size: 14px;
+        line-height: 1.5;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table-info-pay th {
+        background-color: #f7f7f7;
+        width: 25%;
+        text-align: right;
+        color: #3e3e3e;
+    }
+
+    .table-bordered td, .table-bordered th {
+        border: 1px solid #dee2e6;
+    }
+
+    th {
+        display: table-cell;
+    }
+
+    table td {
+        color: #444;
+    }
+
+    td {
+        display: table-cell;
+    }
+
+    .price1 {
+        font-size: 16px;
+        color: #ea212d;
+    }
+
+    b, strong {
+        font-weight: bolder;
+    }
+
+    .table-donhang thead th {
+        border-bottom-width: 1px;
+        background-color: #0b665a;
+        font-size: 14px;
+        color: #fff;
+    }
+
+    .table-donhang td, .table-donhang th {
+        border: solid 1px #fff;
+    }
+
+    .box-chuy {
+        margin-top: 20px;
+    }
+
+        .box-chuy .title-box-chuy {
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            background-color: #f5f5f5;
+            padding: 10px;
+        }
+
+            .box-chuy .title-box-chuy i.fa {
+                color: #ea212d;
+            }
+
+    .fa {
+        display: inline-block;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: inherit;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .cotent-box-chuy {
+        font-size: 14px;
+        line-height: 22px;
+        padding-left: 10px;
+    }
+
+        .cotent-box-chuy > div {
+            margin-bottom: 7px;
+        }
+
+        .cotent-box-chuy ul {
+            margin-left: 15px;
+            padding-left: 0;
+        }
+
+    ul {
+        list-style-type: none;
+    }
+
+    dl, ol, ul {
+        margin-top: 0;
+        margin-bottom: 1rem;
+    }
+
+    .cotent-box-chuy li {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    .cotent-box-chuy a {
+        color: #ea212d;
+    }
+</style>
+<section class="main-content">
+    <div class="container">
+        <div class="hd-info-pro">
+            RESULTS OF TRANSACTIONS ONLINE INSURANCE
+        </div>
+
+        <div class="box-border-pro">
+            <div class="mes-frm">You have just purchased insurance at the website http://baohiemtructuyen.com.vn of BIDV Insurance Corporation (BIC) with the following information: </div>
+            <div id="ctl18_pnOrdContent">
+
+                <div class="sub-hd-frm" style=" margin-bottom: 0 ">
+                    Information line
+                </div>
+                <table class="table2 table-bordered table-hover table-info-pay">
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                Order number:
+                            </th>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblOrderId">103604</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Order date:
+                            </th>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblBookDate">11/03/2020 14:03</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Product Type:
+                            </th>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblProductName">Motorcycle civil liability insurance</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Premium information
+                            </th>
+                            <td>
+                                <div>+ Total charge (including VAT): <strong class="price1"><span id="ctl18_ctl00_ordInfo1_lblFullPremium">86,000</span> VNĐ</strong></div>
+                                <div>+ Fee reduction: <strong class="price1">-<span id="ctl18_ctl00_ordInfo1_lblPremiumDiscount"> 0 </span> VNĐ</strong></div>
+                                <div><strong class="price1">+ Total net charge (including VAT): <span id="ctl18_ctl00_ordInfo1_lblTotalPremium">86,000</span> VNĐ</strong></div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div class="sub-hd-frm" style="margin-bottom:0">
+                    Billing Information
+                </div>
+                <table class="table2 table-bordered table-hover table-info-pay">
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                Payments:
+                            </th>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblPaymentMethod">Transfer payments</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Payment status:
+                            </th>
+                            <td><div class="price1"><span id="ctl18_ctl00_ordInfo1_lblPaymentStatus">Unpaid</span></div></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Date of payment:
+                            </th>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblPaymentDate">N/A</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="sub-hd-frm" style="margin-bottom:0">Information about delivery and receipt of insurance certificates</div>
+                <table class="table2 table-bordered table-hover table-info-pay">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Full name of recipient:</th>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblFullnameDelevery">nguyen van son</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Receiver's address:</th>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblOrdAddressDelivery">ha noi</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Email address:
+                            </th>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblEmailDelevery">boydola.nvs@gmail.com</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Contact phone number:
+                            </th>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblPhoneDelevery">0912343212</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Beneficiary information:</th>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblBeneficiaries"></span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Forms of delivery and receipt:</th>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblMethodDelevery">Insurance certificate will be sent by courier (EMS) to the address you provided above after we receive the payment fee.</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Time of delivery:
+                            </th>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblTimeDelivery">Within 24 hours (excluding Saturdays, Sundays and public holidays) since the time of fee payment.</span></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Delivery status:
+                            </th>
+                            <td><div class="price1"><span id="ctl18_ctl00_ordInfo1_lblShippingStatus">No insurance certificate has been delivered</span></div></td>
+                        </tr>
+
+                        <tr>
+                        </tr>
+                        <tr>
+                        </tr>
+                        <tr>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+                <table class="table2 table-bordered table-hover table-info-pay">
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                Your message:
+                            </th>
+                            <td><div id="ctl18_ctl00_divCustomermessage" class="form_text"></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="sub-hd-frm" style="margin-bottom:0">
+                    Vehicle information
+                </div>
+                <table class="table2 table-bordered table-hover table-donhang table-responsive-lg">
+                    <thead>
+                        <tr>
+                            <th class="text-center align-middle" scope="col">STT</th>
+                            <th class="text-center align-middle" scope="col">
+                                Car owner name
+                            </th>
+                            <th class="text-center align-middle" scope="col">
+                                Registered address
+                            </th>
+                            <th class="text-center align-middle" scope="col">
+                                Sea of ​​control
+                            </th>
+                            <th class="text-center align-middle" scope="col">
+                                Number of frames
+                            </th>
+                            <th class="text-center align-middle" scope="col">
+                                Car engine number
+                            </th>
+                            <th class="text-center align-middle" scope="col">
+                                Duration of insurance
+                            </th>
+                            <th class="text-center align-middle" scope="col">
+                                Fee (VAT included)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>
+
+                                1
+                            </td>
+                            <td>nguyen van son</td>
+                            <td>ha noi</td>
+                            <td> </td>
+                            <td>8809</td>
+                            <td>9888</td>
+                            <td>
+                                1 year from 11/03/2020
+                            </td>
+                            <td>
+                                <div align="right">
+                                    86,000
+                                    VNĐ
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="7">
+                                <strong style="float: right;">
+                                    Total charge (including VAT):
+                                </strong>
+                            </td>
+                            <td>
+                                <div align="right">
+                                    <strong>
+                                        86,000
+                                        VNĐ
+                                    </strong>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="box-chuy">
+                <div class="title-box-chuy">
+                    <i class="fa fa-bell" aria-hidden="true"></i> How will your order be handled by us?
+                </div>
+                <div class="cotent-box-chuy">
+                    <div>Depending on the status of your order, we will process your order according to the following options: </div>
+                    <div><i class="fa fa-angle-right" aria-hidden="true"></i> If your order <strong>payment was successful</strong>, We will contact (if more information is needed) to issue a certificate of insurance on the working day. Note: If the order has been successfully paid and valid information, we will directly send the certificate of insurance without contacting you again. </div>
+
+                    <div><i class="fa fa-angle-right" aria-hidden="true"></i> If your order <strong>Unpaid successfully</strong>: </div>
+
+                    <div>+ In case you choose to pay cash: We will contact you to close the time, place and send staff to collect cash and issue a certificate of insurance. </div>
+                    <div>+ In case you choose to pay by other forms, you access the website via the following links to view instructions and make payment: </div>
+
+                    <ul>
+                        <li><a href="https://baohiemtructuyen.com.vn/default.aspx?mod=news&action=customerservice&id=122&mid=175"><i class="fa fa-caret-right" aria-hidden="true"></i> Instruction on payment transfer</a>;</li>
+                        <li><a href="https://baohiemtructuyen.com.vn/default.aspx?mod=news&action=customerservice&id=123&mid=175"><i class="fa fa-caret-right" aria-hidden="true"></i> Payment guide with Visa, Master card</a>;</li>
+                        <li><a href="https://baohiemtructuyen.com.vn/default.aspx?mod=news&action=customerservice&id=124&mid=175"><i class="fa fa-caret-right" aria-hidden="true"></i> Payment guide with local ATM card</a>;</li>
+                        <li><a href="https://baohiemtructuyen.com.vn/default.aspx?mod=news&action=customerservice&id=126&mid=175"><i class="fa fa-caret-right" aria-hidden="true"></i> Payment guide with Ngan Luong e-wallet</a>;</li>
+                        <li><a href="https://baohiemtructuyen.com.vn/default.aspx?mod=news&action=customerservice&id=127&mid=175"><i class="fa fa-caret-right" aria-hidden="true"></i> Payment guide with M-Pay's M-Plus Mobile Banking application</a>.</li>
+                        <li><a href="https://baohiemtructuyen.com.vn/default.aspx?mod=news&action=customerservice&id=127&mid=175"><i class="fa fa-caret-right" aria-hidden="true"></i> Instructions to pay through Zalo pay Zalo application</a>.</li>
+                    </ul>
+
+                </div>
+
+                <div class="title-box-chuy"><i class="fa fa-bell" aria-hidden="true"></i> CONTACT US FOR SUPPORT:</div>
+                <div class="cotent-box-chuy">
+                    <div><i class="fa fa-angle-right" aria-hidden="true"></i> 24/7 hotline: <strong class="price1">0916 186 611</strong></div>
+                    <div><i class="fa fa-angle-right" aria-hidden="true"></i> Support during working hours: 024.22200282 ext. 120</div>
+                    <div><i class="fa fa-angle-right" aria-hidden="true"></i> Support via email: ebusiness.bic@bidv.com.vn</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
