@@ -1,0 +1,464 @@
+﻿
+@{
+    ViewBag.Title = "Order";
+}
+
+<section>
+    <div class="subslide shadow">
+        <div class="thumb" style="background-image: url(https://topquotelifeinsurance.com/wp-content/uploads/2017/08/life-insurance-for-motorcycle-riders-1.jpg)"></div>
+    </div>
+
+</section>
+<div class="container">
+    <ul class="tab-pro">
+        <li class="active nav-item"><a href="#">Ordered</a></li>
+        <li class="nav-item "><a href="#">Log in</a></li>
+        <li class="nav-item "><a href="#">Delivery & payment</a></li>
+    </ul>
+</div>
+<section class="main-content">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 ">
+                        <div class="hd-info-pro">LIST OF ORDERED CARS</div>
+                        <div class="tab-content">
+                            <div id="tab1" class="tab-pane active ">
+                                <div class="col-lg-12 col-md-12 col-sm-12 d-none d-md-block">
+                                    <div class="row">
+                                        <div class="col-lg-1 col-md-1 text-center align-middle list-header">No.</div>
+                                        <div class="col-lg-3 col-md-3 text-center align-middle list-header">Car owner name</div>
+                                        <div class="col-lg-2 col-md-2 text-center align-middle list-header">Sea of ​​control</div>
+                                        <div class="col-lg-2 col-md-2 text-center align-middle list-header">Number of frames</div>
+                                        <div class="col-lg-2 col-md-2 text-center align-middle list-header">Fee (VAT included)</div>
+                                        <div class="col-lg-1 col-md-1 text-center align-middle list-header">Repair</div>
+                                        <div class="col-lg-1 col-md-1 text-center align-middle list-header">Delete</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-8 col-sm-12">
+                        <div class="box-border-pro">
+                            <div class="frm frmpro">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="rdbPackage_0" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Select product package</label>
+                                        <div class="col-lg-8">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id='rdbPackage_1' value='66000' onclick="PackageChange();" name="mcPackage" required />
+                                                <label class="custom-control-label" for='rdbPackage_1'><b> 66.000 VNĐ</b> Compulsory insurance for TNDS</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" class="custom-control-input" id='rdbPackage_2' value='86000' onclick="PackageChange();" name="mcPackage" required />
+                                                <label class="custom-control-label" for='rdbPackage_2'> <b>86.000 VNĐ</b> Compulsory insurance for TNDS + Personal accident insurance for vehicles</label>
+                                            </div>
+
+
+                                            <i class="pad-top-5">
+                                                <span id="ctl18_lblPackageReq" class="req" style="color:Red;"></span>
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h4>Enter the information on the vehicle registration</h4>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="fullname" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Vehicle owner name:</label>
+                                        <div class="col-lg-8">
+                                            <input name="ctl18$fullname" type="text" id="ctl18_fullname" class="form-control txt" placeholder="Vehicle owner name" />
+                                            <i class="pad-top-5">
+                                                <span id="ctl18_lblInsuredReq" class="req" style="color:Red;"></span>
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="txtAddress" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Address on vehicle registration:</label>
+                                        <div class="col-lg-8">
+                                            <input name="ctl18$txtAddress" type="text" id="ctl18_txtAddress" class="form-control txt" placeholder="Address on vehicle registration" />
+                                            <i class="pad-top-5">
+                                                <span id="ctl18_lblAddressReq" class="req" style="color:Red;"></span>
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="txtbks" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">License plate status:</label>
+                                        <div class="col-lg-8">
+                                            <div>
+                                                <input value="PlateYes" name="ctl18$RegistrationStatus" type="radio" id="ctl18_rdPlateYes" onclick="closeForm();" checked="checked" />
+                                                There are number plates
+                                            </div>
+                                            <div>
+                                                <input value="PlateNotYet" name="ctl18$RegistrationStatus" type="radio" id="ctl18_rdPlateNotYet" onclick="openForm()" />
+                                                New cars do not have number plates
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="divPlate" style="display: block;">
+                                    <div class="row">
+                                        <label for="plates" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Sea of ​​control:</label>
+                                        <div class="col-lg-8">
+                                            <input name="ctl18$plates" type="text" id="ctl18_plates" class="form-control txt" placeholder="Sea of ​​control" />
+                                            <i class="pad-top-5">
+                                                <span id="ctl18_lblPlatesReq" class="req" style="color:Red;"></span>
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="divChassis" style="display: none;">
+                                    <div class="row">
+                                        <label for="ChassisNumber" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Number of frames:</label>
+                                        <div class="col-lg-8">
+                                            <input name="ctl18$ChassisNumber" type="text" id="ctl18_ChassisNumber" class="form-control txt" placeholder="Number of frames" />
+                                            <i class="pad-top-5">
+                                                <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" id="divEngine" style="display: none;">
+                                    <div class="row">
+                                        <label for="plates" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Phone number :</label>
+                                        <div class="col-lg-8">
+                                            <input name="ctl18$txtEngineNumber" type="text" id="ctl18_txtEngineNumber" class="form-control txt" placeholder="Phone number" />
+                                            <i class="pad-top-5">
+                                                <span id="ctl18_lblEngineNumberReq" class="req" style="color:Red;"></span>
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="txtFromDate" class="col-lg-4 col-sm-12 col-form-label col-form-label-first pad-0">Duration of insurance :</label>
+                                        <div class="col-lg-8">
+                                            <input type="text" id="datepicker" class="form-control txt start-date" placeholder="Thời hạn bảo hiểm" onchange="fromdate_change();" />
+                                            <div class="icon-date"></div>
+                                            <i class="pad-top-5">01 year from the date on and after the time of fee payment</i>
+                                            <i class="pad-top-5"><span id="ctl18_lblFromDateReq" class="req" style="color:Red;"></span></i>
+                                            <i class="pad-top-5"><span id="ctl18_lblFromDate" class="req" style="color:Red;"></span></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-center mb-15">
+                                    <label>Would you like to order another car?</label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <label for="txtbks" class="col-lg-4 col-sm-12 col-form-label col-form-label-first hide-md">&nbsp;</label>
+                                        <div class="col-lg-8">
+                                            <div id="ctl18_divBuyanOther" class="row">
+                                                <div class="col-sm-6" style="padding-right:5px">
+                                                    <input type="submit" name="ctl18$btnYes" value="Yes" id="ctl18_btnYes" class="btn-pro btn" />
+                                                </div>
+                                                <div class="col-sm-6" style="padding-left:5px">
+                                                    <input type="submit" name="ctl18$btnNo" value="No" id="ctl18_btnNo" class="btn-pro-buynow m-0" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-12">
+                        <div class="hd-info-pro">INSURANCE FEES</div>
+                        <div class="result">
+                            <div class="item-result">
+                                <span>Total fee (including VAT):</span>
+                                <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">0 VNĐ</label></strong>
+                            </div>
+                            <div id="ctl18_Promotions1_pnPromotions">
+
+
+                                <div class="item-result">
+                                    <span>Discount amount:</span>
+                                    <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">0 VNĐ</label></strong>
+                                </div>
+                                <div class="result-red">
+                                    <div>Total net charge (including VAT) actually collected:</div>
+                                    <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">0 VNĐ</label></strong>
+                                </div>
+                                <a id="ctl18_lbtBook" class="btn-pro-buynow" href="javascript:__doPostBack('ctl18$lbtBook','')">Order</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .thumb {
+        width: 1300px;
+        height: 300px;
+        background-color: #3e3e3e;
+        background-image: none;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .subslide {
+        max-width: fit-content;
+        position: relative;
+        margin: auto;
+    }
+
+    .shadow {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    }
+
+    .box-border-pro {
+        position: relative;
+        background: #fff;
+        border: 1px solid #e4e4e4;
+        padding: 25px;
+    }
+
+    .tab-pro {
+        font-size: large;
+        padding: 0;
+        text-align: center;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+
+        .tab-pro li.active a {
+            background-color: #0b665a;
+            display: inline-block;
+            color: #fff;
+            padding: 15px;
+        }
+
+        .tab-pro li a {
+            display: inline-block;
+            padding: 15px;
+        }
+
+            .tab-pro li a:hover {
+                background-color: #0b665a;
+                color: #fff;
+            }
+
+        .tab-pro li {
+            display: inline-block;
+        }
+
+    label {
+        display: inline;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .mb-15 {
+        margin-bottom: 15px;
+    }
+
+    .hd-info-pro {
+        background-color: #0b665a;
+        color: #fff;
+        font-family: inherit;
+        text-transform: uppercase;
+        font-size: 15px;
+        padding: 15px;
+        border-bottom: solid 1px #fff
+    }
+
+    .tab-pane.active {
+        display: block;
+        margin-bottom: 42px;
+    }
+
+    .tab-pane {
+        display: none;
+        opacity: 1;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .list-header {
+        border-bottom-width: 1px;
+        background-color: #0b665a;
+        font-size: 14px;
+        color: #fff;
+        padding: .75rem;
+        font-weight: bold;
+        border: solid 1px #fff;
+    }
+
+    .box-border-pro {
+        position: relative;
+        background: #fff;
+        border: 1px solid #e4e4e4;
+        padding: 25px;
+    }
+
+    .frmpro {
+        width: 100%;
+        color: #3e3e3e;
+    }
+
+    .frm .custom-control-label {
+        font-size: 14px;
+        line-height: 24px;
+        margin-top: 10px;
+    }
+
+    .frm .custom-control-input:checked ~ .custom-control-label::before {
+        background-color: #0b665a;
+        border-color: #0b665a;
+    }
+
+    .frmpro .col-form-label {
+        line-height: 1.7em;
+        font-size: 14px;
+        color: #3e3e3e;
+    }
+
+    .col-form-label-first {
+        text-align: right;
+    }
+
+    .frmpro i {
+        font-size: 12px;
+        line-height: normal !important;
+    }
+
+    .pad-top-5 {
+        display: block;
+        padding-top: 5px;
+    }
+
+    .btn-pro {
+        background-color: #ea212d;
+        padding: 12px;
+        padding-left: 0;
+        padding-right: 0;
+        border: none;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: 700;
+        width: 100%;
+        transition: all 0.15s ease-in-out;
+        font-size: large;
+    }
+
+    .btn-pro-buynow {
+        display: block;
+        width: 100%;
+        background-color: #0b665a;
+        padding: 11px;
+        padding-bottom: 14px;
+        padding-left: 0px;
+        padding-right: 0px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        margin-top: 5px;
+        border: none;
+        font-size: large;
+    }
+
+    .m-0 {
+        margin: 0 !important;
+    }
+
+    .btn-pro-buynow:hover {
+        background-color: #ea212d;
+        color: #fff;
+    }
+
+    .btn-pro:hover {
+        background-color: #0b665a;
+        color: #fff;
+    }
+
+    .frmpro .txt {
+        padding: .375rem .75rem;
+    }
+
+    .frm .txt {
+        padding: 14px;
+        border: solid 2px #c8c8c8;
+    }
+
+    .frm .form-control {
+        height: calc(2.0em + .75rem + 2px);
+    }
+
+    .icon-date {
+        position: absolute;
+        right: 260px;
+        top: 7px;
+        background-image: url(https://baohiemtructuyen.com.vn/images/icon/cal.png);
+        background-repeat: no-repeat;
+        width: 26px;
+        height: 26px;
+    }
+
+    .result {
+        background-color: #f7f7f7;
+    }
+
+        .result .item-result {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: solid 1px #c8c8c8;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+            .result .item-result span {
+                display: block;
+                font-size: 14px;
+                color: #7c7c7c;
+            }
+
+    .result-red {
+        background-color: #ea212d;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 0px;
+        padding-right: 0px;
+        font-size: large;
+    }
+
+        .result-red strong {
+            font-weight: normal;
+            font-size: 20px;
+        }
+</style>
+<script>
+    function openForm() {
+        document.getElementById("divPlate").style.display = "none";
+        document.getElementById("divChassis").style.display = "block";
+        document.getElementById("divEngine").style.display = "block";
+    }
+    function closeForm() {
+        document.getElementById("divPlate").style.display = "block";
+        document.getElementById("divChassis").style.display = "none";
+        document.getElementById("divEngine").style.display = "none";
+    }
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+
+</script>
+
