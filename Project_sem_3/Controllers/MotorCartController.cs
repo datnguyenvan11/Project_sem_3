@@ -66,7 +66,7 @@ namespace Project_sem_3.Controllers
             return View();
         }
 
-        public ActionResult CreateOrder()
+        public ActionResult CreateContract()
         {
             // load cart trong session.
             var shoppingCart = LoadShoppingCart();
