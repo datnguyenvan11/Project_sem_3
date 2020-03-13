@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProgrammesController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\AccoutRoleController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
@@ -182,6 +183,18 @@
     <Compile Include="Migrations\202003120413377_tesst.cs" />
     <Compile Include="Migrations\202003120413377_tesst.Designer.cs">
       <DependentUpon>202003120413377_tesst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003130650391_validataProgreme.cs" />
+    <Compile Include="Migrations\202003130650391_validataProgreme.designer.cs">
+      <DependentUpon>202003130650391_validataProgreme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003130754533_SeederProgreme.cs" />
+    <Compile Include="Migrations\202003130754533_SeederProgreme.designer.cs">
+      <DependentUpon>202003130754533_SeederProgreme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003130821033_tesst2.cs" />
+    <Compile Include="Migrations\202003130821033_tesst2.Designer.cs">
+      <DependentUpon>202003130821033_tesst2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountRole.cs" />
@@ -2203,6 +2216,11 @@
     <Content Include="Areas\Admin\Views\Admin\Table.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Programmes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Programmes\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Programmes\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Programmes\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Programmes\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2261,6 +2279,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202003120413377_tesst.resx">
       <DependentUpon>202003120413377_tesst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003130650391_validataProgreme.resx">
+      <DependentUpon>202003130650391_validataProgreme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003130754533_SeederProgreme.resx">
+      <DependentUpon>202003130754533_SeederProgreme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003130821033_tesst2.resx">
+      <DependentUpon>202003130821033_tesst2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
