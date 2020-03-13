@@ -1,0 +1,79 @@
+﻿@model Project_sem_3.Models.Insurance
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="content-text1">Delete Insurance</h2>
+
+<h3 class="content-text">Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeleteAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeleteAt)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            @*<input type="submit" value="Delete" class="btn btn-default" /> |*@
+            <button type="submit" class="btn btn-success btn-lg">Delete</button>
+
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
+<style>
+    .content-text {
+        font-size: larger;
+        font-weight: 900;
+    }
+
+    .content-text1 {
+        font-weight: inherit;
+        color: cornflowerblue;
+        padding-left: 15px;
+    }
+</style>
