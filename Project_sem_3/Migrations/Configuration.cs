@@ -14,10 +14,12 @@ namespace Project_sem_3.Migrations
 
         protected override void Seed(Project_sem_3.Models.MyDb context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            context.Programmes.AddOrUpdate(x => x.Id,
+               new Models.Programme() { Id = 1, Name = "Gold", Price = 200000 },
+               new Models.Programme() { Id = 2, Name = "Silver", Price = 180000 },
+               new Models.Programme() { Id = 3, Name = "Standard", Price = 100000},
+               new Models.Programme() { Id = 4, Name = "Diamond", Price = 300000 }
+               );
         }
     }
 }
