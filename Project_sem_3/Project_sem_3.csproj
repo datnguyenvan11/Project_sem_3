@@ -2669,11 +2669,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Contract\Index.cshtml" />
-    <Content Include="Views\HomeInsurance\Index.cshtml" />
     <Content Include="Views\HomeInsurance\Order.cshtml" />
-    <Content Include="Views\MotorInsurance\Index.cshtml" />
     <Content Include="Views\MotorInsurance\Order.cshtml" />
-    <Content Include="Views\MedicalInsurance\Index.cshtml" />
     <Content Include="Views\MedicalInsurance\Information.cshtml" />
     <Content Include="Views\MedicalInsurance\Order.cshtml" />
     <Content Include="Views\Accounts\Login.cshtml" />
