@@ -52,7 +52,9 @@ body {
 
 
 a {
-  background: transparent; }
+  background: transparent;
+  text-decoration:none
+}
   a:focus {
     outline: thin dotted; }
   a:hover, a:active {
@@ -216,7 +218,7 @@ table {
 body {
   color: #768089;
   font-family: "Roboto Condensed", "Open Sans", sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 300;
   line-height: normal; }
 
@@ -293,7 +295,9 @@ form textarea {
       width: 970px; } }
   @media (min-width: 1200px) {
     .container {
-      width: 1170px; } }
+        width: 1170px;
+        
+    } }
 
 .container-fluid {
   margin-right: auto;
@@ -1176,7 +1180,9 @@ form textarea {
     background: none; }
 
 .main-navigation {
-  float: left; }
+    float: left;
+    font-size: 21px;
+}
   .main-navigation .menu-toggle {
     border: none;
     background: none;
@@ -1703,8 +1709,10 @@ form textarea {
  * Footer Styles
  */
 .site-footer {
-  border-top: 1px solid #ccc;
-  padding-top: 50px; }
+    border-top: 1px solid #ccc;
+    padding-top: 50px;
+    font-size: 19px;
+}
   .site-footer .widget-area {
     margin-bottom: 50px; }
     .site-footer .widget-area .widget {

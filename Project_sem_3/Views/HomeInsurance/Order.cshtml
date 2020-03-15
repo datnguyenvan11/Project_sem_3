@@ -1,120 +1,98 @@
-﻿
+﻿@model IEnumerable<Project_sem_3.Models.InsurancePackage>
+@using Project_sem_3.Models
 @{
-    ViewBag.Title = "Order";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+
 <section>
-    <div class="subslide shadow">
-        <div class="thumb" style="        background-image: url(https://loveyhouse.com/wp-content/uploads/2019/11/House-and-Home-Insurance.jpg)"></div>
+    <div class="banner">
+
     </div>
 
 </section>
 
-<div class="container">
-    <ul class="tab-pro">
-        <li class="nav-item active"><a href="#">Charge</a></li>
-        <li class="nav-item "><a href="#"> Log in</a></li>
-        <li class="nav-item "><a href="#">Delivery & payment</a></li>
-    </ul>
-</div>
 
-<section class="main-content">
-    <div class="container">
+<div class="container1" style="margin-left:10%;margin-right:10%;margin-top:7% ;margin-bottom:7%">
+    <div class="hd-info-pro">
+        PLEASE ENTER iNFORMATION
+    </div>
+
+    <form action="/HomeInsurance/CreateContract" method="get">
         <div class="row">
-
             <div class="col-lg-9 col-md-8 col-sm-12">
-                <div class="hd-info-pro">CALCULATE HOME INSURANCE PREMIUMS</div>
-                <div class="">
-                    <table class="table2 table-bordered table-hover table-info-pro">
-                        <tbody>
-                            <tr>
-                                <th scope="row">Select coverage:</th>
-                                <td>
-                                    <span disabled="disabled"><input id="ctl18_chkCoverageBase" type="checkbox" name="ctl18$chkCoverageBase" checked="checked" disabled="disabled" onclick="premiumCalc();" /><label for="ctl18_chkCoverageBase"> Basic (fire, explosion)</label></span>
-                                    <br />
-                                    <input id="ctl18_chkCoverageExt1" type="checkbox" name="ctl18$chkCoverageExt1" onclick="premiumCalc();" />
-                                    Expand 1 (Thunderstorm, Storm, Flood, Overflow, Collide with home, Burglar)
-                                    <br />
-                                    <input id="ctl18_chkCoverageExt2" type="checkbox" name="ctl18$chkCoverageExt2" onclick="premiumCalc();" />
-                                    Expansion 2 (Site cleanup, firefighting, rent after losses)
+                <div class="box-border-pro">
+                    <div class="frm frmpro">
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="rdbPackage_0" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Select product package</label>
+                                <div class="col-lg-8">
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="PackageChange();" name="insurancePackageId" required />
+                                            <label class="custom-control-label" for='rdbPackage_1'><b> @item.Name  @String.Format("{0:c}", @item.Price) </b> (@item.Description)</label>
+                                        </div>
+                                    }
 
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Type of house:</th>
-                                <td>
-                                    <div class="form_radio one_line">
-                                        <label>
-                                            <input type="radio" name="ClassofHouse" value="1" checked="checked" onclick="premiumCalc();" />
-                                            Terrace houses / Villas
-                                        </label>
-                                        <label>
-                                            <input type="radio" name="ClassofHouse" value="2" onclick="premiumCalc();" />Apartment
-                                        </label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">The house was used:</th>
-                                <td>
-                                    <select name="ctl18$ddlUsePeriod" id="ctl18_ddlUsePeriod" class="custom-select my-1 mr-sm-2" onchange="premiumCalc();">
-                                        <option selected="selected" value="15">01 – 15 years</option>
-                                        <option value="25">15 – 25 years</option>
+                                    <i class="pad-top-5">
+                                        <span id="ctl18_lblPackageReq" class="req" style="color:Red;"></span>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h4>Enter the information on the vehicle registration</h4>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="txtAddress" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">HouseType</label>
+                                <input type="radio" name="HouseType" value="  Terrace houses / Villas
+" checked="checked" />
+                                Terrace houses / Villas
 
+                                <input type="radio" name="HouseType" value="Apartment" />Apartment
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <label for="txtAddress" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">HouserAddress:</label>
+                                <div class="col-lg-8">
+                                    <textarea name="HouserAddress" type="text" id="ctl18_txtAddress" class="form-control txt" placeholder="HouserAddress"></textarea>
+                                    <i class="pad-top-5">
+                                        <span id="ctl18_lblAddressReq" class="req" style="color:Red;"></span>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="divPlate" style="display: block;">
+                            <div class="row">
+                                <label for="plates" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">DurationHouse:</label>
+                                <div class="col-lg-8">
+                                    <select name="DurationHouse" id="ctl18_ddlUsePeriod" class="custom-select my-1 mr-sm-2">
+                                        <option selected="selected" value="01 – 15 years">01 – 15 years</option>
+                                        <option value=">15 – 25 years">15 – 25 years</option>
                                     </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">House insurance amount:</th>
-                                <td>
-                                    <select name="ctl18$ddlHouseSI" id="ctl18_ddlHouseSI" class="custom-select my-1 mr-sm-2" onchange="premiumCalc();">
-                                        <option selected="selected" value="300000000">300,000,000 VNĐ</option>
-                                        <option value="500000000">500,000,000 VNĐ</option>
-                                        <option value="750000000">750,000,000 VNĐ</option>
-                                        <option value="1000000000">1,000,000,000 VNĐ</option>
-                                        <option value="1500000000">1,500,000,000 VNĐ</option>
-                                        <option value="2000000000">2,000,000,000 VNĐ</option>
-                                        <option value="3000000000">3,000,000,000 VNĐ</option>
-                                        <option value="4000000000">4,000,000,000 VNĐ</option>
-                                        <option value="5000000000">5,000,000,000 VNĐ</option>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="divChassis">
+                            <div class="row">
+                                <label for="HouseOwner" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">HouseOwner:</label>
+                                <div class="col-lg-8">
+                                    <input name="HouseOwner" type="text" id="ctl18_ChassisNumber" class="form-control txt" placeholder="HouseOwner" />
+                                    <i class="pad-top-5">
+                                        <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
 
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Property insurance amount:</th>
-                                <td>
-                                    <select name="ctl18$ddlAssetInHouseSI" id="ctl18_ddlAssetInHouseSI" class="custom-select my-1 mr-sm-2" onchange="premiumCalc();">
-                                        <option selected="selected" value="100000000">100,000,000 VNĐ</option>
-                                        <option value="300000000">300,000,000 VNĐ</option>
-                                        <option value="500000000">500,000,000 VNĐ</option>
-                                        <option value="750000000">750,000,000 VNĐ</option>
-                                        <option value="1000000000">1,000,000,000 VNĐ</option>
 
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Total charge (including VAT):</th>
-                                <td><strong><span id="ctl18_lblTotalPremium">357,500</span> VNĐ</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="text-center mr-top-20">
-                    <strong>Total net charge (without VAT):</strong>
-                    <p class="price-sum"><span id="ctl18_lblTotalPremiumPaid"></span> VNĐ</p>
-                    <span id="ctl18_spancoupon"></span>
-                    <input type="submit" name="ctl18$btnContinue" value="Continue" id="ctl18_btnContinue" class="btn-pro-buynow hvr-forward" />
 
-                </div>
-
-                <div class="box-chuy">
-                    <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
-                    <div class="cotent-box-chuy">
-                        <div class="cotent-text"> Select coverage: By default, when you buy private home insurance, you will have to buy basic benefits (fire, explosion). You can choose to buy 2 additional benefits 1, 2 by CHECK on benefits. </div>
-                        <div class="cotent-text"> You enter the required website information: the type of house, the number of years used, the amount of insurance for the house, the property in the house, you will see the total premium.</div>
-                        <div class="cotent-text"> If you agree to order, please click  <b>[Continue]</b> to move to the next order. </div>
                     </div>
                 </div>
             </div>
@@ -123,28 +101,66 @@
                 <div class="result">
                     <div class="item-result">
                         <span>Total fee (including VAT):</span>
-                        <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">0 VNĐ</label></strong>
+                        <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">$0</label></strong>
                     </div>
                     <div id="ctl18_Promotions1_pnPromotions">
 
 
                         <div class="item-result">
                             <span>Discount amount:</span>
-                            <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">0 VNĐ</label></strong>
+                            <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">$0</label></strong>
                         </div>
                         <div class="result-red">
                             <div>Total net charge (including VAT) actually collected:</div>
-                            <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">0 VNĐ</label></strong>
+
+                            <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">$0</label></strong>
                         </div>
-                        <a id="ctl18_lbtBook" class="btn-pro-buynow" href="javascript:__doPostBack('ctl18$lbtBook','')">Order</a>
+                        <input id="ctl18_lbtBook" style="text-decoration:none" type="submit" value="Order" class="btn-pro-buynow" href="/HouseInsurance/CreateContract" />
                     </div>
                 </div>
             </div>
+            
         </div>
-    </div>
-</section>
+        <div class="box-chuy col-12">
+            <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
+            <div class="cotent-box-chuy">
+                <div class="cotent-text"> Select coverage: By default, when you buy private home insurance, you will have to buy basic benefits (fire, explosion). You can choose to buy 2 additional benefits 1, 2 by CHECK on benefits. </div>
+                <div class="cotent-text"> You enter the required website information: the type of house, the number of years used, the amount of insurance for the house, the property in the house, you will see the total premium.</div>
+                <div class="cotent-text"> If you agree to order, please click  <b>[Continue]</b> to move to the next order. </div>
+            </div>
+        </div>
+    </form>
+</div>
 
 <style>
+     .box-chuy {
+        margin-top: 20px;
+    }
+        .box-chuy .title-box-chuy {
+            font-size: 16px;
+            font-family: "unset";
+            text-transform: uppercase;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            background-color: #f5f5f5;
+            padding: 10px;
+        }
+    .icon-bell {
+        background: url(https://www.iconsdb.com/icons/preview/red/bell-3-xxl.png) no-repeat left .75rem center/15px 15px;
+        padding: 0px 0px 0px 30px;
+    }
+    .cotent-box-chuy {
+        font-size: 16px;
+        line-height: 22px;
+        padding-left: 10px;
+    }
+        .cotent-box-chuy > div {
+            margin-bottom: 7px;
+        }
+    .cotent-text {
+        background: url(https://baohiemtructuyen.com.vn/images/sub_menu_bullet.png) no-repeat 0 11px;
+        padding: 2px 0 5px 15px;
+    }
     .thumb {
         width: 1300px;
         height: 300px;
@@ -165,6 +181,13 @@
         box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
     }
 
+    .box-border-pro {
+        position: relative;
+        background: #fff;
+        border: 1px solid #e4e4e4;
+        padding: 25px;
+    }
+
     .tab-pro {
         font-size: large;
         padding: 0;
@@ -173,23 +196,16 @@
         border-radius: 5px;
     }
 
-    ul {
-        list-style-type: none;
-    }
-
-    .tab-pro li {
-        display: inline-block;
-    }
-
         .tab-pro li.active a {
             background-color: #0b665a;
+            display: inline-block;
             color: #fff;
+            padding: 15px;
         }
 
         .tab-pro li a {
             display: inline-block;
             padding: 15px;
-            font-family: "HelB";
         }
 
             .tab-pro li a:hover {
@@ -197,13 +213,40 @@
                 color: #fff;
             }
 
-    a {
-        text-decoration: none;
-        transition: all 0.15s ease-in-out;
+        .tab-pro li {
+            display: inline-block;
+        }
+
+    label {
+        display: inline;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 300;
     }
 
-    .main-content {
-        padding-top: 20px;
+    #ctl18_fullname {
+        width: 60%
+    }
+
+    #ctl18_txtAddress {
+        width: 70%;
+        height: 124px
+    }
+
+    #ctl18_plates {
+        width: 67%
+    }
+
+    #ctl18_ChassisNumber {
+        width: 67%
+    }
+
+    #datepicker {
+        width: 55%
+    }
+
+    .mb-15 {
+        margin-bottom: 15px;
     }
 
     .hd-info-pro {
@@ -213,78 +256,87 @@
         text-transform: uppercase;
         font-size: 15px;
         padding: 15px;
-        border-bottom: solid 1px #fff;
+        border-bottom: solid 1px #fff
     }
 
-    .table2 {
-        width: 100%;
-        margin-bottom: 1rem;
-        color: #212529;
+    .tab-pane.active {
+        display: block;
+        margin-bottom: 42px;
     }
 
-    .table-info-pro {
+    .tab-pane {
+        display: none;
+        opacity: 1;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .list-header {
+        border-bottom-width: 1px;
+        background-color: #0b665a;
         font-size: 14px;
-        margin-bottom: 0;
-    }
-
-    table {
-        border-collapse: collapse;
-        border-spacing: 0;
-        font: inherit;
-    }
-
-        table tr {
-            border-bottom: 1px solid #D9D9D9;
-        }
-
-    .table2 td, .table2 th {
+        color: #fff;
         padding: .75rem;
-        vertical-align: top;
-        font-size: 14px;
-        line-height: 2.5;
-        border-top: 1px solid #dee2e6;
+        font-weight: bold;
+        border: solid 1px #fff;
     }
 
-    .table-info-pro th {
-        background-color: #f7f7f7;
-        width: 40%;
-        text-align: right;
-        font-family: unset;
-        font-weight: normal;
-        font-size: 14px;
+    .box-border-pro {
+        position: relative;
+        background: #fff;
+        border: 1px solid #e4e4e4;
+        padding: 25px;
+    }
+
+    .frmpro {
+        width: 100%;
         color: #3e3e3e;
     }
 
-    .mr-top-20 {
-        margin-top: 20px;
+    .frm .custom-control-label {
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 10px;
     }
 
-    .custom-select {
-        display: inline-block;
+    .frm .custom-control-input:checked ~ .custom-control-label::before {
+        background-color: #0b665a;
+        border-color: #0b665a;
+    }
+
+    .frmpro .col-form-label {
+        line-height: 1.7em;
+        font-size: 18px;
+        color: #3e3e3e;
+    }
+
+    .col-form-label-first {
+        text-align: right;
+    }
+
+    .frmpro i {
+        font-size: 12px;
+        line-height: normal !important;
+    }
+
+    .pad-top-5 {
+        display: block;
+        padding-top: 5px;
+    }
+
+    .btn-pro {
+        background-color: #ea212d;
+        padding: 12px;
+        padding-left: 0;
+        padding-right: 0;
+        border: none;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: 700;
         width: 100%;
-        height: calc(1.5em + .75rem + 2px);
-        padding: .375rem 1.75rem .375rem .75rem;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #495057;
-        vertical-align: middle;
-        background: url(https://previews.123rf.com/images/tifani1/tifani11801/tifani1180100316/94060669-set-icon-arrow-up-and-down-.jpg) no-repeat right .75rem center/62px 47px;
-        background-color: #fff;
-        border: 1px solid #ced4da;
-        border-radius: .25rem;
-        -webkit-appearance: none;
+        transition: all 0.15s ease-in-out;
         font-size: large;
-    }
-
-    .mb-1, .my-1 {
-        margin-bottom: .25rem !important;
-    }
-
-    .price-sum {
-        font-size: 24px;
-        color: #ea212d;
-        font-family: "HelB";
     }
 
     .btn-pro-buynow {
@@ -295,6 +347,7 @@
         padding-bottom: 14px;
         padding-left: 0px;
         padding-right: 0px;
+        -webkit-border-radius: 5px;
         border-radius: 5px;
         color: #fff;
         font-family: "Helb";
@@ -304,8 +357,16 @@
         font-size: large;
     }
 
-    input {
-        max-width: 100%;
+    .banner {
+        width: 100%;
+        height: 600px;
+        background-image: url(https://www.bennetts.co.uk/-/media/default-website/bike-insurance/motorbike-insurance/whats-included/bennetts-ultimate-cover-banner.ashx?h=360&w=780&la=en&hash=93DA48B7B1A1A5A492766AF4D77DC194FF258290);
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .m-0 {
+        margin: 0 !important;
     }
 
     .btn-pro-buynow:hover {
@@ -313,46 +374,32 @@
         color: #fff;
     }
 
-    .hvr-forward {
-        vertical-align: middle;
-        transform: perspective(1px) translateZ(0);
-        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-        transition-duration: 0.3s;
-        transition-property: transform;
+    .btn-pro:hover {
+        background-color: #0b665a;
+        color: #fff;
     }
 
-    .box-chuy {
-        margin-top: 20px;
+    .frmpro .txt {
+        padding: .375rem .75rem;
     }
 
-        .box-chuy .title-box-chuy {
-            font-size: 16px;
-            font-family: "unset";
-            text-transform: uppercase;
-            padding-bottom: 5px;
-            margin-bottom: 20px;
-            background-color: #f5f5f5;
-            padding: 10px;
-        }
-
-    .icon-bell {
-        background: url(https://www.iconsdb.com/icons/preview/red/bell-3-xxl.png) no-repeat left .75rem center/15px 15px;
-        padding: 0px 0px 0px 30px;
+    .frm .txt {
+        padding: 14px;
+        border: solid 2px #c8c8c8;
     }
 
-    .cotent-box-chuy {
-        font-size: 14px;
-        line-height: 22px;
-        padding-left: 10px;
+    .frm .form-control {
+        height: calc(3em + 0.75rem + 4px);
     }
 
-        .cotent-box-chuy > div {
-            margin-bottom: 7px;
-        }
-
-    .cotent-text {
-        background: url(https://baohiemtructuyen.com.vn/images/sub_menu_bullet.png) no-repeat 0 11px;
-        padding: 2px 0 5px 15px;
+    .icondate {
+        position: absolute;
+        right: 385px;
+        top: 13px;
+        background-image: url("https://baohiemtructuyen.com.vn/images/icon/cal.png");
+        background-repeat: no-repeat;
+        width: 26px;
+        height: 26px;
     }
 
     .result {
@@ -390,4 +437,17 @@
             font-size: 20px;
         }
 </style>
+@section Scripts {
+    <script>
+        $("input[name=insurancePackageId]") // select the radio by its id
+            .change(function () { // bind a function to the change event
+                if ($(this).is(":checked")) { // check if the radio is checked
+                    var val = $(this).attr("class"); // retrieve the value
+                    var valint = parseInt(val)
+                    var ttt = valint.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
+                    $('#ctl18_Promotions1_lblHasToPayPremium').text(ttt)
+                }
+            });
+    </script>
+}
