@@ -10,18 +10,25 @@
     <title>Insurance</title>
 
     <!-- Loading third party fonts -->
-    <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700|" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet" type="text/css" />
     <link href=@Url.Content("/Content/fonts/font-awesome.min.css") rel="stylesheet" type="text/css">
     <link href=@Url.Content("/Content/fonts/lineo-icon/style.css") rel="stylesheet" type="text/css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" />
 
+    @* Syncfusion Essential JS 2 Scripts *@
     <!-- Loading main css file -->
     <link rel="stylesheet" href=@Url.Content("/Content/style.css")>
     <!--[if lt IE 9]>
     <script src="js/ie-support/html5.js"></script>
     <script src="js/ie-support/respond.js"></script>
     <![endif]-->
+    <style>
+        .no-bullet li {
+            margin-bottom: 6px
+        }
+    </style>
 </head>
 
 <body>
@@ -50,8 +57,8 @@
 
 
             <div class="bottom-header">
-                <div class="container">
-                    <div class="main-navigation">
+                <div class="container" style="height: 56px;">
+                    <div class="main-navigation" style="font-size:20px;    margin-top: 10px;">
                         <button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
                         <ul class="menu">
                             @*<li class="menu-item"><a href="about.html">About us</a></li>
@@ -66,9 +73,7 @@
                             <li class="menu-item">@Html.ActionLink("Medical", "MedicalInsurance", "Home")</li>
                             <li class="menu-item">@Html.ActionLink("House", "HouseInsurance", "Home")</li>
                             <li class="menu-item">@Html.ActionLink("Motor", "MotorInsurance", "Home")</li>
-                            <li class="menu-item">@Html.ActionLink("life", "lifeInsurance", "Home")</li>
-
-
+                            <li class="menu-item">@Html.ActionLink("Life", "LifeInsurance", "Home")</li>
                             <li class="menu-item">@Html.ActionLink("Contact", "Contact", "Home")</li>
 
 
@@ -77,7 +82,7 @@
                     </div> <!-- .main-navigation -->
 
 
-                    <div style="float:right" class="main-navigation">
+                    <div style="float:right;font-size:20px;    margin-top: 10px;" class="main-navigation">
 
                         <ul class="menu">
                             <li class="menu-item"><a href="/Account/Login">Login</a></li>
@@ -323,7 +328,7 @@
 
         </div>
 
-        <div class="site-footer">
+        <div class="site-footer" style="font-size:19px">
             <div class="widget-area">
                 <div class="container">
                     <div class="row">
@@ -424,8 +429,10 @@
     <script src=@Url.Content("/Content/js/app.js")></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jqueryui")
 
+    @RenderSection("scripts", required: false)
+   
 
 </body>
 </html>

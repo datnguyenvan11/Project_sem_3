@@ -41,6 +41,8 @@ namespace Project_sem_3.Models
         {
             return new MyDb();
         }
+
+        public System.Data.Entity.DbSet<Project_sem_3.Models.MotorInsurance> MotorInsurances { get; set; }
     }
 }
 

@@ -1,45 +1,72 @@
-﻿
+﻿@model IEnumerable<Project_sem_3.Models.InsurancePackage>
+@using Project_sem_3.Models
 @{
-    ViewBag.Title = "Order";
+ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var cart = ViewBag.shoppingCart as MotorShopingCart;
+    var stt = 1;
+    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
 }
 
+
+
 <section>
-    <div class="subslide shadow">
-        <div class="thumb" style="background-image: url(https://topquotelifeinsurance.com/wp-content/uploads/2017/08/life-insurance-for-motorcycle-riders-1.jpg)"></div>
+    <div class="banner">
+        
     </div>
 
 </section>
-<div class="container">
-    <ul class="tab-pro">
-        <li class="active nav-item"><a href="#">Ordered</a></li>
-        <li class="nav-item "><a href="#">Log in</a></li>
-        <li class="nav-item "><a href="#">Delivery & payment</a></li>
-    </ul>
-</div>
-<section class="main-content">
-    <div class="container">
-        <div class="row">
 
-            <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 ">
-                        <div class="hd-info-pro">LIST OF ORDERED CARS</div>
-                        <div class="tab-content">
-                            <div id="tab1" class="tab-pane active ">
-                                <div class="col-lg-12 col-md-12 col-sm-12 d-none d-md-block">
-                                    <div class="row">
-                                        <div class="col-lg-1 col-md-1 text-center align-middle list-header">No.</div>
-                                        <div class="col-lg-3 col-md-3 text-center align-middle list-header">Car owner name</div>
-                                        <div class="col-lg-2 col-md-2 text-center align-middle list-header">Sea of ​​control</div>
-                                        <div class="col-lg-2 col-md-2 text-center align-middle list-header">Number of frames</div>
-                                        <div class="col-lg-2 col-md-2 text-center align-middle list-header">Fee (VAT included)</div>
-                                        <div class="col-lg-1 col-md-1 text-center align-middle list-header">Repair</div>
-                                        <div class="col-lg-1 col-md-1 text-center align-middle list-header">Delete</div>
-                                    </div>
+
+<div class="container1" style="margin-left:10%;margin-right:10%;margin-top:7% ;margin-bottom:7%">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 ">
+                    <div class="hd-info-pro">LIST OF ORDERED CARS</div>
+                    <div class="tab-content">
+                        <div id="tab1" class="tab-pane active ">
+                            <div class="col-lg-12 col-md-12 col-sm-12 d-none d-md-block">
+                                <div class="row">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+
+                                                <th scope="col">
+                                                    MotorOwner
+
+                                                </th>
+                                                <th scope="col">Address on vehicle registration</th>
+                                                <th scope="col">LicensePlate</th>
+                                                <th scope="col">ChassisNumber</th>
+                                                <th scope="col">Duration of insurance</th>
+                                                <th scope="col">Delete</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in cart.GetCartItems())
+                                            {
+
+
+
+                                                <tr>
+                                                    <td>@item.Value.CarOwner</td>
+                                                    <td>@item.Value.RegisteredAddress</td>
+                                                    <td>@item.Value.LicensePlate</td>
+                                                    <td>@item.Value.ChassisNumber</td>
+                                                    <td>@item.Value.Duration</td>
+                                                </tr>
+
+                                            }
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <form action="/MotorInsurance/AddCart" method="get">
                     <div class="col-lg-9 col-md-8 col-sm-12">
                         <div class="box-border-pro">
                             <div class="frm frmpro">
@@ -47,15 +74,13 @@
                                     <div class="row">
                                         <label for="rdbPackage_0" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Select product package</label>
                                         <div class="col-lg-8">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" id='rdbPackage_1' value='66000' onclick="PackageChange();" name="mcPackage" required />
-                                                <label class="custom-control-label" for='rdbPackage_1'><b> 66.000 VNĐ</b> Compulsory insurance for TNDS</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" class="custom-control-input" id='rdbPackage_2' value='86000' onclick="PackageChange();" name="mcPackage" required />
-                                                <label class="custom-control-label" for='rdbPackage_2'> <b>86.000 VNĐ</b> Compulsory insurance for TNDS + Personal accident insurance for vehicles</label>
-                                            </div>
-
+                                            @foreach (var item in Model)
+                                            {
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="PackageChange();" name="insurancePackageId" required />
+                                                    <label class="custom-control-label" for='rdbPackage_1'><b>@String.Format("{0:c}", @item.Price) </b> @item.Description</label>
+                                                </div>
+                                            }
 
                                             <i class="pad-top-5">
                                                 <span id="ctl18_lblPackageReq" class="req" style="color:Red;"></span>
@@ -70,7 +95,7 @@
                                     <div class="row">
                                         <label for="fullname" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Vehicle owner name:</label>
                                         <div class="col-lg-8">
-                                            <input name="ctl18$fullname" type="text" id="ctl18_fullname" class="form-control txt" placeholder="Vehicle owner name" />
+                                            <input  name="CarOwner" type="text" id="ctl18_fullname" class="form-control txt" placeholder="Vehicle owner name" />
                                             <i class="pad-top-5">
                                                 <span id="ctl18_lblInsuredReq" class="req" style="color:Red;"></span>
                                             </i>
@@ -81,70 +106,51 @@
                                     <div class="row">
                                         <label for="txtAddress" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Address on vehicle registration:</label>
                                         <div class="col-lg-8">
-                                            <input name="ctl18$txtAddress" type="text" id="ctl18_txtAddress" class="form-control txt" placeholder="Address on vehicle registration" />
+                                            <textarea name="RegisteredAddress" type="text" id="ctl18_txtAddress" class="form-control txt" placeholder="Address on vehicle registration" ></textarea>
                                             <i class="pad-top-5">
                                                 <span id="ctl18_lblAddressReq" class="req" style="color:Red;"></span>
                                             </i>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <label for="txtbks" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">License plate status:</label>
-                                        <div class="col-lg-8">
-                                            <div>
-                                                <input value="PlateYes" name="ctl18$RegistrationStatus" type="radio" id="ctl18_rdPlateYes" onclick="closeForm();" checked="checked" />
-                                                There are number plates
-                                            </div>
-                                            <div>
-                                                <input value="PlateNotYet" name="ctl18$RegistrationStatus" type="radio" id="ctl18_rdPlateNotYet" onclick="openForm()" />
-                                                New cars do not have number plates
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="form-group" id="divPlate" style="display: block;">
                                     <div class="row">
-                                        <label for="plates" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Sea of ​​control:</label>
+                                        <label for="plates" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">LicensePlate:</label>
                                         <div class="col-lg-8">
-                                            <input name="ctl18$plates" type="text" id="ctl18_plates" class="form-control txt" placeholder="Sea of ​​control" />
+                                            <input   name="LicensePlate" type="text" id="ctl18_plates" class="form-control txt" placeholder="LicensePlate" />
                                             <i class="pad-top-5">
                                                 <span id="ctl18_lblPlatesReq" class="req" style="color:Red;"></span>
                                             </i>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group" id="divChassis" style="display: none;">
+                                <div class="form-group" id="divChassis">
                                     <div class="row">
-                                        <label for="ChassisNumber" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Number of frames:</label>
+                                        <label for="ChassisNumber" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">ChassisNumber:</label>
                                         <div class="col-lg-8">
-                                            <input name="ctl18$ChassisNumber" type="text" id="ctl18_ChassisNumber" class="form-control txt" placeholder="Number of frames" />
+                                            <input name="ChassisNumber" type="text" id="ctl18_ChassisNumber" class="form-control txt" placeholder="Chassis Number" />
                                             <i class="pad-top-5">
                                                 <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
                                             </i>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group" id="divEngine" style="display: none;">
-                                    <div class="row">
-                                        <label for="plates" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Phone number :</label>
-                                        <div class="col-lg-8">
-                                            <input name="ctl18$txtEngineNumber" type="text" id="ctl18_txtEngineNumber" class="form-control txt" placeholder="Phone number" />
-                                            <i class="pad-top-5">
-                                                <span id="ctl18_lblEngineNumberReq" class="req" style="color:Red;"></span>
-                                            </i>
-                                        </div>
-                                    </div>
-                                </div>
+                                <input type="hidden" name="quantity" value="1" />
+
+
                                 <div class="form-group">
                                     <div class="row">
                                         <label for="txtFromDate" class="col-lg-4 col-sm-12 col-form-label col-form-label-first pad-0">Duration of insurance :</label>
                                         <div class="col-lg-8">
-                                            <input type="text" id="datepicker" class="form-control txt start-date" placeholder="Thời hạn bảo hiểm" onchange="fromdate_change();" />
-                                            <div class="icon-date"></div>
+
+                                            <input type="datetime" id="datepicker" class="form-control txt start-date " name="Duration" placeholder="Duration of insurance" onchange="fromdate_change();" />
+
+                                            <div class="icondate"></div>
                                             <i class="pad-top-5">01 year from the date on and after the time of fee payment</i>
                                             <i class="pad-top-5"><span id="ctl18_lblFromDateReq" class="req" style="color:Red;"></span></i>
                                             <i class="pad-top-5"><span id="ctl18_lblFromDate" class="req" style="color:Red;"></span></i>
+
                                         </div>
                                     </div>
                                 </div>
@@ -160,42 +166,44 @@
                                                     <input type="submit" name="ctl18$btnYes" value="Yes" id="ctl18_btnYes" class="btn-pro btn" />
                                                 </div>
                                                 <div class="col-sm-6" style="padding-left:5px">
-                                                    <input type="submit" name="ctl18$btnNo" value="No" id="ctl18_btnNo" class="btn-pro-buynow m-0" />
+                                                    <input type="submit" style="height: 45px;" name="ctl18$btnNo" value="No" id="ctl18_btnNo" class="btn-pro-buynow m-0" />
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-12">
-                        <div class="hd-info-pro">INSURANCE FEES</div>
-                        <div class="result">
+                </form>
+                <div class="col-lg-3 col-md-4 col-sm-12">
+                    <div class="hd-info-pro">INSURANCE FEES</div>
+                    <div class="result">
+                        <div class="item-result">
+                            <span>Total fee (including VAT):</span>
+                            <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">$0</label></strong>
+                        </div>
+                        <div id="ctl18_Promotions1_pnPromotions">
+
+
                             <div class="item-result">
-                                <span>Total fee (including VAT):</span>
-                                <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">0 VNĐ</label></strong>
+                                <span>Discount amount:</span>
+                                <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">$0</label></strong>
                             </div>
-                            <div id="ctl18_Promotions1_pnPromotions">
+                            <div class="result-red">
+                                <div>Total net charge (including VAT) actually collected:</div>
 
-
-                                <div class="item-result">
-                                    <span>Discount amount:</span>
-                                    <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">0 VNĐ</label></strong>
-                                </div>
-                                <div class="result-red">
-                                    <div>Total net charge (including VAT) actually collected:</div>
-                                    <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">0 VNĐ</label></strong>
-                                </div>
-                                <a id="ctl18_lbtBook" class="btn-pro-buynow" href="javascript:__doPostBack('ctl18$lbtBook','')">Order</a>
+                                <strong><label class=" @cart.GetTotalPrice()" for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">@String.Format("{0:c}", @cart.GetTotalPrice())</label></strong>
                             </div>
+                            <a id="ctl18_lbtBook" style="text-decoration:none" class="btn-pro-buynow" href="/MotorInsurance/CreateContract">Order</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
 <style>
     .thumb {
@@ -258,9 +266,25 @@
         display: inline;
         max-width: 100%;
         margin-bottom: 5px;
-        font-weight: 700;
+        font-weight: 300;
     }
-
+    #ctl18_fullname{
+        width:60%
+    }
+    #ctl18_txtAddress{
+        width:70%;
+        height:124px
+        
+    }
+    #ctl18_plates{
+        width:67%
+    }
+    #ctl18_ChassisNumber{
+         width:67%
+    }
+    #datepicker{
+        width:55%
+    }
     .mb-15 {
         margin-bottom: 15px;
     }
@@ -310,7 +334,7 @@
     }
 
     .frm .custom-control-label {
-        font-size: 14px;
+        font-size: 16px;
         line-height: 24px;
         margin-top: 10px;
     }
@@ -322,7 +346,7 @@
 
     .frmpro .col-form-label {
         line-height: 1.7em;
-        font-size: 14px;
+        font-size: 18px;
         color: #3e3e3e;
     }
 
@@ -372,7 +396,13 @@
         border: none;
         font-size: large;
     }
-
+    .banner {
+  width: 100%;
+  height: 600px;
+  background-image: url(https://www.bennetts.co.uk/-/media/default-website/bike-insurance/motorbike-insurance/whats-included/bennetts-ultimate-cover-banner.ashx?h=360&w=780&la=en&hash=93DA48B7B1A1A5A492766AF4D77DC194FF258290);
+  background-position: center center;
+  background-size: cover;
+}
     .m-0 {
         margin: 0 !important;
     }
@@ -397,14 +427,15 @@
     }
 
     .frm .form-control {
-        height: calc(2.0em + .75rem + 2px);
+        height: calc(3em + 0.75rem + 4px);
+
     }
 
-    .icon-date {
+    .icondate {
         position: absolute;
-        right: 260px;
-        top: 7px;
-        background-image: url(https://baohiemtructuyen.com.vn/images/icon/cal.png);
+          right: 385px;
+    top: 13px;
+        background-image: url("https://baohiemtructuyen.com.vn/images/icon/cal.png");
         background-repeat: no-repeat;
         width: 26px;
         height: 26px;
@@ -445,20 +476,33 @@
             font-size: 20px;
         }
 </style>
-<script>
-    function openForm() {
-        document.getElementById("divPlate").style.display = "none";
-        document.getElementById("divChassis").style.display = "block";
-        document.getElementById("divEngine").style.display = "block";
-    }
-    function closeForm() {
-        document.getElementById("divPlate").style.display = "block";
-        document.getElementById("divChassis").style.display = "none";
-        document.getElementById("divEngine").style.display = "none";
-    }
-    $(function () {
-        $("#datepicker").datepicker();
-    });
+@section Scripts {
 
-</script>
 
+
+    <script type="text/javascript">
+
+        $('input[type=datetime]').datepicker({
+            dateFormat: "dd/M/yy",
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "-60:+0"
+        });
+
+
+        $("input[name=insurancePackageId]") // select the radio by its id
+            .change(function () { // bind a function to the change event
+                if ($(this).is(":checked")) { // check if the radio is checked
+                    var val = $(this).attr("class"); // retrieve the value
+                    var valint = parseInt(val)
+                    var tt = $('#ctl18_Promotions1_lblHasToPayPremium').attr('class')
+                    var tint = parseInt(tt)
+                    var t = valint + tint
+                    var ttt = t.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+                    $('#ctl18_Promotions1_lblHasToPayPremium').text(ttt)
+                }
+            });
+    </script>
+
+}

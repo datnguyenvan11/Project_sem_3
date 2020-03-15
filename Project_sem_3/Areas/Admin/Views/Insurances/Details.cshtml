@@ -23,7 +23,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.Raw(HttpUtility.HtmlDecode(Model.Description))
         </dd>
 
         <dt>
@@ -42,13 +42,9 @@
             @Html.DisplayFor(model => model.UpdatedAt)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DeleteAt)
-        </dt>
+      
 
-        <dd>
-            @Html.DisplayFor(model => model.DeleteAt)
-        </dd>
+     
 
     </dl>
 </div>

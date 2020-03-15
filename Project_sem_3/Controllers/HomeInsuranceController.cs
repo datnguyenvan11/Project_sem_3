@@ -18,12 +18,13 @@ namespace Project_sem_3.Controllers
         }
         public ActionResult Order()
         {
-            return View();
+
+            var insurancePackages = db.InsurancePackages.Where(i => i.InsuranceId == 19);
+            return View(insurancePackages);
         }
 
         public ActionResult CreateContract(int InsurancePackageId, string HouseType, string DurationHouse, string HouseOwner, string HouserAddress)
         {
-
             // load cart trong session.
             var insurancepackage = db.InsurancePackages.Find(InsurancePackageId);
 
@@ -31,7 +32,7 @@ namespace Project_sem_3.Controllers
             {
                 TotalPrice = insurancepackage.Price,
                 CustomerId = 1,
-                InsuranceId = 2,
+                InsuranceId = 19,
                 HouseInsurances = new List<HouseInsurance>()
             };
 
