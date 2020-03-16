@@ -197,10 +197,6 @@
     <Compile Include="Migrations\202003130754533_SeederProgreme.designer.cs">
       <DependentUpon>202003130754533_SeederProgreme.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003130821033_tesst2.cs" />
-    <Compile Include="Migrations\202003130821033_tesst2.Designer.cs">
-      <DependentUpon>202003130821033_tesst2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountRole.cs" />
     <Compile Include="Models\Contract.cs" />
@@ -221,6 +217,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Assets\css\custom.css" />
     <Content Include="Areas\Admin\Assets\css\sb-admin-2.css" />
     <Content Include="Areas\Admin\Assets\css\sb-admin-2.min.css" />
     <Content Include="Areas\Admin\Assets\img\undraw_posting_photo.svg" />
@@ -2700,9 +2697,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003130754533_SeederProgreme.resx">
       <DependentUpon>202003130754533_SeederProgreme.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003130821033_tesst2.resx">
-      <DependentUpon>202003130821033_tesst2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
