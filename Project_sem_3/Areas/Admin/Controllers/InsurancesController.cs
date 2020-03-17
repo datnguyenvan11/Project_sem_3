@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Project_sem_3.Models;
 
 namespace Project_sem_3.Areas.Admin.Controllers
@@ -17,7 +18,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/Insurances
         public ActionResult Index()
         {
-            return View(db.Insurances.ToList());
+            return View(db.Insurances.Where(x => x.Status == 0).ToList());
         }
 
         // GET: Admin/Insurances/Details/5
@@ -43,7 +44,6 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
         // POST: Admin/Insurances/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Insurance insurance)
@@ -121,6 +121,20 @@ namespace Project_sem_3.Areas.Admin.Controllers
             db.Insurances.Remove(insurance);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAll(int[] selectedIDs)
+        {
+            foreach (int IDs in selectedIDs)
+            {
+                Insurance insurance = db.Insurances.Find(IDs);
+                db.Insurances.Attach(insurance);
+                insurance.Status = -1;
+            }
+            db.SaveChanges();
+            return Json(selectedIDs, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
