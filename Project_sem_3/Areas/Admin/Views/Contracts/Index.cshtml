@@ -32,8 +32,7 @@
                                     </thead>
                                     
                                     <tbody>
-                                       
-                                            @foreach (var item in Model)
+                                    @foreach (var item in Model)
                                             {
                                                 <tr role="row" class="odd">
                                                 <td class="sorting_1">
@@ -57,10 +56,9 @@
                                                         }
                                                     </button>
                                                     <button class="button button3">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-                                    </td>    
+                                                </td>    
                                                 </tr>
-                                    }
-                                       
+                                            }
                                     </tbody>
                                 </table>
                             </div>
