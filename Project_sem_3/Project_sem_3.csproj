@@ -179,6 +179,7 @@
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeInsuranceController.cs" />
+    <Compile Include="Controllers\LifeInsuranceController.cs" />
     <Compile Include="Controllers\MedicalInsuranceController.cs" />
     <Compile Include="Controllers\MotorInsuranceController.cs" />
     <Compile Include="Controllers\MotorCartController.cs" />
@@ -2673,6 +2674,7 @@
     <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\LifeInsurance\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
