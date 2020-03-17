@@ -13,6 +13,8 @@ namespace Project_sem_3.Models
         public string Name { get; set; }
         [Required(ErrorMessage = "Price is required")]
         public double Price { get; set; }
+        public int Status { get; set; }
+        public enum ProgrammeStatus { Deleted = -1, Action = 0 }
         public virtual ICollection<MedicalInsurance> MedicalInsurances { get; set; }
     }
 }
