@@ -19,6 +19,8 @@ namespace Project_sem_3.Models
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime DeleteAt { get; set; }
+        public int Status { get; set; }
+        public enum InsuranceStatus { Deleted = -1, Action = 0 }
         public virtual ICollection<InsurancePackage> InsurancePackages { get; set; }
 
     }
