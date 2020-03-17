@@ -197,6 +197,14 @@
     <Compile Include="Migrations\202003130754533_SeederProgreme.designer.cs">
       <DependentUpon>202003130754533_SeederProgreme.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202003161003157_insurance.cs" />
+    <Compile Include="Migrations\202003161003157_insurance.Designer.cs">
+      <DependentUpon>202003161003157_insurance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003161737374_addStatus.cs" />
+    <Compile Include="Migrations\202003161737374_addStatus.Designer.cs">
+      <DependentUpon>202003161737374_addStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountRole.cs" />
     <Compile Include="Models\Contract.cs" />
@@ -2697,6 +2705,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003130754533_SeederProgreme.resx">
       <DependentUpon>202003130754533_SeederProgreme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003161003157_insurance.resx">
+      <DependentUpon>202003161003157_insurance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003161737374_addStatus.resx">
+      <DependentUpon>202003161737374_addStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
