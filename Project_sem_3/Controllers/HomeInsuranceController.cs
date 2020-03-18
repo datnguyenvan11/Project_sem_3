@@ -9,7 +9,7 @@ namespace Project_sem_3.Controllers
 {
     public class HomeInsuranceController : Controller
     {
-        private MyDb db = new MyDb();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: HomeInsurance
         public ActionResult Index()
@@ -31,7 +31,7 @@ namespace Project_sem_3.Controllers
             var contract = new Contract
             {
                 TotalPrice = insurancepackage.Price,
-                CustomerId = 1,
+                ApplicationUserId = "1",
                 InsuranceId = 19,
                 HouseInsurances = new List<HouseInsurance>()
             };

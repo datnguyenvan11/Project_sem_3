@@ -10,7 +10,7 @@ namespace Project_sem_3.Controllers
 {
     public class MotorInsuranceController : Controller
     {
-        private MyDb db = new MyDb();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: MotorInsurance
         public ActionResult Index()
@@ -85,7 +85,7 @@ namespace Project_sem_3.Controllers
             var contract = new Contract
             {
                 TotalPrice = shoppingCart.GetTotalPrice(),
-                CustomerId = 1,
+                ApplicationUserId = "1",
                 InsuranceId = 16,
                 MotorInsurances = new List<MotorInsurance>()
             };
