@@ -5,11 +5,50 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-    <h2 class="content-text1">Details Insurance</h2>
+<h2 class="content-text1">Details Insurance</h2>
 
 <div>
-    <hr />
-    <dl class="dl-horizontal">
+    <hr />      
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedAt)
+            </th>
+
+            <th></th>
+        </tr>  
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.Name)
+            </td>
+            <td>
+                @Html.Raw(HttpUtility.HtmlDecode(Model.Description))
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.CreatedAt)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.UpdatedAt)
+            </td>
+            
+        </tr>
+    </table>
+    @*<dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -46,11 +85,11 @@
 
      
 
-    </dl>
+    </dl>*@
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <button class="btn btn-warning">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button> 
+    <button class="btn btn-info">@Html.ActionLink("Back to List", "Index")</button>
 </p>
 <style>
     .content-text {

@@ -6,86 +6,159 @@
 }
 
 <h2>Details</h2>
+<h4>InsurancePackage</h4>          
+<hr />
 
-<div>
-    <h4>InsurancePackage</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
+<table class="table">
+    <tr>
+        <th>
             @Html.DisplayNameFor(model => model.Insurance.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Insurance.Name)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.DurationContract)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DurationContract)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.DurationPay)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DurationPay)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-
-        <dt>
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.DeleteAt)
-        </dt>
-
-        <dd>
+        </th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Insurance.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.DurationContract)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.DurationPay)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.CreatedAt)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.UpdatedAt)
+        </td>
+        <td>
             @Html.DisplayFor(model => model.DeleteAt)
-        </dd>
-
-    </dl>
-</div>
+        </td>
+    </tr>
+</table>   
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    <button class="btn btn-warning">@Html.ActionLink("Edit", "Edit", new { id = Model.Id })</button>  
+    <button class="btn btn-info">@Html.ActionLink("Back to List", "Index")</button>
 </p>
+@*<div class="container">
+            <dl class="dl-horizontal">
+                <div class="form-group">
+                    <div class="row">
+                        <label>@Html.DisplayNameFor(model => model.Insurance.Name) :</label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.Insurance.Name)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <label>@Html.DisplayNameFor(model => model.Name) :</label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.Name)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <label>@Html.DisplayNameFor(model => model.Description) :</label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.Description)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <label>@Html.DisplayNameFor(model => model.Price) :</label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.Price)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <label>@Html.DisplayNameFor(model => model.DurationContract) :</label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.DurationContract)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <label>@Html.DisplayNameFor(model => model.DurationPay) :</label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.DurationPay)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <label>@Html.DisplayNameFor(model => model.CreatedAt) :</label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.CreatedAt)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <label>@Html.DisplayNameFor(model => model.UpdatedAt) :</label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.UpdatedAt)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <label>@Html.DisplayNameFor(model => model.DeleteAt) :</label>
+                        <div class="col-md-10">
+                            @Html.DisplayFor(model => model.DeleteAt)
+                        </div>
+                    </div>
+                </div>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>*@
