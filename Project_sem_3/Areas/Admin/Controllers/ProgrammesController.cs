@@ -124,6 +124,20 @@ namespace Project_sem_3.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAll(int[] selectedIDs)
+        {
+            foreach (int IDs in selectedIDs)
+            {
+                Programme programme = db.Programmes.Find(IDs);
+                db.Programmes.Attach(programme);
+                programme.Status = 0;
+            }
+            db.SaveChanges();
+            return Json(selectedIDs, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

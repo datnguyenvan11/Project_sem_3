@@ -17,7 +17,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/InsurancePackages
         public ActionResult Index()
         {
-            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance);
+            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x =>x.Status == 0);
             return View(insurancePackages.ToList());
         }
 
@@ -130,6 +130,20 @@ namespace Project_sem_3.Areas.Admin.Controllers
             db.InsurancePackages.Remove(insurancePackage);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAll(int[] selectedIDs)
+        {
+            foreach (int IDs in selectedIDs)
+            {
+                InsurancePackage insurancePackage = db.InsurancePackages.Find(IDs);
+                db.InsurancePackages.Attach(insurancePackage);
+                insurancePackage.Status = -1;
+            }
+            db.SaveChanges();
+            return Json(selectedIDs, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)

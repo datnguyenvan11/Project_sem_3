@@ -184,6 +184,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeInsuranceController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\LifeInsuranceController.cs" />
     <Compile Include="Controllers\MedicalInsuranceController.cs" />
     <Compile Include="Controllers\MotorInsuranceController.cs" />
     <Compile Include="Controllers\MotorCartController.cs" />
@@ -201,6 +202,14 @@
     <Compile Include="Migrations\202003180648041_r.cs" />
     <Compile Include="Migrations\202003180648041_r.Designer.cs">
       <DependentUpon>202003180648041_r.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003161003157_insurance.cs" />
+    <Compile Include="Migrations\202003161003157_insurance.Designer.cs">
+      <DependentUpon>202003161003157_insurance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003161737374_addStatus.cs" />
+    <Compile Include="Migrations\202003161737374_addStatus.Designer.cs">
+      <DependentUpon>202003161737374_addStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2704,6 +2713,8 @@
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\LifeInsurance\Order.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2728,6 +2739,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003180648041_r.resx">
       <DependentUpon>202003180648041_r.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003161003157_insurance.resx">
+      <DependentUpon>202003161003157_insurance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003161737374_addStatus.resx">
+      <DependentUpon>202003161737374_addStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

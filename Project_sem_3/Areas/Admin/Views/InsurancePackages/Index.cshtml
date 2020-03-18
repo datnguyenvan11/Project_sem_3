@@ -7,14 +7,16 @@
 
 <!-- Custom styles for this page -->
 <link href="/Assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="/Areas/Admin/Assets/css/custom.css" rel="stylesheet">
 <!-- Main Content -->
 <div id="content">
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Contracts</h1>
+        <h1 class="h3 mb-2 text-gray-800">Insurance Package</h1>
         <p class="mb-4"> All contracts of customers about insurances .</p>
+        <button type="button" id="delete_checked">Delete Selected</button>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -28,7 +30,21 @@
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
-                                        <tr><th rowspan="1" colspan="1">Insurance Name</th><th rowspan="1" colspan="1">Name</th><th rowspan="1" colspan="1">Description</th><th rowspan="1" colspan="1">Price</th><th rowspan="1" colspan="1">DurationContract</th><th rowspan="1" colspan="1">DurationPay</th><th rowspan="1" colspan="1">CreatedAt</th><th rowspan="1" colspan="1">UpdatedAt</th><th rowspan="1" colspan="1">Action</th></tr>
+
+
+                                        <tr>
+                                            <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll_InsurancePackage" />Select All</th>
+                                            <th rowspan="1" colspan="1">Insurance Name</th>
+                                            <th rowspan="1" colspan="1">Name</th>
+                                            <th rowspan="1" colspan="1">Description</th>
+                                            <th rowspan="1" colspan="1">Price</th>
+                                            <th rowspan="1" colspan="1">DurationContract</th>
+                                            <th rowspan="1" colspan="1">DurationPay</th>
+                                            <th rowspan="1" colspan="1">CreatedAt</th>
+                                            <th rowspan="1" colspan="1">UpdatedAt</th>
+                                            <th rowspan="1" colspan="1">Action</th>
+                                        </tr>
+
                                     </thead>
 
                                     <tbody>
@@ -36,6 +52,10 @@
                                         @foreach (var item in Model)
                                         {
                                             <tr role="row" class="odd">
+                                                <td>
+                                                    <input type="checkbox" class="check" value="@item.Id" />
+                                                    @Html.AntiForgeryToken()
+                                                </td>
                                                 <td class="sorting_1">
                                                     @item.Insurance.Name
                                                 </td>
@@ -46,11 +66,11 @@
                                                 <td>@item.DurationPay</td>
                                                 <td>@item.CreatedAt</td>
                                                 <td>@item.UpdatedAt</td>
-                                                <td>   
+                                                <td>
                                                     <span>
-                                                        <button>@Html.ActionLink("Edit", "Edit", new {id = item.Id})</button>
-                                                        <button>@Html.ActionLink("Details", "Details", new {id = item.Id})</button>
-                                                        <button>@Html.ActionLink("Delete", "Delete", new {id= item.Id})</button>
+                                                        <button>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
+                                                        <button>@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
+                                                        <button>@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
                                                     </span>
                                                 </td>
                                             </tr>
@@ -59,7 +79,8 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div>
+                        </div>
+                        <div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div>
                     </div>
                 </div>
             </div>
@@ -68,79 +89,47 @@
     </div>
     <!-- /.container-fluid -->
 </div>
-<!-- End of Main Content -->
-@*<h2>Index</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Insurance.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DurationContract)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DurationPay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeleteAt)
-            </th>
-            <th></th>
-        </tr>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var selectedIDs = new Array();
+            $('#checkAll_InsurancePackage').click(function () {
+                $(".check").prop('checked',
+                    $(this).prop('checked'));
+            })
 
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Insurance.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DurationContract)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DurationPay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeleteAt)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-            </td>
-        </tr>
-    }
+        $('#delete_checked').click(function () {
+            var selectedIDs = new Array();
+            $('input:checkbox.check').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDs.push($(this).val());
+                }
+            });
+            if (selectedIDs.length <= 0) {
+                alert('You have not selected insurance package !');
+                return;
+                }
+            $.ajax({
+                url: "/Admin/InsurancePackages/DeleteAll",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                    selectedIDs
+                },
+                success: function (res) {
+                    if (!res == false) {
+                        window.location.href = `/Admin/InsurancePackages`;
+                    }
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                });
+            })
+        })
+    </script>
+}
 
-    </table>*@
