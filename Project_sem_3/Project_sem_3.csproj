@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -166,6 +168,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ContractsController.cs" />
@@ -174,33 +177,36 @@
     <Compile Include="Areas\Admin\Controllers\InsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\MotorInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProgrammesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
-    <Compile Include="Controllers\AccoutRoleController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeInsuranceController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicalInsuranceController.cs" />
     <Compile Include="Controllers\MotorInsuranceController.cs" />
     <Compile Include="Controllers\MotorCartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003120413377_tesst.cs" />
-    <Compile Include="Migrations\202003120413377_tesst.Designer.cs">
-      <DependentUpon>202003120413377_tesst.cs</DependentUpon>
+    <Compile Include="Migrations\202003170920552_role2.cs" />
+    <Compile Include="Migrations\202003170920552_role2.Designer.cs">
+      <DependentUpon>202003170920552_role2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003130650391_validataProgreme.cs" />
-    <Compile Include="Migrations\202003130650391_validataProgreme.designer.cs">
-      <DependentUpon>202003130650391_validataProgreme.cs</DependentUpon>
+    <Compile Include="Migrations\202003171003516_s.cs" />
+    <Compile Include="Migrations\202003171003516_s.Designer.cs">
+      <DependentUpon>202003171003516_s.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003130754533_SeederProgreme.cs" />
-    <Compile Include="Migrations\202003130754533_SeederProgreme.designer.cs">
-      <DependentUpon>202003130754533_SeederProgreme.cs</DependentUpon>
+    <Compile Include="Migrations\202003180648041_r.cs" />
+    <Compile Include="Migrations\202003180648041_r.Designer.cs">
+      <DependentUpon>202003180648041_r.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountRole.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contract.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MedicalInsurance.cs" />
     <Compile Include="Models\HouseInsurance.cs" />
     <Compile Include="Models\Insurance.cs" />
@@ -2288,6 +2294,12 @@
     <Content Include="Areas\Admin\Views\Insurances\Index.cshtml" />
     <Content Include="Areas\Admin\Views\MotorInsurances\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\CreateAdmin.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -2673,6 +2685,25 @@
     <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Accounts\Register.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2689,14 +2720,14 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003120413377_tesst.resx">
-      <DependentUpon>202003120413377_tesst.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003170920552_role2.resx">
+      <DependentUpon>202003170920552_role2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003130650391_validataProgreme.resx">
-      <DependentUpon>202003130650391_validataProgreme.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003171003516_s.resx">
+      <DependentUpon>202003171003516_s.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003130754533_SeederProgreme.resx">
-      <DependentUpon>202003130754533_SeederProgreme.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003180648041_r.resx">
+      <DependentUpon>202003180648041_r.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
