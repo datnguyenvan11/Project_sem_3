@@ -63,6 +63,7 @@
 
                                     <tbody>
 
+
                                         @foreach (var item in Model)
                                         {
                                             <tr role="row" class="odd">
@@ -70,6 +71,7 @@
                                                     <input type="checkbox" class="check" value="@item.Id" />
                                                     @Html.AntiForgeryToken()
                                                 </td>
+
                                                 <td class="sorting_1">
                                                     @item.Insurance.Name
                                                 </td>
@@ -91,9 +93,11 @@
                                                         }
                                                     </button>
                                                     <button class="button button3">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+
                                                 </td>
                                             </tr>
                                         }
+
 
                                     </tbody>
                                 </table>
