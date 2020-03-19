@@ -12,7 +12,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
 {
     public class MotorInsurancesController : Controller
     {
-        private MyDb db = new MyDb();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/MotorInsurances
         public ActionResult Index(int Id)

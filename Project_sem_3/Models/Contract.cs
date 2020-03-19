@@ -8,7 +8,7 @@ namespace Project_sem_3.Models
     public class Contract
     {
         public int Id { get; set; }
-        public int CustomerId { get; set; }
+        public string ApplicationUserId { get; set; }
         public double TotalPrice { get; set; }
         public int InsuranceId { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -27,7 +27,7 @@ namespace Project_sem_3.Models
         public virtual ICollection<HouseInsurance> HouseInsurances { get; set; }
         public virtual ICollection<MedicalInsurance> MedicalInsurances { get; set; }
         public virtual ICollection<LifeInsurance> LifeInsurances { get; set; }
-        public virtual Customer Customer { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual Insurance Insurance { get; set; }
 
 

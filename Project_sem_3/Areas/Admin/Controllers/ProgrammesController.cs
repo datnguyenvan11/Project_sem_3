@@ -15,7 +15,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
 {
     public class ProgrammesController : Controller
     {
-        private MyDb db = new MyDb();
+        ApplicationDbContext db = new ApplicationDbContext();
         List<Programme> list = new List<Programme>();
         // GET: Admin/Programmes
         public ActionResult Index()

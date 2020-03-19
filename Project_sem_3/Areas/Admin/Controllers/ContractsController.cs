@@ -12,7 +12,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
 {
     public class ContractsController : Controller
     {
-        private MyDb db = new MyDb();
+        ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/Contracts
         public ActionResult Index()
@@ -93,6 +93,20 @@ namespace Project_sem_3.Areas.Admin.Controllers
             db.Contracts.Remove(contract);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult StatusOrder(int action, int[] selectedIDs)
+        {
+            foreach (int IDs in selectedIDs)
+            {
+                Contract contract = db.Contracts.Find(IDs);
+                db.Contracts.Attach(contract);
+                contract.Status = action;
+            }
+            db.SaveChanges();
+            return Json(selectedIDs, JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
