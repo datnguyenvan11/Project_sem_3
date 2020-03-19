@@ -1,0 +1,113 @@
+﻿
+
+@model IEnumerable<Project_sem_3.Models.Users_in_Role_ViewModel>
+
+@{
+    ViewBag.Title = "Users With Roles";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="box-title">
+            <b>Users with Roles</b>
+        </h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="panel-body">
+        <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
+            <thead>
+                <tr>
+                    <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
+
+                    <td><b>Username</b></td>
+                    <td><b>Email</b></td>
+                    <td><b>Roles</b></td>
+                </tr>
+            </thead>
+            @foreach (var user in Model)
+            {
+        <tr>
+            <td>
+                <input type="checkbox" class="check" value="@user.UserId" />
+                @Html.AntiForgeryToken()
+            </td>
+            <td><b>@user.Username</b></td>
+            <td><b>@user.Email</b></td>
+            <td><b>@user.Role</b></td>
+            <form action="/role/DeleteConfirmedUser" method="post">
+                @Html.AntiForgeryToken()
+                <input type="text" name="userId" value="@user.UserId" />
+                <input type="submit" name="name" value="dasdada" />
+            </form>
+            
+        </tr>
+            }
+        </table>
+    </div>
+
+    @Html.DropDownList("RoleName", new SelectList(ViewBag.Roles, "Value", "Text"), new { @id = "select-action" });
+    <button class="btn btn-danger" id="btn-role"> action</button>
+    <div class="panel-footer">
+        <p class="box-title"><b>Total Users till @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  : </b><span class="label label-primary">@Model.Count()</span></p>
+    </div>
+</div>
+
+
+@section scripts{
+    <script>
+
+        $(function () {
+            $('#UsersWithRoles').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#checkAll').click(function () {
+                $(".check").prop('checked',
+                    $(this).prop('checked'));
+            })
+        })
+
+        $('#btn-role').click(function () {
+            var selectedIDs = new Array();
+            var action = $('#select-action').val();
+          
+            $('input:checkbox.check').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDs.push($(this).val());
+                }
+            });
+            if (selectedIDs.length <= 0) {
+                alert('You have not selected a contract!');
+                return;
+            }
+            $.ajax({
+                url: "/Admin/Role/SetRole",
+                type: "POST",
+                dataType: "json",
+                data: {
+                   'selectedIDs': selectedIDs,
+                    'action':action
+                },
+                success: function (res) {
+                    if (!res == false) {
+                        window.location.href = `/Admin/Role/UsersWithRoles`;
+                    }
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        })
+    </script>
+}  

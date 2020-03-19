@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -18,6 +19,20 @@ namespace Project_sem_3.App_Start
     {
         public Task SendAsync(IdentityMessage message)
         {
+            MailMessage mail = new MailMessage();
+
+            SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+            smtpServer.Credentials = new System.Net.NetworkCredential("tatthanh0304@gmail.com", "hsvpqrpifdhcosoc");
+            smtpServer.Port = 587; // Gmail works on this port
+            smtpServer.EnableSsl = true;
+
+            mail.From = new MailAddress("datnvth1807036@fpt.edu.vn");
+            mail.To.Add(message.Destination);
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+            mail.IsBodyHtml = true;
+
+            smtpServer.Send(mail);
             // Plug in your email service here to send an email.
             return Task.FromResult(0);
         }
