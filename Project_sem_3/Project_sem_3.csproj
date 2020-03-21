@@ -191,18 +191,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003170920552_role2.cs" />
-    <Compile Include="Migrations\202003170920552_role2.Designer.cs">
-      <DependentUpon>202003170920552_role2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003171003516_s.cs" />
-    <Compile Include="Migrations\202003171003516_s.Designer.cs">
-      <DependentUpon>202003171003516_s.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003180648041_r.cs" />
-    <Compile Include="Migrations\202003180648041_r.Designer.cs">
-      <DependentUpon>202003180648041_r.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202003161003157_insurance.cs" />
     <Compile Include="Migrations\202003161003157_insurance.Designer.cs">
       <DependentUpon>202003161003157_insurance.cs</DependentUpon>
@@ -2714,7 +2702,6 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\LifeInsurance\Order.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2731,15 +2718,6 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003170920552_role2.resx">
-      <DependentUpon>202003170920552_role2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003171003516_s.resx">
-      <DependentUpon>202003171003516_s.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003180648041_r.resx">
-      <DependentUpon>202003180648041_r.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003161003157_insurance.resx">
       <DependentUpon>202003161003157_insurance.cs</DependentUpon>
     </EmbeddedResource>

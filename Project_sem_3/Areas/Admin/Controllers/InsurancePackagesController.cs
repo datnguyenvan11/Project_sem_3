@@ -134,13 +134,13 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteAll(int[] selectedIDs)
+        public ActionResult DeleteAll(int action, int[] selectedIDs)
         {
             foreach (int IDs in selectedIDs)
             {
                 InsurancePackage insurancePackage = db.InsurancePackages.Find(IDs);
                 db.InsurancePackages.Attach(insurancePackage);
-                insurancePackage.Status = -1;
+                insurancePackage.Status = action;
             }
             db.SaveChanges();
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);

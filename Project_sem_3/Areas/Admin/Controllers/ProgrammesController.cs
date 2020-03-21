@@ -20,7 +20,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/Programmes
         public ActionResult Index()
         {
-            return View(db.Programmes.ToList());
+            return View(db.Programmes.Where(x =>x.Status == 0).ToList());
         }
 
         // GET: Admin/Programmes/Details/5
@@ -126,13 +126,13 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteAll(int[] selectedIDs)
+        public ActionResult DeleteAll(int action, int[] selectedIDs)
         {
             foreach (int IDs in selectedIDs)
             {
                 Programme programme = db.Programmes.Find(IDs);
                 db.Programmes.Attach(programme);
-                programme.Status = 0;
+                programme.Status = action;
             }
             db.SaveChanges();
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);
