@@ -10,6 +10,17 @@ namespace Project_sem_3.Models
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public int Status { get; set; }
+        public enum OrderStatus { Done = 1, Cancel = 0, Deleted = -1 }
+        public ExternalLoginConfirmationViewModel()
+        {
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
+
+            Status = (int)OrderStatus.Done;
+        }
     }
 
     public class ExternalLoginListViewModel
@@ -82,7 +93,7 @@ namespace Project_sem_3.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public string Name { get; set; }
+        public string UserName { get; set; }
         public string Address { get; set; }
         public string Gender { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -90,7 +101,6 @@ namespace Project_sem_3.Models
        
         public string PhoneNumber { get; set; }
         public int Status { get; set; }
-        public string RoleName { get; set; }
         public enum OrderStatus { Done = 1, Cancel = 0, Deleted = -1 }
         public RegisterViewModel()
         {
@@ -100,7 +110,54 @@ namespace Project_sem_3.Models
             Status = (int)OrderStatus.Done;
         }
     }
+    public class Users_in_Role_ViewModel
+    {
+        public string UserId { get; set; }
+        public string Username { get; set; }
+        public string Address { get; set; }
+        public string Gender { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string RoleName { get; set; }
+        public string Role { get; set; }
+    }
+    public class CreateAdminModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm password")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        public string ConfirmPassword { get; set; }
+
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string Gender { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+
+        public string PhoneNumber { get; set; }
+        public int Status { get; set; }
+        public string RoleName { get; set; }
+        public enum OrderStatus { Done = 1, Cancel = 0, Deleted = -1 }
+        public CreateAdminModel()
+        {
+            CreatedAt = DateTime.Now;
+            UpdatedAt = DateTime.Now;
+
+            Status = (int)OrderStatus.Done;
+        }
+    }
     public class ResetPasswordViewModel
     {
         [Required]

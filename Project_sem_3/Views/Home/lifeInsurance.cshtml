@@ -18,8 +18,16 @@
             <div class="">
                 <div>
                     <p>
-                        <div class="block_button myriad_pro_semibold"><a href="https://localhost:44362/LifeInsurance/Order">CHARGE & ORDER</a></div>
-                        <h1>WHOLE LIFE INSURANCE - MORE THAN LOVE</h1>
+
+                        <div class="block_button myriad_pro_semibold">
+                            @*<a href="https://localhost:44362/LifeInsurance/Order">CHARGE & ORDER</a>*@
+                            <button style="background-color:crimson;color:white" onclick="location.href='/LifeInsurance/Order'" type="button">
+                                Charge & Order
+                            </button>
+
+                        </div>
+                        <h1 style="color:#337ab7">WHOLE LIFE INSURANCE - MORE THAN LOVE</h1>
+
                         <h3 class="font-text">HAPPINESS IS WHEN YOU ARE MADE SOMEBODY ELSE HAPPY</h3>
 
                         <h2 class="text-primary">What is whole life insurance?</h2>
@@ -28,14 +36,14 @@
                         <h2 class="text-primary" style="margin-top: 2%;">Life insurance packages:</h2>
                     <p>1.<span style="margin-bottom:2%; color: crimson;"> Life peace.</span></p>
                     <p>2.<span style="margin-bottom:2%; color: crimson;"> Inner peace.</span></p>
-                    <p style="margin-top: 2%;"><strong style="color: black;">Life peace: </strong></p>
+                    <p style="margin-top: 2%;"><strong style="color: #0f75bd;">Life peace: </strong></p>
                     <ul>
                         <li>Covered up to 200% of Sum Assured for 72 cancers and critical illnesses.</li>
                         <li>Covered up to 300% of the insured against death risk.</li>
                         <li>Get 30% immediate cash insurance at age 65.</li>
                         <li>Premium-free benefits in the future immediately after the first cancer / critical illness benefit is paid.</li>
                     </ul>
-                    <p style="margin-top: 2%;"><strong style="color: black;">Inner peace: </strong></p>
+                    <p style="margin-top: 2%;"><strong style="color: #0f75bd;">Inner peace: </strong></p>
                     <ul>
                         <li>Diversified protection against accident risks and outside accidents.</li>
                         <li>Guarantee of treatment expenses 24/7.</li>
@@ -54,9 +62,9 @@
 
                 <table style="margin-top: 2%;">
                     <tr>
-                        <th style="width:30%;color: blue;">Features</th>
-                        <th style="color: black;">Life peace</th>
-                        <th style="color: black;">Inner peace</th>
+                        <th style="width:30%;color:#444;">Features</th>
+                        <th style="color: #444;">Life peace</th>
+                        <th style="color: #444;">Inner peace</th>
                     </tr>
                     <tr>
                         <td>Age of participation</td>
@@ -102,7 +110,12 @@
                     </div>
                 </div>
                 <iframe style="margin-top:15px" width="560" height="315" src="https://www.youtube.com/embed/FxKb--dYdMI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                    <h2 style="margin-top: 2%; color: crimson;">Please contact us for a free consultation!</h2>
-                <div class="block_button myriad_pro_semibold"><a href="https://localhost:44362/LifeInsurance/Order">CHARGE & ORDER</a></div>
+                <div class="block_button myriad_pro_semibold">
+                @*<a href="https://localhost:44362/LifeInsurance/Order">CHARGE & ORDER</a>*@
+                    <button style="background-color:crimson;color:white" onclick="location.href='/LifeInsurance/Order'" type="button">
+                    Charge & Order
+                    </button>
+                </div>
                 <div style="margin-top:30px;"></div>
 
                 <div>
@@ -119,14 +132,14 @@
 <style>
     .font-text {
         margin-top: -10px;
-        color: brown;
+        color: crimson;
     }
 
     .featured-text {
         display: block;
         font-size: 35px;
         font-weight: 700;
-        color: #153976;
+        color: #337ab7;
         line-height: 1;
         margin-bottom: 15px;
     }
@@ -136,9 +149,9 @@
         margin: 0;
     }
 
-    p {
+    /*p {
         color: black;
-    }
+    }*/
 
     li {
         margin-top: 2%;
@@ -156,15 +169,17 @@
     }
 
     table {
-        border-collapse: collapse;
+        /*border-collapse: collapse;*/
         border-spacing: 0;
         width: 100%;
         border: 1px solid #ddd;
+        color:#444;
     }
 
     th, td {
         text-align: center;
         padding: 16px;
+        color:#444;
     }
 
         th:first-child, td:first-child {
@@ -196,7 +211,7 @@
         -moz-border-radius: 7px;
         -webkit-border-radius: 7px;
         padding: 15px 15px;
-        font-family: Tahoma;
+        font-family: "Roboto Condensed", "Open Sans", sans-serif;
     }
 
         .content_3col h1 {
@@ -209,7 +224,7 @@
         }
 
         .content_3col h2 {
-            color: #014346;
+            color: red;
             font-size: 14px;
             font-weight: bold;
             padding-top: 15px;

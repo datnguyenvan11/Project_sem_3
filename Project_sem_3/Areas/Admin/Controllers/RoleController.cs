@@ -13,9 +13,10 @@ using System.Web.Mvc;
 
 namespace Project_sem_3.Areas.Admin.Controllers
 {
-   [Authorize(Roles ="Admin")]
+   //[Authorize(Roles ="Admin")]
     public class RoleController : Controller
     {
+        ApplicationDbContext context = new ApplicationDbContext();
         private ApplicationRoleManager _rolenManager;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -114,6 +115,44 @@ namespace Project_sem_3.Areas.Admin.Controllers
             await RoleManager.DeleteAsync(role);
             return Redirect("/Admin/Role");
         }
+        public ActionResult UsersWithRoles()
+        {
+            var usersWithRoles = (from user in context.Users
+                                  select new
+                                  {
+                                      UserId = user.Id,
+                                      Username = user.UserName,
+                                      Email = user.Email,
+                                      Address=user.Address,
+                                      Gernder=user.Gender,
+                                      PhoneNumber=user.PhoneNumber,
+                                      CreatedAt = user.CreatedAt,
+
+                                      RoleNames = (from userRole in user.Roles
+                                                   join role in context.Roles on userRole.RoleId
+                                                   equals role.Id
+                                                   select role.Name).ToList()
+                                  }).ToList().Select(p => new Users_in_Role_ViewModel()
+
+                                  {
+                                      UserId = p.UserId,
+                                      Username = p.Username,
+                                      Email = p.Email,
+                                      Gender=p.Gernder,
+                                      Address=p.Address,
+                                      PhoneNumber=p.PhoneNumber,
+                                      CreatedAt = p.CreatedAt,
+                                      Role = string.Join(",", p.RoleNames)
+                                  });
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (var role in RoleManager.Roles)
+            {
+                list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
+            }
+            ViewBag.Roles = list;
+
+            return View(usersWithRoles);
+        }
         public ActionResult CreateAdmin()
         {
             List<SelectListItem> list = new List<SelectListItem>();
@@ -128,13 +167,13 @@ namespace Project_sem_3.Areas.Admin.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateAdmin(RegisterViewModel model)
+        public async Task<ActionResult> CreateAdmin(CreateAdminModel model)
         {
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Email,
+                    UserName = model.Name,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
                     Gender = model.Gender,
@@ -156,7 +195,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return Redirect("/Admin");
+                    return Redirect("/Admin/Role");
                 }
                 AddErrors(result);
             }
@@ -171,7 +210,58 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 ModelState.AddModelError("", error);
             }
         }
+      
+        public ActionResult SetRole(string[] selectedIDs, string action)
+        {
+            foreach (var userid in selectedIDs)
+            {
+                UserManager.AddToRole(userid, action);
+            }
+            return Json(selectedIDs, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmedUser(string userId)
+        {
+            if (userId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
+            //get User Data from Userid
+            var user = await UserManager.FindByIdAsync(userId);
 
+            //List Logins associated with user
+            var logins = user.Logins;
+
+            //Gets list of Roles associated with current user
+            var rolesForUser = await UserManager.GetRolesAsync(userId);
+
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                foreach (var login in logins.ToList())
+                {
+                    await UserManager.RemoveLoginAsync(login.UserId, new UserLoginInfo(login.LoginProvider, login.ProviderKey));
+                }
+
+                if (rolesForUser.Count() > 0)
+                {
+                    foreach (var item in rolesForUser.ToList())
+                    {
+                        // item should be the name of the role
+                        var result = await UserManager.RemoveFromRoleAsync(user.Id, item);
+                    }
+                }
+
+                //Delete User
+                await UserManager.DeleteAsync(user);
+
+                TempData["Message"] = "User Deleted Successfully. ";
+                TempData["MessageValue"] = "1";
+                //transaction.commit();
+            }
+
+            return RedirectToAction("UsersWithRoles", "ManageUsers", new { area = "", });
+        }
     }
 }

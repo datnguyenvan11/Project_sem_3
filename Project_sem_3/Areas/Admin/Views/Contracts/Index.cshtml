@@ -80,14 +80,20 @@
                                                 <td class="sorting_1">
                                                     @item.Insurance.Name
                                                 </td>
+
+                                                <td>@item.InsuranceId</td>
+
                                                 <td>@item.ApplicationUserId</td>
+
+                        
+
                                                 <td>@item.TotalPrice</td>
                                                 <td>@item.CreatedAt</td>
                                                 <td>@item.UpdatedAt</td>
                                                 <td>@item.Status</td>
                                                 <td>
-                                                    <button class="button button1">@Html.ActionLink("Confirm", "Edit", new { id = item.Id })</button>
-                                                    <button class="button button2">
+                                                    <button class="btn btn-success">@Html.ActionLink("Confirm", "Edit", new { id = item.Id })</button>
+                                                    <button class="btn btn-primary">
                                                         @if (@item.Insurance.Id == 16)
                                                         {
                                                             @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
@@ -97,12 +103,11 @@
                                                             @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
                                                         }
                                                     </button>
-                                                    <button class="button button3">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
 
-                                                </td>
-                                            </tr>
-                                        }
-
+                                                    <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                                                </td>    
+                                                </tr>
+                                            }
 
                                     </tbody>
                                 </table>
@@ -155,7 +160,7 @@
                 },
                 success: function (res) {
                     if (!res == false) {
-                        window.location.href = `/Admin/Contracts`;
+                        window.location.reload();
                     }
                 },
                 error: function () {
