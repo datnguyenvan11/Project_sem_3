@@ -6,7 +6,7 @@
 }
 
 <!-- Custom styles for this page -->
-<link href="/Assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">        
+<link href="/Assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="/Areas/Admin/Assets/css/custom.css" rel="stylesheet">
 <!-- Main Content -->
 <div id="content">
@@ -14,12 +14,12 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Insurance</h1>
-        <p class="mb-4"> All contracts of customers about insurances .</p>
-        <button type="button" id="delete_checked">Delete Selected</button>
+        <h1 class="h3 mb-2 text-gray-800">Insurance Deleted</h1>
+        @*<p class="mb-4"> All contracts of customers about insurances .</p>*@
+        @*<button type="button" id="delete_checked">Delete Selected</button>*@
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/Insurances/Create" class="btn btn-info" role="button">Create Insurance</a>
-            <a href="https://localhost:44362/Admin/Insurances/Deleted" class="btn btn-info float-right" role="button">Insurance Deleted</a>
+            @*<a href="https://localhost:44362/Admin/Insurances/Action" class="btn btn-info float-right" role="button">Insurance Active</a>*@
         </div>
 
         <!-- DataTales Example -->
@@ -39,6 +39,7 @@
                                             <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
                                             <th rowspan="1" colspan="1">Name</th>
                                             <th rowspan="1" colspan="1">CreatedAt</th>
+                                            <th rowspan="1" colspan="1">Status</th>
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
                                     </thead>
@@ -54,6 +55,7 @@
                                                     @item.Name
                                                 </td>
                                                 <td>@item.CreatedAt</td>
+                                                <td>@item.Status</td>
 
                                                 <td>
                                                     <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
@@ -79,33 +81,33 @@
         $(document).ready(function () {
             var selectedIDs = new Array();
             $('#checkAll').click(function () {
-                $(".check").prop('checked', 
-                $(this).prop('checked'));
+                $(".check").prop('checked',
+                    $(this).prop('checked'));
             })
-            
-        $('#delete_checked').click(function () {
-            var selectedIDs = new Array();
-            $('input:checkbox.check').each(function () {
-                if ($(this).prop('checked')) {
-                    selectedIDs.push($(this).val());
-                }
-            });
-            if (selectedIDs.length <= 0) {
-                alert('ban chua chon insurance');
-                return;
-                }
-            $.ajax({
-                url: "/Admin/Insurances/DeleteAll",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                    selectedIDs
-                },
-                success: function (res) {
-                    if (!res == false) {
-                        window.location.href = `/Admin/Insurances`;
+
+            $('#delete_checked').click(function () {
+                var selectedIDs = new Array();
+                $('input:checkbox.check').each(function () {
+                    if ($(this).prop('checked')) {
+                        selectedIDs.push($(this).val());
                     }
+                });
+                if (selectedIDs.length <= 0) {
+                    alert('ban chua chon insurance');
+                    return;
+                }
+                $.ajax({
+                    url: "/Admin/Insurances/DeleteAll",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                        selectedIDs
+                    },
+                    success: function (res) {
+                        if (!res == false) {
+                            window.location.href = `/Admin/Insurances`;
+                        }
                     },
                     error: function () {
                         alert('error');

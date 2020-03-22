@@ -17,7 +17,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/InsurancePackages
         public ActionResult Index()
         {
-            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x =>x.Status == 0);
+            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x => x.Status == 0);
             return View(insurancePackages.ToList());
         }
 
@@ -54,15 +54,15 @@ namespace Project_sem_3.Areas.Admin.Controllers
             {
                 var insurancepackages = new InsurancePackage()
                 {
-                    InsuranceId=insurancePackage.InsuranceId,
-                    Name=insurancePackage.Name,
-                    Description=insurancePackage.Description,
-                    Price=insurancePackage.Price,
-                    DurationContract=insurancePackage.DurationContract,
-                    DurationPay=insurancePackage.DurationPay,
-                    CreatedAt=DateTime.Now,
-                    UpdatedAt=DateTime.Now,
-                    DeleteAt=DateTime.Now,
+                    InsuranceId = insurancePackage.InsuranceId,
+                    Name = insurancePackage.Name,
+                    Description = insurancePackage.Description,
+                    Price = insurancePackage.Price,
+                    DurationContract = insurancePackage.DurationContract,
+                    DurationPay = insurancePackage.DurationPay,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    DeleteAt = DateTime.Now,
                 };
                 db.InsurancePackages.Add(insurancepackages);
                 db.SaveChanges();
@@ -153,6 +153,11 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Deleted()
+        {
+
+            return View(db.InsurancePackages.Where(t => t.Status == -1).ToList());
         }
     }
 }

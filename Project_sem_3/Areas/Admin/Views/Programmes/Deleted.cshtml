@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Project_sem_3.Models.Insurance>
+﻿@model IEnumerable<Project_sem_3.Models.Programme>
 
 @{
     ViewBag.Title = "Index";
@@ -6,7 +6,7 @@
 }
 
 <!-- Custom styles for this page -->
-<link href="/Assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">        
+<link href="/Assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="/Areas/Admin/Assets/css/custom.css" rel="stylesheet">
 <!-- Main Content -->
 <div id="content">
@@ -14,12 +14,12 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Insurance</h1>
-        <p class="mb-4"> All contracts of customers about insurances .</p>
-        <button type="button" id="delete_checked">Delete Selected</button>
+        <h1 class="h3 mb-2 text-gray-800">Programmes Deleted</h1>
+        @*<p class="mb-4"> All contracts of customers about insurances .</p>
+            <button type="button" id="delete_checked">Delete Selected</button>*@
         <div style="margin-bottom:15px;">
-            <a href="https://localhost:44362/Admin/Insurances/Create" class="btn btn-info" role="button">Create Insurance</a>
-            <a href="https://localhost:44362/Admin/Insurances/Deleted" class="btn btn-info float-right" role="button">Insurance Deleted</a>
+            <a href="https://localhost:44362/Admin/Programmes/Create" class="btn btn-info" role="button">Create Programmes</a>
+            @*<a href="https://localhost:44362/Admin/Programmes/Action" class="btn btn-info float-right" role="button">Programmes Active</a>*@
         </div>
 
         <!-- DataTales Example -->
@@ -30,19 +30,20 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div></div></div>
-                        <div class="row">
+                        <div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div></div></div><div class="row">
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
+                                            <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll_programme" />Select All</th>
                                             <th rowspan="1" colspan="1">Name</th>
-                                            <th rowspan="1" colspan="1">CreatedAt</th>
+                                            <th rowspan="1" colspan="1">Price</th>
+                                            <th rowspan="1" colspan="1">Status</th>
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         @foreach (var item in Model)
                                         {
                                             <tr role="row" class="odd">
@@ -53,7 +54,8 @@
                                                 <td class="sorting_1">
                                                     @item.Name
                                                 </td>
-                                                <td>@item.CreatedAt</td>
+                                                <td>@item.Price</td>
+                                                <td>@item.Status</td>
 
                                                 <td>
                                                     <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
@@ -70,42 +72,44 @@
                 </div>
             </div>
         </div>
+
     </div>
     <!-- /.container-fluid -->
 </div>
+<!-- End of Main Content -->
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
             var selectedIDs = new Array();
-            $('#checkAll').click(function () {
-                $(".check").prop('checked', 
-                $(this).prop('checked'));
+            $('#checkAll_programme').click(function () {
+                $(".check").prop('checked',
+                    $(this).prop('checked'));
             })
-            
-        $('#delete_checked').click(function () {
-            var selectedIDs = new Array();
-            $('input:checkbox.check').each(function () {
-                if ($(this).prop('checked')) {
-                    selectedIDs.push($(this).val());
-                }
-            });
-            if (selectedIDs.length <= 0) {
-                alert('ban chua chon insurance');
-                return;
-                }
-            $.ajax({
-                url: "/Admin/Insurances/DeleteAll",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                    selectedIDs
-                },
-                success: function (res) {
-                    if (!res == false) {
-                        window.location.href = `/Admin/Insurances`;
+
+            $('#delete_checked').click(function () {
+                var selectedIDs = new Array();
+                $('input:checkbox.check').each(function () {
+                    if ($(this).prop('checked')) {
+                        selectedIDs.push($(this).val());
                     }
+                });
+                if (selectedIDs.length <= 0) {
+                    alert('You have not selected programme !');
+                    return;
+                }
+                $.ajax({
+                    url: "/Admin/Programmes/DeleteAll",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                        selectedIDs
+                    },
+                    success: function (res) {
+                        if (!res == false) {
+                            window.location.href = `/Admin/Programmes`;
+                        }
                     },
                     error: function () {
                         alert('error');
@@ -115,5 +119,3 @@
         })
     </script>
 }
-
-

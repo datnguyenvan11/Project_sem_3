@@ -17,7 +17,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/Contracts
         public ActionResult Index()
         {
-            var contracts = db.Contracts.Include(c => c.Insurance);
+            var contracts = db.Contracts.Include(c => c.Insurance).Where(x => x.Status == 1);
             return View(contracts.ToList());
         }
 
@@ -62,12 +62,12 @@ namespace Project_sem_3.Areas.Admin.Controllers
         }
 
         // GET: Admin/Contracts/Edit/5
-     
+
         // POST: Admin/Contracts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
 
-      
+
 
         // GET: Admin/Contracts/Delete/5
         public ActionResult Delete(int? id)
@@ -116,6 +116,12 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Deleted()
+        {
+
+            return View(db.Contracts.Where(t => t.Status == -1).ToList());
         }
     }
 }
