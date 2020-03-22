@@ -1,4 +1,5 @@
-﻿using Project_sem_3.Models;
+﻿using Microsoft.AspNet.Identity;
+using Project_sem_3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,21 +57,16 @@ namespace Project_sem_3.Controllers
         }
 
 
-        //public ActionResult RemoveCart(int insurancePackageId)
-        //{
-        //    var insurancePackage = db.InsurancePackages.Find(insurancePackageId);
-        //    if (insurancePackage == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Product's' not found");
-        //    }
-        //    // Lấy thông tin shopping cart từ session.
-        //    var sc = LoadShoppingCart();
-        //    // Thêm sản phẩm vào shopping cart.
-        //    sc.RemoveFromCart(insurancePackage.Id);
-        //    // lưu thông tin cart vào session.
-        //    SaveShoppingCart(sc);
-        //    return Redirect("/MotorCart/ShowCart");
-        //}
+        public ActionResult RemoveCart(string LicensePlate)
+        {
+            // Lấy thông tin shopping cart từ session.
+            var sc = LoadShoppingCart();
+            // Thêm sản phẩm vào shopping cart.
+            sc.RemoveFromCart(LicensePlate);
+            // lưu thông tin cart vào session.
+            SaveShoppingCart(sc);
+            return Redirect("/MotorInsurance/Order");
+        }
         [HttpGet]
         public ActionResult CreateContract()
         {
@@ -85,7 +81,7 @@ namespace Project_sem_3.Controllers
             var contract = new Contract
             {
                 TotalPrice = shoppingCart.GetTotalPrice(),
-                ApplicationUserId = "1",
+                ApplicationUserId =User.Identity.GetUserId(),
                 InsuranceId = 16,
                 MotorInsurances = new List<MotorInsurance>()
             };
