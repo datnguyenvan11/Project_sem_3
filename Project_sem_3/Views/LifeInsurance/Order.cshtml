@@ -30,196 +30,129 @@
     <form action="/HomeInsurance/CreateContract" method="get">
         <div class="row">
             <div class="col-lg-9 col-md-8 col-sm-12">
-                <div class="box-border-pro">
-                    <div class="frm frmpro">
-                        @*<div class="form-group">
-            <div class="row">
-                <label for="rdbPackage_0" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Select product package</label>
-                <div class="col-lg-8">
-                    @foreach (var item in Model)
-                    {
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="PackageChange();" name="insurancePackageId" required />
-                            <label class="custom-control-label" for='rdbPackage_1'><b> @item.Name  @String.Format("{0:c}", @item.Price) </b> (@item.Description)</label>
-                        </div>
-                    }
 
-                    <i class="pad-top-5">
-                        <span id="ctl18_lblPackageReq" class="req" style="color:Red;"></span>
-                    </i>
-                </div>
+                @*<div class="form-group  col-md-5 ">
+            <div>
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             </div>
-        </div>*@
-                        <div class="form-group">
-                            <h4>Enter the information on the vehicle registration</h4>
-                        </div>
-                        @*<div class="form-group">
-                                    <div class="row">
-                                        <label for="txtAddress" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">HouseType</label>
-                                        <input type="radio" name="HouseType" value="  Terrace houses / Villas
-        " checked="checked" />
-                                        Terrace houses / Villas
 
-                                        <input type="radio" name="HouseType" value="Apartment" />Apartment
-                                    </div>
-                                </div>*@
-
-                        <div class="form-group" id="divChassis">
-                            <div class="row">
-                                <label for="Name" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Name:</label>
-                                <div class="col-lg-8">
-                                    <input name="Name" type="text" id="ctl18_fullname" class="form-control txt" placeholder="Name" />
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" id="divChassis">
-                            <div class="row">
-                                <label for="PhoneNumber" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">PhoneNumber:</label>
-                                <div class="col-lg-8">
-                                    <input name="PhoneNumber" type="text" id="ctl18_ChassisNumber" class="form-control txt" placeholder="PhoneNumber" />
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" id="divChassis">
-                            <div class="row">
-                                <label for="Email" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Email:</label>
-                                <div class="col-lg-8">
-                                    <input name="Email" type="text" id="ctl18_ChassisEmail" class="form-control txt" placeholder="name@example.com" />
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-                        <div class="form-group">
-                            <div class="row">
-                                <label for="txtAddress" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Address:</label>
-                                <div class="col-lg-8">
-                                    <textarea name="Address" type="text" id="ctl18_txtAddress" class="form-control txt" placeholder="Address"></textarea>
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblAddressReq" class="req" style="color:Red;"></span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>\
-
-                        <div class="form-group" id="divChassis">
-                            <div class="row">
-                                <label for="IdentityCard" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">IdentityCard:</label>
-                                <div class="col-lg-8">
-                                    <input name="IdentityCard" type="text" id="ctl18_ChassisIdentityCard" class="form-control txt" placeholder="IdentityCard" />
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" id="divChassis">
-                            <div class="row">
-                                <label for="DateOfIdentityCard" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">DateOfIdentityCard:</label>
-                                <div class="col-lg-8">
-                                    <input name="DateOfIdentityCard" type="text" id="ctl18_ChassisDateOfIdentityCard" class="form-control txt" placeholder="DateOfIdentityCard" />
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" id="divChassis">
-                            <div class="row">
-                                <label for="PlaceOfIdentityCard" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">PlaceOfIdentityCard:</label>
-                                <div class="col-lg-8">
-                                    <input name="PlaceOfIdentityCard" type="text" id="ctl18_ChassisPlaceOfIdentityCard" class="form-control txt" placeholder="PlaceOfIdentityCard" />
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" id="divChassis">
-                            <div class="row">
-                                <label for="Job" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Job:</label>
-                                <div class="col-lg-8">
-                                    <input name="Job" type="text" id="ctl18_ChassisNumber" class="form-control txt" placeholder="Job" />
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
-                        @*<div class="form-group" id="divPlate" style="display: block;">
-                            <div class="row">
-                                <label for="plates" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">DurationHouse:</label>
-                                <div class="col-lg-8">
-                                    <select name="DurationHouse" id="ctl18_ddlUsePeriod" class="custom-select my-1 mr-sm-2">
-                                        <option selected="selected" value="01 – 15 years">01 – 15 years</option>
-                                        <option value=">15 – 25 years">15 – 25 years</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>*@
-
-
-
-                        @*<div class="form-group" id="divChassis">
-                            <div class="row">
-                                <label for="HouseOwner" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">HouseOwner:</label>
-                                <div class="col-lg-8">
-                                    <input name="HouseOwner" type="text" id="ctl18_ChassisNumber" class="form-control txt" placeholder="HouseOwner" />
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
-                                    </i>
-                                </div>
-                            </div>
-                        </div>*@
-
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-12">
-                <div class="hd-info-pro">INSURANCE FEES</div>
-                <div class="result">
-                    <div class="item-result">
-                        <span>Total fee (including VAT):</span>
-                        <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">$0</label></strong>
-                    </div>
-                    <div id="ctl18_Promotions1_pnPromotions">
-
-
-                        <div class="item-result">
-                            <span>Discount amount:</span>
-                            <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">$0</label></strong>
-                        </div>
-                        <div class="result-red">
-                            <div>Total net charge (including VAT) actually collected:</div>
-
-                            <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">$0</label></strong>
-                        </div>
-                        <input id="ctl18_lbtBook" style="text-decoration:none" type="submit" value="Order" class="btn-pro-buynow" href="/HouseInsurance/CreateContract" />
-                    </div>
-                </div>
-            </div>
 
         </div>
+        <div class="form-group col-md-6">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>*@
+
+                <div style="padding-top:30px" class="form-group">
+                    <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-md-4">
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                </div>
+                <div style="margin-top:-20px" class="form-group ">
+                    @*<label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>*@
+                    <div class="col-md-4">
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                </div>
+                <div style="margin-top:9%" class="form-group  ">
+                    <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-md-8">
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                </div>
+                <div style="margin-top:120px;overflow: hidden" class="form-group  ">
+                    <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-md-8">
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                </div>
+                <div style="padding-top:30px" class="form-group">
+                    <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-md-4">
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                </div>
+                <div style="margin-top:-20px" class="form-group ">
+                    <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-md-4">
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                </div>
+                <div style="margin-top:70px; overflow: hidden" class="form-group  ">
+                    <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-md-8">
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                </div>
+                <div style="padding-top:30px" class="form-group">
+                    <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-md-4">
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                </div>
+                <div style="margin-top:-20px" class="form-group ">
+                    <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-md-4">
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                </div>
+                <div style="margin-top:70px; overflow: hidden" class="form-group  ">
+                    <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-md-8">
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                @*<div class="form-group row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+            <div class="col-md-4">
+                <input type="password" class="form-control" id="inputPassword">
+            </div>
+        </div>*@
+
+
+
+
+                @*<div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>*@
+
+            </div>
+                <div class="col-lg-3 col-md-4 col-sm-12">
+                    <div class="hd-info-pro">INSURANCE FEES</div>
+                    <div class="result">
+                        <div class="item-result">
+                            <span>Total fee (including VAT):</span>
+                            <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">$0</label></strong>
+                        </div>
+                        <div id="ctl18_Promotions1_pnPromotions">
+
+
+                            <div class="item-result">
+                                <span>Discount amount:</span>
+                                <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">$0</label></strong>
+                            </div>
+                            <div class="result-red">
+                                <div>Total net charge (including VAT) actually collected:</div>
+
+                                <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">$0</label></strong>
+                            </div>
+                            <input id="ctl18_lbtBook" style="text-decoration:none" type="submit" value="Order" class="btn-pro-buynow" href="/HouseInsurance/CreateContract" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         <div class="box-chuy col-12">
             <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
             <div class="cotent-box-chuy">
@@ -328,6 +261,9 @@
         margin-bottom: 5px;
         font-weight: 300;
     }
+    .form-group{
+        margin-bottom:-12px
+    }
 
     #ctl18_fullname {
         width: 60%
@@ -370,7 +306,7 @@
     }
 
     .hd-info-pro {
-        background-color: #0b665a;
+        background-color: #0f75bd;
         color: #fff;
         font-family: inherit;
         text-transform: uppercase;
@@ -480,7 +416,7 @@
     .banner {
         width: 100%;
         height: 600px;
-        background-image: url(https://www.bennetts.co.uk/-/media/default-website/bike-insurance/motorbike-insurance/whats-included/bennetts-ultimate-cover-banner.ashx?h=360&w=780&la=en&hash=93DA48B7B1A1A5A492766AF4D77DC194FF258290);
+        background-image: url(https://insurancequotes2day.com/wp-content/uploads/2017/05/life-insurance-for-seniors.jpg);
         background-position: center center;
         background-size: cover;
     }
@@ -571,3 +507,4 @@
             });
     </script>
 }
+

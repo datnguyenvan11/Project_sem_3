@@ -1,48 +1,429 @@
 ﻿@using Project_sem_3.Models
 @model LoginViewModel
 
-
 @*<div class="row">
+
     <div class="col-md-8">
         <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+            <div class="container1" style="margin-left:10%;margin-right:10%;margin-top:7% ;margin-bottom:7%">
+                @*<div class="hd-info-pro">
+                PLEASE ENTER iNFORMATION
+            </div>*@
+
+                <form action="/HomeInsurance/CreateContract" method="get">
+                    <div class="row">
+                        <div>
+                            <div class="box-border-pro">
+                                <div class="frm frmpro">
+
+                                    <div class="form-group">
+                                        <h4>Enter the information on the vehicle registration</h4>
+                                    </div>
+
+
+                                    <div class="form-group" id="divChassis">
+                                        <div class="row">
+                                            <label for="Name" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">User Name:</label>
+                                            <div class="col-lg-8">
+                                                <input name="Name" type="text" id="ctl18_fullname" class="form-control txt" placeholder="UserName" />
+                                                <i class="pad-top-5">
+                                                    <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
+                                                </i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="divChassis">
+                                        <div class="row">
+                                            <label for="Password" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Password:</label>
+                                            <div class="col-lg-8">
+                                                <input name="Password" type="text" id="ctl18_Password" class="form-control txt" placeholder="Password" />
+                                                <i class="pad-top-5">
+                                                    <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
+                                                </i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
                         </div>
+                       
+
+                    </div>
+                    @*<div class="box-chuy col-12">
+                    <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
+                    <div class="cotent-box-chuy">
+                        <div class="cotent-text"> Select coverage: By default, when you buy private home insurance, you will have to buy basic benefits (fire, explosion). You can choose to buy 2 additional benefits 1, 2 by CHECK on benefits. </div>
+                        <div class="cotent-text"> You enter the required website information: the type of house, the number of years used, the amount of insurance for the house, the property in the house, you will see the total premium.</div>
+                        <div class="cotent-text"> If you agree to order, please click  <b>[Continue]</b> to move to the next order. </div>
+                    </div>
+                </div>*@
+                </form>
+            </div>
+
+            <style>
+                .box-chuy {
+                    margin-top: 20px;
+                }
+
+                    .box-chuy .title-box-chuy {
+                        font-size: 16px;
+                        font-family: "unset";
+                        text-transform: uppercase;
+                        padding-bottom: 5px;
+                        margin-bottom: 20px;
+                        background-color: #f5f5f5;
+                        padding: 10px;
+                    }
+
+                .icon-bell {
+                    background: url(https://www.iconsdb.com/icons/preview/red/bell-3-xxl.png) no-repeat left .75rem center/15px 15px;
+                    padding: 0px 0px 0px 30px;
+                }
+
+                .cotent-box-chuy {
+                    font-size: 16px;
+                    line-height: 22px;
+                    padding-left: 10px;
+                }
+
+                    .cotent-box-chuy > div {
+                        margin-bottom: 7px;
+                    }
+
+                .cotent-text {
+                    background: url(https://baohiemtructuyen.com.vn/images/sub_menu_bullet.png) no-repeat 0 11px;
+                    padding: 2px 0 5px 15px;
+                }
+
+                .thumb {
+                    width: 1300px;
+                    height: 300px;
+                    background-color: #3e3e3e;
+                    background-image: none;
+                    background-repeat: no-repeat;
+                    background-position: center center;
+                    background-size: cover;
+                }
+
+                .subslide {
+                    max-width: fit-content;
+                    position: relative;
+                    margin: auto;
+                }
+
+                .shadow {
+                    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+                }
+
+                .box-border-pro {
+                    position: relative;
+                    background: #fff;
+                    border: 1px solid #e4e4e4;
+                    padding: 25px;
+                }
+
+                .tab-pro {
+                    font-size: large;
+                    padding: 0;
+                    text-align: center;
+                    background-color: #f0f0f0;
+                    border-radius: 5px;
+                }
+
+                    .tab-pro li.active a {
+                        background-color: #0b665a;
+                        display: inline-block;
+                        color: #fff;
+                        padding: 15px;
+                    }
+
+                    .tab-pro li a {
+                        display: inline-block;
+                        padding: 15px;
+                    }
+
+                        .tab-pro li a:hover {
+                            background-color: #0b665a;
+                            color: #fff;
+                        }
+
+                    .tab-pro li {
+                        display: inline-block;
+                    }
+
+                label {
+                    display: inline;
+                    max-width: 100%;
+                    margin-bottom: 5px;
+                    font-weight: 300;
+                }
+
+                #ctl18_fullname {
+                    width: 70%
+                }
+                   #ctl18_Password {
+                    width: 50%
+                }
+
+              
+
+              
+
+
+
+                #datepicker {
+                    width: 55%
+                }
+
+                .mb-15 {
+                    margin-bottom: 15px;
+                }
+
+                .hd-info-pro {
+                    background-color: #0b665a;
+                    color: #fff;
+                    font-family: inherit;
+                    text-transform: uppercase;
+                    font-size: 15px;
+                    padding: 15px;
+                    border-bottom: solid 1px #fff
+                }
+
+                .tab-pane.active {
+                    display: block;
+                    margin-bottom: 42px;
+                }
+
+                .tab-pane {
+                    display: none;
+                    opacity: 1;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+
+                .list-header {
+                    border-bottom-width: 1px;
+                    background-color: #0b665a;
+                    font-size: 14px;
+                    color: #fff;
+                    padding: .75rem;
+                    font-weight: bold;
+                    border: solid 1px #fff;
+                }
+
+                .box-border-pro {
+                    position: relative;
+                    background: #fff;
+                    border: 1px solid #e4e4e4;
+                    padding: 25px;
+                }
+
+                .frmpro {
+                    width: 100%;
+                    color: #3e3e3e;
+                }
+
+                .frm .custom-control-label {
+                    font-size: 16px;
+                    line-height: 24px;
+                    margin-top: 10px;
+                }
+
+                .frm .custom-control-input:checked ~ .custom-control-label::before {
+                    background-color: #0b665a;
+                    border-color: #0b665a;
+                }
+
+                .frmpro .col-form-label {
+                    line-height: 1.7em;
+                    font-size: 18px;
+                    color: #3e3e3e;
+                }
+
+                .col-form-label-first {
+                    text-align: right;
+                }
+
+                .frmpro i {
+                    font-size: 12px;
+                    line-height: normal !important;
+                }
+
+                .pad-top-5 {
+                    display: block;
+                    padding-top: 5px;
+                }
+
+                .btn-pro {
+                    background-color: #ea212d;
+                    padding: 12px;
+                    padding-left: 0;
+                    padding-right: 0;
+                    border: none;
+                    -webkit-border-radius: 5px;
+                    border-radius: 5px;
+                    color: #fff;
+                    font-weight: 700;
+                    width: 100%;
+                    transition: all 0.15s ease-in-out;
+                    font-size: large;
+                }
+
+                .btn-pro-buynow {
+                    display: block;
+                    width: 100%;
+                    background-color: #0b665a;
+                    padding: 11px;
+                    padding-bottom: 14px;
+                    padding-left: 0px;
+                    padding-right: 0px;
+                    -webkit-border-radius: 5px;
+                    border-radius: 5px;
+                    color: #fff;
+                    font-family: "Helb";
+                    text-align: center;
+                    margin-top: 5px;
+                    border: none;
+                    font-size: large;
+                }
+
+                .banner {
+                    width: 100%;
+                    height: 600px;
+                    background-image: url(https://www.bennetts.co.uk/-/media/default-website/bike-insurance/motorbike-insurance/whats-included/bennetts-ultimate-cover-banner.ashx?h=360&w=780&la=en&hash=93DA48B7B1A1A5A492766AF4D77DC194FF258290);
+                    background-position: center center;
+                    background-size: cover;
+                }
+
+                .m-0 {
+                    margin: 0 !important;
+                }
+
+                .btn-pro-buynow:hover {
+                    background-color: #ea212d;
+                    color: #fff;
+                }
+
+                .btn-pro:hover {
+                    background-color: #0b665a;
+                    color: #fff;
+                }
+
+                .frmpro .txt {
+                    padding: .375rem .75rem;
+                }
+
+                .frm .txt {
+                    padding: 14px;
+                    border: solid 2px #c8c8c8;
+                }
+
+                .frm .form-control {
+                    height: calc(3em + 0.75rem + 4px);
+                }
+
+                .icondate {
+                    position: absolute;
+                    right: 385px;
+                    top: 13px;
+                    background-image: url("https://baohiemtructuyen.com.vn/images/icon/cal.png");
+                    background-repeat: no-repeat;
+                    width: 26px;
+                    height: 26px;
+                }
+
+                .result {
+                    background-color: #f7f7f7;
+                }
+
+                    .result .item-result {
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        border-bottom: solid 1px #c8c8c8;
+                        padding-left: 15px;
+                        padding-right: 15px;
+                    }
+
+                        .result .item-result span {
+                            display: block;
+                            font-size: 14px;
+                            color: #7c7c7c;
+                        }
+
+                .result-red {
+                    background-color: #ea212d;
+                    color: #fff;
+                    font-family: "Helb";
+                    text-align: center;
+                    padding-top: 30px;
+                    padding-bottom: 30px;
+                    padding-left: 0px;
+                    padding-right: 0px;
+                    font-size: large;
+                }
+
+                    .result-red strong {
+                        font-weight: normal;
+                        font-size: 20px;
+                    }
+            </style>
+            @section Scripts {
+                <script>
+                    $("input[name=insurancePackageId]") // select the radio by its id
+                        .change(function () { // bind a function to the change event
+                            if ($(this).is(":checked")) { // check if the radio is checked
+                                var val = $(this).attr("class"); // retrieve the value
+                                var valint = parseInt(val)
+                                var ttt = valint.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+                                $('#ctl18_Promotions1_lblHasToPayPremium').text(ttt)
+                            }
+                        });
+                </script>
+            }
+
+
+
+
+
+            @*@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4>Use a local account to log in.</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        @Html.LabelFor(m => m.RememberMe)
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Log in" class="btn btn-default" />
                 </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
+            </div>
             <p>
+
                 @Html.ActionLink("Forgot your password?", "ForgotPassword")
             </p>*@
             
@@ -54,6 +435,7 @@
             </section>
         </div>
     </div>*@
+
 
 
 
