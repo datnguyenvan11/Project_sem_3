@@ -5,14 +5,14 @@ namespace Project_sem_3.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Project_sem_3.Models.MyDb>
+    internal sealed class Configuration : DbMigrationsConfiguration<Project_sem_3.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Project_sem_3.Models.MyDb context)
+        protected override void Seed(Project_sem_3.Models.ApplicationDbContext context)
         {
 
 

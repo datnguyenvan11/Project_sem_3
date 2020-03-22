@@ -192,22 +192,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
 
-    <Compile Include="Migrations\202003161003157_insurance.cs" />
-    <Compile Include="Migrations\202003161003157_insurance.Designer.cs">
-      <DependentUpon>202003161003157_insurance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202003161737374_addStatus.cs" />
-    <Compile Include="Migrations\202003161737374_addStatus.Designer.cs">
-      <DependentUpon>202003161737374_addStatus.cs</DependentUpon>
-    <Compile Include="Migrations\202003180720474_tt.cs" />
-    <Compile Include="Migrations\202003180720474_tt.Designer.cs">
-      <DependentUpon>202003180720474_tt.cs</DependentUpon>
-
-    </Compile>
-    <Compile Include="Migrations\202003200824576_deletecus.cs" />
-    <Compile Include="Migrations\202003200824576_deletecus.Designer.cs">
-      <DependentUpon>202003200824576_deletecus.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contract.cs" />
@@ -2731,19 +2715,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003161003157_insurance.resx">
-      <DependentUpon>202003161003157_insurance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003161737374_addStatus.resx">
-      <DependentUpon>202003161737374_addStatus.cs</DependentUpon>
-    <EmbeddedResource Include="Migrations\202003180720474_tt.resx">
-      <DependentUpon>202003180720474_tt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202003200824576_deletecus.resx">
-      <DependentUpon>202003200824576_deletecus.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
+
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
