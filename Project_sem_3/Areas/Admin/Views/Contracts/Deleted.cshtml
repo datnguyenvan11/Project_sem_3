@@ -13,34 +13,33 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Contracts</h1>
-        <p class="mb-4"> All contracts of customers about insurances .</p>
-        <div class="card-footer">
-            <div class="row mt-3">
-                <div class="col-3 mt-2">
-                    <div class="form-group mr-3">
-                        <select class="form-control mr-2" id="select-action">
-                            <option value="6">--Chọn thao tác--</option>
-                            <option value="5">Pending</option>
-                            <option value="4">Confirmed</option>
-                            <option value="3">Shipping</option>
-                            <option value="2">Paid</option>
-                            <option value="1">Done</option>
-                            <option value="0">Cancel</option>
-                            <option value="-1">Deleted</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-9">
-                    <button type="button" id="action_contract">Xác nhận</button>
-                </div>
-            </div>
-        </div>
-
+        <h1 class="h3 mb-2 text-gray-800">Contracts Deleted</h1>
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/Contracts/Create" class="btn btn-info" role="button">Create Contracts</a>
-            <a href="https://localhost:44362/Admin/Contracts/Deleted" class="btn btn-info float-right" role="button">Contracts Deleted</a>
+            @*<a href="https://localhost:44362/Admin/Contracts/Action" class="btn btn-info float-right" role="button">Contracts Active</a>*@
         </div>
+        @*<p class="mb-4"> All contracts of customers about insurances .</p>
+            <div class="card-footer">
+                <div class="row mt-3">
+                    <div class="col-3 mt-2">
+                        <div class="form-group mr-3">
+                            <select class="form-control mr-2" id="select-action">
+                                <option value="6">--Chọn thao tác--</option>
+                                <option value="5">Pending</option>
+                                <option value="4">Confirmed</option>
+                                <option value="3">Shipping</option>
+                                <option value="2">Paid</option>
+                                <option value="1">Done</option>
+                                <option value="0">Cancel</option>
+                                <option value="-1">Deleted</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <button type="button" id="action_contract">Xác nhận</button>
+                    </div>
+                </div>
+            </div>*@
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -60,7 +59,7 @@
                                             <th rowspan="1" colspan="1">CustomerID</th>
                                             <th rowspan="1" colspan="1">Total Price</th>
                                             <th rowspan="1" colspan="1">Created At</th>
-                                            <th rowspan="1" colspan="1">Updated At</th>
+                                            @*<th rowspan="1" colspan="1">Updated At</th>*@
                                             <th rowspan="1" colspan="1">Status</th>
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
@@ -80,20 +79,14 @@
                                                 <td class="sorting_1">
                                                     @item.Insurance.Name
                                                 </td>
-
-                                                <td>@item.InsuranceId</td>
-
                                                 <td>@item.ApplicationUserId</td>
-
-                        
-
                                                 <td>@item.TotalPrice</td>
                                                 <td>@item.CreatedAt</td>
-                                                <td>@item.UpdatedAt</td>
+                                                @*<td>@item.UpdatedAt</td>*@
                                                 <td>@item.Status</td>
                                                 <td>
-                                                    <button class="btn btn-success">@Html.ActionLink("Confirm", "Edit", new { id = item.Id })</button>
-                                                    <button class="btn btn-primary">
+                                                    <button class="button button1">@Html.ActionLink("Confirm", "Edit", new { id = item.Id })</button>
+                                                    <button class="button button2">
                                                         @if (@item.Insurance.Id == 16)
                                                         {
                                                             @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
@@ -103,11 +96,12 @@
                                                             @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
                                                         }
                                                     </button>
+                                                    <button class="button button3">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
 
-                                                    <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-                                                </td>    
-                                                </tr>
-                                            }
+                                                </td>
+                                            </tr>
+                                        }
+
 
                                     </tbody>
                                 </table>
@@ -160,7 +154,7 @@
                 },
                 success: function (res) {
                     if (!res == false) {
-                        window.location.reload();
+                        window.location.href = `/Admin/Contracts`;
                     }
                 },
                 error: function () {

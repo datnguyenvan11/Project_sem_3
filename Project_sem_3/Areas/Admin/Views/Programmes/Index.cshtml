@@ -6,7 +6,7 @@
 }
 
 <!-- Custom styles for this page -->
-<link href="/Assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">    
+<link href="/Assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="/Areas/Admin/Assets/css/custom.css" rel="stylesheet">
 <!-- Main Content -->
 <div id="content">
@@ -17,6 +17,10 @@
         <h1 class="h3 mb-2 text-gray-800">Programmes</h1>
         <p class="mb-4"> All contracts of customers about insurances .</p>
         <button type="button" id="delete_checked">Delete Selected</button>
+        <div style="margin-bottom:15px;">
+            <a href="https://localhost:44362/Admin/Programmes/Create" class="btn btn-info" role="button">Create Programmes</a>
+            <a href="https://localhost:44362/Admin/Programmes/Deleted" class="btn btn-info float-right" role="button">Programmes Deleted</a>
+        </div>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -90,8 +94,9 @@
             var selectedIDs = new Array();
             $('#checkAll_programme').click(function () {
                 $(".check").prop('checked',
-                $(this).prop('checked'));
+                    $(this).prop('checked'));
             })
+
 
         $('#action_contract').click(function () {
             var selectedIDs = new Array();
@@ -122,6 +127,23 @@
                     if (!res == false) {
                         window.location.reload();
                     }
+                });
+                if (selectedIDs.length <= 0) {
+                    alert('You have not selected programme !');
+                    return;
+                }
+                $.ajax({
+                    url: "/Admin/Programmes/DeleteAll",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                        selectedIDs
+                    },
+                    success: function (res) {
+                        if (!res == false) {
+                            window.location.href = `/Admin/Programmes`;
+                        }
                     },
                     error: function () {
                         alert('error');

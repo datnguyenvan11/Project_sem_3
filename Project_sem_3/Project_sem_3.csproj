@@ -2303,7 +2303,14 @@
     <Content Include="Areas\Admin\Views\Role\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Role\CreateAdmin.cshtml" />
+
+    <Content Include="Areas\Admin\Views\InsurancePackages\Deleted.cshtml" />
+    <Content Include="Areas\Admin\Views\Contracts\Deleted.cshtml" />
+    <Content Include="Areas\Admin\Views\Insurances\Deleted.cshtml" />
+    <Content Include="Areas\Admin\Views\Programmes\Deleted.cshtml" />
+
     <Content Include="Areas\Admin\Views\Role\UsersWithRoles.cshtml" />
+
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />

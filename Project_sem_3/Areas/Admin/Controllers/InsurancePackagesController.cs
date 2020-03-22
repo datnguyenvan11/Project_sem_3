@@ -18,7 +18,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/InsurancePackages
         public ActionResult Index()
         {
-            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x =>x.Status == 0);
+            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x => x.Status == 0);
             return View(insurancePackages.ToList());
         }
 
@@ -187,6 +187,11 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Deleted()
+        {
+
+            return View(db.InsurancePackages.Where(t => t.Status == -1).ToList());
         }
     }
 }

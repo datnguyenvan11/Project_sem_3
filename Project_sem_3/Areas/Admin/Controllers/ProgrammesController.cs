@@ -20,7 +20,9 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/Programmes
         public ActionResult Index()
         {
-            return View(db.Programmes.Where(x =>x.Status == 0).ToList());
+
+            return View(db.Programmes.Where(t => t.Status == 0).ToList());
+
         }
 
         // GET: Admin/Programmes/Details/5
@@ -145,6 +147,12 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Deleted()
+        {
+
+            return View(db.Programmes.Where(t => t.Status == -1).ToList());
         }
     }
 }

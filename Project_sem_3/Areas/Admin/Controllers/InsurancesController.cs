@@ -145,5 +145,11 @@ namespace Project_sem_3.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult Deleted()
+        {
+
+            return View(db.Insurances.Where(t => t.Status == -1).ToList());
+        }
     }
 }
