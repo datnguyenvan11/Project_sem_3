@@ -16,7 +16,6 @@ namespace Project_sem_3.Models
         public string Gender { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-       
         public int Status { get; set; }
        
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

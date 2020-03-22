@@ -191,6 +191,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+
     <Compile Include="Migrations\202003161003157_insurance.cs" />
     <Compile Include="Migrations\202003161003157_insurance.Designer.cs">
       <DependentUpon>202003161003157_insurance.cs</DependentUpon>
@@ -198,6 +199,10 @@
     <Compile Include="Migrations\202003161737374_addStatus.cs" />
     <Compile Include="Migrations\202003161737374_addStatus.Designer.cs">
       <DependentUpon>202003161737374_addStatus.cs</DependentUpon>
+    <Compile Include="Migrations\202003180720474_tt.cs" />
+    <Compile Include="Migrations\202003180720474_tt.Designer.cs">
+      <DependentUpon>202003180720474_tt.cs</DependentUpon>
+
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -2297,6 +2302,7 @@
     <Content Include="Areas\Admin\Views\Role\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Role\CreateAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\UsersWithRoles.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -2723,6 +2729,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202003161737374_addStatus.resx">
       <DependentUpon>202003161737374_addStatus.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202003180720474_tt.resx">
+      <DependentUpon>202003180720474_tt.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
