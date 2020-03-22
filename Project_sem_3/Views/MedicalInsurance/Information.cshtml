@@ -1,126 +1,8 @@
-﻿
+﻿@model IEnumerable<Project_sem_3.Models.InsurancePackage>
+
 @{
     ViewBag.Title = "Information";
 }
-
-<section>
-    <div class="subslide shadow">
-        <div class="thumb" style="        background-image: url(https://cdn.vietnambiz.vn/2019/9/4/jan-31-is-next-deadline-to-enroll-for-obamacare787x524-15675953121511744257074.jpg)"></div>
-    </div>
-</section>
-<div class="container">
-    <ul class="tab-pro">
-        <li class="nav-item active"><a href="https://localhost:44362/HealthInsurance/Information">Information</a></li>
-        <li class="nav-item "><a href="#">Order</a></li>
-        <li class="nav-item "><a href="#">Log in</a></li>
-        <li class="nav-item "><a href="#">Delivery & payment</a></li>
-    </ul>
-</div>
-<section class="main-content">
-    <div class="container">
-        <div class="row">
-
-            <div class="col-lg-9 col-md-8 col-sm-12">
-                <div class="box-border-pro">
-                    <div class="mes-frm">Please enter all the information in the form below</div>
-                    <div class="frm frmpro">
-                        <form action="https://localhost:44362/HealthInsurance/Order" method="get">
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="ddlOption" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Choice of insurance package:</label>
-                                    <div class="col-lg-5">
-                                        <select name="ctl18$ddlOption" id="ctl18_ddlOption" class="custom-select my-1 mr-sm-2 txt" onchange="disableControl();">
-                                            <option value="0">--Insurance package--</option>
-                                            <option value="1">Security insurance package</option>
-                                            <option value="2">Inpatient insurance package</option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="ddlAmountPersons" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Number of insured:</label>
-                                    <div class="col-lg-5">
-                                        <select name="ctl18$ddlAmountPersons" id="ctl18_ddlAmountPersons" class="custom-select my-1 mr-sm-2 txt">
-                                            <option value="0">-- Choose a number of person --</option>
-                                            <option value="1">1 person </option>
-                                            <option value="2">2 person </option>
-                                            <option value="3">3 person </option>
-                                            <option value="4">4 person </option>
-                                            <option value="5">5 person </option>
-                                            <option value="6">6 person </option>
-                                            <option value="7">7 person </option>
-                                            <option value="8">8 person </option>
-                                            <option value="9">9 person </option>
-                                            <option value="10">10 person </option>
-
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="txtsongaydulich" class="col-lg-4 col-sm-12 col-form-label col-form-label-first"></label>
-                                    <div class="col-lg-5">
-                                        <i class="pad-top-5">
-                                            (Children 1-6 years old must be accompanied by a parent. The child's insurance program only applies to the same or lower level than the parent's program)
-                                        </i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="row">
-                                    <label for="btnContinue" class="col-lg-4 col-sm-12 col-form-label col-form-label-first"></label>
-                                    <div class="col-lg-5">
-                                        <a href=" /MedicalInsurance/Order">
-                                        <input type="submit" name="ctl18$btnContinue" value="Tiếp tục" onclick="return checkvalidateOption();" id="ctl18_btnContinue" class="btn-pro hvr-forward" />
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </form>
-
-                    </div>
-
-                    <div class="box-chuy">
-
-                        <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> NOTE IF YOU BUY THE FIRST TIME:</div>
-                        <div class="cotent-box-chuy">
-                            <div><i class="cotent-text"></i> Waiting time for regular medical examination (including dental examination) is 30 days</div>
-
-                            <div><i class="cotent-text"></i> Waiting time for chronic disease, available disease is 06 months or 01 year depending on each disease group, details of insurance rules.</div>
-                            <div><i class="cotent-text"></i> Waiting time for issues related to maternity: Birth or caesarean is 01 year; Maternity complications 280 days; Ectopic pregnancy 90 days</div>
-                            <div><i><strong>(Waiting time:</strong> At the time of your request for insurance payment, BIC will check if your insurance policy has purchased enough waiting times, if not enough, BIC will notify to refuse insurance)</i></div>
-                        </div>
-
-                    </div>
-
-                    <div class="box-chuy">
-                        <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
-                        <div class="cotent-box-chuy">
-                            <div><i class="cotent-text"></i> Select the number of people you are planning to buy Comprehensive Health Insurance (BIC HealthCare), Click the [Continue] button to move to the details and billing steps. </div>
-
-                            <div><i class="cotent-text"></i> If you want to buy comprehensive health insurance (BIC HealthCare) for more than 10 people, please contact us directly for advice for a more preferential fee. </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-12 col-right">
-                <div class="accordion" id="menuaccordion">
-                    <div class="subdetail">
-                        <div id="ctl19_menu_right"><div class='sub-menuleft' id='menu-145'><a class='' href='' data-toggle='collapse' data-target='#submenu-145' aria-expanded='true' aria-controls='collapseOne'><span>Comprehensive health insurance (BIC HealthCare)</span></a></div><div id='submenu-145' class='collapsed' aria-labelledby='menu-145' data-parent='#menuaccordion'><ul class='menu-left'><li><a href='bao-hiem-suc-khoe' alt='' class='menuleft-act'>General information</a></li><li><a href='bao-hiem-suc-khoe-bang-quyen-loi-bao-hiem' alt=''> Insurance benefits</a></li><li><a href='bao-hiem-suc-khoe-bieu-phi-bao-hiem' alt=''>Premium tariff</a></li><li><a href='bao-hiem-suc-khoe-huong-dan-boi-thuong' alt=''> Compensation guide</a></li><li><a href='bao-hiem-suc-khoe-danh-sach-benh-vien-lien-ket' alt=''> List of affiliated health facilities that guarantee hospital fees</a></li><li><a href='bao-hiem-suc-khoe-download' alt=''> Download rules and forms</a></li><li><a href='https://localhost:44380/HealthInsurance/Information' alt=''> Charge & order</a></li></ul></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="c45"></div>
-</section>
-
 <style>
     .thumb {
         width: 1300px;
@@ -380,23 +262,137 @@
         height: 45px;
     }
 </style>
-<script language="javascript" type="text/javascript">
+<section>
+    <div class="subslide shadow">
+        <div class="thumb" style="        background-image: url(https://cdn.vietnambiz.vn/2019/9/4/jan-31-is-next-deadline-to-enroll-for-obamacare787x524-15675953121511744257074.jpg)"></div>
+    </div>
+</section>
+<div class="container">
+    <ul class="tab-pro">
+        <li class="nav-item active"><a href="https://localhost:44362/MedicalInsurance/Information">Information</a></li>
+        <li class="nav-item "><a href="#">Order</a></li>
+        <li class="nav-item "><a href="#">Log in</a></li>
+        <li class="nav-item "><a href="#">Delivery & payment</a></li>
+    </ul>
+</div>
+<section class="main-content">
+    <div class="container">
+        <div class="row">
 
-    function checkvalidateOption() {
-        var done = true;
-        var ddlAmountPersons = document.getElementById('ctl18_ddlAmountPersons');
-        var ddlOption = document.getElementById('ctl18_ddlOption');
-        if (ddlOption.options[ddlOption.selectedIndex].value == 0) {
-            done = false;
-            alert('Chưa chọn gói bảo hiểm!');
-        } else {
-            //goi ca nhan
-            if (ddlAmountPersons.options[ddlAmountPersons.selectedIndex].value == '') {
-                done = false;
-                alert('Chưa chọn số người tham gia bảo hiểm!');
-            }
-        }
-        return done;
+            <div class="col-lg-9 col-md-8 col-sm-12">
+                <div class="box-border-pro">
+                    <div class="mes-frm">Please enter all the information in the form below</div>
+                    <form class="frm frmpro" action="/MedicalInsurance/Order" method="post">
+                            <div class="form-group">
+                                <div class="row">
+                                    <label for="ddlOption" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Choice of insurance package:</label>
+                                    <div class="col-lg-5">
+                                        <select name="price" id="ctl18_ddlOption" class="custom-select my-1 mr-sm-2 txt" onchange="disableControl();">
+                                            <option value="0">chon goi</option>
+                                            @foreach (var item in Model)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                                <option value="@item.Price" type="hidden"/>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label for="ddlAmountPersons" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Number of insured:</label>
+                                    <div class="col-lg-5">
+                                        <select name="number" id="ctl18_ddlAmountPersons" class="custom-select my-1 mr-sm-2 txt">
+                                            <option value="0">-- Choose a number of person --</option>
+                                            <option value="1">1 person </option>
+                                            <option value="2">2 person </option>
+                                            <option value="3">3 person </option>
+                                            <option value="4">4 person </option>
+                                            <option value="5">5 person </option>
+                                            <option value="6">6 person </option>
+                                            <option value="7">7 person </option>
+                                            <option value="8">8 person </option>
+                                            <option value="9">9 person </option>
+                                            <option value="10">10 person </option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label for="txtsongaydulich" class="col-lg-4 col-sm-12 col-form-label col-form-label-first"></label>
+                                    <div class="col-lg-5">
+                                        <i class="pad-top-5">
+                                            (Children 1-6 years old must be accompanied by a parent. The child's insurance program only applies to the same or lower level than the parent's program)
+                                        </i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <label for="btnContinue" class="col-lg-4 col-sm-12 col-form-label col-form-label-first"></label>
+                                    <div class="col-lg-5">
+                                          <input type="submit" name="ctl18$btnContinue" value="Tiếp tục" id="ctl18_btnContinue" class="btn-pro hvr-forward" />
+                                    </div>
+                                </div>
+                            </div>
+
+                    </form>
+
+                    <div class="box-chuy">
+
+                        <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> NOTE IF YOU BUY THE FIRST TIME:</div>
+                        <div class="cotent-box-chuy">
+                            <div><i class="cotent-text"></i> Waiting time for regular medical examination (including dental examination) is 30 days</div>
+
+                            <div><i class="cotent-text"></i> Waiting time for chronic disease, available disease is 06 months or 01 year depending on each disease group, details of insurance rules.</div>
+                            <div><i class="cotent-text"></i> Waiting time for issues related to maternity: Birth or caesarean is 01 year; Maternity complications 280 days; Ectopic pregnancy 90 days</div>
+                            <div><i><strong>(Waiting time:</strong> At the time of your request for insurance payment, BIC will check if your insurance policy has purchased enough waiting times, if not enough, BIC will notify to refuse insurance)</i></div>
+                        </div>
+
+                    </div>
+
+                    <div class="box-chuy">
+                        <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
+                        <div class="cotent-box-chuy">
+                            <div><i class="cotent-text"></i> Select the number of people you are planning to buy Comprehensive Health Insurance (BIC HealthCare), Click the [Continue] button to move to the details and billing steps. </div>
+
+                            <div><i class="cotent-text"></i> If you want to buy comprehensive health insurance (BIC HealthCare) for more than 10 people, please contact us directly for advice for a more preferential fee. </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-12 col-right">
+                <div class="accordion" id="menuaccordion">
+                    <div class="subdetail">
+                        <div id="ctl19_menu_right"><div class='sub-menuleft' id='menu-145'><a class='' href='' data-toggle='collapse' data-target='#submenu-145' aria-expanded='true' aria-controls='collapseOne'><span>Comprehensive health insurance (BIC HealthCare)</span></a></div><div id='submenu-145' class='collapsed' aria-labelledby='menu-145' data-parent='#menuaccordion'><ul class='menu-left'><li><a href='bao-hiem-suc-khoe' alt='' class='menuleft-act'>General information</a></li><li><a href='bao-hiem-suc-khoe-bang-quyen-loi-bao-hiem' alt=''> Insurance benefits</a></li><li><a href='bao-hiem-suc-khoe-bieu-phi-bao-hiem' alt=''>Premium tariff</a></li><li><a href='bao-hiem-suc-khoe-huong-dan-boi-thuong' alt=''> Compensation guide</a></li><li><a href='bao-hiem-suc-khoe-danh-sach-benh-vien-lien-ket' alt=''> List of affiliated health facilities that guarantee hospital fees</a></li><li><a href='bao-hiem-suc-khoe-download' alt=''> Download rules and forms</a></li><li><a href='https://localhost:44380/HealthInsurance/Information' alt=''> Charge & order</a></li></ul></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="c45"></div>
+</section>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#ctl18_btnContinue').click(function () {
+                var insurancePackageId= $("select#ctl18_ddlOption").val();
+                var numberPeople = $("select#ctl18_ddlAmountPersons").val();
+                if (insurancePackageId == 0) {
+                    alert("chưa chọn gói")
+                    return
+                }
+                if (numberPeople == 0) {
+                    alert("chưa chọn số người")
+                    return
+                }
+            })
+        })
+    </script>
     }
-</script>
 
