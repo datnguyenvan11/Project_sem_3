@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using Project_sem_3.Models;
@@ -17,7 +18,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/InsurancePackages
         public ActionResult Index()
         {
-            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x =>x.Status == 0);
+            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x => x.Status == 0);
             return View(insurancePackages.ToList());
         }
 
@@ -54,18 +55,51 @@ namespace Project_sem_3.Areas.Admin.Controllers
             {
                 var insurancepackages = new InsurancePackage()
                 {
-                    InsuranceId=insurancePackage.InsuranceId,
-                    Name=insurancePackage.Name,
-                    Description=insurancePackage.Description,
-                    Price=insurancePackage.Price,
-                    DurationContract=insurancePackage.DurationContract,
-                    DurationPay=insurancePackage.DurationPay,
-                    CreatedAt=DateTime.Now,
-                    UpdatedAt=DateTime.Now,
-                    DeleteAt=DateTime.Now,
+                    InsuranceId = insurancePackage.InsuranceId,
+                    Name = insurancePackage.Name,
+                    Description = insurancePackage.Description,
+                    Price = insurancePackage.Price,
+                    DurationContract = insurancePackage.DurationContract,
+                    DurationPay = insurancePackage.DurationPay,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    DeleteAt = DateTime.Now,
                 };
                 db.InsurancePackages.Add(insurancepackages);
                 db.SaveChanges();
+                var Users = db.Users.Include(u => u.Roles).ToList();
+
+                foreach (var user in Users)
+                {
+                    var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "test");
+
+                    var receivermail = new MailAddress(user.Email, "test");
+                    var passwordemail = "vtacl123";
+                    var subject = "hehe";
+                    var body = insurancePackage.Name + insurancePackage.Description + insurancePackage.Price;
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        EnableSsl = true,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+
+
+
+                    };
+                    using (var mess = new MailMessage(senderemail, receivermail)
+                    {
+                        Subject= subject,
+                        Body=body
+                    }
+                    )
+                    {
+                        smtp.Send(mess);
+                    };
+                }
+                
                 return RedirectToAction("Index");
             }
 
@@ -147,13 +181,13 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteAll(int[] selectedIDs)
+        public ActionResult DeleteAll(int action, int[] selectedIDs)
         {
             foreach (int IDs in selectedIDs)
             {
                 InsurancePackage insurancePackage = db.InsurancePackages.Find(IDs);
                 db.InsurancePackages.Attach(insurancePackage);
-                insurancePackage.Status = -1;
+                insurancePackage.Status = action;
             }
             db.SaveChanges();
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);
@@ -166,6 +200,11 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Deleted()
+        {
+
+            return View(db.InsurancePackages.Where(t => t.Status == -1).ToList());
         }
     }
 }
