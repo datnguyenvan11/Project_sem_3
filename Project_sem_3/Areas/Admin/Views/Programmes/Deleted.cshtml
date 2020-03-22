@@ -1,9 +1,10 @@
-﻿@model IEnumerable<Project_sem_3.Models.Contract>
+﻿@model IEnumerable<Project_sem_3.Models.Programme>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+
 <!-- Custom styles for this page -->
 <link href="/Assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="/Areas/Admin/Assets/css/custom.css" rel="stylesheet">
@@ -13,33 +14,12 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Contracts</h1>
-        <p class="mb-4"> All contracts of customers about insurances .</p>
-        <div class="card-footer">
-            <div class="row mt-3">
-                <div class="col-3 mt-2">
-                    <div class="form-group mr-3">
-                        <select class="form-control mr-2" id="select-action">
-                            <option value="6">--Chọn thao tác--</option>
-                            <option value="5">Pending</option>
-                            <option value="4">Confirmed</option>
-                            <option value="3">Shipping</option>
-                            <option value="2">Paid</option>
-                            <option value="1">Done</option>
-                            <option value="0">Cancel</option>
-                            <option value="-1">Deleted</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-9">
-                    <button type="button" id="action_contract">Xác nhận</button>
-                </div>
-            </div>
-        </div>
-
+        <h1 class="h3 mb-2 text-gray-800">Programmes Deleted</h1>
+        @*<p class="mb-4"> All contracts of customers about insurances .</p>
+            <button type="button" id="delete_checked">Delete Selected</button>*@
         <div style="margin-bottom:15px;">
-            <a href="https://localhost:44362/Admin/Contracts/Create" class="btn btn-info" role="button">Create Contracts</a>
-            <a href="https://localhost:44362/Admin/Contracts/Deleted" class="btn btn-info float-right" role="button">Contracts Deleted</a>
+            <a href="https://localhost:44362/Admin/Programmes/Create" class="btn btn-info" role="button">Create Programmes</a>
+            @*<a href="https://localhost:44362/Admin/Programmes/Action" class="btn btn-info float-right" role="button">Programmes Active</a>*@
         </div>
 
         <!-- DataTales Example -->
@@ -55,19 +35,14 @@
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
+                                            <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll_programme" />Select All</th>
                                             <th rowspan="1" colspan="1">Name</th>
-                                            <th rowspan="1" colspan="1">CustomerID</th>
-                                            <th rowspan="1" colspan="1">Total Price</th>
-                                            <th rowspan="1" colspan="1">Created At</th>
-                                            <th rowspan="1" colspan="1">Updated At</th>
+                                            <th rowspan="1" colspan="1">Price</th>
                                             <th rowspan="1" colspan="1">Status</th>
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
-
 
                                         @foreach (var item in Model)
                                         {
@@ -76,41 +51,19 @@
                                                     <input type="checkbox" class="check" value="@item.Id" />
                                                     @Html.AntiForgeryToken()
                                                 </td>
-
                                                 <td class="sorting_1">
-                                                    @item.Insurance.Name
+                                                    @item.Name
                                                 </td>
-
-
-                                                <td>@item.InsuranceId</td>
-
-                                                <td>@item.ApplicationUserId</td>
-
-                        
-
-
-                                                <td>@item.TotalPrice</td>
-                                                <td>@item.CreatedAt</td>
-                                                <td>@item.UpdatedAt</td>
+                                                <td>@item.Price</td>
                                                 <td>@item.Status</td>
+
                                                 <td>
-                                                    <button class="btn btn-success">@Html.ActionLink("Confirm", "Edit", new { id = item.Id })</button>
-                                                    <button class="btn btn-primary">
-                                                        @if (@item.Insurance.Id == 16)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
-                                                        }
-                                                        @if (@item.Insurance.Id == 19)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
-                                                        }
-                                                    </button>
-
+                                                    <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
+                                                    <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
                                                     <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-                                                </td>    
-                                                </tr>
-                                            }
-
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -129,46 +82,40 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var selectedIDs = new Array();
-            $('#checkAll').click(function () {
+            $('#checkAll_programme').click(function () {
                 $(".check").prop('checked',
                     $(this).prop('checked'));
             })
-        })
 
-        $('#action_contract').click(function () {
-            var selectedIDs = new Array();
-            var action = $('#select-action').val();
-            if (action == 6) {
-                alert('Please select the action you want to perform!');
-                return;
-            }
-            $('input:checkbox.check').each(function () {
-                if ($(this).prop('checked')) {
-                    selectedIDs.push($(this).val());
-                }
-            });
-            if (selectedIDs.length <= 0) {
-                alert('You have not selected a contract!');
-                return;
-            }
-            $.ajax({
-                url: "/Admin/Contracts/StatusOrder",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                    selectedIDs,
-                    action
-                },
-                success: function (res) {
-                    if (!res == false) {
-                        window.location.reload();
+            $('#delete_checked').click(function () {
+                var selectedIDs = new Array();
+                $('input:checkbox.check').each(function () {
+                    if ($(this).prop('checked')) {
+                        selectedIDs.push($(this).val());
                     }
-                },
-                error: function () {
-                    alert('error');
+                });
+                if (selectedIDs.length <= 0) {
+                    alert('You have not selected programme !');
+                    return;
                 }
-            });
+                $.ajax({
+                    url: "/Admin/Programmes/DeleteAll",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                        selectedIDs
+                    },
+                    success: function (res) {
+                        if (!res == false) {
+                            window.location.href = `/Admin/Programmes`;
+                        }
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                });
+            })
         })
     </script>
 }

@@ -12,14 +12,25 @@ namespace Project_sem_3.Models
         public int Id { get; set; }
         public int InsuranceId { get; set; }
         public virtual Insurance Insurance { get; set; }
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Description { get; set; }
         [DataType(DataType.Currency)]
+        [Required]
         public double Price { get; set; }
+        [Required]
         public string DurationContract { get; set; }
+        [Required]
         public string DurationPay { get; set; }
+        [DataType(DataType.Date)]
+        
         public DateTime CreatedAt { get; set; }
+        [DataType(DataType.Date)]
+        
         public DateTime UpdatedAt { get; set; }
+        [DataType(DataType.Date)]
+        
         public DateTime DeleteAt { get; set; }
         public int Status { get; set; }
         public enum InsurancePackageStatus { Deleted = -1, Action = 0 }

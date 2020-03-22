@@ -18,7 +18,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/InsurancePackages
         public ActionResult Index()
         {
-            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x =>x.Status == 0);
+            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x => x.Status == 0);
             return View(insurancePackages.ToList());
         }
 
@@ -132,7 +132,20 @@ namespace Project_sem_3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(insurancePackage).State = EntityState.Modified;
+                var insurancepackages = new InsurancePackage()
+                {
+                    InsuranceId = insurancePackage.InsuranceId,
+                    Id = insurancePackage.Id,
+                    Name = insurancePackage.Name,
+                    Description = insurancePackage.Description,
+                    Price = insurancePackage.Price,
+                    DurationContract = insurancePackage.DurationContract,
+                    DurationPay = insurancePackage.DurationPay,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    DeleteAt = DateTime.Now,
+                };
+                db.Entry(insurancepackages).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -168,13 +181,13 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteAll(int[] selectedIDs)
+        public ActionResult DeleteAll(int action, int[] selectedIDs)
         {
             foreach (int IDs in selectedIDs)
             {
                 InsurancePackage insurancePackage = db.InsurancePackages.Find(IDs);
                 db.InsurancePackages.Attach(insurancePackage);
-                insurancePackage.Status = -1;
+                insurancePackage.Status = action;
             }
             db.SaveChanges();
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);
@@ -187,6 +200,11 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public ActionResult Deleted()
+        {
+
+            return View(db.InsurancePackages.Where(t => t.Status == -1).ToList());
         }
     }
 }

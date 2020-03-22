@@ -125,13 +125,13 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteAll(int[] selectedIDs)
+        public ActionResult DeleteAll(int action, int[] selectedIDs)
         {
             foreach (int IDs in selectedIDs)
             {
                 Insurance insurance = db.Insurances.Find(IDs);
                 db.Insurances.Attach(insurance);
-                insurance.Status = -1;
+                insurance.Status = action;
             }
             db.SaveChanges();
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);
@@ -144,6 +144,12 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult Deleted()
+        {
+
+            return View(db.Insurances.Where(t => t.Status == -1).ToList());
         }
     }
 }
