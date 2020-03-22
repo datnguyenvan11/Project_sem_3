@@ -132,7 +132,20 @@ namespace Project_sem_3.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(insurancePackage).State = EntityState.Modified;
+                var insurancepackages = new InsurancePackage()
+                {
+                    InsuranceId = insurancePackage.InsuranceId,
+                    Id = insurancePackage.Id,
+                    Name = insurancePackage.Name,
+                    Description = insurancePackage.Description,
+                    Price = insurancePackage.Price,
+                    DurationContract = insurancePackage.DurationContract,
+                    DurationPay = insurancePackage.DurationPay,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                    DeleteAt = DateTime.Now,
+                };
+                db.Entry(insurancepackages).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
