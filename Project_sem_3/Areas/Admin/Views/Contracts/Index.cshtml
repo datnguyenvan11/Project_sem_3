@@ -15,7 +15,7 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Contracts</h1>
         <p class="mb-4"> All contracts of customers about insurances .</p>
-        <div class="card-footer">
+        @*<div class="card-footer">
             <div class="row mt-3">
                 <div class="col-3 mt-2">
                     <div class="form-group mr-3">
@@ -35,7 +35,7 @@
                     <button type="button" id="action_contract">Xác nhận</button>
                 </div>
             </div>
-        </div>
+        </div>*@
 
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/Contracts/Create" class="btn btn-info" role="button">Create Contracts</a>
@@ -112,7 +112,23 @@
                                             }
 
                                     </tbody>
-                                </table>
+                                </table>    
+                                <div class="card-footer">
+                                    <div class="row mt-3">
+                                        <div class="col-3 mt-2">
+                                            <div class="form-group mr-3">
+                                                <select class="form-control mr-2" id="select-action">
+                                                    <option value="6">--Chọn thao tác--</option>
+                                                    <option value="0">Action</option>
+                                                    <option value="-1">Deleted</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-9" style="margin-top: 8px;">
+                                            <button  type="button" id="action_contract" class="btn btn-success">Confirm</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div>
                     </div>
