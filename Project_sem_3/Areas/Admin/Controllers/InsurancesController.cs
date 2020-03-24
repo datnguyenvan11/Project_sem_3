@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using PagedList;
+using PagedList.Mvc;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Project_sem_3.Models;
@@ -16,9 +18,37 @@ namespace Project_sem_3.Areas.Admin.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/Insurances
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, int? page)
         {
-            return View(db.Insurances.Where(x => x.Status == 0).ToList());
+            var insurances = db.Insurances.Where(x => x.Status == 0);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                insurances = db.Insurances.Where(x => x.Name.Contains(searchString))
+                    .Where(x => x.Status == 0);
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    insurances = insurances.OrderByDescending(s => s.Name);
+                    break;
+                case "Date":
+                    insurances = insurances.OrderBy(s => s.CreatedAt);
+                    break;
+                case "Date_desc":
+                    insurances = insurances.OrderByDescending(s => s.CreatedAt);
+                    break;
+
+                default:
+                    insurances = insurances.OrderBy(s => s.Name);
+                    break;
+            }
+            return View(insurances.ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/Insurances/Details/5
