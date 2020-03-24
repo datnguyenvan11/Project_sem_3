@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Project_sem_3.Models.Contract>
+﻿@*@model IEnumerable<Project_sem_3.Models.Contract>*@
+@model PagedList.IPagedList<Project_sem_3.Models.Contract>
+@using PagedList.Mvc
 
 @{
     ViewBag.Title = "Index";
@@ -58,8 +60,8 @@
                                             <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
                                             <th rowspan="1" colspan="1">Name</th>
                                             <th rowspan="1" colspan="1">CustomerID</th>
-                                            <th rowspan="1" colspan="1">Total Price</th>
-                                            <th rowspan="1" colspan="1">Created At</th>
+                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Total Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
+                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
                                             <th rowspan="1" colspan="1">Updated At</th>
                                             <th rowspan="1" colspan="1">Status</th>
                                             <th rowspan="1" colspan="1">Action</th>
@@ -80,15 +82,8 @@
                                                 <td class="sorting_1">
                                                     @item.Insurance.Name
                                                 </td>
-
-
                                                 <td>@item.InsuranceId</td>
-
-                                                <td>@item.ApplicationUserId</td>
-
-                        
-
-
+                                                @*<td>@item.ApplicationUserId</td>*@
                                                 <td>@item.TotalPrice</td>
                                                 <td>@item.CreatedAt</td>
                                                 <td>@item.UpdatedAt</td>
@@ -107,14 +102,27 @@
                                                     </button>
 
                                                     <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-                                                </td>    
-                                                </tr>
-                                            }
+                                                </td>
+                                            </tr>
+                                        }
 
                                     </tbody>
                                 </table>
                             </div>
-                        </div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div></div></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+                            </div>
+                            <div class="col-sm-12 col-md-4"></div>
+                            <div class="col-sm-12 col-md-3">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+                               new PagedListRenderOptions()
+                               {
+                                   LiElementClasses = new List<string> { "text-paging" }
+                               })
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -172,3 +180,22 @@
         })
     </script>
 }
+
+<style>
+    .text-paging {
+        color: brown;
+    }
+
+        .text-paging > a {
+            color: black;
+        }
+
+    /*.style-sort {
+        background: url(https://cdn2.iconfinder.com/data/icons/music-player-icons-filled/57/Double_Arrows-512.png) no-repeat right .75rem center/9px 16px;
+        background-position: 64px 64px;
+    }*/
+
+    .style-sort > a {
+        color: crimson;
+    }
+</style>
