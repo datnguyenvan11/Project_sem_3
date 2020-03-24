@@ -18,7 +18,7 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Programmes</h1>
         <p class="mb-4"> All contracts of customers about insurances .</p>
-        <button type="button" id="delete_checked">Delete Selected</button>
+        @*<button type="button" id="delete_checked">Delete Selected</button>*@
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/Programmes/Create" class="btn btn-info" role="button">Create Programmes</a>
             <a href="https://localhost:44362/Admin/Programmes/Deleted" class="btn btn-info float-right" role="button">Programmes Deleted</a>
@@ -32,6 +32,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="dataTables_length" id="dataTable_length">
@@ -106,6 +107,7 @@
                                })
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -126,22 +128,27 @@
             })
 
 
-            $('#action_contract').click(function () {
-                var selectedIDs = new Array();
-                var action = $('#select-action').val();
-                if (action == 6) {
-                    alert('Please select the action you want to perform!');
-                    return;
-                }
-                $('input:checkbox.check').each(function () {
-                    if ($(this).prop('checked')) {
+
+        $('#action_contract').click(function () {
+            var selectedIDs = new Array();
+            var action = $('#select-action').val();
+            if (action == 6) {
+                alert('Please select the action you want to perform!');
+                return;
+            }
+            $('input:checkbox.check').each(function () {
+                if ($(this).prop('checked')) {
+                    var r = confirm("Do you want to delete?");
+                    if (r == true) {
                         selectedIDs.push($(this).val());
                     }
-                });
-                if (selectedIDs.length <= 0) {
-                    alert('You have not selected programme !');
-                    return;
                 }
+            });
+            if (selectedIDs.length <= 0) {
+                alert('You have not selected programme !');
+                return;
+
+            
                 $.ajax({
                     url: "/Admin/Programmes/DeleteAll",
                     type: "POST",

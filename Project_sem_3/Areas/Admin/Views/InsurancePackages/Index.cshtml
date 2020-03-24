@@ -19,7 +19,7 @@
         <h1 class="h3 mb-2 text-gray-800">Insurance Package</h1>
         <p class="mb-4"> All contracts of customers about insurances .</p>
 
-        <button type="button" id="delete_checked">Delete Selected</button>
+        @*<button type="button" id="delete_checked">Delete Selected</button>*@
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/InsurancePackages/Create" class="btn btn-info" role="button">Create Insurance Packages</a>
             <a href="https://localhost:44362/Admin/InsurancePackages/Deleted" class="btn btn-info float-right" role="button">Insurance Packages Deleted</a>
@@ -34,6 +34,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
                         <div class="row">
                             <div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div>
                             <div class="col-sm-12 col-md-6">
@@ -76,7 +77,8 @@
                                             <th rowspan="1" colspan="1">DurationContract</th>
                                             <th rowspan="1" colspan="1">DurationPay</th>
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
-                                            <th rowspan="1" colspan="1">UpdatedAt</th>
+
+
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
 
@@ -96,11 +98,11 @@
                                                 </td>
                                                 <td>@item.Name</td>
                                                 <td>@item.Description</td>
-                                                <td>@item.Price</td>
-                                                <td>@item.DurationContract</td>
-                                                <td>@item.DurationPay</td>
-                                                <td>@item.CreatedAt</td>
-                                                <td>@item.UpdatedAt</td>
+                                                <td>@item.Price$</td>
+                                                <td>@item.DurationContract year</td>
+                                                <td>@item.DurationPay $/year</td>
+                                                @*<td>@item.CreatedAt</td>
+                                                <td>@item.UpdatedAt</td>*@
                                                 <td>
                                                     <div class="btn-group">
                                                         <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
@@ -110,9 +112,24 @@
                                                 </td>
                                             </tr>
                                         }
-
                                     </tbody>
                                 </table>
+                                <div class="card-footer">
+                                    <div class="row mt-3">
+                                        <div class="col-3 mt-2">
+                                            <div class="form-group mr-3">
+                                                <select class="form-control mr-2" id="select-action">
+                                                    <option value="6">--Chọn thao tác--</option>
+                                                    <option value="0">Action</option>
+                                                    <option value="-1">Deleted</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-9" style="margin-top: 8px;">
+                                            <button  type="button" id="action_contract" class="btn btn-success">Confirm</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -146,18 +163,24 @@
                     $(this).prop('checked'));
             })
 
-            $('#action_contract').click(function () {
-                var selectedIDs = new Array();
-                var action = $('#select-action').val();
-                if (action == 6) {
-                    alert('Please select the action you want to perform!');
-                    return;
-                }
-                $('input:checkbox.check').each(function () {
-                    if ($(this).prop('checked')) {
+
+
+        $('#action_contract').click(function () {
+            var selectedIDs = new Array();
+            var action = $('#select-action').val();
+            if (action == 6) {
+                alert('Please select the action you want to perform!');
+                return;
+            }
+            $('input:checkbox.check').each(function () {
+                if ($(this).prop('checked')) {
+                    var r = confirm("Do you want to delete?");
+                    if (r == true) {
                         selectedIDs.push($(this).val());
                     }
-                });
+
+                }
+     
                 if (selectedIDs.length <= 0) {
                     alert('You have not selected insurance package !');
                     return;
@@ -182,10 +205,12 @@
                 });
             })
         })
+
         function handle(e) {
             if (e.keyCode === 13) {
                 e.preventDefault();
             }
+
     </script>
 }
 
