@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using PagedList;
+using PagedList.Mvc;
 using System.Web.Mvc;
 using Project_sem_3.Models;
 
@@ -15,10 +17,36 @@ namespace Project_sem_3.Areas.Admin.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/Contracts
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, int? page)
         {
-            var contracts = db.Contracts.Include(c => c.Insurance).Where(x => x.Status == 1);
-            return View(contracts.ToList());
+            var contracts = db.Contracts.Where(x => x.Status == 5);
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    contracts = db.Contracts.Where(x => x.TotalPrice.Contains(searchString))
+            //        .Where(t => t.Status == 1);
+            //}
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "TotalPrice_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            switch (sortOrder)
+            {
+                case "Date":
+                    contracts = contracts.OrderBy(s => s.CreatedAt);
+                    break;
+                case "Date_desc":
+                    contracts = contracts.OrderByDescending(s => s.CreatedAt);
+                    break;
+                case "TotalPrice_desc":
+                    contracts = contracts.OrderByDescending(s => s.TotalPrice);
+                    break;
+                default:
+                    contracts = contracts.OrderBy(s => s.TotalPrice);
+                    break;
+            }
+            return View(contracts.ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/Contracts/Details/5
