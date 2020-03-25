@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using PagedList;
-using PagedList.Mvc;
+
 using System.Web.Mvc;
 using Project_sem_3.Models;
 
