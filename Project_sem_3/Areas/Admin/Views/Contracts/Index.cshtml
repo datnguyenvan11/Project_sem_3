@@ -59,9 +59,15 @@
                                         <tr>
                                             <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
                                             <th rowspan="1" colspan="1">Name</th>
-                                            <th rowspan="1" colspan="1">CustomerID</th>
+
+                                            <th rowspan="1" colspan="1">Insurance</th>
+
+                                            <th rowspan="1" colspan="1">Customer</th>
+                                            
+
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Total Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
+
                                             <th rowspan="1" colspan="1">Updated At</th>
                                             <th rowspan="1" colspan="1">Status</th>
                                             <th rowspan="1" colspan="1">Action</th>
@@ -82,8 +88,12 @@
                                                 <td class="sorting_1">
                                                     @item.Insurance.Name
                                                 </td>
-                                                <td>@item.InsuranceId</td>
-                                                @*<td>@item.ApplicationUserId</td>*@
+
+
+
+
+                                                <td>@item.ApplicationUserId</td>
+
                                                 <td>@item.TotalPrice</td>
                                                 <td>@item.CreatedAt</td>
                                                 <td>@item.UpdatedAt</td>

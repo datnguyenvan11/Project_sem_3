@@ -63,7 +63,7 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <h2 class="title">Registration Form</h2>
+                    <h2 class="title">Registration</h2>
                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
@@ -72,12 +72,16 @@
                                 <div class="input-group">
                                     <label class="label">Email</label>
                                     @Html.TextBoxFor(m => m.Email, new { @class = "input--style-4" })
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Password</label>
                                     @Html.PasswordFor(m => m.Password, new { @class = "input--style-4" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
                                 </div>
                             </div>
                         </div>
@@ -87,6 +91,8 @@
                                     <label class="label">ConfirmPassword</label>
                                     <div class="input-group-icon">
                                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input--style-4" })
+                                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                 </div>
@@ -98,11 +104,15 @@
                                         <label class="radio-container m-r-45">
                                             Male
                                             @Html.RadioButtonFor(model => model.Gender, "Male", new { Checked = "checked" })
+                                              @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+
                                             <span class="checkmark"></span>
                                         </label>
                                         <label class="radio-container">
                                             Female
                                             @Html.RadioButtonFor(model => model.Gender, "Female")
+                                            @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
@@ -114,12 +124,16 @@
                                 <div class="input-group">
                                     <label class="label">UserName</label>
                                     @Html.TextBoxFor(m => m.UserName, new { @class = "input--style-4" })
+                                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Phone Number</label>
                                     @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "input--style-4" })
+                                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+
                                 </div>
                             </div>
                         </div>
@@ -127,10 +141,15 @@
 
                             <label class="label">Address</label>
                             <textarea class="" type="text" style="width: 304%;height: 137px;" name="Address"></textarea>
+                            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
 
                         </div>
+
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Sign Up</button>
+                            <span style="margin-left:25%">
+                                Have already an account? <a href="/Account/Login">Login here</a>
+                            </span>
                         </div>
                     }
                 </div>

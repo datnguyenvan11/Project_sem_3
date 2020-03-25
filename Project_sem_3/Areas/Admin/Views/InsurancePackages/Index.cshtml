@@ -76,7 +76,11 @@
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
                                             <th rowspan="1" colspan="1">DurationContract</th>
                                             <th rowspan="1" colspan="1">DurationPay</th>
+                                            <th rowspan="1" colspan="1">CreatedAt</th>
+                                          
+
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
+>
 
 
                                             <th rowspan="1" colspan="1">Action</th>
@@ -88,6 +92,7 @@
 
                                         @foreach (var item in Model)
                                         {
+
                                             <tr role="row" class="odd">
                                                 <td>
                                                     <input type="checkbox" class="check" value="@item.Id" />
@@ -102,7 +107,6 @@
                                                 <td>@item.DurationContract year</td>
                                                 <td>@item.DurationPay $/year</td>
                                                 @*<td>@item.CreatedAt</td>
-                                                <td>@item.UpdatedAt</td>*@
                                                 <td>
                                                     <div class="btn-group">
                                                         <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>

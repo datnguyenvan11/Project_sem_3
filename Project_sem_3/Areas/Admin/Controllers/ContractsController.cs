@@ -18,7 +18,9 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/Contracts
         public ActionResult Index(string sortOrder, string searchString, int? page)
         {
-            var contracts = db.Contracts.Where(x => x.Status == 5);
+
+            var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 5);
+
             //if (!String.IsNullOrEmpty(searchString))
             //{
             //    contracts = db.Contracts.Where(x => x.TotalPrice.Contains(searchString))
