@@ -8,7 +8,6 @@ using System.Net;
 using System.Text;
 using System.Web;
 using PagedList;
-using PagedList.Mvc;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Project_sem_3.Models;
