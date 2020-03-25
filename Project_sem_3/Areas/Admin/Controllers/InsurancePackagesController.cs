@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Web;
+using PagedList;
+
 using System.Web.Mvc;
 using Project_sem_3.Models;
 
@@ -16,10 +18,44 @@ namespace Project_sem_3.Areas.Admin.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/InsurancePackages
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, int? page)
         {
             var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x => x.Status == 1);
-            return View(insurancePackages.ToList());
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                insurancePackages = db.InsurancePackages.Where(x => x.Name.Contains(searchString))
+                    .Where(x => x.Status == 0);
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    insurancePackages = insurancePackages.OrderByDescending(s => s.Name);
+                    break;
+                case "Date":
+                    insurancePackages = insurancePackages.OrderBy(s => s.CreatedAt);
+                    break;
+                case "Date_desc":
+                    insurancePackages = insurancePackages.OrderByDescending(s => s.CreatedAt);
+                    break;
+                case "Price":
+                    insurancePackages = insurancePackages.OrderBy(s => s.Price);
+                    break;
+                case "Price_desc":
+                    insurancePackages = insurancePackages.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    insurancePackages = insurancePackages.OrderBy(s => s.Name);
+                    break;
+            }
+            return View(insurancePackages.ToList().ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/InsurancePackages/Details/5
@@ -92,15 +128,15 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     };
                     using (var mess = new MailMessage(senderemail, receivermail)
                     {
-                        Subject= subject,
-                        Body=body
+                        Subject = subject,
+                        Body = body
                     }
                     )
                     {
                         smtp.Send(mess);
                     };
                 }
-                
+
                 return RedirectToAction("Index");
             }
 

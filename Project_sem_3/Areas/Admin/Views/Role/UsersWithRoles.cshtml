@@ -17,34 +17,54 @@
     <!-- /.box-header -->
     <div class="panel-body">
         <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
-            <thead>
-                <tr>
-                    <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
+            <div style="margin-bottom:15px;">
+                <a href="https://localhost:44362/Admin/Role/CreateAdmin" class="btn btn-info" role="button">Create User</a>
+                @*<a href="https://localhost:44362/Admin/InsurancePackages/Deleted" class="btn btn-info float-right" role="button">Insurance Packages Deleted</a>*@
+            </div>
 
-                    <td><b>Username</b></td>
-                    <td><b>Email</b></td>
-                    <td><b>Roles</b></td>
-                </tr>
+            <thead>
+            <tr>
+                <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll"/>Select All</th>
+
+                <td><b>Username</b></td>
+                <td><b>Email</b></td>
+                <td><b>Roles</b></td>
+            </tr>
             </thead>
             @foreach (var user in Model)
             {
-        <tr>
-            <td>
-                <input type="checkbox" class="check" value="@user.UserId" />
-                @Html.AntiForgeryToken()
-            </td>
-            <td><b>@user.Username</b></td>
-            <td><b>@user.Email</b></td>
-            <td><b>@user.Role</b></td>
-            <form action="/role/DeleteConfirmedUser" method="post">
-                @Html.AntiForgeryToken()
-                <input type="text" name="userId" value="@user.UserId" />
-                <input type="submit" name="name" value="dasdada" />
-            </form>
-            
-        </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" class="check" value="@user.UserId"/>
+                        @Html.AntiForgeryToken()
+                    </td>
+                    <td><b>@user.Username</b></td>
+                    <td><b>@user.Email</b></td>
+                    <td><b>@user.Role</b></td>
+                    <form action="/role/DeleteConfirmedUser" method="post">
+                        @Html.AntiForgeryToken()
+                        <input type="text" name="userId" value="@user.UserId"/>
+                        <input type="submit" name="name" value="Deleted"/>
+                    </form>
+                </tr>
             }
-        </table>
+        </table>       
+        <div class="card-footer">
+            <div class="row mt-3">
+                <div class="col-3 mt-2">
+                    <div class="form-group mr-3">
+                        <select class="form-control mr-2" id="select-action">
+                            <option value="6">--Chọn thao tác--</option>
+                            <option value="0">Action</option>
+                            <option value="-1">Deleted</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-9" style="margin-top: 8px;">
+                    <button  type="button" id="action_contract" class="btn btn-success">Confirm</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     @Html.DropDownList("RoleName", new SelectList(ViewBag.Roles, "Value", "Text"), new { @id = "select-action" });

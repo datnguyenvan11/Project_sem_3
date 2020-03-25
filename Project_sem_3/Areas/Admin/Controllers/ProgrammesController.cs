@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
+using PagedList;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using Project_sem_3.Models;
@@ -18,10 +19,36 @@ namespace Project_sem_3.Areas.Admin.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
         List<Programme> list = new List<Programme>();
         // GET: Admin/Programmes
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string searchString, int? page)
         {
+            var programme = db.Programmes.Where(t => t.Status == 0);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                programme = db.Programmes.Where(t => t.Name.Contains(searchString))
+                    .Where(t => t.Status == 0);
+            }
 
-            return View(db.Programmes.Where(t => t.Status == 0).ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    programme = programme.OrderByDescending(s => s.Name);
+                    break;
+                case "Price":
+                    programme = programme.OrderBy(s => s.Price);
+                    break;
+                case "Price_desc":
+                    programme = programme.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    programme = programme.OrderBy(s => s.Name);
+                    break;
+            }
+            return View(programme.ToList().ToPagedList(pageNumber, pageSize));
 
         }
 
