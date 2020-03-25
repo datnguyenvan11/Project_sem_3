@@ -1,24 +1,26 @@
-﻿@model IEnumerable<Project_sem_3.Models.InsurancePackage>
+﻿@model Project_sem_3.Models.ViewOrderMotor
 @using Project_sem_3.Models
 @{
- 
+
     Layout = "~/Views/Shared/_Layout.cshtml";
     var cart = ViewBag.shoppingCart as MotorShopingCart;
     var stt = 1;
-    var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+    var info = System.Globalization.CultureInfo.GetCultureInfo("USD");
+
 }
 
 
 
 <section>
     <div class="banner">
-        
+
     </div>
 
 </section>
 
 
-<div class="container1" style="margin-left:10%;margin-right:10%;margin-top:7% ;margin-bottom:7%">
+<div class="container1" style="margin-left:10%;margin-right:10%;margin-top:7% ;margin-bottom:7%;position:relative;
+}">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="row">
@@ -27,50 +29,58 @@
                     <div class="tab-content">
                         <div id="tab1" class="tab-pane active ">
                             <div class="col-lg-12 col-md-12 col-sm-12 d-none d-md-block">
+                                
+
                                 <div class="row">
                                     <table class="table">
-                                        <thead class="thead-dark">
-                                            <tr>
+                                        @if (@cart.GetCartItems().Count > 0)
+                                        {
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th scope="col">
+                                                        Package
+                                                    </th>
+                                                    <th scope="col">
+                                                        MotorOwner
+                                                    </th>
+                                                    <th scope="col">Address on vehicle registration</th>
+                                                    <th scope="col">LicensePlate</th>
+                                                    <th scope="col">ChassisNumber</th>
+                                                    <th scope="col">Duration of insurance</th>
+                                                    <th scope="col">Price</th>
 
-                                                <th scope="col">
-                                                    MotorOwner
+                                                    <th scope="col">Delete</th>
 
-                                                </th>
-                                                <th scope="col">Address on vehicle registration</th>
-                                                <th scope="col">LicensePlate</th>
-                                                <th scope="col">ChassisNumber</th>
-                                                <th scope="col">Duration of insurance</th>
-                                                <th scope="col">Price</th>
-
-                                                <th scope="col">Delete</th>
-
-                                            </tr>
-                                        </thead>
+                                                </tr>
+                                            </thead>
+                                        }
                                         <tbody>
                                             @foreach (var item in cart.GetCartItems())
                                             {
-
-
-
                                             <tr>
+                                                <td>@item.Value.InsurancePackageName</td>
                                                 <td>@item.Value.CarOwner</td>
                                                 <td>@item.Value.RegisteredAddress</td>
                                                 <td>@item.Value.LicensePlate</td>
                                                 <td>@item.Value.ChassisNumber</td>
-                                                <td>@item.Value.Duration</td>
-                                                <td>@item.Value.Price</td>
+                                                <td>@item.Value.Duration.ToString("yyyy-MM-dd")</td>
+                                                <td>
+                                                    @String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C}", @item.Value.Price)
+                                                </td>
                                                 <td><a onclick="return confirm('Ban co chac muon xoa san pham tuyet voi cua chung toi ra khoi gio hang khong.')" href="/MotorInsurance/RemoveCart?LicensePlate=@item.Value.LicensePlate">Remove</a></td>
                                             </tr>
 
                                             }
                                         </tbody>
+
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <form action="/MotorInsurance/AddCart" method="get">
+
+                <form action="/MotorInsurance/AddCart" method="get" id="formDemo">
                     <div class="col-lg-9 col-md-8 col-sm-12">
                         <div class="frm frmpro">
                             @*<div class="form-group">
@@ -91,9 +101,11 @@
                 </div>
             </div>
         </div>*@
-        
+                            <div for="rdbPackage_0" style="margin-left:1px" class="row col-form-label col-form-label-first">Select InsurancePackages :</div>
+
                             <div _ngcontent-c5="" class="row">
-                                @foreach (var item in Model) { 
+                                @foreach (var item in ViewBag.insurancepackages)
+                                {
                                     <div _ngcontent-c5="" class="col-md-6" style="margin-top:30px">
                                         <div _ngcontent-c5="" class="benefit-item benefit-item-description-table">
                                             <div _ngcontent-c5="" class="benefit-item-main">
@@ -104,8 +116,10 @@
                                                     <div _ngcontent-c5="" class="benefit-name-wrapper v-middle">
                                                         <h2 _ngcontent-c5="" class="benefit-name">
                                                             <div _ngcontent-c5="" class="app-checkbox agree-with-term">
-                                                                <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="closeForm();" name="insurancePackageId" name="muhRadio" value="" /></label>                                                           @*<input _ngcontent-c5="" id="choose1" name="choose1" type="checkbox"> <label _ngcontent-c5="" for="choose1">*@
+                                                                <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="closeForm();" name="insurancePackageId" required /></label>                                                           @*<input _ngcontent-c5="" id="choose1" name="choose1" type="checkbox"> <label _ngcontent-c5="" for="choose1">*@
                                                                 <span _ngcontent-c5="" class="checkout-term">@item.Name</span>
+                                                                @Html.ValidationMessageFor(m => m.insurancePackageId, "", new { @class = "text-danger" })
+
                                                             </div>
                                                         </h2>
                                                     </div>
@@ -150,94 +164,106 @@
                                     </div>
                                 }
                             </div>
-        
-                        <div class="form-group" id="divnone">
-                            <h4>Enter the information on the vehicle registration</h4>
-                        </div>
-                        <div class="form-group divnone">
-                            <div class="row">
-                                <label for="fullname" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Vehicle owner name:</label>
-                                <div class="col-lg-8">
-                                    <input name="CarOwner" type="text" id="ctl18_fullname" class="form-control txt" placeholder="Vehicle owner name" />
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblInsuredReq" class="req" style="color:Red;"></span>
-                                    </i>
+
+                            <div class="form-group" id="divnone">
+                                <h4>Enter the information on the vehicle registration</h4>
+                            </div>
+                            <div class="form-group divnone">
+                                <div class="row">
+                                    <label for="fullname" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Vehicle owner name:</label>
+                                    <div class="col-lg-8">
+                                        <input name="CarOwner" type="text" id="ctl18_fullname" class="form-control txt" placeholder="Vehicle owner name" />
+
+
+                                        <i class="pad-top-5">
+                                            <span id="ctl18_lblInsuredReq" class="req" style="color:Red;"></span>
+                                        </i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group divnone">
-                            <div class="row">
-                                <label for="txtAddress" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Address on vehicle registration:</label>
-                                <div class="col-lg-8">
-                                    <textarea name="RegisteredAddress" type="text" id="ctl18_txtAddress" class="form-control txt" placeholder="Address on vehicle registration"></textarea>
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblAddressReq" class="req" style="color:Red;"></span>
-                                    </i>
+                            <div class="form-group divnone">
+                                <div class="row">
+                                    <label for="txtAddress" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Address on vehicle registration:</label>
+                                    <div class="col-lg-8">
+                                        <textarea name="RegisteredAddress" type="text" id="ctl18_txtAddress" class="form-control txt" placeholder="Address on vehicle registration"></textarea>
+
+
+                                        <i class="pad-top-5">
+                                            <span id="ctl18_lblAddressReq" class="req" style="color:Red;"></span>
+                                        </i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-group divnone" id="divPlate" style="display: block;">
-                            <div class="row">
-                                <label for="plates" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">LicensePlate:</label>
-                                <div class="col-lg-8">
-                                    <input name="LicensePlate" type="text" id="ctl18_plates" class="form-control txt" placeholder="LicensePlate" />
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblPlatesReq" class="req" style="color:Red;"></span>
-                                    </i>
+                            <div class="form-group divnone" id="divPlate" style="display: block;">
+                                <div class="row">
+                                    <label for="plates" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">LicensePlate:</label>
+                                    <div class="col-lg-8">
+                                        <input name="LicensePlate" type="text" id="ctl18_plates" class="form-control txt" placeholder="LicensePlate" />
+
+
+                                        <i class="pad-top-5">
+                                            <span id="ctl18_lblPlatesReq" class="req" style="color:Red;"></span>
+                                        </i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group divnone" id="divChassis">
-                            <div class="row">
-                                <label for="ChassisNumber" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">ChassisNumber:</label>
-                                <div class="col-lg-8">
-                                    <input name="ChassisNumber" type="text" id="ctl18_ChassisNumber" class="form-control txt" placeholder="Chassis Number" />
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
-                                    </i>
+                            <div class="form-group divnone" id="divChassis">
+                                <div class="row">
+                                    <label for="ChassisNumber" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">ChassisNumber:</label>
+                                    <div class="col-lg-8">
+                                        <input name="ChassisNumber" type="text" id="ctl18_ChassisNumber" class="form-control txt" placeholder="Chassis Number" />
+
+                                        <i class="pad-top-5">
+                                            <span id="ctl18_lblChassisNumberReq" class="req" style="color:Red;"></span>
+                                        </i>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <input type="hidden" name="quantity" value="1" />
+                            <input type="hidden" name="quantity" value="1" />
 
 
-                        <div class="form-group divnone">
-                            <div class="row">
-                                <label for="txtFromDate" class="col-lg-4 col-sm-12 col-form-label col-form-label-first pad-0">Duration of insurance :</label>
-                                <div class="col-lg-8">
+                            <div class="form-group divnone">
+                                <div class="row">
+                                    <label for="txtFromDate" class="col-lg-4 col-sm-12 col-form-label col-form-label-first pad-0">Duration of insurance :</label>
+                                    <div class="col-lg-8">
 
-                                    <input type="datetime" id="datepicker" class="form-control txt start-date " name="Duration" placeholder="Duration of insurance" onchange="fromdate_change();" />
-
-                                    <div class="icondate"></div>
-                                    <i class="pad-top-5">01 year from the date on and after the time of fee payment</i>
-                                    <i class="pad-top-5"><span id="ctl18_lblFromDateReq" class="req" style="color:Red;"></span></i>
-                                    <i class="pad-top-5"><span id="ctl18_lblFromDate" class="req" style="color:Red;"></span></i>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-center mb-15 divnone">
-                            <label>Would you like to order another car?</label>
-                        </div>
-                        <div class="form-group divnone">
-                            <div class="row">
-                                <label for="txtbks" class="col-lg-4 col-sm-12 col-form-label col-form-label-first hide-md">&nbsp;</label>
-                                <div class="col-lg-8">
-                                    <div id="ctl18_divBuyanOther" class="row">
-                                        <div class="col-sm-6" style="padding-right:5px">
-                                            <input type="submit" name="ctl18$btnYes" value="Yes" id="ctl18_btnYes" class="btn-pro btn" onclick="showform()" />
+                                        <div class='input-group date' style="width:55%" id='datetimepicker1'>
+                                            <input type="datetime" id="datepicker" style="width:100%" class="form-control txt start-date " name="Duration" placeholder="Duration of insurance" onchange="fromdate_change();" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
                                         </div>
-                                        <div class="col-sm-6" style="padding-left:5px">
-                                            <input type="submit" style="height: 45px;" name="ctl18$btnNo" value="No" id="ctl18_btnNo" class="btn-pro-buynow m-0" />
+                                        <i class="pad-top-5">01 year from the date on and after the time of fee payment</i>
+                                        <i class="pad-top-5"><span id="ctl18_lblFromDateReq" class="req" style="color:Red;"></span></i>
+                                        <i class="pad-top-5"><span id="ctl18_lblFromDate" class="req" style="color:Red;"></span></i>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" mb-15 divnone" style="margin-left: 34%;">
+                                <label>Add to Cart </label>
+                            </div>
+                            <div class="form-group divnone">
+                                <div class="row">
+                                    <label for="txtbks" class="col-lg-4 col-sm-12 col-form-label col-form-label-first hide-md">&nbsp;</label>
+                                    <div class="col-lg-8">
+                                        <div id="ctl18_divBuyanOther" class="row">
+                                            <div class="col-sm-6 text-right" style="margin-left: 25%;
+    padding-right: 65px;">
+                                                <input type="submit" name="ctl18$btnYes" value="continue" id="ctl18_btnYes" class="btn-pro btn" onclick="showform()" />
+                                            </div>
+                                            @*<div class="col-sm-6" style="padding-left:5px">
+                                                <input type="submit" style="height: 45px;" name="ctl18$btnNo" value="No" id="ctl18_btnNo" class="btn-pro-buynow m-0" />
+                                            </div>*@
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
                         </div>
-                        </div>
+                    </div>
                 </form>
                 <div class="col-lg-3 col-md-4 col-sm-12">
                     <div class="hd-info-pro">INSURANCE FEES</div>
@@ -256,10 +282,16 @@
                             <div class="result-red">
                                 <div>Total net charge (including VAT) actually collected:</div>
 
-                                <strong><label class=" @cart.GetTotalPrice()" for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">@String.Format("{0:c}", @cart.GetTotalPrice())</label></strong>
+                                <strong><label class=" @cart.GetTotalPrice()" for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">@String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C}", @cart.GetTotalPrice())</label></strong>
                             </div>
-                            <a id="ctl18_lbtBook" style="text-decoration:none" class="btn-pro-buynow" href="/MotorInsurance/CreateContract">Order</a>
-                        </div>
+                            @if (cart.GetCartItems().Count == 0)
+                            {
+                            }
+                            @if (cart.GetCartItems().Count > 0)
+                            { 
+                                <a id="ctl18_lbtBook" style="text-decoration:none" class="btn-pro-buynow" href="/MotorInsurance/CreateContract">Order</a>
+                                }
+                            </div>
                     </div>
                 </div>
             </div>
@@ -268,26 +300,29 @@
 </div>
 
 <style>
-   
+
     .subslide {
         max-width: fit-content;
         position: relative;
         margin: auto;
     }
+
     .product-card .item-content .btn-learn-more {
-    position: absolute;
-    bottom: 20px;
-    width: calc(100% - 40px);
-}
+        position: absolute;
+        bottom: 20px;
+        width: calc(100% - 40px);
+    }
+
     .shadow {
         box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
     }
 
-*, :after, :before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
+    *, :after, :before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
     .box-border-pro {
         position: relative;
         background: #fff;
@@ -302,83 +337,104 @@
         background-color: #f0f0f0;
         border-radius: 5px;
     }
+
     .benefit-item.benefit-item-description-table {
-    font-size: 16px;
-}.benefit-item .benefit-item-main {
-    position: relative;
-    background: #fff;
-}.benefit-item .benefit-icon {
-    width: 50px;
-    height: 50px;
-    background: #ed1b2e;
-    color: #fff;
-    text-align: center;
-    position: absolute;
-    top: -25px;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    transform: translateX(-50%);
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    z-index: 10;
-}.benefit-item .benefit-icon i {
-    position: relative;
-    top: 11px;
-}
- .laces-checkbox {
-  display:inline-block;
-  width:2rem;
-  height:2rem;
-  font-size:1.2rem;
-  line-height:1.8rem;
-  text-align:center;
-  border:1px solid #999;
-  border-radius:0.3rem;
-}
-.icon-benefit-shield {
-    width: 27px;
-    height: 28px;
-    background-position: 0 -770px;
-}
-.icon-benefit {
-    background-image: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngitem.com%2Fmiddle%2FmxRJbm_motorcycle-gap-cover-icon-bike-insurance-icon-png%2F&psig=AOvVaw2Wm29PAOOxFCc96L2YPndS&ust=1584883624783000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOCUouvVq-gCFQAAAAAdAAAAABAJ);
-}
-.icon {
-    display: inline-block;
-}
-.benefit-item .benefit-image {
-    position: relative;
-    height: 130px;
-}
-.full-cover {
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50%;
-}.benefit-item .benefit-name-wrapper {
-    width: 100%;
-}
-.v-middle {
-    display: block;
-    position: absolute;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-}.benefit-item .benefit-name {
-    font-size: 24px;
-    line-height: 28px;
-    color: #fff;
-    text-align: center;
-}.app-checkbox input:checked, .app-checkbox input:not(:checked) {
-    position: absolute;
-    left: -9999px;
-}
+        font-size: 16px;
+    }
+
+    .benefit-item .benefit-item-main {
+        position: relative;
+        background: #fff;
+    }
+
+    .benefit-item .benefit-icon {
+        width: 50px;
+        height: 50px;
+        background: #ed1b2e;
+        color: #fff;
+        text-align: center;
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        transform: translateX(-50%);
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        z-index: 10;
+    }
+
+        .benefit-item .benefit-icon i {
+            position: relative;
+            top: 11px;
+        }
+
+    .laces-checkbox {
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+        text-align: center;
+        border: 1px solid #999;
+        border-radius: 0.3rem;
+    }
+
+    .icon-benefit-shield {
+        width: 27px;
+        height: 28px;
+        background-position: 0 -770px;
+    }
+
+    .icon-benefit {
+        background-image: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngitem.com%2Fmiddle%2FmxRJbm_motorcycle-gap-cover-icon-bike-insurance-icon-png%2F&psig=AOvVaw2Wm29PAOOxFCc96L2YPndS&ust=1584883624783000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOCUouvVq-gCFQAAAAAdAAAAABAJ);
+    }
+
+    .icon {
+        display: inline-block;
+    }
+
+    .benefit-item .benefit-image {
+        position: relative;
+        height: 130px;
+    }
+
+    .full-cover {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50%;
+    }
+
+    .benefit-item .benefit-name-wrapper {
+        width: 100%;
+    }
+
+    .v-middle {
+        display: block;
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .benefit-item .benefit-name {
+        font-size: 24px;
+        line-height: 28px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .app-checkbox input:checked, .app-checkbox input:not(:checked) {
+        position: absolute;
+        left: -9999px;
+    }
+
     input[type=checkbox], input[type=radio] {
         margin: 4px 0 0;
         margin-top: 1px\9;
@@ -389,99 +445,125 @@
         box-sizing: border-box;
         padding: 0;
     }
-.app-checkbox input:checked+label, .app-checkbox input:not(:checked)+label {
-    position: relative;
-    cursor: pointer;
-    padding-left: 35px;
-}
-label {
-    display: inline-block;
-    max-width: 100%;
-    margin-bottom: 5px;
-    font-weight: 700;
-}
-.app-checkbox input:checked+label, .app-checkbox input:not(:checked)+label {
-    position: relative;
-    cursor: pointer;
-    padding-left: 35px;
-}.benefit-item.benefit-item-description-table .benefit-body {
-    padding: 0;
-    overflow: hidden;
-}
-.benefit-item .benefit-body {
-    height: 190px;
-    text-align: center;
-    padding: 40px 50px 0;
-    -webkit-box-shadow: 0 0 20px rgba(0,0,0,.1);
-    -moz-box-shadow: 0 0 20px rgba(0,0,0,.1);
-    box-shadow: 0 0 20px rgba(0,0,0,.1);
-}.benefit-item.benefit-item-description-table .benefit-description-table .item {
-    padding: 14px 0;
-    font-size: 14px;
-    line-height: 20px;
-}
-.row {
-    margin-left: -15px;
-    margin-right: -15px;
-}.benefit-item.benefit-item-description-table .benefit-description-table .item-name {
-    text-align: right;
-}.benefit-item.benefit-item-description-table .benefit-description-table .table-head .item-name span, .benefit-item.benefit-item-description-table .benefit-description-table .table-head .item-value span {
-    background: #b8e986;
-    padding: 3px;
-}.benefit-item.benefit-item-description-table .benefit-description-table .item-value {
-    text-align: left;
-}.benefit-item.benefit-item-description-table .benefit-description-table .item {
-    padding: 14px 0;
-    font-size: 14px;
-    line-height: 20px;
-}.benefit-item.benefit-item-description-table .benefit-description-table .item-name {
-    text-align: right;
-}.app-checkbox input:checked+label:before, .app-checkbox input:not(:checked)+label:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 24px;
-    height: 24px;
-    background: #fff;
-    border: 2px solid grey;
-}app-checkbox input:checked+label, .app-checkbox input:not(:checked)+label {
-    position: relative;
-    cursor: pointer;
-    padding-left: 35px;
-}
-label {
-    display: inline-block;
-    max-width: 100%;
-    margin-bottom: 5px;
-    font-weight: 700;
-}
-.app-checkbox input:checked, .app-checkbox input:not(:checked) {
-    position: absolute;
-    left: 91px;
-    background-color: white;
-    top: -4px;
-}
-        .tab-pro li.active a {
+
+    .app-checkbox input:checked + label, .app-checkbox input:not(:checked) + label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 35px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .app-checkbox input:checked + label, .app-checkbox input:not(:checked) + label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 35px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-body {
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .benefit-item .benefit-body {
+        height: 190px;
+        text-align: center;
+        padding: 40px 50px 0;
+        -webkit-box-shadow: 0 0 20px rgba(0,0,0,.1);
+        -moz-box-shadow: 0 0 20px rgba(0,0,0,.1);
+        box-shadow: 0 0 20px rgba(0,0,0,.1);
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item {
+        padding: 14px 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item-name {
+        text-align: right;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .table-head .item-name span, .benefit-item.benefit-item-description-table .benefit-description-table .table-head .item-value span {
+        background: #b8e986;
+        padding: 3px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item-value {
+        text-align: left;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item {
+        padding: 14px 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item-name {
+        text-align: right;
+    }
+
+    .app-checkbox input:checked + label:before, .app-checkbox input:not(:checked) + label:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 24px;
+        height: 24px;
+        background: #fff;
+        border: 2px solid grey;
+    }
+
+    app-checkbox input:checked + label, .app-checkbox input:not(:checked) + label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 35px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .app-checkbox input:checked, .app-checkbox input:not(:checked) {
+        position: absolute;
+        left: 91px;
+        background-color: white;
+        top: -4px;
+    }
+
+    .tab-pro li.active a {
+        background-color: #0b665a;
+        display: inline-block;
+        color: #fff;
+        padding: 15px;
+    }
+
+    .tab-pro li a {
+        display: inline-block;
+        padding: 15px;
+    }
+
+        .tab-pro li a:hover {
             background-color: #0b665a;
-            display: inline-block;
             color: #fff;
-            padding: 15px;
         }
 
-        .tab-pro li a {
-            display: inline-block;
-            padding: 15px;
-        }
-
-            .tab-pro li a:hover {
-                background-color: #0b665a;
-                color: #fff;
-            }
-
-        .tab-pro li {
-            display: inline-block;
-        }
+    .tab-pro li {
+        display: inline-block;
+    }
 
     label {
         display: inline;
@@ -489,23 +571,28 @@ label {
         margin-bottom: 5px;
         font-weight: 300;
     }
-    #ctl18_fullname{
-        width:60%
+
+    #ctl18_fullname {
+        width: 60%
     }
-    #ctl18_txtAddress{
-        width:70%;
-        height:124px
-        
+
+    #ctl18_txtAddress {
+        width: 70%;
+        height: 124px
     }
-    #ctl18_plates{
-        width:67%
+
+    #ctl18_plates {
+        width: 67%
     }
-    #ctl18_ChassisNumber{
-         width:67%
+
+    #ctl18_ChassisNumber {
+        width: 67%
     }
-    #datepicker{
-        width:55%
+
+    #datepicker {
+        width: 55%
     }
+
     .mb-15 {
         margin-bottom: 15px;
     }
@@ -572,7 +659,7 @@ label {
     }
 
     .col-form-label-first {
-        text-align: right;
+        text-align: left;
     }
 
     .frmpro i {
@@ -617,27 +704,29 @@ label {
         border: none;
         font-size: large;
     }
+
     .banner {
-  width: 100%;
-  height: 600px;
-  background-image: url(https://www.masseyins.com/wp-content/uploads/2019/03/Motorcycle-miniature-model-figure-on-passport-1024x682.jpeg);
-  background-position: center center;
-  background-size: cover;
-}
+        width: 100%;
+        height: 600px;
+        background-image: url(https://www.masseyins.com/wp-content/uploads/2019/03/Motorcycle-miniature-model-figure-on-passport-1024x682.jpeg);
+        background-position: center center;
+        background-size: cover;
+    }
+
     input[type=radio] {
-  border: 1px solid gray;
-  padding: 0.5em;
-  -webkit-appearance: none;
-}
+        border: 1px solid gray;
+        padding: 0.5em;
+        -webkit-appearance: none;
+    }
 
-input[type=radio]:checked {
-  background: url(data:image/gif;base64,R0lGODlhAQABAPAAAP///////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==) no-repeat center center;
-  background-size: 9px 9px;
-}
+        input[type=radio]:checked {
+            background: url(data:image/gif;base64,R0lGODlhAQABAPAAAP///////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==) no-repeat center center;
+            background-size: 9px 9px;
+        }
 
-input[type=radio]:focus {
-  outline-color: transparent;
-}
+        input[type=radio]:focus {
+            outline-color: transparent;
+        }
 
 
     .m-0 {
@@ -665,13 +754,12 @@ input[type=radio]:focus {
 
     .frm .form-control {
         height: calc(3em + 0.75rem + 4px);
-
     }
 
     .icondate {
         position: absolute;
-          right: 385px;
-    top: 13px;
+        right: 385px;
+        top: 13px;
         background-image: url("https://baohiemtructuyen.com.vn/images/icon/cal.png");
         background-repeat: no-repeat;
         width: 26px;
@@ -679,11 +767,12 @@ input[type=radio]:focus {
     }
 
 
-*, :after, :before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
+    *, :after, :before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
     .result {
         background-color: #f7f7f7;
     }
@@ -718,6 +807,11 @@ input[type=radio]:focus {
             font-weight: normal;
             font-size: 20px;
         }
+        .error{
+            color:red;
+            font-size:13px
+                
+        }
 </style>
 @section Scripts {
 
@@ -726,11 +820,19 @@ input[type=radio]:focus {
     <script type="text/javascript">
 
         $('input[type=datetime]').datepicker({
-            dateFormat: "dd/M/yy",
-            changeMonth: true,
-            changeYear: true,
-            yearRange: "-60:+0"
-        });
+           dateFormat:'yy-mm-dd',
+    changeMonth: true,
+    changeYear: true,
+    autoclose: true
+
+    /*other options goes here...*/
+        }).on('change', function (ev) {
+            $(this).datepicker('hide');
+             $('html, body').animate({
+                        scrollTop: $("#divnone").offset().top
+                    }, 2000);
+});
+          $('input[type=datetime]').datepicker('setDate', 'now')
 
 
         $("input[name=insurancePackageId]") // select the radio by its id
@@ -745,54 +847,72 @@ input[type=radio]:focus {
 
                     $('#ctl18_Promotions1_lblHasToPayPremium').text(ttt)
                     $('html, body').animate({
-        scrollTop: $("#divnone").offset().top
-    }, 2000);
+                        scrollTop: $("#divnone").offset().top
+                    }, 2000);
                 }
             });
-     
+
     </script>
     <script>
 
         $(".divnone").hide();
-      
-    $("#rdbPackage_1").click(function() {
-    
-});
-    function closeForm() {
-        $(".divnone").show();
-        $("#divnone").show()
+
+        $("#rdbPackage_1").click(function () {
+
+        });
+        function closeForm() {
+            $(".divnone").show();
+            $("#divnone").show()
         }
-     
 
 
 
-        $('input[type=checkbox]').css('display','none');
-$('input[type=checkbox]').after('<div class="laces-checkbox"><i class="fa"></i></div>');
-$('input[type=checkbox]').each(function(){
-  if($(this).prop('checked') == true) {
-    $(this).find('~ .laces-checkbox .fa').addClass('fa-check');
-  }
-});
+        $('input[type=checkbox]').css('display', 'none');
+        $('input[type=checkbox]').after('<div class="laces-checkbox"><i class="fa"></i></div>');
+        $('input[type=checkbox]').each(function () {
+            if ($(this).prop('checked') == true) {
+                $(this).find('~ .laces-checkbox .fa').addClass('fa-check');
+            }
+        });
 
-$('input[type=checkbox]').on('change', function(){
-  if($(this).find('.fa').hasClass('fa-check')) {
-    $(this).prev('input[type=checkbox]').prop('checked', false);
-    $(this).find('.fa').removeClass('fa-check');
-  } else {
-    $(this).prev('input[type=checkbox]').prop('checked', true);
-    $(this).find('.fa').addClass('fa-check');
-  }
-});
+        $('input[type=checkbox]').on('change', function () {
+            if ($(this).find('.fa').hasClass('fa-check')) {
+                $(this).prev('input[type=checkbox]').prop('checked', false);
+                $(this).find('.fa').removeClass('fa-check');
+            } else {
+                $(this).prev('input[type=checkbox]').prop('checked', true);
+                $(this).find('.fa').addClass('fa-check');
+            }
+        });
 
-$('.laces-checkbox').on('click', function() {
-  if($(this).find('.fa').hasClass('fa-check')) {
-    $(this).prev('input[type=checkbox]').prop('checked', false);
-    $(this).find('.fa').removeClass('fa-check');
-  } else {
-    $(this).prev('input[type=checkbox]').prop('checked', true);
-    $(this).find('.fa').addClass('fa-check');
-  }
-});
+        $('.laces-checkbox').on('click', function () {
+            if ($(this).find('.fa').hasClass('fa-check')) {
+                $(this).prev('input[type=checkbox]').prop('checked', false);
+                $(this).find('.fa').removeClass('fa-check');
+            } else {
+                $(this).prev('input[type=checkbox]').prop('checked', true);
+                $(this).find('.fa').addClass('fa-check');
+            }
+        });
+    </script>
+    <script>
+
+        $("#formDemo").validate({
+            rules: {
+                CarOwner: "required",
+                RegisteredAddress: "required",
+                LicensePlate: "required",
+                ChassisNumber: "required",
+
+            },
+            messages: {
+                CarOwner: "* Please enter CarOwner",
+                RegisteredAddress:  "* Please enter RegisteredAddress",
+                LicensePlate: "* Please enter RegisteredAddress",
+                ChassisNumber:"* Please enter ChassisNumber"
+
+            }
+        });
     </script>
 
 }

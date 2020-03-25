@@ -18,7 +18,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/InsurancePackages
         public ActionResult Index()
         {
-            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x => x.Status == 0);
+            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x => x.Status == 1);
             return View(insurancePackages.ToList());
         }
 
@@ -61,6 +61,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     Price = insurancePackage.Price,
                     DurationContract = insurancePackage.DurationContract,
                     DurationPay = insurancePackage.DurationPay,
+                    Status=1,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
                     DeleteAt = DateTime.Now,

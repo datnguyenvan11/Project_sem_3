@@ -20,9 +20,10 @@ namespace Project_sem_3.Controllers
         }
         public ActionResult Order()
         {
-            var insurancePackages = db.InsurancePackages.Where(i=>i.InsuranceId==16);
+            var insurancePackages = db.InsurancePackages.Where(i=>i.InsuranceId==16).Where(i=>i.Status==1);
             ViewBag.shoppingCart = LoadShoppingCart();
-            return View(insurancePackages);
+            ViewBag.insurancepackages = insurancePackages;
+            return View();
         }
         private static string SHOPPING_CART_NAME = "shoppingCart";
         // GET: ShoppingCart

@@ -62,8 +62,11 @@
                                             <th rowspan="1" colspan="1">Price</th>
                                             <th rowspan="1" colspan="1">DurationContract</th>
                                             <th rowspan="1" colspan="1">DurationPay</th>
+                                            <th rowspan="1" colspan="1">status</th>
                                             <th rowspan="1" colspan="1">CreatedAt</th>
                                             <th rowspan="1" colspan="1">UpdatedAt</th>
+
+
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
 
@@ -73,29 +76,30 @@
 
                                         @foreach (var item in Model)
                                         {
-                                            <tr role="row" class="odd">
-                                                <td>
-                                                    <input type="checkbox" class="check" value="@item.Id" />
-                                                    @Html.AntiForgeryToken()
-                                                </td>
-                                                <td class="sorting_1">
-                                                    @item.Insurance.Name
-                                                </td>
-                                                <td>@item.Name</td>
-                                                <td>@item.Description</td>
-                                                <td>@item.Price</td>
-                                                <td>@item.DurationContract</td>
-                                                <td>@item.DurationPay</td>
-                                                <td>@item.CreatedAt</td>
-                                                <td>@item.UpdatedAt</td>
-                                                <td>
-                                                    <div class ="btn-group">
-                                                        <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
-                                                        <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
-                                                        <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <input type="checkbox" class="check" value="@item.Id" />
+                                                @Html.AntiForgeryToken()
+                                            </td>
+                                            <td class="sorting_1">
+                                                @item.Insurance.Name
+                                            </td>
+                                            <td>@item.Name</td>
+                                            <td>@item.Description</td>
+                                            <td>@item.Price</td>
+                                            <td>@item.DurationContract</td>
+                                            <td>@item.DurationPay</td>
+                                            <td>@item.Status</td>
+                                            <td>@item.CreatedAt</td>
+                                            <td>@item.UpdatedAt</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
+                                                    <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
+                                                    <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                                                </div>
+                                            </td>
+                                        </tr>
                                         }
 
                                     </tbody>

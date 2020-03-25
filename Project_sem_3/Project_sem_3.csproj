@@ -191,7 +191,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-
+    <Compile Include="Migrations\202003220729589_add.cs" />
+    <Compile Include="Migrations\202003220729589_add.Designer.cs">
+      <DependentUpon>202003220729589_add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003231458528_test.cs" />
+    <Compile Include="Migrations\202003231458528_test.Designer.cs">
+      <DependentUpon>202003231458528_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003231503051_test2.cs" />
+    <Compile Include="Migrations\202003231503051_test2.Designer.cs">
+      <DependentUpon>202003231503051_test2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contract.cs" />
@@ -2287,14 +2298,11 @@
     <Content Include="Areas\Admin\Views\Role\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Role\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Role\CreateAdmin.cshtml" />
-
     <Content Include="Areas\Admin\Views\InsurancePackages\Deleted.cshtml" />
     <Content Include="Areas\Admin\Views\Contracts\Deleted.cshtml" />
     <Content Include="Areas\Admin\Views\Insurances\Deleted.cshtml" />
     <Content Include="Areas\Admin\Views\Programmes\Deleted.cshtml" />
-
     <Content Include="Areas\Admin\Views\Role\UsersWithRoles.cshtml" />
-
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -2700,6 +2708,7 @@
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\LifeInsurance\Order.cshtml" />
+    <Content Include="Views\MotorInsurance\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2715,7 +2724,17 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
-
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003220729589_add.resx">
+      <DependentUpon>202003220729589_add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003231458528_test.resx">
+      <DependentUpon>202003231458528_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003231503051_test2.resx">
+      <DependentUpon>202003231503051_test2.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

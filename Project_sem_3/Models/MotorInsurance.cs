@@ -11,7 +11,6 @@ namespace Project_sem_3.Models
         [Key, Column(Order = 0)]
         public int InsurancePackageId { get; set; }
         [Key, Column(Order = 1)]
-
         public int ContractId { get; set; }
         public string CarOwner { get; set; }
         public string RegisteredAddress { get; set; }
