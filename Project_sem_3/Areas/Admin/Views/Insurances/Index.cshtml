@@ -34,7 +34,6 @@
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
-
                                 <form action="/Admin/Insurances/" method="get" id="pagesize">
                                     <div class="dataTables_length" id="dataTable_length">
                                         <label>
@@ -47,7 +46,7 @@
                                 <form action="/Admin/Insurances/" method="get">
                                     <div id="dataTable_filter" class="dataTables_filter">
                                         <label>Search:<input type="text" id="SearchString" name="SearchString" class="form-control form-control-sm" placeholder="" aria-controls="dataTable" value="" onkeypress="handle(event)"></label>
-                                    </div>*@
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -182,18 +181,20 @@
                             alert('error');
                         }
                     });
-                })
+                };
+            });
         })
         function handle(e) {
             if (e.keyCode === 13) {
                 e.preventDefault();
             }
+        }
 
-            $(function () {
-                $("#pageSize").change(function () {
-                    $("#pagesize").submit();
-                });
+        $(function () {
+            $("#pageSize").change(function () {
+                $("#pagesize").submit();
             });
+        });
     </script>
 }
 

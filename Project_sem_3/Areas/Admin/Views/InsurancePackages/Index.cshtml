@@ -41,15 +41,19 @@
                                 <form action="/Admin/InsurancePackages/" method="get" id="pagesize">
                                     <div class="dataTables_length" id="dataTable_length">
                                         <label>
-                                            Show   @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" }) entries
+                                            Show
+                                            @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
+                                            entries
                                         </label>
                                     </div>
                                 </form>
-                            </div>                            <div class="col-sm-12 col-md-6">
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
                                 <form action="/Admin/InsurancePackages/" method="get">
                                     <div id="dataTable_filter" class="dataTables_filter">
                                         <label>Search:<input type="text" id="SearchString" name="SearchString" class="form-control form-control-sm" placeholder="" aria-controls="dataTable" value="" onkeypress="handle(event)"></label>
-                                    </div>*@
+                                    </div>
                                 </form>
 
                             </div>
@@ -115,7 +119,7 @@
                                                 <td>@item.DurationContract year</td>
                                                 <td>$@item.DurationPay /year</td>
                                                 @*<td>@item.CreatedAt</td>
-                                                <td>@item.UpdatedAt</td>*@ 
+                                                    <td>@item.UpdatedAt</td>*@
                                                 <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
 
                                                 <td>
@@ -218,19 +222,21 @@
                             alert('error');
                         }
                     });
-                })
-            })
-
-            function handle(e) {
-                if (e.keyCode === 13) {
-                    e.preventDefault();
-                }
-
-                $(function () {
-                    $("#pageSize").change(function () {
-                        $("#pagesize").submit();
-                    });
                 });
+            });
+        })
+
+        function handle(e) {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+            }
+        }
+
+        $(function () {
+            $("#pageSize").change(function () {
+                $("#pagesize").submit();
+            });
+        });
 
     </script>
 }
