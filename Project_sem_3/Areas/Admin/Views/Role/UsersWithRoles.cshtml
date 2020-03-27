@@ -63,7 +63,7 @@
                     <button  type="button" id="action_contract" class="btn btn-success">Confirm</button>
                 </div>  
                 <div class="col-6" style="margin-right: 0px;">
-                    @Html.DropDownList("RoleName", new SelectList(ViewBag.Roles, "Value", "Text"), new {@id = "select-action"})
+                    @Html.DropDownList("RoleName", new SelectList(ViewBag.Roles, "Value", "Text"), new {@id = "select-action", @class=""})
                     <button class="btn btn-danger" id="btn-role"> action</button>
                 </div>
             </div>
