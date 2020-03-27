@@ -20,43 +20,93 @@
         PLEASE ENTER iNFORMATION
     </div>
 
-    <form action="/HomeInsurance/CreateContract" method="get">
+    <form action="/HomeInsurance/CreateContract" method="get" id="formhouse">
         <div class="row">
             <div class="col-lg-9 col-md-8 col-sm-12">
                 <div class="box-border-pro">
                     <div class="frm frmpro">
+
                         <div class="form-group">
+                            <div for="rdbPackage_0" class="row col-form-label col-form-label-first">Select InsurancePackages :</div>
+
                             <div class="row">
-                                <label for="rdbPackage_0" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Select product package</label>
-                                <div class="col-lg-8">
+
+                                <div _ngcontent-c5="" class="row">
                                     @foreach (var item in Model)
                                     {
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="PackageChange();" name="insurancePackageId" required />
-                                            <label class="custom-control-label" for='rdbPackage_1'><b> @item.Name  @String.Format("{0:c}", @item.Price) </b> (@item.Description)</label>
+                                        <div _ngcontent-c5="" class="col-md-6" style="margin-top:30px">
+                                            <div _ngcontent-c5="" class="benefit-item benefit-item-description-table">
+                                                <div _ngcontent-c5="" class="benefit-item-main">
+                                                    <div _ngcontent-c5="" class="benefit-icon">
+                                                        <i _ngcontent-c5="" class="icon icon-benefit icon-benefit-shield"></i>
+                                                    </div>
+                                                    <div _ngcontent-c5="" class="benefit-image full-cover" style="background-image: url('https://ngocdiep.vn/uploads/images/img-5787-rs(1).jpg')">
+                                                        <div _ngcontent-c5="" class="benefit-name-wrapper v-middle">
+                                                            <h2 _ngcontent-c5="" class="benefit-name">
+                                                                <div _ngcontent-c5="" class="app-checkbox agree-with-term">
+                                                                    <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="closeForm();" name="insurancePackageId" required /></label>                                                           @*<input _ngcontent-c5="" id="choose1" name="choose1" type="checkbox"> <label _ngcontent-c5="" for="choose1">*@
+                                                                    <span _ngcontent-c5="" class="checkout-term">@item.Name</span>
+
+                                                                </div>
+                                                            </h2>
+                                                        </div>
+                                                    </div>
+                                                    <div _ngcontent-c5="" class="benefit-body">
+                                                        <div _ngcontent-c5="" class="benefit-description-table">
+                                                            <div _ngcontent-c5="" class="table-head">
+                                                                <div _ngcontent-c5="" class="row item">
+                                                                    <div _ngcontent-c5="" class="col-xs-4">
+                                                                        <p _ngcontent-c5="" class="item-name">
+                                                                            <span _ngcontent-c5="">
+                                                                                To be paid
+                                                                            </span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div _ngcontent-c5="" class="col-xs-8">
+                                                                        <p _ngcontent-c5="" class="item-value" style="color: black;">
+                                                                            <span _ngcontent-c5="" style="font-weight: bold;background: white;">@item.Description<span _ngcontent-c5="" class="new-line" style="background: white;"><span _ngcontent-c5="" style="font-weight: bold;background: white;">10 triệu đồng</span> trước rủi ro Tử vong</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div _ngcontent-c5="" class="table-head">
+                                                                <div _ngcontent-c5="" class="row item">
+                                                                    <div _ngcontent-c5="" class="col-xs-4">
+                                                                        <p _ngcontent-c5="" class="item-name">
+                                                                            <span _ngcontent-c5="">Charges</span>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div _ngcontent-c5="" class="col-xs-8">
+                                                                        <p _ngcontent-c5="" class="item-value">
+                                                                            <span _ngcontent-c5="" style="font-weight: bold;background: white;">@item.Price/year</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     }
-
-                                    <i class="pad-top-5">
-                                        <span id="ctl18_lblPackageReq" class="req" style="color:Red;"></span>
-                                    </i>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="divnone">
                             <h4>Enter the information on the vehicle registration</h4>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group divnone">
                             <div class="row">
                                 <label for="txtAddress" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">HouseType</label>
                                 <input type="radio" name="HouseType" value="  Terrace houses / Villas
-" checked="checked" />
+" checked="checked" style="background:none;border:none;-webkit-appearance:radio" />
                                 Terrace houses / Villas
 
-                                <input type="radio" name="HouseType" value="Apartment" />Apartment
+                                <input type="radio" name="HouseType" style="tyle=" background:none;border:none;-webkit-appearance:radio"" value="Apartment" />Apartment
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group divnone">
                             <div class="row">
                                 <label for="txtAddress" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">HouserAddress:</label>
                                 <div class="col-lg-8">
@@ -68,18 +118,20 @@
                             </div>
                         </div>
 
-                        <div class="form-group" id="divPlate" style="display: block;">
+                        <div class="form-group divnone" id="divPlate" style="display: block;">
                             <div class="row">
                                 <label for="plates" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">DurationHouse:</label>
                                 <div class="col-lg-8">
-                                    <select name="DurationHouse" id="ctl18_ddlUsePeriod" class="custom-select my-1 mr-sm-2">
+                                    <select class="form-control mr-2" id="select-action" name="DurationHouse" style="    width: 40%;
+    height: 40px;">
                                         <option selected="selected" value="01 – 15 years">01 – 15 years</option>
                                         <option value=">15 – 25 years">15 – 25 years</option>
                                     </select>
+
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" id="divChassis">
+                        <div class="form-group divnone" id="divChassis">
                             <div class="row">
                                 <label for="HouseOwner" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">HouseOwner:</label>
                                 <div class="col-lg-8">
@@ -91,6 +143,7 @@
                             </div>
                         </div>
 
+                        <input id="ctl18_lbtBook" style="text-decoration:none" type="submit" value="Continue" class="btn-pro-buynow divnone" href="/HouseInsurance/CreateContract" />
 
 
                     </div>
@@ -115,11 +168,10 @@
 
                             <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">$0</label></strong>
                         </div>
-                        <input id="ctl18_lbtBook" style="text-decoration:none" type="submit" value="Order" class="btn-pro-buynow" href="/HouseInsurance/CreateContract" />
                     </div>
                 </div>
             </div>
-            
+
         </div>
         <div class="box-chuy col-12">
             <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
@@ -133,9 +185,463 @@
 </div>
 
 <style>
-     .box-chuy {
+
+
+
+
+    .benefit-item .benefit-image {
+        position: relative;
+        height: 130px;
+    }
+
+    .full-cover {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50%;
+    }
+
+    .benefit-item .benefit-name-wrapper {
+        width: 100%;
+    }
+
+    .v-middle {
+        display: block;
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .benefit-item .benefit-name {
+        font-size: 24px;
+        line-height: 28px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .app-checkbox input:checked, .app-checkbox input:not(:checked) {
+        position: absolute;
+        left: -9999px;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        margin: 4px 0 0;
+        margin-top: 1px\9;
+        line-height: normal;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        box-sizing: border-box;
+        padding: 0;
+    }
+
+    .app-checkbox input:checked + label, .app-checkbox input:not(:checked) + label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 35px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .app-checkbox input:checked + label, .app-checkbox input:not(:checked) + label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 35px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-body {
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .benefit-item .benefit-body {
+        height: 190px;
+        text-align: center;
+        padding: 40px 50px 0;
+        -webkit-box-shadow: 0 0 20px rgba(0,0,0,.1);
+        -moz-box-shadow: 0 0 20px rgba(0,0,0,.1);
+        box-shadow: 0 0 20px rgba(0,0,0,.1);
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item {
+        padding: 14px 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item-name {
+        text-align: right;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .table-head .item-name span, .benefit-item.benefit-item-description-table .benefit-description-table .table-head .item-value span {
+        background: #b8e986;
+        padding: 3px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item-value {
+        text-align: left;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item {
+        padding: 14px 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item-name {
+        text-align: right;
+    }
+
+    .app-checkbox input:checked + label:before, .app-checkbox input:not(:checked) + label:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 24px;
+        height: 24px;
+        background: #fff;
+        border: 2px solid grey;
+    }
+
+    app-checkbox input:checked + label, .app-checkbox input:not(:checked) + label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 35px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .app-checkbox input:checked, .app-checkbox input:not(:checked) {
+        position: absolute;
+        left: 91px;
+        background-color: white;
+        top: -4px;
+    }
+
+    .tab-pro li.active a {
+        background-color: #0b665a;
+        display: inline-block;
+        color: #fff;
+        padding: 15px;
+    }
+
+    .tab-pro li a {
+        display: inline-block;
+        padding: 15px;
+    }
+
+        .tab-pro li a:hover {
+            background-color: #0b665a;
+            color: #fff;
+        }
+
+    .tab-pro li {
+        display: inline-block;
+    }
+
+    label {
+        display: inline;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 300;
+    }
+
+    #ctl18_fullname {
+        width: 60%
+    }
+
+    #ctl18_txtAddress {
+        width: 70%;
+        height: 124px
+    }
+
+    #ctl18_plates {
+        width: 67%
+    }
+
+    #ctl18_ChassisNumber {
+        width: 67%
+    }
+
+    #datepicker {
+        width: 55%
+    }
+
+    .mb-15 {
+        margin-bottom: 15px;
+    }
+
+    .hd-info-pro {
+        background-color: #337ab7;
+        color: #fff;
+        font-family: inherit;
+        text-transform: uppercase;
+        font-size: 15px;
+        padding: 15px;
+        border-bottom: solid 1px #fff
+    }
+
+    .tab-pane.active {
+        display: block;
+        margin-bottom: 42px;
+    }
+
+    .tab-pane {
+        display: none;
+        opacity: 1;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .list-header {
+        border-bottom-width: 1px;
+        background-color: #0b665a;
+        font-size: 14px;
+        color: #fff;
+        padding: .75rem;
+        font-weight: bold;
+        border: solid 1px #fff;
+    }
+
+    .box-border-pro {
+        position: relative;
+        background: #fff;
+        border: 1px solid #e4e4e4;
+        padding: 25px;
+    }
+
+    .frmpro {
+        width: 100%;
+        color: #3e3e3e;
+    }
+
+    .frm .custom-control-label {
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 10px;
+    }
+
+    .frm .custom-control-input:checked ~ .custom-control-label::before {
+        background-color: #0b665a;
+        border-color: #0b665a;
+    }
+
+    .frmpro .col-form-label {
+        line-height: 1.7em;
+        font-size: 18px;
+        color: #3e3e3e;
+    }
+
+    .col-form-label-first {
+        text-align: right;
+    }
+
+    .frmpro i {
+        font-size: 12px;
+        line-height: normal !important;
+    }
+
+    .pad-top-5 {
+        display: block;
+        padding-top: 5px;
+    }
+
+    .btn-pro {
+        background-color: #ea212d;
+        padding: 12px;
+        padding-left: 0;
+        padding-right: 0;
+        border: none;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: 700;
+        width: 100%;
+        transition: all 0.15s ease-in-out;
+        font-size: large;
+    }
+
+    .btn-pro-buynow {
+        display: block;
+        width: 100%;
+        background-color: #0f75bd;
+        padding: 11px;
+        padding-bottom: 14px;
+        padding-left: 0px;
+        padding-right: 0px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        margin-top: 5px;
+        border: none;
+        font-size: large;
+    }
+
+    .banner {
+        width: 100%;
+        height: 600px;
+        background-image: url(https://www.masseyins.com/wp-content/uploads/2019/03/Motorcycle-miniature-model-figure-on-passport-1024x682.jpeg);
+        background-position: center center;
+        background-size: cover;
+    }
+
+    input[type=radio] {
+        border: 1px solid gray;
+        padding: 0.5em;
+        -webkit-appearance: none;
+    }
+
+        input[type=radio]:checked {
+            background: url(data:image/gif;base64,R0lGODlhAQABAPAAAP///////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==) no-repeat center center;
+            background-size: 9px 9px;
+        }
+
+        input[type=radio]:focus {
+            outline-color: transparent;
+        }
+
+
+    .m-0 {
+        margin: 0 !important;
+    }
+
+    .btn-pro-buynow:hover {
+        background-color: #ea212d;
+        color: #fff;
+    }
+
+    .btn-pro:hover {
+        background-color: #0b665a;
+        color: #fff;
+    }
+
+    .frmpro .txt {
+        padding: .375rem .75rem;
+    }
+
+    .frm .txt {
+        padding: 14px;
+        border: solid 2px #c8c8c8;
+    }
+
+    .frm .form-control {
+        height: calc(3em + 0.75rem + 4px);
+    }
+
+    .icondate {
+        position: absolute;
+        right: 385px;
+        top: 13px;
+        background-image: url("https://baohiemtructuyen.com.vn/images/icon/cal.png");
+        background-repeat: no-repeat;
+        width: 26px;
+        height: 26px;
+    }
+
+
+    *, :after, :before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .result {
+        background-color: #f7f7f7;
+    }
+
+        .result .item-result {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: solid 1px #c8c8c8;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+            .result .item-result span {
+                display: block;
+                font-size: 14px;
+                color: #7c7c7c;
+            }
+
+    .result-red {
+        background-color: #ea212d;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 0px;
+        padding-right: 0px;
+        font-size: large;
+    }
+
+        .result-red strong {
+            font-weight: normal;
+            font-size: 20px;
+        }
+        .error{
+            color:red;
+            font-size:13px
+                
+        }
+
+    .tab-pro li.active a {
+        background-color: #0b665a;
+        display: inline-block;
+        color: #fff;
+        padding: 15px;
+    }
+
+    .tab-pro li a {
+        display: inline-block;
+        padding: 15px;
+    }
+
+        .tab-pro li a:hover {
+            background-color: #0b665a;
+            color: #fff;
+        }
+
+    .tab-pro li {
+        display: inline-block;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    .box-chuy {
         margin-top: 20px;
     }
+
         .box-chuy .title-box-chuy {
             font-size: 16px;
             font-family: "unset";
@@ -145,22 +651,27 @@
             background-color: #f5f5f5;
             padding: 10px;
         }
+
     .icon-bell {
         background: url(https://www.iconsdb.com/icons/preview/red/bell-3-xxl.png) no-repeat left .75rem center/15px 15px;
         padding: 0px 0px 0px 30px;
     }
+
     .cotent-box-chuy {
         font-size: 16px;
         line-height: 22px;
         padding-left: 10px;
     }
+
         .cotent-box-chuy > div {
             margin-bottom: 7px;
         }
+
     .cotent-text {
         background: url(https://baohiemtructuyen.com.vn/images/sub_menu_bullet.png) no-repeat 0 11px;
         padding: 2px 0 5px 15px;
     }
+
     .thumb {
         width: 1300px;
         height: 300px;
@@ -311,7 +822,7 @@
     }
 
     .col-form-label-first {
-        text-align: right;
+        text-align: left;
     }
 
     .frmpro i {
@@ -439,6 +950,17 @@
 </style>
 @section Scripts {
     <script>
+
+          $(".divnone").hide();
+
+        $("#rdbPackage_1").click(function () {
+
+        });
+        function closeForm() {
+            $(".divnone").show();
+            $("#divnone").show()
+        }
+
         $("input[name=insurancePackageId]") // select the radio by its id
             .change(function () { // bind a function to the change event
                 if ($(this).is(":checked")) { // check if the radio is checked
@@ -447,7 +969,26 @@
                     var ttt = valint.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
                     $('#ctl18_Promotions1_lblHasToPayPremium').text(ttt)
+                     $('html, body').animate({
+                        scrollTop: $("#divnone").offset().top
+                    }, 2000);
                 }
             });
+         $("#formhouse").validate({
+            rules: {
+                HouseType: "required",
+                DurationHouse: "required",
+                HouserAddress: "required",
+                HouseOwner:"required"
+            },
+            messages: {
+                HouseType: "* Please enter HouseType",
+                DurationHouse:  "* Please enter DurationHouse",
+                HouserAddress: "* Please enter HouserAddress",
+                HouseOwner:"* Please enter HouseOwner"
+
+
+            }
+        });
     </script>
 }

@@ -216,7 +216,7 @@ namespace Project_sem_3.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+                    //await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                    result= UserManager.AddToRole(user.Id, "User");
 
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -225,7 +225,8 @@ namespace Project_sem_3.Controllers
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("/Home");
+                    return View("DisplayEmail");
+
                 }
                 AddErrors(result);
             }
@@ -397,7 +398,7 @@ namespace Project_sem_3.Controllers
                     // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel{   UserName=loginInfo.DefaultUserName ,Email = loginInfo.Email });
             }
         }
 
@@ -421,7 +422,7 @@ namespace Project_sem_3.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,CreatedAt=model.CreatedAt,UpdatedAt=model.UpdatedAt,Status=model.Status };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email,CreatedAt=model.CreatedAt,UpdatedAt=model.UpdatedAt,Status=model.Status };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

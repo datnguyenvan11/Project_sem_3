@@ -17,7 +17,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/Insurances
-        public ActionResult Index(string sortOrder, string searchString, int? page)
+        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize)
         {
             var insurances = db.Insurances.Where(x => x.Status == 0);
             if (!String.IsNullOrEmpty(searchString))
@@ -26,7 +26,14 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     .Where(x => x.Status == 0);
             }
 
-            int pageSize = 3;
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="5", Value= "5"},
+                new SelectListItem() { Text="10", Value= "10"},
+                new SelectListItem() { Text="15", Value= "15" },
+                new SelectListItem() { Text="20", Value= "20" },
+            };
+            int pagesize = (pageSize ?? 5);
             int pageNumber = (page ?? 1);
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
@@ -47,7 +54,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     insurances = insurances.OrderBy(s => s.Name);
                     break;
             }
-            return View(insurances.ToList().ToPagedList(pageNumber, pageSize));
+            return View(insurances.ToList().ToPagedList(pageNumber, pagesize));
         }
 
         // GET: Admin/Insurances/Details/5

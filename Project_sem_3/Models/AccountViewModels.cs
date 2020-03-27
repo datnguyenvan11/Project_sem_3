@@ -13,6 +13,8 @@ namespace Project_sem_3.Models
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public int Status { get; set; }
+        public string UserName { get;set; }
+
         public enum OrderStatus { Done = 1, Cancel = 0, Deleted = -1 }
         public ExternalLoginConfirmationViewModel()
         {
@@ -92,13 +94,21 @@ namespace Project_sem_3.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        [Required]
 
         public string UserName { get; set; }
+        [Required]
+
         public string Address { get; set; }
+        [Required]
+
         public string Gender { get; set; }
+        [Required]
+
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-       
+        [Required]
+
         public string PhoneNumber { get; set; }
         public int Status { get; set; }
         public enum OrderStatus { Done = 1, Cancel = 0, Deleted = -1 }
@@ -202,5 +212,27 @@ namespace Project_sem_3.Models
         public string Name { get; set; }
    
 
+    }
+    public class ViewOrderMotor
+    {
+        [Required]
+        public int insurancePackageId { get; set; }
+        [Required]
+
+        public int quantity { get; set; }
+        [Required]
+
+        public string CarOwner { get; set; }
+        [Required]
+
+        public string RegisteredAddress { get; set; }
+        [Required]
+
+        public string LicensePlate { get; set; }
+        [Required]
+
+        public string ChassisNumber { get; set; }
+        [Required]
+        public DateTime Duration { get; set; }
     }
 }
