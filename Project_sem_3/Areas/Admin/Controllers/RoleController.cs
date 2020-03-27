@@ -10,6 +10,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Project_sem_3.Areas.Admin.Controllers
 {
@@ -117,7 +118,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         }
         public ActionResult UsersWithRoles()
         {
-            var usersWithRoles = (from user in context.Users
+            var usersWithRoles = (from user in context.Users.Where(x => x.Status != -1)
                                   select new
                                   {
                                       UserId = user.Id,
@@ -128,12 +129,12 @@ namespace Project_sem_3.Areas.Admin.Controllers
                                       PhoneNumber=user.PhoneNumber,
                                       CreatedAt = user.CreatedAt,
 
-                                      RoleNames = (from userRole in user.Roles
+                                      RoleNames = (from userRole  in user.Roles
                                                    join role in context.Roles on userRole.RoleId
                                                    equals role.Id
                                                    select role.Name).ToList()
                                   }).ToList().Select(p => new Users_in_Role_ViewModel()
-
+            
                                   {
                                       UserId = p.UserId,
                                       Username = p.Username,
@@ -263,5 +264,18 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
             return RedirectToAction("UsersWithRoles", "ManageUsers", new { area = "", });
         }
+        [HttpPost]
+        public ActionResult StatusUser(int action, string[] selectedIDs)
+        {
+            foreach (string IDs in selectedIDs)
+            {
+                ApplicationUser user = context.Users.Find(IDs);
+                context.Users.Attach(user);
+                user.Status = action;
+            }
+            context.SaveChanges();
+            return Json(selectedIDs, JsonRequestBehavior.AllowGet);
+        }
     }
+
 }

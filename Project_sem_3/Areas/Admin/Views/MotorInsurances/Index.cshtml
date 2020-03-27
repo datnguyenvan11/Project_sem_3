@@ -7,14 +7,14 @@
 
 <h2>Index</h2>
 
-<p>
+@*<p>
     <button class="btn-success"> @Html.ActionLink("Create New", "Create")</button>
-</p>
+</p>*@
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Contract.Id)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.InsurancePackage.Name)
         </th>
@@ -44,9 +44,9 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Contract.Id)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.InsurancePackage.Name)
         </td>
@@ -69,13 +69,13 @@
             @Html.DisplayFor(modelItem => item.Quantity)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
+            $@Html.DisplayFor(modelItem => item.UnitPrice)
         </td>
-        <td>
+        @*<td>
             <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.ContractId })</button> 
             <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.ContractId })</button> 
             <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.ContractId })</button>
-        </td>
+        </td>*@
     </tr>
 }
 
