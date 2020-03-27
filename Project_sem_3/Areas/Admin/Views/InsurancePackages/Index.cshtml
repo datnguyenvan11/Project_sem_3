@@ -32,11 +32,10 @@
                 <h6 class="m-0 font-weight-bold text-primary">DataTables Contract</h6>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
+                <div >
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
                         <div class="row">
-
                             <div class="col-sm-12 col-md-6">
                                 <form action="/Admin/InsurancePackages/" method="get" id="pagesize">
                                     <div class="dataTables_length" id="dataTable_length">
@@ -47,8 +46,7 @@
                                         </label>
                                     </div>
                                 </form>
-                            </div>
-
+                            </div>                            
                             <div class="col-sm-12 col-md-6">
                                 <form action="/Admin/InsurancePackages/" method="get">
                                     <div id="dataTable_filter" class="dataTables_filter">
@@ -88,11 +86,10 @@
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
                                             <th rowspan="1" colspan="1">DurationContract</th>
                                             <th rowspan="1" colspan="1">DurationPay</th>
-                                            <th rowspan="1" colspan="1">CreatedAt</th>
 
 
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
-                                            >
+                                            
 
 
                                             <th rowspan="1" colspan="1">Action</th>
@@ -117,11 +114,11 @@
                                                 <td>@item.Description</td>
                                                 <td>$@item.Price</td>
                                                 <td>@item.DurationContract year</td>
-                                                <td>$@item.DurationPay /year</td>
-                                                @*<td>@item.CreatedAt</td>
-                                                    <td>@item.UpdatedAt</td>*@
-                                                <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
 
+                                                <td>$@item.DurationPay /year</td>
+
+
+                                                <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
                                                 <td>
                                                     <div class="btn-group">
                                                         <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
