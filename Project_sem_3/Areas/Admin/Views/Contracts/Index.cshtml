@@ -18,26 +18,26 @@
         <h1 class="h3 mb-2 text-gray-800">Contracts</h1>
         <p class="mb-4"> All contracts of customers about insurances .</p>
         @*<div class="card-footer">
-            <div class="row mt-3">
-                <div class="col-3 mt-2">
-                    <div class="form-group mr-3">
-                        <select class="form-control mr-2" id="select-action">
-                            <option value="6">--Chọn thao tác--</option>
-                            <option value="5">Pending</option>
-                            <option value="4">Confirmed</option>
-                            <option value="3">Shipping</option>
-                            <option value="2">Paid</option>
-                            <option value="1">Done</option>
-                            <option value="0">Cancel</option>
-                            <option value="-1">Deleted</option>
-                        </select>
+                <div class="row mt-3">
+                    <div class="col-3 mt-2">
+                        <div class="form-group mr-3">
+                            <select class="form-control mr-2" id="select-action">
+                                <option value="6">--Chọn thao tác--</option>
+                                <option value="5">Pending</option>
+                                <option value="4">Confirmed</option>
+                                <option value="3">Shipping</option>
+                                <option value="2">Paid</option>
+                                <option value="1">Done</option>
+                                <option value="0">Cancel</option>
+                                <option value="-1">Deleted</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <button type="button" id="action_contract">Xác nhận</button>
                     </div>
                 </div>
-                <div class="col-9">
-                    <button type="button" id="action_contract">Xác nhận</button>
-                </div>
-            </div>
-        </div>*@
+            </div>*@
 
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/Contracts/Create" class="btn btn-info" role="button">Create Contracts</a>
@@ -52,7 +52,25 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div></div></div><div class="row">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <form action="/Admin/Contracts/" method="get" id="pagesize">
+                                    <div class="dataTables_length" id="dataTable_length">
+                                        <label>
+                                            Show
+                                            @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
+                                            entries
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div id="dataTable_filter" class="dataTables_filter">
+                                    <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
@@ -63,7 +81,7 @@
                                             <th rowspan="1" colspan="1">Insurance</th>
 
                                             <th rowspan="1" colspan="1">Customer</th>
-                                            
+
 
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Total Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
@@ -117,7 +135,7 @@
                                         }
 
                                     </tbody>
-                                </table>    
+                                </table>
                                 <div class="card-footer">
                                     <div class="row mt-3">
                                         <div class="col-3 mt-2">
@@ -130,7 +148,7 @@
                                             </div>
                                         </div>
                                         <div class="col-9" style="margin-top: 8px;">
-                                            <button  type="button" id="action_contract" class="btn btn-success">Confirm</button>
+                                            <button type="button" id="action_contract" class="btn btn-success">Confirm</button>
                                         </div>
                                     </div>
                                 </div>
@@ -204,6 +222,12 @@
                 }
             });
         })
+
+        $(function () {
+            $("#pageSize").change(function () {
+                $("#pagesize").submit();
+            });
+        });
     </script>
 }
 
