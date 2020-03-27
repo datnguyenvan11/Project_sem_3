@@ -25,7 +25,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 insurancePackages = db.InsurancePackages.Where(x => x.Name.Contains(searchString))
-                    .Where(x => x.Status == 0);
+                    .Where(x => x.Status == 1);
             }
 
             ViewBag.PageSize = new List<SelectListItem>()

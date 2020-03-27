@@ -40,7 +40,9 @@
                                 <form action="/Admin/InsurancePackages/" method="get" id="pagesize">
                                     <div class="dataTables_length" id="dataTable_length">
                                         <label>
-                                            Show   @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" }) entries
+                                            Show
+                                            @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
+                                            entries
                                         </label>
                                     </div>
                                 </form>
@@ -114,6 +116,7 @@
                                                 <td>@item.DurationContract year</td>
 
                                                 <td>$@item.DurationPay /year</td>
+
 
                                                 <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
                                                 <td>
@@ -216,19 +219,21 @@
                             alert('error');
                         }
                     });
-                })
-            })
-
-            function handle(e) {
-                if (e.keyCode === 13) {
-                    e.preventDefault();
-                }
-
-                $(function () {
-                    $("#pageSize").change(function () {
-                        $("#pagesize").submit();
-                    });
                 });
+            });
+        })
+
+        function handle(e) {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+            }
+        }
+
+        $(function () {
+            $("#pageSize").change(function () {
+                $("#pagesize").submit();
+            });
+        });
 
     </script>
 }

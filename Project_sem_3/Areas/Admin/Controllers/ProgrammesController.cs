@@ -30,7 +30,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
             ViewBag.PageSize = new List<SelectListItem>()
             {
-               new SelectListItem() { Text="5", Value= "5"},
+                new SelectListItem() { Text="5", Value= "5"},
                 new SelectListItem() { Text="10", Value= "10"},
                 new SelectListItem() { Text="15", Value= "15" },
                 new SelectListItem() { Text="20", Value= "20" },

@@ -34,7 +34,6 @@
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
-
                                 <form action="/Admin/Insurances/" method="get" id="pagesize">
                                     <div class="dataTables_length" id="dataTable_length">
                                         <label>
@@ -184,18 +183,20 @@
                             alert('error');
                         }
                     });
-                })
+                };
+            });
         })
         function handle(e) {
             if (e.keyCode === 13) {
                 e.preventDefault();
             }
+        }
 
-            $(function () {
-                $("#pageSize").change(function () {
-                    $("#pagesize").submit();
-                });
+        $(function () {
+            $("#pageSize").change(function () {
+                $("#pagesize").submit();
             });
+        });
     </script>
 }
 
