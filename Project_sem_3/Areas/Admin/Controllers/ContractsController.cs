@@ -16,18 +16,24 @@ namespace Project_sem_3.Areas.Admin.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/Contracts
-        public ActionResult Index(string sortOrder, string searchString, int? page)
+        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize)
         {
 
-            var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 5);
+            var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 1);
 
             //if (!String.IsNullOrEmpty(searchString))
             //{
             //    contracts = db.Contracts.Where(x => x.TotalPrice.Contains(searchString))
             //        .Where(t => t.Status == 1);
             //}
-
-            int pageSize = 10;
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="5", Value= "5"},
+                new SelectListItem() { Text="10", Value= "10"},
+                new SelectListItem() { Text="15", Value= "15" },
+                new SelectListItem() { Text="20", Value= "20" },
+            };
+            int pagesize = (pageSize ?? 5);
             int pageNumber = (page ?? 1);
 
             ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "TotalPrice_desc" : "";
@@ -47,7 +53,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     contracts = contracts.OrderBy(s => s.TotalPrice);
                     break;
             }
-            return View(contracts.ToList().ToPagedList(pageNumber, pageSize));
+            return View(contracts.ToList().ToPagedList(pageNumber, pagesize));
         }
 
         // GET: Admin/Contracts/Details/5
@@ -74,10 +80,84 @@ namespace Project_sem_3.Areas.Admin.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Deleted()
+        public ActionResult Deleted(string sortOrder, string searchString, int? page, int? pageSize)
         {
 
-            return View(db.Contracts.Where(t => t.Status == -1).ToList());
+            var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == -1);
+
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    contracts = db.Contracts.Where(x => x.TotalPrice.Contains(searchString))
+            //        .Where(t => t.Status == -1);
+            //}
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="5", Value= "5"},
+                new SelectListItem() { Text="10", Value= "10"},
+                new SelectListItem() { Text="15", Value= "15" },
+                new SelectListItem() { Text="20", Value= "20" },
+            };
+            int pagesize = (pageSize ?? 5);
+            int pageNumber = (page ?? 1);
+
+            ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "TotalPrice_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            switch (sortOrder)
+            {
+                case "Date":
+                    contracts = contracts.OrderBy(s => s.CreatedAt);
+                    break;
+                case "Date_desc":
+                    contracts = contracts.OrderByDescending(s => s.CreatedAt);
+                    break;
+                case "TotalPrice_desc":
+                    contracts = contracts.OrderByDescending(s => s.TotalPrice);
+                    break;
+                default:
+                    contracts = contracts.OrderBy(s => s.TotalPrice);
+                    break;
+            }
+            return View(contracts.ToList().ToPagedList(pageNumber, pagesize));
+        }
+
+        public ActionResult Confirmed(string sortOrder, string searchString, int? page, int? pageSize)
+        {
+
+            var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 0);
+
+            //if (!String.IsNullOrEmpty(searchString))
+            //{
+            //    contracts = db.Contracts.Where(x => x.TotalPrice.Contains(searchString))
+            //        .Where(t => t.Status == 0);
+            //}
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="5", Value= "5"},
+                new SelectListItem() { Text="10", Value= "10"},
+                new SelectListItem() { Text="15", Value= "15" },
+                new SelectListItem() { Text="20", Value= "20" },
+            };
+            int pagesize = (pageSize ?? 5);
+            int pageNumber = (page ?? 1);
+
+            ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "TotalPrice_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            switch (sortOrder)
+            {
+                case "Date":
+                    contracts = contracts.OrderBy(s => s.CreatedAt);
+                    break;
+                case "Date_desc":
+                    contracts = contracts.OrderByDescending(s => s.CreatedAt);
+                    break;
+                case "TotalPrice_desc":
+                    contracts = contracts.OrderByDescending(s => s.TotalPrice);
+                    break;
+                default:
+                    contracts = contracts.OrderBy(s => s.TotalPrice);
+                    break;
+            }
+            return View(contracts.ToList().ToPagedList(pageNumber, pagesize));
         }
     }
 }

@@ -32,15 +32,25 @@
                 <h6 class="m-0 font-weight-bold text-primary">DataTables Contract</h6>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
+                <div>
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
                         <div class="row">
-                            <div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div>
                             <div class="col-sm-12 col-md-6">
-                                <form action="/Admin/InsurancePackages" method="get">
+                                <form action="/Admin/InsurancePackages/" method="get" id="pagesize">
+                                    <div class="dataTables_length" id="dataTable_length">
+                                        <label>
+                                            Show
+                                            @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
+                                            entries
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <form action="/Admin/InsurancePackages/" method="get">
                                     <div id="dataTable_filter" class="dataTables_filter">
-                                        <label>Search:<input type="text" id="SearchString" name="SearchString" class="form-control form-control-sm" placeholder="" aria-controls="dataTable" value="" onkeypress="handle(event)"></label>
+                                        <label>Search:<input type="text" id="SearchString" name="SearchString" class="form-control form-control-sm" placeholder="" aria-controls="dataTable" value="" onkeypress="handle(e)"></label>
                                     </div>
                                 </form>
 
@@ -60,7 +70,7 @@
                                             </div>
                                         </div>
                                         <div class="col-9">
-                                            <button type="button" id="action_contract">Xác nhận</button>
+                                            <button type="button" class="btn btn-success" style="margin-top: 8px;" id="action_contract">Confirm</button>
                                         </div>
                                     </div>
                                 </div>
@@ -76,11 +86,10 @@
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
                                             <th rowspan="1" colspan="1">DurationContract</th>
                                             <th rowspan="1" colspan="1">DurationPay</th>
-                                            <th rowspan="1" colspan="1">CreatedAt</th>
-                                          
+
 
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
->
+
 
 
                                             <th rowspan="1" colspan="1">Action</th>
@@ -103,10 +112,14 @@
                                                 </td>
                                                 <td>@item.Name</td>
                                                 <td>@item.Description</td>
-                                                <td>@item.Price$</td>
+                                                <td>$@item.Price</td>
                                                 <td>@item.DurationContract year</td>
-                                                <td>@item.DurationPay $/year</td>*@
-                                                @*<td>@item.CreatedAt</td>
+
+                                                <td>$@item.DurationPay /year</td>
+
+
+                                                <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
+
                                                 <td>
                                                     <div class="btn-group">
                                                         <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
@@ -118,22 +131,7 @@
                                         }
                                     </tbody>
                                 </table>
-                                <div class="card-footer">
-                                    <div class="row mt-3">
-                                        <div class="col-3 mt-2">
-                                            <div class="form-group mr-3">
-                                                <select class="form-control mr-2" id="select-action">
-                                                    <option value="6">--Chọn thao tác--</option>
-                                                    <option value="0">Action</option>
-                                                    <option value="-1">Deleted</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-9" style="margin-top: 8px;">
-                                            <button  type="button" id="action_contract" class="btn btn-success">Confirm</button>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="row">
@@ -169,51 +167,59 @@
 
 
 
-        $('#action_contract').click(function () {
-            var selectedIDs = new Array();
-            var action = $('#select-action').val();
-            if (action == 6) {
-                alert('Please select the action you want to perform!');
-                return;
-            }
-            $('input:checkbox.check').each(function () {
-                if ($(this).prop('checked')) {
-                    var r = confirm("Do you want to delete?");
-                    if (r == true) {
-                        selectedIDs.push($(this).val());
-                    }
-
-                }
-     
-                if (selectedIDs.length <= 0) {
-                    alert('You have not selected insurance package !');
+            $('#action_contract').click(function () {
+                var selectedIDs = new Array();
+                var action = $('#select-action').val();
+                if (action == 6) {
+                    alert('Please select the action you want to perform!');
                     return;
                 }
-                $.ajax({
-                    url: "/Admin/InsurancePackages/DeleteAll",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                        selectedIDs,
-                        action
-                    },
-                    success: function (res) {
-                        if (!res == false) {
-                            window.location.reload();
+                $('input:checkbox.check').each(function () {
+                    if ($(this).prop('checked')) {
+                        var r = confirm("Do you want to delete?");
+                        if (r == true) {
+                            selectedIDs.push($(this).val());
                         }
-                    },
-                    error: function () {
-                        alert('error');
+
                     }
+
+                    if (selectedIDs.length <= 0) {
+                        alert('You have not selected insurance package !');
+                        return;
+                    }
+                    $.ajax({
+                        url: "/Admin/InsurancePackages/DeleteAll",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                            selectedIDs,
+                            action
+                        },
+                        success: function (res) {
+                            if (!res == false) {
+                                window.location.reload();
+                            }
+                        },
+                        error: function () {
+                            alert('error');
+                        }
+                    });
                 });
-            })
+            });
         })
 
         function handle(e) {
             if (e.keyCode === 13) {
                 e.preventDefault();
             }
+        }
+
+        $(function () {
+            $("#pageSize").change(function () {
+                $("#pagesize").submit();
+            });
+        });
 
     </script>
 }
@@ -228,9 +234,9 @@
         }
 
     /*.style-sort {
-        background: url(https://cdn2.iconfinder.com/data/icons/music-player-icons-filled/57/Double_Arrows-512.png) no-repeat right .75rem center/9px 16px;
-        background-position: 64px 64px;
-    }*/
+                                                            background: url(https://cdn2.iconfinder.com/data/icons/music-player-icons-filled/57/Double_Arrows-512.png) no-repeat right .75rem center/9px 16px;
+                                                            background-position: 64px 64px;
+                                                        }*/
 
     .style-sort > a {
         color: crimson;

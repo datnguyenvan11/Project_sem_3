@@ -30,23 +30,33 @@
                 <h6 class="m-0 font-weight-bold text-primary">DataTables Contract</h6>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
+                <div>
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
                         <div class="row">
+
                             <div class="col-sm-12 col-md-6">
-                                <div class="dataTables_length" id="dataTable_length">
-                                    <label>Show <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <form action="/Admin/Programmes" method="get">
-                                    <div id="dataTable_filter" class="dataTables_filter">
-                                        <label>Search:<input type="text" id="SearchString" name="SearchString" class="form-control form-control-sm" placeholder="" aria-controls="dataTable" value="" onkeypress="handle(event)"></label>
+                                <form action="/Admin/Programmes/" method="get" id="pagesize">
+                                    <div class="dataTables_length" id="dataTable_length">
+                                        <label>
+                                            Show
+                                            @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
+                                            entries
+                                        </label>
                                     </div>
                                 </form>
                             </div>
-                        </div><div class="row">
+
+                            <div class="col-sm-12 col-md-6">
+                                <form action="/Admin/Programmes/" method="get">
+                                    <div id="dataTable_filter" class="dataTables_filter">
+                                        <label>Search:<input type="text" id="SearchString" name="SearchString" class="form-control form-control-sm" placeholder="" aria-controls="dataTable" value="" onkeypress="handle(e)"></label>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="row">
                             <div class="col-3 mt-2">
                                 <div class="form-group mr-3">
                                     <select class="form-control mr-2" id="select-action">
@@ -57,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="col-9">
-                                <button type="button" id="action_contract">Xác nhận</button>
+                                <button type="button" class="btn btn-success" id="action_contract" style="margin-top: 8px;">Xác nhận</button>
                             </div>
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
@@ -81,12 +91,15 @@
                                                 <td class="sorting_1">
                                                     @item.Name
                                                 </td>
-                                                <td>@item.Price</td>
+                                                <td>$@item.Price</td>
 
                                                 <td>
-                                                    <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
-                                                    <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
-                                                    <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
+                                                        <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
+                                                        <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                                                    </div>
+
                                                 </td>
                                             </tr>
                                         }
@@ -129,67 +142,77 @@
 
 
 
-        $('#action_contract').click(function () {
-            var selectedIDs = new Array();
-            var action = $('#select-action').val();
-            if (action == 6) {
-                alert('Please select the action you want to perform!');
-                return;
-            }
-            $('input:checkbox.check').each(function () {
-                if ($(this).prop('checked')) {
-                    var r = confirm("Do you want to delete?");
-                    if (r == true) {
-                        selectedIDs.push($(this).val());
-                    }
+            $('#action_contract').click(function () {
+                var selectedIDs = new Array();
+                var action = $('#select-action').val();
+                if (action == 6) {
+                    alert('Please select the action you want to perform!');
+                    return;
                 }
-            });
-            if (selectedIDs.length <= 0) {
-                alert('You have not selected programme !');
-                return;
-
-            
-                $.ajax({
-                    url: "/Admin/Programmes/DeleteAll",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                        selectedIDs,
-                        action
-                    },
-                    success: function (res) {
-                        if (!res == false) {
-                            window.location.reload();
+                $('input:checkbox.check').each(function () {
+                    if ($(this).prop('checked')) {
+                        var r = confirm("Do you want to delete?");
+                        if (r == true) {
+                            selectedIDs.push($(this).val());
                         }
-                    });
+                    }
+                });
                 if (selectedIDs.length <= 0) {
                     alert('You have not selected programme !');
                     return;
-                }
-                $.ajax({
-                    url: "/Admin/Programmes/DeleteAll",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                        selectedIDs
-                    },
-                    success: function (res) {
-                        if (!res == false) {
-                            window.location.href = `/Admin/Programmes`;
-                        }
-                    },
-                    error: function () {
-                        alert('error');
+
+
+                    $.ajax({
+                        url: "/Admin/Programmes/DeleteAll",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                            selectedIDs,
+                            action
+                        },
+                        success: function (res) {
+                            if (!res == false) {
+                                window.location.reload();
+                            }
+                        },
+                    });
+                    if (selectedIDs.length <= 0) {
+                        alert('You have not selected programme !');
+                        return;
                     }
-                });
-            })
+                    $.ajax({
+                        url: "/Admin/Programmes/DeleteAll",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                            selectedIDs
+                        },
+                        success: function (res) {
+                            if (!res == false) {
+                                window.location.href = `/Admin/Programmes`;
+                            }
+                        },
+                        error: function () {
+                            alert('error');
+                        }
+                    });
+                };
+            });
         })
+
         function handle(e) {
             if (e.keyCode === 13) {
                 e.preventDefault();
             }
+        };
+
+        $(function () {
+            $("#pageSize").change(function () {
+                $("#pagesize").submit();
+            });
+        });
     </script>
 }
 

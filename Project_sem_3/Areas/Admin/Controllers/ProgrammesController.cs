@@ -19,7 +19,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
         List<Programme> list = new List<Programme>();
         // GET: Admin/Programmes
-        public ActionResult Index(string sortOrder, string searchString, int? page)
+        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize)
         {
             var programme = db.Programmes.Where(t => t.Status == 0);
             if (!String.IsNullOrEmpty(searchString))
@@ -28,7 +28,14 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     .Where(t => t.Status == 0);
             }
 
-            int pageSize = 3;
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="5", Value= "5"},
+                new SelectListItem() { Text="10", Value= "10"},
+                new SelectListItem() { Text="15", Value= "15" },
+                new SelectListItem() { Text="20", Value= "20" },
+            };
+            int pagesize = (pageSize ?? 5);
             int pageNumber = (page ?? 1);
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
@@ -48,7 +55,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     programme = programme.OrderBy(s => s.Name);
                     break;
             }
-            return View(programme.ToList().ToPagedList(pageNumber, pageSize));
+            return View(programme.ToList().ToPagedList(pageNumber, pagesize));
 
         }
 

@@ -18,17 +18,24 @@ namespace Project_sem_3.Areas.Admin.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/InsurancePackages
-        public ActionResult Index(string sortOrder, string searchString, int? page)
+        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize)
         {
             var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x => x.Status == 1);
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 insurancePackages = db.InsurancePackages.Where(x => x.Name.Contains(searchString))
-                    .Where(x => x.Status == 0);
+                    .Where(x => x.Status == 1);
             }
 
-            int pageSize = 3;
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="5", Value= "5"},
+                new SelectListItem() { Text="10", Value= "10"},
+                new SelectListItem() { Text="15", Value= "15" },
+                new SelectListItem() { Text="20", Value= "20" },
+            };
+            int pagesize = (pageSize ?? 5);
             int pageNumber = (page ?? 1);
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
@@ -55,7 +62,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     insurancePackages = insurancePackages.OrderBy(s => s.Name);
                     break;
             }
-            return View(insurancePackages.ToList().ToPagedList(pageNumber, pageSize));
+            return View(insurancePackages.ToList().ToPagedList(pageNumber, pagesize));
         }
 
         // GET: Admin/InsurancePackages/Details/5
@@ -97,7 +104,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     Price = insurancePackage.Price,
                     DurationContract = insurancePackage.DurationContract,
                     DurationPay = insurancePackage.DurationPay,
-                    Status=1,
+                    Status = 1,
                     CreatedAt = DateTime.Now,
                     UpdatedAt = DateTime.Now,
                     DeleteAt = DateTime.Now,

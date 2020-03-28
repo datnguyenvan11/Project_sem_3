@@ -3,7 +3,7 @@
 @using PagedList.Mvc
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Confirmed";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <!-- Custom styles for this page -->
@@ -15,10 +15,10 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Contracts Deleted</h1>
+        <h1 class="h3 mb-2 text-gray-800">Contracts Confirmed</h1>
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/Contracts/Create" class="btn btn-info" role="button">Create Contracts</a>
-            <a href="https://localhost:44362/Admin/Contracts/Confirmed" class="btn btn-info float-right" role="button">Contracts Confirmed</a>
+            <a href="https://localhost:44362/Admin/Contracts/Deleted" class="btn btn-info float-right" role="button">Contracts Deleted</a>
         </div>
         @*<p class="mb-4"> All contracts of customers about insurances .</p>
             <div class="card-footer">
@@ -53,7 +53,7 @@
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
-                                <form action="/Admin/Contracts/Deleted/" method="get" id="pagesize">
+                                <form action="/Admin/Contracts/Confirmed/" method="get" id="pagesize">
                                     <div class="dataTables_length" id="dataTable_length">
                                         <label>
                                             Show
@@ -68,7 +68,8 @@
                                     <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label>
                                 </div>
                             </div>
-                        </div><div class="row">
+                        </div>
+                        <div class="row">
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>

@@ -181,6 +181,7 @@
     <Compile Include="Areas\Admin\Controllers\HouseInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\InsurancePackagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\InsurancesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LifeInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\MotorInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProgrammesController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
@@ -194,13 +195,11 @@
     <Compile Include="Controllers\MedicalInsuranceController.cs" />
     <Compile Include="Controllers\MotorInsuranceController.cs" />
     <Compile Include="Controllers\MotorCartController.cs" />
+    <Compile Include="Controllers\OrderNoticeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202003280850505_dt.cs" />
-    <Compile Include="Migrations\202003280850505_dt.Designer.cs">
-      <DependentUpon>202003280850505_dt.cs</DependentUpon>
-    </Compile>
+
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contract.cs" />
@@ -2301,6 +2300,9 @@
     <Content Include="Areas\Admin\Views\Insurances\Deleted.cshtml" />
     <Content Include="Areas\Admin\Views\Programmes\Deleted.cshtml" />
     <Content Include="Areas\Admin\Views\Role\UsersWithRoles.cshtml" />
+    <Content Include="Areas\Admin\Views\Contracts\Confirmed.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LoginWithAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\LifeInsurances\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -2708,6 +2710,7 @@
     <Content Include="Views\LifeInsurance\Order.cshtml" />
     <Content Include="Views\MotorInsurance\View.cshtml" />
     <Content Include="Views\MedicalInsurance\getsesstion.cshtml" />
+    <Content Include="Views\OrderNotice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2722,11 +2725,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003280850505_dt.resx">
-      <DependentUpon>202003280850505_dt.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

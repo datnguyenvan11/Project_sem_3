@@ -24,13 +24,13 @@ namespace Project_sem_3.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DeletedAt { get; set; }
         public int Status { get; set; }
-        public enum OrderStatus { Pending = 5, Confirmed = 4, Shipping = 3, Paid = 2, Done = 1, Cancel = 0, Deleted = -1 }
+        public enum OrderStatus { Pending = 1, Confirmed = 0, Deleted = -1 }
         public Contract()
         {
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
             DeletedAt = DateTime.Now;
-        Status = (int)OrderStatus.Pending;
+            Status = (int)OrderStatus.Pending;
         }
         public virtual ICollection<MotorInsurance> MotorInsurances { get; set; }
         public virtual ICollection<HouseInsurance> HouseInsurances { get; set; }

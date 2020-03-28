@@ -53,22 +53,23 @@
             <div class="row mt-3">
                 <div class="col-3 mt-2">
                     <div class="form-group mr-3">
-                        <select class="form-control mr-2" id="select-action">
+                        <select class="form-control mr-2" id="select-user">
                             <option value="6">--Chọn thao tác--</option>
-                            <option value="0">Action</option>
                             <option value="-1">Deleted</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-9" style="margin-top: 8px;">
+                <div class="col-3" style="margin-top: 8px;">
                     <button  type="button" id="action_contract" class="btn btn-success">Confirm</button>
+                </div>  
+                <div class="col-6" style="margin-right: 0px;">
+                    @Html.DropDownList("RoleName", new SelectList(ViewBag.Roles, "Value", "Text"), new {@id = "select-action", @class=""})
+                    <button class="btn btn-danger" id="btn-role"> action</button>
                 </div>
             </div>
         </div>
-    </div>
+    </div>       
 
-    @Html.DropDownList("RoleName", new SelectList(ViewBag.Roles, "Value", "Text"), new { @id = "select-action" });
-    <button class="btn btn-danger" id="btn-role"> action</button>
     <div class="panel-footer">
         <p class="box-title"><b>Total Users till @String.Format("{0 : dddd, MMMM d, yyyy}", DateTime.Now)  : </b><span class="label label-primary">@Model.Count()</span></p>
     </div>
@@ -116,8 +117,43 @@
                 type: "POST",
                 dataType: "json",
                 data: {
-                   'selectedIDs': selectedIDs,
+                    'selectedIDs': selectedIDs,
                     'action':action
+                },
+                success: function (res) {
+                    if (!res == false) {
+                        window.location.href = `/Admin/Role/UsersWithRoles`;
+                    }
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        })
+
+
+    </script>  
+    <script>
+        $('#action_contract').click(function () {
+            var selectedIDsUser = new Array();
+            var actions = $('#select-user').val();
+          
+            $('input:checkbox.check').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDsUser.push($(this).val());
+                }
+            });
+            if (selectedIDsUser.length <= 0) {
+                alert('You have not selected a User!');
+                return;
+            }
+            $.ajax({
+                url: "/Admin/Role/StatusUser",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    'selectedIDs': selectedIDsUser,
+                    'action':actions
                 },
                 success: function (res) {
                     if (!res == false) {

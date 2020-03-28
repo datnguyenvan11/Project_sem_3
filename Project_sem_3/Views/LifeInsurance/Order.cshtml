@@ -1,240 +1,51 @@
-﻿
+﻿@model IEnumerable<Project_sem_3.Models.InsurancePackage>
+@using Project_sem_3.Models
 @{
     ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*<h2>Order</h2>*@
-
-@*@model IEnumerable<Project_sem_3.Models.InsurancePackage>
-    @using Project_sem_3.Models
-    @{
-
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }*@
-
-
-
-<section>
-    <div class="banner">
-
-    </div>
-
-</section>
-
-
-<div class="container1" style="margin-left:10%;margin-right:10%;margin-top:7% ;margin-bottom:7%">
-    <div class="hd-info-pro">
-        PLEASE ENTER iNFORMATION
-    </div>
-
-    @*<form action="/HomeInsurance/CreateContract"  method="get">*@
-    <form action="#" onsubmit="return validation()" class="bg-light">
-        <div class="row">
-            <div class="form-basic-information">
-                <div class="col-lg-9 col-md-8 col-sm-12">
-                    <div style="padding-top:30px" class="form-group">
-                        <label style="padding-left:83px;padding-top:5px" for="exampleInputPassword1" class="col-sm-2 col-form-label">Name:</label>
-                        <div class="col-md-7">
-                            <input style="height:43px" type="text" name="name" class="form-control" id="Name" autocomplete="off" placeholder="Name">
-                            <span id="usererror" class="text-danger font-weight-bold"></span>
-                        </div>
-                    </div>
-                    @*<div  class="form-group ">
-                            <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Pull Name:</label>
-                            <div class="col-md-4">
-                                <input style="height:43px" type="password" class="form-control" id="exampleInputPullName" autocomplete="off" placeholder="Pull Name">
-                            </div>
-                        </div>*@
-                    <div style="margin-top:89px;overflow:hidden" class="form-group  ">
-                        <label style="padding-left:89px;padding-top:5px" for="exampleInputPassword1" class="col-sm-2 col-form-label">Email:</label>
-                        <div class="col-md-8">
-                            <input style="height:43px" type="text" name="email" class="form-control" id="emails" placeholder="Email">
-                            <span id="username" class="text-danger font-weight-bold"></span>
-                        </div>
-                    </div>
-                    <div style="margin-top:50px" class="form-group  ">
-                        <label style="padding-left:50px;padding-top:5px" for="exampleInputPassword1" class="col-sm-2 col-form-label">Date_Iden:</label>
-                        <div class="col-md-4">
-                            <input style="height:43px" type="text" name="Date_Iden" class="form-control" id="date_iden" autocomplete="off" placeholder="Date_Iden">
-                            <span id="Date_error" class="text-danger font-weight-bold"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label style="padding-left:44px;padding-top:5px" for="exampleInputPassword1" class="col-sm-2 col-form-label">Place_Iden:</label>
-                        <div class="col-md-4" style="overflow: hidden">
-                            @*<input style="height:43px" type="password" class="form-control" id="exampleInputPlace_Iden" autocomplete="off" placeholder="Place_Iden">*@
-                            <span id="place_error" class="text-danger font-weight-bold"></span>
-                            <select style="height:43px" _ngcontent-c5="" id="place_iden" name=" Place_Iden" required="" class="form-control default ng-pristine ng-invalid ng-touched">
-                                <option _ngcontent-c5="" disabled="" selected="" value="">Place_Iden</option>
-                                <!---->
-                                <option _ngcontent-c5="" value="04">HÀ NỘI</option>
-                                <option _ngcontent-c5="" value="08">HỒ CHÍ MINH</option>
-                                <option _ngcontent-c5="" value="DN">ĐÀ NẴNG</option>
-                                <option _ngcontent-c5="" value="61">ĐỒNG NAI</option>
-                                <option _ngcontent-c5="" value="31">HẢI PHÒNG</option>
-                                <option _ngcontent-c5="" value="76">AN GIANG</option>
-                                <option _ngcontent-c5="" value="BG">BẮC GIANG</option>
-                                <option _ngcontent-c5="" value="BC">BẮC KẠN</option>
-                                <option _ngcontent-c5="" value="BN">BẮC NINH</option>
-                                <option _ngcontent-c5="" value="BL">BẠC LIÊU</option>
-                                <option _ngcontent-c5="" value="64">BÀ RỊA-VŨNG TÀU</option>
-                                <option _ngcontent-c5="" value="75">BẾN TRE</option>
-                                <option _ngcontent-c5="" value="56">BÌNH ĐỊNH</option>
-                                <option _ngcontent-c5="" value="BD">BÌNH DƯƠNG</option>
-                                <option _ngcontent-c5="" value="BP">BÌNH PHƯỚC</option>
-                                <option _ngcontent-c5="" value="62">BÌNH THUẬN</option>
-                                <option _ngcontent-c5="" value="26">CAO BẰNG</option>
-                                <option _ngcontent-c5="" value="71">CẦN THƠ</option>
-                                <option _ngcontent-c5="" value="CM">CÀ MAU</option>
-                                <option _ngcontent-c5="" value="50">ĐĂK LĂK</option>
-                                <option _ngcontent-c5="" value="DA">ĐĂK NÔNG</option>
-                                <option _ngcontent-c5="" value="DB">ĐIỆN BIÊN</option>
-                                <option _ngcontent-c5="" value="67">ĐỒNG THÁP</option>
-                                <option _ngcontent-c5="" value="59">GIA LAI</option>
-                                <option _ngcontent-c5="" value="HD">HẢI DƯƠNG</option>
-                                <option _ngcontent-c5="" value="HG">HẬU GIANG</option>
-                                <option _ngcontent-c5="" value="19">HÀ GIANG</option>
-                                <option _ngcontent-c5="" value="HN">HÀ NAM</option>
-                                <option _ngcontent-c5="" value="39">HÀ TĨNH</option>
-                                <option _ngcontent-c5="" value="18">HÒA BÌNH</option>
-                                <option _ngcontent-c5="" value="HY">HƯNG YÊN</option>
-                                <option _ngcontent-c5="" value="58">KHÁNH HÒA</option>
-                                <option _ngcontent-c5="" value="77">KIÊN GIANG</option>
-                                <option _ngcontent-c5="" value="60">KON TUM</option>
-                                <option _ngcontent-c5="" value="25">LẠNG SƠN</option>
-                                <option _ngcontent-c5="" value="23">LAI CHÂU</option>
-                                <option _ngcontent-c5="" value="63">LÂM ĐỒNG</option>
-                                <option _ngcontent-c5="" value="20">LÀO CAI</option>
-                                <option _ngcontent-c5="" value="72">LONG AN</option>
-                                <option _ngcontent-c5="" value="ND">NAM ĐỊNH</option>
-                                <option _ngcontent-c5="" value="38">NGHỆ AN</option>
-                                <option _ngcontent-c5="" value="30">NINH BÌNH</option>
-                                <option _ngcontent-c5="" value="68">NINH THUẬN</option>
-                                <option _ngcontent-c5="" value="PT">PHÚ THỌ</option>
-                                <option _ngcontent-c5="" value="57">PHÚ YÊN</option>
-                                <option _ngcontent-c5="" value="52">QUẢNG BÌNH</option>
-                                <option _ngcontent-c5="" value="QN">QUẢNG NAM</option>
-                                <option _ngcontent-c5="" value="55">QUẢNG NGÃI</option>
-                                <option _ngcontent-c5="" value="33">QUẢNG NINH</option>
-                                <option _ngcontent-c5="" value="53">QUẢNG TRỊ</option>
-                                <option _ngcontent-c5="" value="79">SÓC TRĂNG</option>
-                                <option _ngcontent-c5="" value="22">SƠN LA</option>
-                                <option _ngcontent-c5="" value="66">TÂY NINH</option>
-                                <option _ngcontent-c5="" value="36">THÁI BÌNH</option>
-                                <option _ngcontent-c5="" value="TN">THÁI NGUYÊN</option>
-                                <option _ngcontent-c5="" value="37">THANH HÓA</option>
-                                <option _ngcontent-c5="" value="54">THỪA THIÊN HUẾ</option>
-                                <option _ngcontent-c5="" value="73">TIỀN GIANG</option>
-                                <option _ngcontent-c5="" value="74">TRÀ VINH</option>
-                                <option _ngcontent-c5="" value="27">TUYÊN QUANG</option>
-                                <option _ngcontent-c5="" value="70">VĨNH LONG</option>
-                                <option _ngcontent-c5="" value="VP">VĨNH PHÚC</option>
-                                <option _ngcontent-c5="" value="29">YÊN BÁI</option>
-                                <option _ngcontent-c5="" value="99">KHÁC</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div style="margin-top:130px" class="form-group  ">
-                        <label style="padding-top:5px" for="exampleInputPassword1" class="col-sm-2 col-form-label">PhoneNumber:</label>
-                        <div class="col-md-8" style="overflow:hidden">
-                            <input style="height:45px" type="password" class="form-control" id="exampleInputPhoneNumber" autocomplete="off" placeholder="PhoneNumber">
-                            <span id="PhoneNumbererror" class="text-danger font-weight-bold"></span>
-                        </div>
-                    </div>
-
-                    <div style="padding-top:82px" class="form-group">
-                        <label style="padding-left:100px;padding-top:5px" for="exampleInputPassword1" class="col-sm-2 col-form-label">job:</label>
-                        <div class="col-md-4">
-                            <input style="height:43px" type="text" name="Job" class="form-control" id="job" autocomplete="off" placeholder="job">
-                            <span id="joberror" class="text-danger font-weight-bold"></span>
-                        </div>
-                    </div>
-                    <div style="" class="form-group ">
-                        <label style="padding-left:29px;padding-top:5px" for="exampleInputPassword1" class="col-md-2 col-form-label">IdentityCard:</label>
-                        <div class="col-md-4">
-                            <input style="height:43px" type="text" name="IdentityCard" class="form-control" id="identityCard" autocomplete="off" placeholder="IdentityCard">
-                            <span id="IdentityCarderror" class="text-danger font-weight-bold"></span>
-                        </div>
-                    </div>
-
-                    @*<div style="margin-top:-20px" class="form-group ">
-                            <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>
-                            <div class="col-md-4">
-                                <input type="password" class="form-control" id="exampleInputPassword1">
-                            </div>
-                        </div>
-                        <div style="margin-top:70px; overflow: hidden" class="form-group  ">
-                            <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>
-                            <div class="col-md-8">
-                                <input type="password" class="form-control" id="exampleInputPassword1">
-                            </div>
-                        </div>*@
 
 
 
 
 
-
-
-                    @*<div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                            <div class="col-md-4">
-                                <input type="password" class="form-control" id="inputPassword">
-                            </div>
-                        </div>*@
-
-
-
-
-                    @*<div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>*@
-
-                </div>
-            </div>
-
-
-            <div class="col-lg-3 col-md-4 col-sm-12">
-                <div class="hd-info-pro">INSURANCE FEES</div>
-                <div class="result">
-                    <div class="item-result">
-                        <span>Total fee (including VAT):</span>
-                        <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">$0</label></strong>
-                    </div>
-                    <div id="ctl18_Promotions1_pnPromotions">
-
-
-                        <div class="item-result">
-                            <span>Discount amount:</span>
-                            <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">$0</label></strong>
-                        </div>
-                        <div class="result-red">
-                            <div>Total net charge (including VAT) actually collected:</div>
-
-                            <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">$0</label></strong>
-                        </div>
-                        @*<input id="ctl18_lbtBook" style="text-decoration:none" type="submit" value="Order" class="btn-pro-buynow" href="/HouseInsurance/CreateContract" />*@
-                        <input type="submit" name="submit" value="submit" class="btn btn-success" />
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="box-chuy col-12">
-            <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
-            <div class="cotent-box-chuy">
-                <div class="cotent-text"> Select coverage: By default, when you buy private home insurance, you will have to buy basic benefits (fire, explosion). You can choose to buy 2 additional benefits 1, 2 by CHECK on benefits. </div>
-                <div class="cotent-text"> You enter the required website information: the type of house, the number of years used, the amount of insurance for the house, the property in the house, you will see the total premium.</div>
-                <div class="cotent-text"> If you agree to order, please click  <b>[Continue]</b> to move to the next order. </div>
-            </div>
-        </div>
-    </form>
-</div>
 
 <style>
+    .form-order-life-insurance {
+        background: #fdfdfd;
+    }
+
+        .form-order-life-insurance .form-group {
+            display: flex;
+        }
+
+            .form-order-life-insurance .form-group label {
+                line-height: 36px;
+                min-width: 100px;
+                font-size: 14px;
+                text-align: end;
+                margin-right: 8px;
+            }
+
+    .my_date_picker {
+        position: relative;
+    }
+
+        .my_date_picker::before {
+            position: absolute;
+            content: "\f073";
+            font-family: FontAwesome;
+            right: 22px;
+            top: 7px;
+            /*z-index: 0;
+                pointer-events: none;*/
+        }
+
+    .ui-widget-header {
+        background: #ff9f9f;
+    }
+
     .form-information {
         margin-top: 20px
     }
@@ -339,19 +150,17 @@
         font-weight: 300;
     }
 
-    .form-group {
-        margin-bottom: -12px
-    }
+
 
     #ctl18_fullname {
         width: 60%
     }
     /*.form-basic-information .validation-error{
-    display: block;
-    color: #ed1b2e;
-    font-size: 12px;
-    padding-left: 12px
-    }*/
+        display: block;
+        color: #ed1b2e;
+        font-size: 12px;
+        padding-left: 12px
+        }*/
 
     #ctl18_txtAddress {
         width: 70%;
@@ -580,78 +389,235 @@
             font-size: 20px;
         }
 </style>
+<section>
+    <div class="banner">
+
+    </div>
+
+</section>
+
+
+<div class="container1" style="margin-left:10%;margin-right:10%;margin-top:7% ;margin-bottom:7%">
+    <div class="hd-info-pro">
+        PLEASE ENTER iNFORMATION
+    </div>
+
+    <form id="son" action="/LifeInsurance/CreateContract" method="post">
+        <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div _ngcontent-c5="" class="app-checkbox agree-with-term">
+                        <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' name="insurancePackageId" required /></label>                                                           @*<input _ngcontent-c5="" id="choose1" name="choose1" type="checkbox"> <label _ngcontent-c5="" for="choose1">*@
+                        <span _ngcontent-c5="" class="checkout-term">@item.Name</span>
+                    </div>
+                }
+            <div class="form-basic-information">
+                <div style="padding: 12px 24px" class="row col-lg-9 col-md-8 col-sm-12">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">Name</label>
+                        <input type="text" name="name" class="form-control" id="Name" autocomplete="off" placeholder="Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">Email</label>
+                        <input type="text" name="email" class="form-control" id="emails" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">Address</label>
+                        <input type="text" name="address" class="form-control" id="address" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-6 my_date_picker">
+                        <label class="col-form-label">Date</label>
+                        <input type="text" name="Date_Iden" class="form-control" id="date_iden" autocomplete="off" placeholder="Date ">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">Place</label>
+                        <select id="place_iden" name="Place_Iden" required="" class="form-control default ng-pristine ng-invalid ng-touched">
+                            <option disabled="" selected="" value="">Place</option>
+                            <option value="HÀ NỘI">HÀ NỘI</option>
+                            <option value="HỒ CHÍ MINH">HỒ CHÍ MINH</option>
+                            <option value="ĐÀ NẴNG">ĐÀ NẴNG</option>
+                            <option value="ĐỒNG NAI">ĐỒNG NAI</option>
+                            <option value="HẢI PHÒNG">HẢI PHÒNG</option>
+                            <option value="AN GIANG">AN GIANG</option>
+                            <option value="BẮC GIANG">BẮC GIANG</option>
+                            <option value="BẮC KẠN">BẮC KẠN</option>
+                            <option value="BẮC NINH">BẮC NINH</option>
+                            <option value="BẠC LIÊU">BẠC LIÊU</option>
+                            <option value="BÀ RỊA-VŨNG TÀU">BÀ RỊA-VŨNG TÀU</option>
+                            <option value="BẾN TRE">BẾN TRE</option>
+                            <option value="BÌNH ĐỊNH">BÌNH ĐỊNH</option>
+                            <option value="BÌNH DƯƠNG">BÌNH DƯƠNG</option>
+                            <option value="BÌNH PHƯỚC">BÌNH PHƯỚC</option>
+                            <option value="BÌNH THUẬN">BÌNH THUẬN</option>
+                            <option value="CAO BẰNG">CAO BẰNG</option>
+                            <option value="CẦN THƠ">CẦN THƠ</option>
+                            <option value="CÀ MAU">CÀ MAU</option>
+                            <option value="ĐĂK LĂK">ĐĂK LĂK</option>
+                            <option value="ĐĂK NÔNG">ĐĂK NÔNG</option>
+                            <option value="ĐIỆN BIÊN">ĐIỆN BIÊN</option>
+                            <option value="ĐỒNG THÁP">ĐỒNG THÁP</option>
+                            <option value="GIA LAI">GIA LAI</option>
+                            <option value="HẢI DƯƠNG">HẢI DƯƠNG</option>
+                            <option value="HẬU GIANG">HẬU GIANG</option>
+                            <option value="HÀ GIANG">HÀ GIANG</option>
+                            <option value="HÀ NAM">HÀ NAM</option>
+                            <option value="HÀ TĨNH">HÀ TĨNH</option>
+                            <option value="HÒA BÌNH">HÒA BÌNH</option>
+                            <option value="HƯNG YÊN">HƯNG YÊN</option>
+                            <option value="KHÁNH HÒA">KHÁNH HÒA</option>
+                            <option value="KIÊN GIANG">KIÊN GIANG</option>
+                            <option value="KON TUM">KON TUM</option>
+                            <option value="LẠNG SƠN">LẠNG SƠN</option>
+                            <option value="LAI CHÂU">LAI CHÂU</option>
+                            <option value="LÂM ĐỒNG">LÂM ĐỒNG</option>
+                            <option value="LÀO CAI">LÀO CAI</option>
+                            <option value="LONG AN">LONG AN</option>
+                            <option value="NAM ĐỊNH">NAM ĐỊNH</option>
+                            <option value="NGHỆ AN">NGHỆ AN</option>
+                            <option value="NINH BÌNH">NINH BÌNH</option>
+                            <option value="NINH THUẬN">NINH THUẬN</option>
+                            <option value="PHÚ THỌ">PHÚ THỌ</option>
+                            <option value="PHÚ YÊN">PHÚ YÊN</option>
+                            <option value="QUẢNG BÌNH">QUẢNG BÌNH</option>
+                            <option value="QUẢNG NAM">QUẢNG NAM</option>
+                            <option value="QUẢNG NGÃI">QUẢNG NGÃI</option>
+                            <option value="33">QUẢNG NINH</option>
+                            <option value="QUẢNG NINH">QUẢNG TRỊ</option>
+                            <option value="SÓC TRĂNG">SÓC TRĂNG</option>
+                            <option value="SƠN LA">SƠN LA</option>
+                            <option value="TÂY NINH">TÂY NINH</option>
+                            <option value="THÁI BÌNH">THÁI BÌNH</option>
+                            <option value="THÁI NGUYÊN">THÁI NGUYÊN</option>
+                            <option value="THANH HÓA">THANH HÓA</option>
+                            <option value="THỪA THIÊN HUẾ">THỪA THIÊN HUẾ</option>
+                            <option value="TIỀN GIANG">TIỀN GIANG</option>
+                            <option value="TRÀ VINH">TRÀ VINH</option>
+                            <option value="TUYÊN QUANG">TUYÊN QUANG</option>
+                            <option value="VĨNH LONG">VĨNH LONG</option>
+                            <option value="VĨNH PHÚ">VĨNH PHÚC</option>
+                            <option value="YÊN BÁI">YÊN BÁI</option>
+                            <option value="KHÁC">KHÁC</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <label class="col-form-label">PhoneNumber</label>
+                        <input type="p" name="phone" class="form-control" id="exampleInputPhoneNumber" autocomplete="off" placeholder="PhoneNumber">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="col-form-label">Job</label>
+                        <input type="text" name="Job" class="form-control" id="job" autocomplete="off" placeholder="job">
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label class="col-form-label">Identity Card</label>
+                        <input type="text" name="IdentityCard" class="form-control" id="identityCard" autocomplete="off" placeholder="IdentityCard">
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="hd-info-pro">INSURANCE FEES</div>
+                <div class="result">
+                    <div class="item-result">
+                        <span>Total fee (including VAT):</span>
+                        <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">$0</label></strong>
+                    </div>
+                    <div id="ctl18_Promotions1_pnPromotions">
+
+
+                        <div class="item-result">
+                            <span>Discount amount:</span>
+                            <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">$0</label></strong>
+                        </div>
+                        <div class="result-red">
+                            <div>Total net charge (including VAT) actually collected:</div>
+
+                            <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">$0</label></strong>
+                        </div>
+                        <input type="submit" name="submit" value="submit" class="btn btn-success" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="box-chuy col-12">
+            <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
+            <div class="cotent-box-chuy">
+                <div class="cotent-text"> Select coverage: By default, when you buy private home insurance, you will have to buy basic benefits (fire, explosion). You can choose to buy 2 additional benefits 1, 2 by CHECK on benefits. </div>
+                <div class="cotent-text"> You enter the required website information: the type of house, the number of years used, the amount of insurance for the house, the property in the house, you will see the total premium.</div>
+                <div class="cotent-text"> If you agree to order, please click <b>[Continue]</b> to move to the next order. </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
 @section Scripts {
     <script>
-            $("input[name=insurancePackageId]") // select the radio by its id
-                .change(function () { // bind a function to the change event
-                    if ($(this).is(":checked")) { // check if the radio is checked
-                        var val = $(this).attr("class"); // retrieve the value
-                        var valint = parseInt(val)
-                        var ttt = valint.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
-                        $('#ctl18_Promotions1_lblHasToPayPremium').text(ttt)
+        $(document).ready(function () {
+            $('#date_iden').datepicker()
+            $("input[name=insurancePackageId]")
+            .change(function () { 
+                if ($(this).is(":checked")) { 
+                    var val = $(this).attr("class"); 
+                    var valint = parseInt(val)
+                    var ttt = valint.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+                    $('#ctl18_Promotions1_lblHasToPayPremium').text(ttt)
+                     $('html, body').animate({
+                        scrollTop: $("#divnone").offset().top
+                    }, 2000);
+                }
+            });
+            $("#son").validate({
+                rules: {
+                    Date_Iden: "required",
+                    email: {
+                        required: true,
+                        email: true,
+                        minlength: 10
+                    },
+                    name: {
+                        required: true,
+                        minlength: 2
+                    },
+                    phone: {
+                        required: true,
+                        minlength: 10
+                    },
+                    Job: "required",
+                    IdentityCard: {
+                        required: true,
+                        minlength: 10
                     }
-                });
-        </script>
 
-    @*<p id="demo"></p>
-
-        <script>
-        function myFunction() {
-          var inpObj = document.getElementById("id1");
-          if (!inpObj.checkValidity()) {
-            document.getElementById("demo").innerHTML = inpObj.validationMessage;
-          } else {
-            document.getElementById("demo").innerHTML = "";
-          }
-        }
-        </script>*@
-   
-    <script>
-        function validation() {
-            var user = document.getElementById('Name').value;
-            if (user == "") {
-                document.getElementById('username').innerHTML = "**please fill ";
-                return false;
-            }
-
-
-
-        }
-
+                },
+                messages: {
+                    Date_Iden: "Please enter date_iden ",
+                    email: "Please enter a valid email address",
+                    email: "Vui lòng nhập email",
+                    name: {
+                        required: "Please enter a valid name",
+                        minlength: "Địa chỉ ngắn vậy, chém gió ah?"
+                    },
+                    PhoneNumber: {
+                        required: " Please enter a valid Phone Number",
+                        minlength: "Your phone is not correct",
+                    },
+                    IdentityCard: {
+                        required: " Please enter IdentityCard",
+                        minlength: "Your phone is not correct",
+                    },
+                    Job: "Please enter a valid job",
+                }
+            });
+        });
 
     </script>
-
-    @*<script type="text/javascript">
-        function validation() {
-             var exampleInputName = document.getElementById('exampleInputName').value;
-             var exampleInputEmail = document.getElementById('exampleInputEmail').value;
-             var exampleInputDate_Iden = document.getElementById('exampleInputDate_Iden').value;
-             var exampleInputPhoneNumber = document.getElementById('exampleInputPhoneNumber').value;
-             var exampleInputjob = document.getElementById('exampleInputjob').value;
-            var exampleInputIdentityCard = document.getElementById('exampleInputIdentityCard').value;
-            var usercheck = /^[A-Za-z. ]{3,30}$/;
-            var phonecheck = /^[789]{0-9}{9}$/;
-            if (usercheck.test(exampleInputName)) {
-                document.getElementById('usererror').innerHTML = "";
-
-            } else {
-                document.getElementById('usererror').innerHTML = "**username is Invalid";
-                return false;
-
-            }
-
-
-
-
-
-        }
-
-
-        </script>*@
-
-
-
-
 }
 
