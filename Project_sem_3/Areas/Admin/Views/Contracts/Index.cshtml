@@ -120,18 +120,20 @@
                                                 
                                                 <td>     
                                                     <div class="btn-group">
-                                                        <button class="btn btn-success">@Html.ActionLink("Confirm", "Edit", new { id = item.Id })</button>
                                                         <button class="btn btn-primary">
-                                                            @if (@item.Insurance.Id == 16)
+                                                            @if (@item.Insurance.Id == 27)
                                                             {
                                                                 @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
                                                             }
-                                                            @if (@item.Insurance.Id == 19)
+                                                            @if (@item.Insurance.Id == 28)
                                                             {
                                                                 @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
                                                             }
-                                                        </button>      
-                                                        <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                                                            @if (@item.Insurance.Id == 26)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "LifeInsurances", Id = item.Id })
+                                                            }
+                                                        </button>
                                                     </div>
                                                    
                                                 </td>

@@ -276,6 +276,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
             context.SaveChanges();
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);
         }
+
     }
 
 }
