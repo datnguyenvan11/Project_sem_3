@@ -194,6 +194,7 @@
     <Compile Include="Controllers\MedicalInsuranceController.cs" />
     <Compile Include="Controllers\MotorInsuranceController.cs" />
     <Compile Include="Controllers\MotorCartController.cs" />
+    <Compile Include="Controllers\OrderNoticeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2704,6 +2705,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\LifeInsurance\Order.cshtml" />
     <Content Include="Views\MotorInsurance\View.cshtml" />
+    <Content Include="Views\OrderNotice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
