@@ -32,7 +32,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">DataTables Contract</h6>
             </div>
             <div class="card-body">
-                <div >
+                <div>
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
                         <div class="row">
@@ -46,11 +46,11 @@
                                         </label>
                                     </div>
                                 </form>
-                            </div>                            
+                            </div>
                             <div class="col-sm-12 col-md-6">
                                 <form action="/Admin/InsurancePackages/" method="get">
                                     <div id="dataTable_filter" class="dataTables_filter">
-                                        <label>Search:<input type="text" id="SearchString" name="SearchString" class="form-control form-control-sm" placeholder="" aria-controls="dataTable" value="" onkeypress="handle(event)"></label>
+                                        <label>Search:<input type="text" id="SearchString" name="SearchString" class="form-control form-control-sm" placeholder="" aria-controls="dataTable" value="" onkeypress="handle(e)"></label>
                                     </div>
                                 </form>
 
@@ -89,7 +89,7 @@
 
 
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
-                                            
+
 
 
                                             <th rowspan="1" colspan="1">Action</th>
@@ -256,4 +256,3 @@
         color: crimson;
     }
 </style>
-@*  *@
