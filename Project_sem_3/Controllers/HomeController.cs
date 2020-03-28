@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_sem_3.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,8 +7,11 @@ using System.Web.Mvc;
 
 namespace Project_sem_3.Controllers
 {
+
     public class HomeController : Controller
     {
+        ApplicationDbContext db = new ApplicationDbContext();
+
         public ActionResult Index()
         {
             return View();
@@ -22,7 +26,8 @@ namespace Project_sem_3.Controllers
         }
         public ActionResult MotorInsurance()
         {
-            return View();
+            var insurances = db.Insurances.Where(x => x.Status == 0).FirstOrDefault(x=>x.Id==27);
+            return View(insurances);
         }
         public ActionResult MedicalInsurance()
         {

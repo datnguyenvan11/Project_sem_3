@@ -19,10 +19,8 @@ namespace Project_sem_3.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-        public string IdentityCard { get; set; }
-        public DateTime DateOfIdentityCard { get; set; }
-        public string PlaceOfIdentityCard { get; set; }
-        public string Job { get; set; }
+        public DateTime DateOfBirth { get; set; }
+   
         public int Quantity { get; set; }
         public double UnitPrice { get; set; }
         public virtual Contract Contract { get; set; }

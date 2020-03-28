@@ -99,7 +99,7 @@
 
                                     <tbody>
 
-                                        @foreach (var item in Model)
+                                        @*@foreach (var item in Model)
                                         {
 
                                             <tr role="row" class="odd">
@@ -119,6 +119,7 @@
 
 
                                                 <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
+
                                                 <td>
                                                     <div class="btn-group">
                                                         <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>

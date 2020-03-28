@@ -199,6 +199,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contract.cs" />
@@ -2708,6 +2709,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\LifeInsurance\Order.cshtml" />
     <Content Include="Views\MotorInsurance\View.cshtml" />
+    <Content Include="Views\MedicalInsurance\getsesstion.cshtml" />
     <Content Include="Views\OrderNotice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
