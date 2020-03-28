@@ -181,6 +181,7 @@
     <Compile Include="Areas\Admin\Controllers\HouseInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\InsurancePackagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\InsurancesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LifeInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\MotorInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProgrammesController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
@@ -2298,6 +2299,8 @@
     <Content Include="Areas\Admin\Views\Programmes\Deleted.cshtml" />
     <Content Include="Areas\Admin\Views\Role\UsersWithRoles.cshtml" />
     <Content Include="Areas\Admin\Views\Contracts\Confirmed.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LoginWithAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\LifeInsurances\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
