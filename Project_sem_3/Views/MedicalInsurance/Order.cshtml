@@ -3,255 +3,763 @@
 @{
     ViewBag.Title = "Order";
 }
-    <style>
-        .thumb {
-            width: 1300px;
-            height: 300px;
-            background-color: #3e3e3e;
-            background-image: none;
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
+<style>
+    .thumb {
+        width: 1300px;
+        height: 300px;
+        background-color: #3e3e3e;
+        background-image: none;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    .subslide {
+        max-width: fit-content;
+        position: relative;
+        margin: auto;
+    }
+
+    .shadow {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    }
+
+    .tab-pro {
+        font-size: large;
+        padding: 0;
+        text-align: center;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+
+    .tab-pro li {
+        display: inline-block;
+    }
+
+        .tab-pro li.active a {
+            background-color: #0b665a;
+            color: #fff;
         }
 
-        .subslide {
-            max-width: fit-content;
-            position: relative;
-            margin: auto;
-        }
-
-        .shadow {
-            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
-        }
-
-        .tab-pro {
-            font-size: large;
-            padding: 0;
-            text-align: center;
-            background-color: #f0f0f0;
-            border-radius: 5px;
-        }
-
-        ul {
-            list-style-type: none;
-        }
-
-        .tab-pro li {
+        .tab-pro li a {
             display: inline-block;
+            padding: 15px;
+            font-family: "HelB";
         }
 
-            .tab-pro li.active a {
+            .tab-pro li a:hover {
                 background-color: #0b665a;
                 color: #fff;
             }
 
-            .tab-pro li a {
-                display: inline-block;
-                padding: 15px;
-                font-family: "HelB";
-            }
+    a {
+        text-decoration: none;
+        transition: all 0.15s ease-in-out;
+    }
 
-                .tab-pro li a:hover {
-                    background-color: #0b665a;
-                    color: #fff;
-                }
+    .main-content {
+        padding-top: 20px;
+    }
 
-        a {
-            text-decoration: none;
-            transition: all 0.15s ease-in-out;
+    .hd-info-pro {
+        background-color: #0b665a;
+        color: #fff;
+        font-family: inherit;
+        text-transform: uppercase;
+        font-size: 15px;
+        padding: 15px;
+        border-bottom: solid 1px #fff;
+        font-weight: bold;
+    }
+
+    .table2 {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        font: inherit;
+        border: 1px solid #D9D9D9;
+    }
+
+        table tr {
+            border-bottom: 1px solid #D9D9D9;
         }
 
-        .main-content {
-            padding-top: 20px;
-        }
+    .table-donhang thead th {
+        border-bottom-width: 1px;
+        background-color: #0b665a;
+        font-size: 14px;
+        color: #fff;
+    }
 
-        .hd-info-pro {
-            background-color: #0b665a;
-            color: #fff;
-            font-family: inherit;
+    .table2 td, .table2 th {
+        padding: 1.75rem;
+        vertical-align: top;
+        line-height: 16px;
+        font-size: 14px;
+        line-height: 1.5;
+        border-top: 1px solid #dee2e6;
+    }
+
+    .table-donhang td, .table-donhang th {
+        background-color: #ececec;
+        border: 1px solid #dee2e6;
+    }
+
+    .my-1 {
+        margin-bottom: .25rem !important;
+    }
+
+    .custom-select {
+        display: inline-block;
+        width: 100%;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        vertical-align: middle;
+        /*background: url(https://previews.123rf.com/images/tifani1/tifani11801/tifani1180100316/94060669-set-icon-arrow-up-and-down-.jpg) no-repeat right .75rem center/62px 47px;*/
+        background-color: #fff;
+        border-radius: .25rem;
+        /*-webkit-appearance: none;*/
+        font-size: 17px;
+        height: calc(1.5em + .75rem + 2px);
+        padding: .375rem 1.75rem .375rem .75rem;
+    }
+
+    .price-pro {
+        font-family: unset;
+        font-size: 18px;
+        color: #3e3e3e;
+        font-weight: bold;
+    }
+
+    .c5 {
+        height: 5px;
+        clear: both;
+    }
+
+    .mr-top-20 {
+        margin-top: 20px;
+    }
+
+    .price-sum {
+        font-size: 24px;
+        color: #ea212d;
+        font-family: "fantasy";
+    }
+
+    .box-chuy {
+        margin-top: 20px;
+    }
+
+        .box-chuy .title-box-chuy {
+            font-size: 16px;
+            font-family: serif;
             text-transform: uppercase;
-            font-size: 15px;
-            padding: 15px;
-            border-bottom: solid 1px #fff;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            background-color: #f5f5f5;
+            padding: 10px;
             font-weight: bold;
         }
 
-        .table2 {
-            width: 100%;
-            margin-bottom: 1rem;
-            color: #212529;
+    .icon-bell {
+        background: url(https://www.iconsdb.com/icons/preview/red/bell-3-xxl.png) no-repeat left .75rem center/15px 15px;
+        padding: 0px 0px 0px 30px;
+    }
+
+    .cotent-box-chuy {
+        font-size: 14px;
+        line-height: 22px;
+        padding-left: 10px;
+    }
+
+        .cotent-box-chuy > div {
+            margin-bottom: 7px;
         }
 
-        table {
-            border-collapse: collapse;
-            border-spacing: 0;
-            font: inherit;
-            border: 1px solid #D9D9D9;
-        }
+    .cotent-text {
+        background: url(https://baohiemtructuyen.com.vn/images/sub_menu_bullet.png) no-repeat 0 11px;
+        padding: 7px 0 5px 15px;
+    }
 
-            table tr {
-                border-bottom: 1px solid #D9D9D9;
-            }
+    .btn-pro-buynow {
+        display: block;
+        width: 100%;
+        background-color: #0b665a;
+        padding: 11px;
+        padding-bottom: 14px;
+        padding-left: 0px;
+        padding-right: 0px;
+        border-radius: 5px;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        margin-top: 5px;
+        border: none;
+        font-size: large;
+    }
 
-        .table-donhang thead th {
-            border-bottom-width: 1px;
-            background-color: #0b665a;
-            font-size: 14px;
-            color: #fff;
-        }
-
-        .table2 td, .table2 th {
-            padding: 1.75rem;
-            vertical-align: top;
-            line-height: 16px;
-            font-size: 14px;
-            line-height: 1.5;
-            border-top: 1px solid #dee2e6;
-        }
-
-        .table-donhang td, .table-donhang th {
-            background-color: #ececec;
-            border: 1px solid #dee2e6;
-        }
-
-        .my-1 {
-            margin-bottom: .25rem !important;
-        }
-
-        .custom-select {
-            display: inline-block;
-            width: 100%;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #495057;
-            vertical-align: middle;
-            /*background: url(https://previews.123rf.com/images/tifani1/tifani11801/tifani1180100316/94060669-set-icon-arrow-up-and-down-.jpg) no-repeat right .75rem center/62px 47px;*/
-            background-color: #fff;
-            border-radius: .25rem;
-            /*-webkit-appearance: none;*/
-            font-size: 17px;
-            height: calc(1.5em + .75rem + 2px);
-            padding: .375rem 1.75rem .375rem .75rem;
-        }
-
-        .price-pro {
-            font-family: unset;
-            font-size: 18px;
-            color: #3e3e3e;
-            font-weight: bold;
-        }
-
-        .c5 {
-            height: 5px;
-            clear: both;
-        }
-
-        .mr-top-20 {
-            margin-top: 20px;
-        }
-
-        .price-sum {
-            font-size: 24px;
-            color: #ea212d;
-            font-family: "fantasy";
-        }
-
-        .box-chuy {
-            margin-top: 20px;
-        }
-
-            .box-chuy .title-box-chuy {
-                font-size: 16px;
-                font-family: serif;
-                text-transform: uppercase;
-                padding-bottom: 5px;
-                margin-bottom: 20px;
-                background-color: #f5f5f5;
-                padding: 10px;
-                font-weight: bold;
-            }
-
-        .icon-bell {
-            background: url(https://www.iconsdb.com/icons/preview/red/bell-3-xxl.png) no-repeat left .75rem center/15px 15px;
-            padding: 0px 0px 0px 30px;
-        }
-
-        .cotent-box-chuy {
-            font-size: 14px;
-            line-height: 22px;
-            padding-left: 10px;
-        }
-
-            .cotent-box-chuy > div {
-                margin-bottom: 7px;
-            }
-
-        .cotent-text {
-            background: url(https://baohiemtructuyen.com.vn/images/sub_menu_bullet.png) no-repeat 0 11px;
-            padding: 7px 0 5px 15px;
-        }
-
-        .btn-pro-buynow {
-            display: block;
-            width: 100%;
-            background-color: #0b665a;
-            padding: 11px;
-            padding-bottom: 14px;
-            padding-left: 0px;
-            padding-right: 0px;
-            border-radius: 5px;
-            color: #fff;
-            font-family: "Helb";
-            text-align: center;
-            margin-top: 5px;
-            border: none;
-            font-size: large;
-        }
-
-            .btn-pro-buynow:hover {
-                background-color: #ea212d;
-                color: #fff;
-            }
-
-        input {
-            max-width: 100%;
-        }
-
-        .result {
-            background-color: #f7f7f7;
-        }
-
-            .result .item-result {
-                padding-top: 10px;
-                padding-bottom: 10px;
-                border-bottom: solid 1px #c8c8c8;
-                padding-left: 15px;
-                padding-right: 15px;
-            }
-
-                .result .item-result span {
-                    display: block;
-                    font-size: 14px;
-                    color: #7c7c7c;
-                }
-
-        .result-red {
+        .btn-pro-buynow:hover {
             background-color: #ea212d;
             color: #fff;
-            font-family: "Helb";
-            text-align: center;
-            padding-top: 30px;
-            padding-bottom: 30px;
-            padding-left: 0px;
-            padding-right: 0px;
-            font-size: large;
         }
 
-            .result-red strong {
-                font-weight: normal;
-                font-size: 20px;
+    input {
+        max-width: 100%;
+    }
+
+    .result {
+        background-color: #f7f7f7;
+    }
+
+        .result .item-result {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: solid 1px #c8c8c8;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+            .result .item-result span {
+                display: block;
+                font-size: 14px;
+                color: #7c7c7c;
             }
-    </style>
+
+    .result-red {
+        background-color: #ea212d;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 0px;
+        padding-right: 0px;
+        font-size: large;
+    }
+
+        .result-red strong {
+            font-weight: normal;
+            font-size: 20px;
+        }
+
+
+
+    .product-card .item-content .btn-learn-more {
+        position: absolute;
+        bottom: 20px;
+        width: calc(100% - 40px);
+    }
+
+    .shadow {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    }
+
+    *, :after, :before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .box-border-pro {
+        position: relative;
+        background: #fff;
+        border: 1px solid #e4e4e4;
+        padding: 25px;
+    }
+
+    .tab-pro {
+        font-size: large;
+        padding: 0;
+        text-align: center;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+
+    .benefit-item.benefit-item-description-table {
+        font-size: 16px;
+    }
+
+    .benefit-item .benefit-item-main {
+        position: relative;
+        background: #fff;
+    }
+
+    .benefit-item .benefit-icon {
+        width: 50px;
+        height: 50px;
+        background: #ed1b2e;
+        color: #fff;
+        text-align: center;
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        transform: translateX(-50%);
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        z-index: 10;
+    }
+
+        .benefit-item .benefit-icon i {
+            position: relative;
+            top: 11px;
+        }
+
+    .laces-checkbox {
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+        text-align: center;
+        border: 1px solid #999;
+        border-radius: 0.3rem;
+    }
+
+    .icon-benefit-shield {
+        width: 27px;
+        height: 28px;
+        background-position: 0 -770px;
+    }
+
+    .icon-benefit {
+        background-image: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngitem.com%2Fmiddle%2FmxRJbm_motorcycle-gap-cover-icon-bike-insurance-icon-png%2F&psig=AOvVaw2Wm29PAOOxFCc96L2YPndS&ust=1584883624783000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOCUouvVq-gCFQAAAAAdAAAAABAJ);
+    }
+
+    .icon {
+        display: inline-block;
+    }
+
+    .benefit-item .benefit-image {
+        position: relative;
+        height: 130px;
+    }
+
+    .full-cover {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50%;
+    }
+
+    .benefit-item .benefit-name-wrapper {
+        width: 100%;
+    }
+
+    .v-middle {
+        display: block;
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .benefit-item .benefit-name {
+        font-size: 24px;
+        line-height: 28px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .app-checkbox input:checked, .app-checkbox input:not(:checked) {
+        position: absolute;
+        left: -9999px;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        margin: 4px 0 0;
+        margin-top: 1px\9;
+        line-height: normal;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        box-sizing: border-box;
+        padding: 0;
+    }
+
+    .app-checkbox input:checked + label, .app-checkbox input:not(:checked) + label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 35px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .app-checkbox input:checked + label, .app-checkbox input:not(:checked) + label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 35px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-body {
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .benefit-item .benefit-body {
+        height: 190px;
+        text-align: center;
+        padding: 40px 50px 0;
+        -webkit-box-shadow: 0 0 20px rgba(0,0,0,.1);
+        -moz-box-shadow: 0 0 20px rgba(0,0,0,.1);
+        box-shadow: 0 0 20px rgba(0,0,0,.1);
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item {
+        padding: 14px 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item-name {
+        text-align: right;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .table-head .item-name span, .benefit-item.benefit-item-description-table .benefit-description-table .table-head .item-value span {
+        background: #b8e986;
+        padding: 3px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item-value {
+        text-align: left;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item {
+        padding: 14px 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item-name {
+        text-align: right;
+    }
+
+    .app-checkbox input:checked + label:before, .app-checkbox input:not(:checked) + label:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 24px;
+        height: 24px;
+        background: #fff;
+        border: 2px solid grey;
+    }
+
+    app-checkbox input:checked + label, .app-checkbox input:not(:checked) + label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 35px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .app-checkbox input:checked, .app-checkbox input:not(:checked) {
+        position: absolute;
+        left: 23px;
+        background-color: white;
+        top: -4px;
+    }
+
+    .tab-pro li.active a {
+        background-color: #0b665a;
+        display: inline-block;
+        color: #fff;
+        padding: 15px;
+    }
+
+    .tab-pro li a {
+        display: inline-block;
+        padding: 15px;
+    }
+
+        .tab-pro li a:hover {
+            background-color: #0b665a;
+            color: #fff;
+        }
+
+    .tab-pro li {
+        display: inline-block;
+    }
+
+    label {
+        display: inline;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 300;
+    }
+
+    #ctl18_fullname {
+        width: 60%
+    }
+
+    #ctl18_txtAddress {
+        width: 70%;
+        height: 124px
+    }
+
+    #ctl18_plates {
+        width: 67%
+    }
+
+    #ctl18_ChassisNumber {
+        width: 67%
+    }
+
+    #datepicker {
+        width: 55%
+    }
+
+    .mb-15 {
+        margin-bottom: 15px;
+    }
+
+    .hd-info-pro {
+        background-color: #337ab7;
+        color: #fff;
+        font-family: inherit;
+        text-transform: uppercase;
+        font-size: 15px;
+        padding: 15px;
+        border-bottom: solid 1px #fff
+    }
+
+    .tab-pane.active {
+        display: block;
+        margin-bottom: 42px;
+    }
+
+    .tab-pane {
+        display: none;
+        opacity: 1;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .list-header {
+        border-bottom-width: 1px;
+        background-color: #0b665a;
+        font-size: 14px;
+        color: #fff;
+        padding: .75rem;
+        font-weight: bold;
+        border: solid 1px #fff;
+    }
+
+    .box-border-pro {
+        position: relative;
+        background: #fff;
+        border: 1px solid #e4e4e4;
+        padding: 25px;
+    }
+
+    .frmpro {
+        width: 100%;
+        color: #3e3e3e;
+    }
+
+    .frm .custom-control-label {
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 10px;
+    }
+
+    .frm .custom-control-input:checked ~ .custom-control-label::before {
+        background-color: #0b665a;
+        border-color: #0b665a;
+    }
+
+    .frmpro .col-form-label {
+        line-height: 1.7em;
+        font-size: 18px;
+        color: #3e3e3e;
+    }
+
+    .col-form-label-first {
+        text-align: left;
+    }
+
+    .frmpro i {
+        font-size: 12px;
+        line-height: normal !important;
+    }
+
+    .pad-top-5 {
+        display: block;
+        padding-top: 5px;
+    }
+
+    .btn-pro {
+        background-color: #ea212d;
+        padding: 12px;
+        padding-left: 0;
+        padding-right: 0;
+        border: none;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: 700;
+        width: 100%;
+        transition: all 0.15s ease-in-out;
+        font-size: large;
+    }
+
+    .btn-pro-buynow {
+        display: block;
+        width: 100%;
+        background-color: #0f75bd;
+        padding: 11px;
+        padding-bottom: 14px;
+        padding-left: 0px;
+        padding-right: 0px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        margin-top: 5px;
+        border: none;
+        font-size: large;
+    }
+
+    .banner {
+        width: 100%;
+        height: 600px;
+        background-image: url(https://www.masseyins.com/wp-content/uploads/2019/03/Motorcycle-miniature-model-figure-on-passport-1024x682.jpeg);
+        background-position: center center;
+        background-size: cover;
+    }
+
+    input[type=radio] {
+        border: 1px solid gray;
+        padding: 0.5em;
+        -webkit-appearance: none;
+    }
+
+        input[type=radio]:checked {
+            background: url(data:image/gif;base64,R0lGODlhAQABAPAAAP///////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==) no-repeat center center;
+            background-size: 9px 9px;
+        }
+
+        input[type=radio]:focus {
+            outline-color: transparent;
+        }
+
+
+    .m-0 {
+        margin: 0 !important;
+    }
+
+    .btn-pro-buynow:hover {
+        background-color: #ea212d;
+        color: #fff;
+    }
+
+    .btn-pro:hover {
+        background-color: #0b665a;
+        color: #fff;
+    }
+
+    .frmpro .txt {
+        padding: .375rem .75rem;
+    }
+
+    .frm .txt {
+        padding: 14px;
+        border: solid 2px #c8c8c8;
+    }
+
+    .frm .form-control {
+        height: calc(3em + 0.75rem + 4px);
+    }
+
+    .icondate {
+        position: absolute;
+        right: 385px;
+        top: 13px;
+        background-image: url("https://baohiemtructuyen.com.vn/images/icon/cal.png");
+        background-repeat: no-repeat;
+        width: 26px;
+        height: 26px;
+    }
+
+
+    *, :after, :before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .result {
+        background-color: #f7f7f7;
+    }
+
+        .result .item-result {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: solid 1px #c8c8c8;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+            .result .item-result span {
+                display: block;
+                font-size: 14px;
+                color: #7c7c7c;
+            }
+
+    .result-red {
+        background-color: #ea212d;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 0px;
+        padding-right: 0px;
+        font-size: large;
+    }
+
+        .result-red strong {
+            font-weight: normal;
+            font-size: 20px;
+        }
+
+    .error {
+        color: red;
+        font-size: 13px
+    }
+</style>
 <section>
     <div class="banner">
 
@@ -259,89 +767,139 @@
 
 </section>
 @*<section>
-    <div class="subslide shadow">
-        <div class="thumb" style="background-image: url(https://humanhealth.com.hk/en/service/detail/32/upload/service/32/self/5c108ff960152.jpg)"></div>
-    </div>
-</section>*@
+        <div class="subslide shadow">
+            <div class="thumb" style="background-image: url(https://humanhealth.com.hk/en/service/detail/32/upload/service/32/self/5c108ff960152.jpg)"></div>
+        </div>
+    </section>*@
 @*<div class="container">
-    <ul class="tab-pro">
-        <li class="nav-item "><a href="#">Information</a></li>
-        <li class="nav-item active"><a href="#">Order</a></li>
-        <li class="nav-item "><a href="#">Log in</a></li>
-        <li class="nav-item "><a href="#">Delivery & payment</a></li>
-    </ul>
-</div>*@
+        <ul class="tab-pro">
+            <li class="nav-item "><a href="#">Information</a></li>
+            <li class="nav-item active"><a href="#">Order</a></li>
+            <li class="nav-item "><a href="#">Log in</a></li>
+            <li class="nav-item "><a href="#">Delivery & payment</a></li>
+        </ul>
+    </div>*@
 <section class="main-content">
-    <div class="container">
+    <div class="container2" style="margin:auto">
         <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="container" style="margin-bottom:45px">
+                    <div _ngcontent-c5="" class="row">
+                        @foreach (var item in ViewBag.insurancepackages)
+                        {
+                            <div _ngcontent-c5="" class="col-md-6" style="margin-top:30px">
+                                <div _ngcontent-c5="" class="benefit-item benefit-item-description-table">
+                                    <div _ngcontent-c5="" class="benefit-item-main">
+                                        <div _ngcontent-c5="" class="benefit-icon">
+                                            <i _ngcontent-c5="" class="icon icon-benefit icon-benefit-shield"></i>
+                                        </div>
+                                        <div _ngcontent-c5="" class="benefit-image full-cover" style="background-image: url('https://ngocdiep.vn/uploads/images/img-5787-rs(1).jpg')">
+                                            <div _ngcontent-c5="" class="benefit-name-wrapper v-middle">
+                                                <h2 _ngcontent-c5="" class="benefit-name">
+                                                    <div _ngcontent-c5="" class="app-checkbox agree-with-term">
+                                                        <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' name="insurancePackageId" required /></label>                                                           @*<input _ngcontent-c5="" id="choose1" name="choose1" type="checkbox"> <label _ngcontent-c5="" for="choose1">*@
+                                                        <span _ngcontent-c5="" class="checkout-term">@item.Name</span>
 
-            <div class="col-lg-9 col-md-12 col-sm-12">
+                                                    </div>
+                                                </h2>
+                                            </div>
+                                        </div>
+                                        <div _ngcontent-c5="" class="benefit-body">
+                                            <div _ngcontent-c5="" class="benefit-description-table">
+                                                <div _ngcontent-c5="" class="table-head">
+                                                    <div _ngcontent-c5="" class="row item">
+                                                        <div _ngcontent-c5="" class="col-xs-4">
+                                                            <p _ngcontent-c5="" class="item-name">
+                                                                <span _ngcontent-c5="">
+                                                                    Description
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                        <div _ngcontent-c5="" class="col-xs-8">
+                                                            <p _ngcontent-c5="" class="item-value" style="color: black;">
+                                                                <span _ngcontent-c5="" style="font-weight: bold;background: white;">@item.Description<span _ngcontent-c5="" class="new-line" style="background: white;"><span _ngcontent-c5="" style="font-weight: bold;background: white;">10 triệu đồng</span> trước rủi ro Tử vong</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div _ngcontent-c5="" class="table-head">
+                                                    <div _ngcontent-c5="" class="row item">
+                                                        <div _ngcontent-c5="" class="col-xs-4">
+                                                            <p _ngcontent-c5="" class="item-name">
+                                                                <span _ngcontent-c5="">Charges</span>
+                                                            </p>
+                                                        </div>
+                                                        <div _ngcontent-c5="" class="col-xs-8">
+                                                            <p _ngcontent-c5="" class="item-value">
+                                                                <span _ngcontent-c5="" style="font-weight: bold;background: white;">@item.Price/year</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+                    </div>
+                </div>
+
                 <div class="hd-info-pro">ENTER THE INSURED'S INFORMATION TO CHARGE</div>
                 <input class="price_packageInsurance" value=" @ViewBag.Price" type="hidden" />
 
                 <div id="ctl18_DivOption2">
-                    <table class="table2 table-bordered table-hover table-donhang table-responsive-lg">
+                    <table class="table2 table table-bordered table-hover table-donhang table-responsive-lg" style="width:100%">
                         <thead>
                             <tr>
-                                <th class="text-center align-middle" style="width:5%" scope="col"></th>
-                                <th class="text-center align-middle" style="width:5%" scope="col">No.</th>
-                                <th class="text-center align-middle" style="width:20%" scope="col">Date of birth</th>
-                                <th class="text-center align-middle" style="width:20%" scope="col">Programme</th>
-                                <th class="text-center align-middle" style="width:15%" scope="col">Dental extension</th>
-                                <th class="text-center align-middle" style="width:15%" scope="col">Expanding maternity</th>
-                                <th class="text-center align-middle" style="width:20%" scope="col">Insurance fee (VAT exempt)</th>
+
+                                @*<th class="text-center align-middle" style="width:5%" scope="col">No.</th>*@
+                                <th class="text-center align-middle" scope="col">Date of birth</th>
+                                <th class="text-center align-middle" scope="col">Programme</th>
+                                <th class="text-center align-middle" scope="col">Name</th>
+                                <th class="text-center align-middle" scope="col">Email</th>
+                                <th class="text-center align-middle" scope="col">Address</th>
+                                <th class="text-center align-middle" scope="col">PhoneNumber</th>
+                                <th class="text-center align-middle" scope="col">Price</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             @Html.AntiForgeryToken()
-                            @for (int i = 1; i < @ViewBag.Number + 1; i++)
-                            {
-                                <tr>
-                                    <th class="align-middle" scope="row">
-                                        <img id="imgStatus_1" src="https://baohiemtructuyen.com.vn/images/question.png" style="cursor: pointer; cursor: hand;" alt="Trạng thái" />
-                                    </th>
-                                    <td>
-                                        <span style="display: none;">
-                                            <input name="ctl18$rptPHA1$ctl00$txtPanelId" type="text" value="ctl18_rptPHA1_ctl00" id="ctl18_rptPHA1_ctl00_txtPanelId" />
-                                            <span id="ctl18_rptPHA1_ctl00_lblPersonId_">1</span>
-                                        </span>
-                                        @i
-                                    </td>
-                                    <td class="align-middle pos-re">
-                                        <input name="ctl18$rptPHA1$ctl00$txtDateofBirth_" type="text" id="ctl18_rptPHA1_ctl00_txtDateofBirth_" class="form-control txt birthDay2" onblur="CalPHAPremium();" />
-                                    </td>
-                                    <td class="align-middle">
-                                        <select name="ctl18$rptPHA1$ctl00$ddlPackage_" id="program-selecter-@i" class="custom-select" onchange="CalPHAPremium(@i)">
-                                            <option value="">Choose a program</option>
-                                            @foreach (var item in Model)
-                                            {
-                                                <option value="@item.Price">@item.Name</option>
-                                            }
-                                        </select>
-                                    </td>
-                                    <td class="align-middle">
-                                        <select name="ctl18$rptPHA$ctl00$ddlDentistry_" id="ctl18_rptPHA_ctl00_ddlDentistry_" class="custom-select my-1 mr-sm-2 txt" onchange="CalPHAPremium();">
-                                            <option value="">Choose to expand</option>
-                                            <option value="2">No</option>
-                                            <option value="1">Yes</option>
 
-                                        </select>
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        <select name="ctl18$rptPHA$ctl00$ddlMaternity_" id="ctl18_rptPHA_ctl00_ddlMaternity_" class="custom-select my-1 mr-sm-2 txt" onchange="CalPHAPremium();">
-                                            <option value="">Choose to expand</option>
-                                            <option value="2">No</option>
-                                            <option value="1">Yes</option>
+                            <tr class="tr">
+                                <td class="align-middle pos-re">
+                                    <input name="dateofbirth" type="datetime" class="dateofbirth form-control txt birthDay2" />
+                                </td>
+                                <td class="align-middle">
+                                    <select name="programme" class="custom-select program-selecter" id="program-selecter-1" onchange="CalPHAPremium(1)">
+                                        <option>Choose a program</option>";
+                                    </select>
+                                </td>
+                                <td class="align-middle">
+                                    <input type="text" name="Name" class="Name form-control" value="" />
+                                </td>
+                                <td class="align-middle">
+                                    <input type="text" name="Email" class="Email form-control" value="" />
+                                </td>
+                                <td class="align-middle">
+                                    <input type="text" name="PhoneNumber" class="Address form-control" value="" />
+                                </td>
+                                <td class="align-middle">
+                                    <input type="text" name="PhoneNumber" class="Phone form-control" value="" />
+                                </td>
+                                <td class="text-center align-middle">
+                                    <div class="price-pro"><div name="ctl18$rptPHA1$ctl00$txtPremium_" type="text" value="0" id="displayprice-1" class="total form-control txt text-right" </div></div>
+                                </td>
+                            </tr>
 
-                                        </select>
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        <div class="price-pro"><input name="ctl18$rptPHA1$ctl00$txtPremium_" type="text" value="0" id="son-@i" class="son form-control txt text-right" /></div>
-                                    </td>
-                                </tr>
-                            }
                         </tbody>
+                        <th colspan="8" style="cursor:pointer;padding:0" class="text-center " id="click"><img src="https://cdn.onlinewebfonts.com/svg/img_248922.png" width="40px" height="40px" alt="plus" /></th>
+
+
                     </table>
+
                     <i>
                         (Date of birth in correct format: day / month / year, age: enter age from 1 to 65 years old)
                     </i>
@@ -359,11 +917,18 @@
                         <strong class="fee"></strong><span id="ctl18_spancoupon"></span>
                     </div>
                 </div>
-                <p class="form_button">
-                    <input type="submit" name="ctl18$btnContinue" onclick="window.location.href='/Contract';" value="Continue" class="btn-pro-buynow hvr-forward" />
+                <div class="form_button  container ">
+                    <div class="form_button  container ">
+                        <div class="col-6">
+                            <input type="submit" name="ctl18$btnContinue" onclick="getdata()" value="Continue" class="btn-pro-buynow hvr-forward " />
 
-                    <input type="button" onclick="window.location.href='/MedicalInsurance/Information';" Class="btn-pro-buynow hvr-forward" value="Back" />
-                </p>
+                        </div>
+                        <div class="col-6">
+                            <input type="button" onclick="window.location.href='/MedicalInsurance/Information';" Class="btn-pro-buynow hvr-forward col-6" value="Back" />
+
+                        </div>
+                    </div>
+                </div>
                 <div class="box-chuy">
                     <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
                     <div class="cotent-box-chuy">
@@ -375,49 +940,273 @@
                 </div>
 
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-12">
-                <div class="hd-info-pro">INSURANCE FEES</div>
-                <div class="result">
-                    <div class="item-result">
-                        <span>Total fee (including VAT):</span>
-                        <strong><label for="ctl18_lblTotalPremiumIcludeVAT" class="price-sum">0 VNĐ</label></strong>
-                    </div>
-                    <div id="ctl18_Promotions1_pnPromotions">
-
-
+            @*<div class="col-lg-3 col-md-4 col-sm-12">
+                    <div class="hd-info-pro">INSURANCE FEES</div>
+                    <div class="result">
                         <div class="item-result">
-                            <span>Discount amount:</span>
-                            <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">0 VNĐ</label></strong>
+                            <span>Total fee (including VAT):</span>
+                            <strong><label for="ctl18_lblTotalPremiumIcludeVAT" class="price-sum">0 VNĐ</label></strong>
                         </div>
-                        <div class="result-red">
-                            <div>Total net charge (including VAT) actually collected:</div>
-                            <strong><label for="ctl18_Promotions1_lblHasToPayPremium" class="total">0 VNĐ</label></strong>
+                        <div id="ctl18_Promotions1_pnPromotions">
+
+
+                            <div class="item-result">
+                                <span>Discount amount:</span>
+                                <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">0 VNĐ</label></strong>
+                            </div>
+                            <div class="result-red">
+                                <div>Total net charge (including VAT) actually collected:</div>
+                                <strong><label for="ctl18_Promotions1_lblHasToPayPremium" class="total">0 VNĐ</label></strong>
+                            </div>
+                            <a id="ctl18_lbtBook" class="btn-pro-buynow" href="javascript:__doPostBack('ctl18$lbtBook','')">Order</a>
                         </div>
-                        <a id="ctl18_lbtBook" class="btn-pro-buynow" href="javascript:__doPostBack('ctl18$lbtBook','')">Order</a>
                     </div>
-                </div>
-            </div>
+                </div>*@
         </div>
     </div>
 </section>
 
+
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
+        $('input[type=datetime]').datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true
+
+            /*other options goes here...*/
+        })
+        var totalprice;
         function CalPHAPremium(i) {
-            var price_packageInsurance = $('.price_packageInsurance').val();
-            var price_programme = $('#program-selecter-'+i).children('option:selected').val();
-            var TotalPrice = price_packageInsurance * price_programme;
-            $('#son-' + i).val(TotalPrice);
-            var total_price_contract = $('.son').map( function() { return this.value }).get().reduce((a, b) => a + parseInt(b), 0)
-            $('.price-sum').html(total_price_contract + " USD");
-            $('.total').html(total_price_contract + " USD");
-            contract = {
-            ApplicationUserId : 1,
-            TotalPrice : total_price_contract,
-            InsuranceId : 17
+            var insuranpackageId = $('input[name="insurancePackageId"]:checked').attr("class");
+            var price_programme = $('#program-selecter-' + i).children('option:selected').attr("class");
+            var TotalPrice = parseInt(insuranpackageId) + parseInt(price_programme);
+            $('#displayprice-' + i).text(TotalPrice.toString());
+            var sum = 0;
+            $('.total').each(function () {
+                sum += +$(this).text() || 0;
+            });
+            $(".price-sum").text(sum);
+            totalprice = sum
+
+        }
+
+
+
+
+        $('#ctl18_lbtBook').click(function () {
+            $.ajax({
+                url: "/Contract/CreateContract",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                    contract
+                },
+                success: function (res) {
+                    alert(1)
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        })
+
+
+
+
+        var price;
+        var insuranpakge;
+        $('input[name="insurancePackageId"]')
+            .change(function () {
+                if ($(this).is(":checked")) {
+                    insuranpakge = $(this).val()
+                    price = $(this).attr("class");
+                    //alert(price)
+                }
+            });
+
+        var objects = {
+
+            'item': []
+        };
+        var prices = [];
+        var emails = [];
+        var selectprogram = [];
+        var dateofbirths = [];
+        var names = [];
+        var phones = [];
+        var programnemname = [];
+        var address = [];
+        function getdata() {
+     var insuranpackageId = $('input[name="insurancePackageId"]:checked').attr("class");
+
+             $.each($(".program-selecter option:selected"), function () {
+                selectprogram.push($(this).val());
+                 var unitprice = parseInt($(this).attr("class")) + parseInt(insuranpackageId)
+                 prices.push(unitprice);
+                  programnemname.push($(this).text());
+            });
+           
+          
+
+            $(".Email").each(function () {
+                emails.push($(this).val());
+            });
+            $(".Address").each(function () {
+                address.push($(this).val());
+            });
+
+            $(".Name").each(function () {
+                names.push($(this).val());
+            });
+
+            $(".Phone").each(function () {
+                phones.push($(this).val());
+            });
+
+            $(".dateofbirth").each(function () {
+                dateofbirths.push($(this).val());
+            });
+            objects['InsurancePackageId'] = insuranpakge;
+            objects['Totalprice'] = totalprice;
+            var LengthTr = $(".program-selecter").length
+            for (var i = 0; i < LengthTr; i++) {
+
+                var item =
+                {
+                    'programname': programnemname[i],
+                    'unitprice': prices[i],
+                    'DateOfbirth': dateofbirths[i],
+                    'Programmeid': selectprogram[i],
+                    'Name': names[i],
+                    'Email': emails[i],
+                    'Address': address[i],
+                    'PhoneNumber': phones[i]
+                };
+                objects.item.push(item)
             }
 
+            console.log(programnemname)
+            if (typeof (Storage) !== "undefined") {
+                sessionStorage.setItem('medical', JSON.stringify(objects));
+
+            } else {
+                alert('Trình duyệt của bạn đã quá cũ. Hãy nâng cấp trình duyệt ngay!');
+            }
+
+        }
+
+
+
+    </script>
+
+
+
+
+
+
+
+
+    <script>
+
+
+        $("#click").click(function () {
+            var index = $("table tr").length
+
+            var html = `<tr id="trid-${index}" class="tr">
+                                                                                                        <td class="align-middle pos-re">
+                                                                                                                <input name="dateofbirth" type="datetime" class="dateofbirth form-control txt birthDay2" onblur="CalPHAPremium();" />
+                                                                                                               </td>
+                                                                                                        <td class="align-middle">
+                                                                                                        <select name="programme" class="custom-select program-selecter form-control" id="program-selecter-${index}"onchange="CalPHAPremium(${index})" >
+                                                                                                        </select>
+                                                                                                        </td>
+                                                                                                         <td class="align-middle">
+                                                                                                                                        <input type="text" name="Name" class="Name form-control" value="" />
+                                                                                                                                    </td>
+                                                                                                                                    <td class="align-middle">
+                                                                                                                                        <input type="text" name="Email" class="Email form-control" value="" />
+                                                                                                                                    </td>
+                                                                        <td class="align-middle">
+                                                                                                        <input type="text" name="PhoneNumber" class="Address form-control" value="" />
+                                                                                                    </td>
+                                                                                                                                    <td class="align-middle">
+                                                                                                                                        <input type="text" name="PhoneNumber" class="Phone form-control" value="" />
+                                                                                                                                    </td>
+                                                                                                                                    <td class="text-center align-middle">
+                                                                                                                                        <div class="price-pro"><div name="ctl18$rptPHA1$ctl00$txtPremium_" type="text" value="0" id="displayprice-${index}" class="total form-control txt text-right" </div></div>
+                                                                                                                                    </td >
+                                                                                                                                        <td> <button style="color:red ; text-align:center;background: red; border: none;height: 5px; width: 20px;}" onclick="deleted(${index})"></button></td>
+                                                                                                                                       <tr/>`
+            $(".table2").append(html)
+
+            getprogramme(index)
+            $('input[type=datetime]').datepicker({
+                dateFormat: 'yy-mm-dd',
+                changeMonth: true,
+                changeYear: true,
+                autoclose: true
+
+                /*other options goes here...*/
+            })
+        })
+
+        function deleted(i) {
+            $(`#trid-${i}`).remove();
+        }
+
+        $(document).ready(function () {
+            $.getJSON("/MedicalInsurance/ViewProgramme",
+                function (data) {
+                    console.log(data)
+                    //Append each row to html table
+                    $.each(data.programme, function (key, value) {
+
+                        $('.program-selecter').append($('<option>', {
+                            value: value.Id,
+                            text: value.Name,
+                            class: value.Price,
+
+
+                        }));
+
+                    })
+                });
+        })
+
+        function getprogramme(i) {
+            $.getJSON("/MedicalInsurance/ViewProgramme",
+                function (data) {
+                    var htmlContentSelecter = " <option>Choose a program</option> "
+                    console.log(data)
+                    //Append each row to html table
+                    $.each(data.programme, function (key, value) {
+                        htmlContentSelecter += `<option class="${value.Price}" value="${value.Id}">${value.Name}</option>`
+                        //$('.program-selecter').append($('<option>', {
+                        //    value: value.Id,
+                        //    text: value.Name,
+                        //    class: value.Price,
+
+
+                        //   }));
+
+                    })
+                    $(`#program-selecter-${i}`).html(htmlContentSelecter)
+
+                });
+        }
+
+    </script>
+
+}
+
+
+
+
+<style>
     a {
         text-decoration: none;
         transition: all 0.15s ease-in-out;
@@ -575,14 +1364,12 @@
             color: #fff;
         }
 
-          .banner {
+    .banner {
         width: 100%;
         height: 600px;
         background-image: url(https://api.visitjeju.net/editorStore/file/201911/28/3c6fb3fc-4b5c-4fd7-b924-10d45da3e22b.jpg);
         background-position: center center;
         background-size: cover;
-
-    input {
         max-width: 100%;
     }
 
@@ -621,24 +1408,6 @@
             font-size: 20px;
         }
 </style>
-        }
-        $('#ctl18_lbtBook').click(function () {
-            $.ajax({
-                url: "/Contract/CreateContract",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                    contract
-                },
-            success: function (res) {
-                alert(1)
-                    },
-                    error: function () {
-                        alert('error');
-                    }
-                });
-        })
-    </script>
-}
+
+
 

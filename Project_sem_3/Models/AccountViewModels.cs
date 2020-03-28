@@ -235,4 +235,20 @@ namespace Project_sem_3.Models
         [Required]
         public DateTime Duration { get; set; }
     }
+    public class ContractMedical{
+        public string InsurancePackageId { get; set; }
+        public string Totalprice { get; set; }
+        public List<Item> Items { get; set; }
+    }
+
+    public class Item
+    {
+        public string unitprice { get; set; }
+        public string Programmeid { get; set; }
+        public string DateOfbirth { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
+    }
 }
