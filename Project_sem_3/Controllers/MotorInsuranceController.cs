@@ -20,7 +20,7 @@ namespace Project_sem_3.Controllers
         }
         public ActionResult Order()
         {
-            var insurancePackages = db.InsurancePackages.Where(i=>i.InsuranceId==16).Where(i=>i.Status==1);
+            var insurancePackages = db.InsurancePackages.Where(i=>i.InsuranceId==27).Where(i=>i.Status==1);
             ViewBag.shoppingCart = LoadShoppingCart();
             ViewBag.insurancepackages = insurancePackages;
             return View();

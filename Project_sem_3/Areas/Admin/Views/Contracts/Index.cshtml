@@ -40,7 +40,7 @@
             </div>*@
 
         <div style="margin-bottom:15px;">
-            <a href="https://localhost:44362/Admin/Contracts/Create" class="btn btn-info" role="button">Create Contracts</a>
+            <a href="https://localhost:44362/Admin/Contracts/Confirmed" class="btn btn-info" role="button">Contracts Confirmed</a>
             <a href="https://localhost:44362/Admin/Contracts/Deleted" class="btn btn-info float-right" role="button">Contracts Deleted</a>
         </div>
 
@@ -88,8 +88,8 @@
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Total Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
 
-                                           
-                                            
+
+
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
                                     </thead>
@@ -112,13 +112,13 @@
 
 
 
-                                                <td>@item.ApplicationUserId</td>
+                                                <td>@item.Insurance.Id</td>
 
                                                 <td>@item.TotalPrice</td>
                                                 <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
                                                 <td>@item.UpdatedAt.ToString("dd-MM-yyyy")</td>
-                                                
-                                                <td>     
+
+                                                <td>
                                                     <div class="btn-group">
                                                         <button class="btn btn-primary">
                                                             @if (@item.Insurance.Id == 27)
@@ -138,8 +138,9 @@
                                                                 @Html.RouteLink("Detail", new { action = "Index", controller = "MedicalInsurances", Id = item.Id })
                                                             }
                                                         </button>
+                                                        <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
                                                     </div>
-                                                   
+
                                                 </td>
                                             </tr>
                                         }
@@ -214,7 +215,7 @@
             }
             if (confirm("Do you want to delete?")) {
                 changeStatusPTTime(selectedIDs, action);
-             }
+            }
         })
         function changeStatusPTTime(selectedIDs, action) {
             $.ajax({
