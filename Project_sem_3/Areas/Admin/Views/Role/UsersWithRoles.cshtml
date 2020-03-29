@@ -25,7 +25,7 @@
             <thead>
             <tr>
                 <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll"/>Select All</th>
-
+                
                 <td><b>Username</b></td>
                 <td><b>Email</b></td>
                 <td><b>Roles</b></td>
@@ -41,11 +41,11 @@
                     <td><b>@user.Username</b></td>
                     <td><b>@user.Email</b></td>
                     <td><b>@user.Role</b></td>
-                    <form action="/role/DeleteConfirmedUser" method="post">
+                    @*<form action="/role/DeleteConfirmedUser" method="post">
                         @Html.AntiForgeryToken()
                         <input type="text" name="userId" value="@user.UserId"/>
                         <input type="submit" name="name" value="Deleted"/>
-                    </form>
+                    </form>*@
                 </tr>
             }
         </table>       
@@ -62,10 +62,11 @@
                 <div class="col-3" style="margin-top: 8px;">
                     <button  type="button" id="action_contract" class="btn btn-success">Confirm</button>
                 </div>  
-                <div class="col-6" style="margin-right: 0px;">
-                    @Html.DropDownList("RoleName", new SelectList(ViewBag.Roles, "Value", "Text"), new {@id = "select-action", @class=""})
-                    <button class="btn btn-danger" id="btn-role"> action</button>
-                </div>
+                <div class="col-3 form-group" style="margin-right: 0px;">
+                    @Html.DropDownList("RoleName", new SelectList(ViewBag.Roles, "Value", "Text"), new {@id = "select-action", @class="form-control"})
+                    
+                </div>    
+                <div class="col-3"><button class="btn btn-danger" id="btn-role"> Action</button></div>
             </div>
         </div>
     </div>       
