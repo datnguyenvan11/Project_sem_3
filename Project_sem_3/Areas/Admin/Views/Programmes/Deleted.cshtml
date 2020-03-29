@@ -60,7 +60,7 @@
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            @*<th rowspan="1" colspan="1"><input type="checkbox" id="checkAll_programme" />Select All</th>*@
+                                            <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll_programme" />Select All</th>
                                             <th rowspan="1" colspan="1">Name</th>
                                             <th rowspan="1" colspan="1">Price</th>
                                             <th rowspan="1" colspan="1">Status</th>
@@ -72,10 +72,10 @@
                                         @foreach (var item in Model)
                                         {
                                             <tr role="row" class="odd">
-                                                @*<td>
+                                                <td>
                                                     <input type="checkbox" class="check" value="@item.Id" />
                                                     @Html.AntiForgeryToken()
-                                                </td>*@
+                                                </td>
                                                 <td class="sorting_1">
                                                     @item.Name
                                                 </td>
@@ -83,16 +83,27 @@
                                                 <td>@item.Status</td>
 
                                                 <td>
-                                                    @*<button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
-                                                        <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
-                                                        <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>*@
-                                                    <button class="btn btn-success" id="action_return">Return Action</button>
-
+                                                    <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
                                                 </td>
                                             </tr>
                                         }
                                     </tbody>
                                 </table>
+                                <div class="card-footer">
+                                    <div class="row mt-3">
+                                        <div class="col-3 mt-2">
+                                            <div class="form-group mr-3">
+                                                <select class="form-control mr-2" id="select-action">
+                                                    <option value="6">--Chọn thao tác--</option>
+                                                    <option value="0">Active Return</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-9" style="margin-top: 8px;">
+                                            <button type="button" id="return_programmes" class="btn btn-success">Confirm</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -121,42 +132,52 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
-            var selectedIDs = new Array();
             $('#checkAll_programme').click(function () {
                 $(".check").prop('checked',
                     $(this).prop('checked'));
             })
-
-            $('#action_return').click(function () {
-                var selectedIDs = new Array();
-                $('input:checkbox.check').each(function () {
-                    if ($(this).prop('checked')) {
-                        selectedIDs.push($(this).val());
-                    }
-                });
-                if (selectedIDs.length <= 0) {
-                    alert('You have not selected insurance package !');
-                    return;
-                }
-                $.ajax({
-                    url: "/Admin/Programmes/ChangeStatus",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                        selectedIDs
-                    },
-                    success: function (res) {
-                        if (!res == false) {
-                            window.location.reload();
-                        }
-                    },
-                    error: function () {
-                        alert('error');
-                    }
-                });
-            })
         })
+
+        $('#return_programmes').click(function () {
+            var selectedIDs = new Array();
+            var action = $('#select-action').val();
+            if (action == 6) {
+                alert('Please select the action you want to perform!');
+                return;
+            }
+            $('input:checkbox.check').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDs.push($(this).val());
+                }
+            });
+            if (selectedIDs.length <= 0) {
+                alert('You have not selected a contract!');
+                return;
+            }
+            if (confirm("Do you want to active return ?")) {
+                changeStatusPTTime(selectedIDs, action);
+            }
+        })
+        function changeStatusPTTime(selectedIDs, action) {
+            $.ajax({
+                url: "/Admin/Programmes/ChangeStatus",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                    selectedIDs,
+                    action
+                },
+                success: function (res) {
+                    if (!res == false) {
+                        window.location.reload();
+                    }
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        }
 
         function handle(e) {
             if (e.keyCode === 13) {

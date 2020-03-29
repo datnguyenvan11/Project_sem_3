@@ -176,13 +176,13 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangeStatus(int[] selectedIDs)
+        public ActionResult ChangeStatus(int action, int[] selectedIDs)
         {
             foreach (int IDs in selectedIDs)
             {
                 Programme programme = db.Programmes.Find(IDs);
                 db.Programmes.Attach(programme);
-                programme.Status = 0;
+                programme.Status = action;
             }
             db.SaveChanges();
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);

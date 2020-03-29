@@ -73,7 +73,7 @@
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            @*<th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>*@
+                                            <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
                                             <th rowspan="1" colspan="1">Name</th>
                                             <th rowspan="1" colspan="1">CustomerID</th>
                                             <th rowspan="1" colspan="1">Total Price</th>
@@ -90,34 +90,40 @@
                                         @foreach (var item in Model)
                                         {
                                             <tr role="row" class="odd">
-                                                @*<td>
+                                                <td>
                                                     <input type="checkbox" class="check" value="@item.Id" />
                                                     @Html.AntiForgeryToken()
-                                                </td>*@
+                                                </td>
 
                                                 <td class="sorting_1">
                                                     @item.Insurance.Name
                                                 </td>
-                                                <td>@item.ApplicationUser.UserName</td>
+                                                <td>@item.ApplicationUserId</td>
                                                 <td>@item.TotalPrice</td>
                                                 <td>@item.CreatedAt</td>
                                                 @*<td>@item.UpdatedAt</td>*@
                                                 <td>@item.Status</td>
                                                 <td>
-                                                    @*<button class="btn btn-success">@Html.ActionLink("Confirm", "Edit", new { id = item.Id })</button>
+                                                    <div class="btn-group">
                                                         <button class="btn btn-primary">
-                                                            @if (@item.Insurance.Id == 16)
+                                                            @if (@item.Insurance.Id == 27)
                                                             {
                                                                 @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
                                                             }
-                                                            @if (@item.Insurance.Id == 19)
+                                                            @if (@item.Insurance.Id == 25)
                                                             {
                                                                 @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
                                                             }
+                                                            @if (@item.Insurance.Id == 26)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "LifeInsurances", Id = item.Id })
+                                                            }
+                                                            @if (@item.Insurance.Id == 28)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "MedicalInsurances", Id = item.Id })
+                                                            }
                                                         </button>
-
-                                                        <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>*@
-                                                    <button class="btn btn-success" id="action_return">Return Action</button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         }
@@ -125,14 +131,29 @@
 
                                     </tbody>
                                 </table>
+                                <div class="card-footer">
+                                    <div class="row mt-3">
+                                        <div class="col-3 mt-2">
+                                            <div class="form-group mr-3">
+                                                <select class="form-control mr-2" id="select-action">
+                                                    <option value="6">--Chọn thao tác--</option>
+                                                    <option value="1">Active Return</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-9" style="margin-top: 8px;">
+                                            <button type="button" id="return_contract" class="btn btn-success">Confirm</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
                             </div>
-                            <div class="col-sm-12 col-md-4"></div>
-                            <div class="col-sm-12 col-md-3">
+                            <div class="col-sm-12 col-md-3"></div>
+                            <div class="col-sm-12 col-md-4">
                                 @Html.PagedListPager(Model, page => Url.Action("Deleted", new { page }),
                                new PagedListRenderOptions()
                                {
@@ -153,42 +174,53 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
-            var selectedIDs = new Array();
-            $('#checkAll_InsurancePackage').click(function () {
+            $('#checkAll').click(function () {
                 $(".check").prop('checked',
                     $(this).prop('checked'));
             })
-
-            $('#action_return').click(function () {
-                var selectedIDs = new Array();
-                $('input:checkbox.check').each(function () {
-                    if ($(this).prop('checked')) {
-                        selectedIDs.push($(this).val());
-                    }
-                });
-                if (selectedIDs.length <= 0) {
-                    alert('You have not selected insurance package !');
-                    return;
-                }
-                $.ajax({
-                    url: "/Admin/Contract/ChangeStatus",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                        selectedIDs
-                    },
-                    success: function (res) {
-                        if (!res == false) {
-                            window.location.reload();
-                        }
-                    },
-                    error: function () {
-                        alert('error');
-                    }
-                });
-            })
         })
+
+        $('#return_contract').click(function () {
+            var selectedIDs = new Array();
+            var action = $('#select-action').val();
+            if (action == 6) {
+                alert('Please select the action you want to perform!');
+                return;
+            }
+            $('input:checkbox.check').each(function () {
+                if ($(this).prop('checked')) {
+                    selectedIDs.push($(this).val());
+                }
+            });
+            if (selectedIDs.length <= 0) {
+                alert('You have not selected a contract!');
+                return;
+            }
+            if (confirm("Do you want to active return ?")) {
+                changeStatusPTTime(selectedIDs, action);
+            }
+        })
+        function changeStatusPTTime(selectedIDs, action) {
+            $.ajax({
+                url: "/Admin/Contracts/ChangeStatus",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                    selectedIDs,
+                    action
+                },
+                success: function (res) {
+                    if (!res == false) {
+                        window.location.reload();
+                    }
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        }
+
         $(function () {
             $("#pageSize").change(function () {
                 $("#pagesize").submit();
