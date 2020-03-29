@@ -133,7 +133,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4"></div>
                             <div class="col-sm-12 col-md-3">
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+                                @Html.PagedListPager(Model, page => Url.Action("Confirmed", new { page }),
                                new PagedListRenderOptions()
                                {
                                    LiElementClasses = new List<string> { "text-paging" }
