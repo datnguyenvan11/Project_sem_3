@@ -629,6 +629,7 @@
             });
             $("#formDemo").validate({
                 rules: {
+
                     Date_Iden: "required",
                     email: {
                         required: true,
@@ -647,10 +648,12 @@
                     IdentityCard: {
                         required: true,
                         minlength: 10
-                    }
+                    },
+                    MaritalStatus: "required"
 
                 },
                 messages: {
+                    MaritalStatus: "Please enter Marital Status",
                     Date_Iden: "Please enter date_iden ",
                     email: "Please enter a valid email address",
                    
