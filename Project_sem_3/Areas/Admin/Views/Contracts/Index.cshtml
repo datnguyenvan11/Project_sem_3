@@ -190,7 +190,6 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
-            var selectedIDs = new Array();
             $('#checkAll').click(function () {
                 $(".check").prop('checked',
                     $(this).prop('checked'));
@@ -208,11 +207,16 @@
                 if ($(this).prop('checked')) {
                     selectedIDs.push($(this).val());
                 }
-            });
+            })
             if (selectedIDs.length <= 0) {
                 alert('You have not selected a contract!');
                 return;
             }
+            if (confirm("Do you want to delete?")) {
+                changeStatusPTTime(selectedIDs, action);
+             }
+        })
+        function changeStatusPTTime(selectedIDs, action) {
             $.ajax({
                 url: "/Admin/Contracts/StatusOrder",
                 type: "POST",
@@ -231,7 +235,7 @@
                     alert('error');
                 }
             });
-        })
+        }
 
         $(function () {
             $("#pageSize").change(function () {
@@ -240,7 +244,6 @@
         });
     </script>
 }
-
 <style>
     .text-paging {
         color: brown;
