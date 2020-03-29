@@ -19,7 +19,7 @@ namespace Project_sem_3.Controllers
         }
         public ActionResult Order()
         {
-            var insurancePackages = db.InsurancePackages.Where(i => i.InsuranceId == 17).Where(i => i.Status == -1);
+            var insurancePackages = db.InsurancePackages.Where(i => i.InsuranceId == 28).Where(i => i.Status == 1);
             ViewBag.insurancepackages = insurancePackages;
             return View();
 
@@ -27,9 +27,10 @@ namespace Project_sem_3.Controllers
 
         public JsonResult ViewProgramme()
         {
+            db.Configuration.ProxyCreationEnabled = false;
             var programme = db.Programmes.Where(x => x.Status == 0).ToList();
 
-            return Json(new { programme }, JsonRequestBehavior.AllowGet);
+            return Json(new { programme}, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult Order(int number, double price)
@@ -42,32 +43,32 @@ namespace Project_sem_3.Controllers
         {
             return View();
         }
+        [HttpPost]
         public ActionResult CreateContract(ContractMedical medical)
         {
-            // load cart trong session.
-            var insurancepackage = db.InsurancePackages.Find(medical.InsurancePackageId);
+           
             var contract = new Contract
             {
-                TotalPrice = Convert.ToInt32(medical.Totalprice),
-                UserId = User.Identity.GetUserId(),
-                InsuranceId = 19,
+                TotalPrice = medical.Totalprice,
+                ApplicationUserId = User.Identity.GetUserId(),
+                InsuranceId = 28,
                 MedicalInsurances = new List<MedicalInsurance>()
             };
 
-            foreach (var item in medical.Items)
+            foreach (var items in medical.items)
             {
-                DateTime dt = DateTime.ParseExact(item.DateOfbirth, "yyyy mm dd ", CultureInfo.InvariantCulture);
                 var medicalinsurace = new MedicalInsurance()
                 {
-                    InsurancePackageId = insurancepackage.Id,
-                    ProgrammeId =Convert.ToInt32(item.Programmeid) ,
-                    Name = item.Name,
-                    PhoneNumber = item.PhoneNumber,
-                    Email = item.Email,
-                    Address    = item.Address,          
+                    InsurancePackageId = System.Int32.Parse(items.InsurancePackageId),
+                    ProgrammeId = System.Int32.Parse(items.Programmeid),
+                    Name = items.Name,
+                    ContractId = contract.Id,
+                    PhoneNumber = items.PhoneNumber,
+                    Email = items.Email,
+                    Address = items.Address,
                     Quantity = 1,
-                    UnitPrice = Convert.ToInt32(item.unitprice),
-                    DateOfBirth = dt
+                    UnitPrice = items.unitprice,
+                    DateOfBirth = items.DateOfbirth
                 };
                 contract.MedicalInsurances.Add(medicalinsurace);
                 db.Contracts.Add(contract);

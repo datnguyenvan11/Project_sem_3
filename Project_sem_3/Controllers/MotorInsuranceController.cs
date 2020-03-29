@@ -82,7 +82,7 @@ namespace Project_sem_3.Controllers
             var contract = new Contract
             {
                 TotalPrice = shoppingCart.GetTotalPrice(),
-                UserId =User.Identity.GetUserId(),
+                ApplicationUserId =User.Identity.GetUserId(),
                 InsuranceId = 16,
                 MotorInsurances = new List<MotorInsurance>()
             };

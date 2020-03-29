@@ -29,7 +29,7 @@ namespace Project_sem_3.Controllers
             var contract = new Contract
             {
                 TotalPrice = insurancepackage.Price,
-                ApplicationUserId = "1",
+                ApplicationUserId = User.Identity.GetUserId(),
                 InsuranceId = 26,
                 LifeInsurances = new List<LifeInsurance>()
             };

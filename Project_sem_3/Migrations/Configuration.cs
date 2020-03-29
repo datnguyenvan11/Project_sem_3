@@ -1130,135 +1130,135 @@
 //                );
 
 
-            context.InsurancePackages.AddOrUpdate(x => x.Id,
-               new Models.InsurancePackage()
-               {
+          //  context.InsurancePackages.AddOrUpdate(x => x.Id,
+          //     new Models.InsurancePackage()
+          //     {
                   
-                   InsuranceId = 27,
-                   Name = "Compulsory insurance",
-                   DurationContract = "3 year",
-                   DurationPay = "2 month",
-                   Description = "Compulsory insurance for human liability liability Insurance for personal accident in vehicles",
-                   Price = 3,
-                   CreatedAt = DateTime.Now,
-                   UpdatedAt = DateTime.Now,
-                   DeleteAt = DateTime.Now,
-                   Status = 1
-               },
+          //         InsuranceId = 27,
+          //         Name = "Compulsory insurance",
+          //         DurationContract = "3 year",
+          //         DurationPay = "2 month",
+          //         Description = "Compulsory insurance for human liability liability Insurance for personal accident in vehicles",
+          //         Price = 3,
+          //         CreatedAt = DateTime.Now,
+          //         UpdatedAt = DateTime.Now,
+          //         DeleteAt = DateTime.Now,
+          //         Status = 1
+          //     },
              
-                 new Models.InsurancePackage()
-               {
+          //       new Models.InsurancePackage()
+          //     {
                  
-                   InsuranceId = 27,
-                    DurationContract = "3 year",
-                    DurationPay= "2 month",
-                   Name = "Compulsory insurance + accident person",
-                   Description = "Compulsory employee liability insurance",
-                   Price = 4,
-                   CreatedAt = DateTime.Now,
-                   UpdatedAt = DateTime.Now,
-                   DeleteAt = DateTime.Now,
-                   Status = 1
-               },
-                   new Models.InsurancePackage()
-                   {
+          //         InsuranceId = 27,
+          //          DurationContract = "3 year",
+          //          DurationPay= "2 month",
+          //         Name = "Compulsory insurance + accident person",
+          //         Description = "Compulsory employee liability insurance",
+          //         Price = 4,
+          //         CreatedAt = DateTime.Now,
+          //         UpdatedAt = DateTime.Now,
+          //         DeleteAt = DateTime.Now,
+          //         Status = 1
+          //     },
+          //         new Models.InsurancePackage()
+          //         {
                        
-                       InsuranceId = 28,
-                       DurationContract = "3 year",
-                       DurationPay = "2 month",
-                       Name = "insurance package Tam An",
-                       Description = "Pay up to 1 billion VND for accident cases;Pay up to 2.5 million dola/ 1 outpatient visit and treatment;",
-                       Price = 5,
-                       CreatedAt = DateTime.Now,
-                       UpdatedAt = DateTime.Now,
-                       DeleteAt = DateTime.Now,
-                       Status = 1
-                   },
-                    new Models.InsurancePackage()
-                    {
+          //             InsuranceId = 28,
+          //             DurationContract = "3 year",
+          //             DurationPay = "2 month",
+          //             Name = "insurance package Tam An",
+          //             Description = "Pay up to 1 billion VND for accident cases;Pay up to 2.5 million dola/ 1 outpatient visit and treatment;",
+          //             Price = 5,
+          //             CreatedAt = DateTime.Now,
+          //             UpdatedAt = DateTime.Now,
+          //             DeleteAt = DateTime.Now,
+          //             Status = 1
+          //         },
+          //          new Models.InsurancePackage()
+          //          {
                         
-                        InsuranceId = 28,
-                        DurationContract = "3 year",
-                        DurationPay = "2 month",
-                        Name = " Internal insurance package",
-                        Description = "Pay up to 9 million VND / day inpatient treatment;Paying up to dola 180 million per surgery; ",
-                        Price = 5,
-                        CreatedAt = DateTime.Now,
-                        UpdatedAt = DateTime.Now,
-                        DeleteAt = DateTime.Now,
-                        Status = 1
-                    },
-                     new Models.InsurancePackage()
-                     {
+          //              InsuranceId = 28,
+          //              DurationContract = "3 year",
+          //              DurationPay = "2 month",
+          //              Name = " Internal insurance package",
+          //              Description = "Pay up to 9 million VND / day inpatient treatment;Paying up to dola 180 million per surgery; ",
+          //              Price = 5,
+          //              CreatedAt = DateTime.Now,
+          //              UpdatedAt = DateTime.Now,
+          //              DeleteAt = DateTime.Now,
+          //              Status = 1
+          //          },
+          //           new Models.InsurancePackage()
+          //           {
                          
-                         InsuranceId = 25,
-                         Name = "Expand 1",
-                         DurationContract = "3",
-                         DurationPay = "2 month",
-                         Description = "Thunderstorm, Storm, Flood, Overflow, Collide with home, Burglar ",
-                         Price = 300,
-                         CreatedAt = DateTime.Now,
-                         UpdatedAt = DateTime.Now,
-                         DeleteAt = DateTime.Now,
-                         Status = 1
-                     },
-                      new Models.InsurancePackage()
-                      {
+          //               InsuranceId = 25,
+          //               Name = "Expand 1",
+          //               DurationContract = "3",
+          //               DurationPay = "2 month",
+          //               Description = "Thunderstorm, Storm, Flood, Overflow, Collide with home, Burglar ",
+          //               Price = 300,
+          //               CreatedAt = DateTime.Now,
+          //               UpdatedAt = DateTime.Now,
+          //               DeleteAt = DateTime.Now,
+          //               Status = 1
+          //           },
+          //            new Models.InsurancePackage()
+          //            {
                          
-                          InsuranceId = 25,
-                          DurationContract = "3 year",
-                          DurationPay = "2 month",
-                          Name = "Expansion 2",
-                          Description = "Site cleanup, firefighting, rent after losses",
-                          Price = 500,
-                          CreatedAt = DateTime.Now,
-                          UpdatedAt = DateTime.Now,
-                          DeleteAt = DateTime.Now,
-                          Status = 1
-                      },
-                       new Models.InsurancePackage()
-                       {
+          //                InsuranceId = 25,
+          //                DurationContract = "3 year",
+          //                DurationPay = "2 month",
+          //                Name = "Expansion 2",
+          //                Description = "Site cleanup, firefighting, rent after losses",
+          //                Price = 500,
+          //                CreatedAt = DateTime.Now,
+          //                UpdatedAt = DateTime.Now,
+          //                DeleteAt = DateTime.Now,
+          //                Status = 1
+          //            },
+          //             new Models.InsurancePackage()
+          //             {
                            
-                           Name = "Advanced Options",
-                           InsuranceId =26 ,
-                           DurationContract = "3 year",
-                           DurationPay = "2 month",
-                           Description = "at risk of cancer,before the risk of Death",
-                           Price = 400,
-                           CreatedAt = DateTime.Now,
-                           UpdatedAt = DateTime.Now,
-                           DeleteAt = DateTime.Now,
-                           Status = 1
-                       },
-                        new Models.InsurancePackage()
-                        {
+          //                 Name = "Advanced Options",
+          //                 InsuranceId =26 ,
+          //                 DurationContract = "3 year",
+          //                 DurationPay = "2 month",
+          //                 Description = "at risk of cancer,before the risk of Death",
+          //                 Price = 400,
+          //                 CreatedAt = DateTime.Now,
+          //                 UpdatedAt = DateTime.Now,
+          //                 DeleteAt = DateTime.Now,
+          //                 Status = 1
+          //             },
+          //              new Models.InsurancePackage()
+          //              {
                             
-                            Name = "Basic Choice",
-                            InsuranceId = 26,
-                            DurationContract = "3 year",
-                            DurationPay = "2 month",
-                            Description = "at risk of cancer,before the risk of Death",
-                            Price = 500,
-                            CreatedAt = DateTime.Now,
-                            UpdatedAt = DateTime.Now,
-                            DeleteAt = DateTime.Now,
-                            Status = 1
-                        }
+          //                  Name = "Basic Choice",
+          //                  InsuranceId = 26,
+          //                  DurationContract = "3 year",
+          //                  DurationPay = "2 month",
+          //                  Description = "at risk of cancer,before the risk of Death",
+          //                  Price = 500,
+          //                  CreatedAt = DateTime.Now,
+          //                  UpdatedAt = DateTime.Now,
+          //                  DeleteAt = DateTime.Now,
+          //                  Status = 1
+          //              }
 
 
 
 
 
-             );
+          //   );
 
 
 
-          context.Programmes.AddOrUpdate(x => x.Id,
-               new Models.Programme() { Id = 1, Name = "Gold", Price = 200000 },
-               new Models.Programme() { Id = 2, Name = "Silver", Price = 180000 },
-               new Models.Programme() { Id = 3, Name = "Standard", Price = 100000 },
-               new Models.Programme() { Id = 4, Name = "Diamond", Price = 300000 }
-               );
+          //context.Programmes.AddOrUpdate(x => x.Id,
+          //     new Models.Programme() { Id = 1, Name = "Gold", Price = 200000 },
+          //     new Models.Programme() { Id = 2, Name = "Silver", Price = 180000 },
+          //     new Models.Programme() { Id = 3, Name = "Standard", Price = 100000 },
+          //     new Models.Programme() { Id = 4, Name = "Diamond", Price = 300000 }
+          //     );
 
         }
     }

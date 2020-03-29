@@ -25,15 +25,15 @@
     </tbody>
 </table>
 <div class="total"></div> 
-<button id=" order">dasdada</button>
+<button id="order">dasdada</button>
 @section Scripts{
     <script>
         var obj = JSON.parse(sessionStorage.medical);
         $(".total").text(obj.Totalprice)
-        $.each(obj.item, function (key, value) {
+        $.each(obj.items, function (key, value) {
             var html = `
             <tr>
-            <td>${obj.InsurancePackageId}</td>
+            <td>${value.InsurancePackageId}</td>
                 <td>${value.DateOfbirth}</td>
                 <td>${value.programname}</td>
                 <td>${value.Name}</td>
@@ -52,13 +52,13 @@
                 data: JSON.stringify(obj),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                error: function (response) {
-                    alert(response.responseText);
-            },
-                success: function (response) {
-                    alert(response);
+                success: function (data) {
+                    alert('success');
+                },
+                failure: function (errMsg) {
+                    alert('error');
                 }
-            });
+            })
         })
     </script>
 }

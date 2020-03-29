@@ -42,7 +42,7 @@ namespace Project_sem_3.Models
         public DbSet<InsurancePackage> InsurancePackages { get; set; }
         public DbSet<Insurance> Insurances { get; set; }
         public DbSet<Contract> Contracts { get; set; }
-        public DbSet<MedicalInsurance> HealthInsurances { get; set; }
+        public DbSet<MedicalInsurance> MedicalInsurances { get; set; }
         public DbSet<HouseInsurance> HouseInsurances { get; set; }
         public DbSet<LifeInsurance> LifeInsurances { get; set; }
         public DbSet<Programme> Programmes { get; set; }

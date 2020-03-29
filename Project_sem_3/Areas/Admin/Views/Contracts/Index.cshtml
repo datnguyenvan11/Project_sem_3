@@ -125,13 +125,17 @@
                                                             {
                                                                 @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
                                                             }
-                                                            @if (@item.Insurance.Id == 28)
+                                                            @if (@item.Insurance.Id == 25)
                                                             {
                                                                 @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
                                                             }
                                                             @if (@item.Insurance.Id == 26)
                                                             {
                                                                 @Html.RouteLink("Detail", new { action = "Index", controller = "LifeInsurances", Id = item.Id })
+                                                            }
+                                                            @if (@item.Insurance.Id == 28)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "MedicalInsurances", Id = item.Id })
                                                             }
                                                         </button>
                                                     </div>
