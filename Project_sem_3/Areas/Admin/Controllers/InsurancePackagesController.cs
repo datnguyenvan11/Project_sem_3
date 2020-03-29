@@ -10,6 +10,7 @@ using PagedList;
 
 using System.Web.Mvc;
 using Project_sem_3.Models;
+using System.Threading;
 
 namespace Project_sem_3.Areas.Admin.Controllers
 {
@@ -94,6 +95,8 @@ namespace Project_sem_3.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,InsuranceId,Name,Description,Price,DurationContract,DurationPay,CreatedAt,UpdatedAt,DeleteAt")] InsurancePackage insurancePackage)
         {
+            
+
             if (ModelState.IsValid)
             {
                 var insurancepackages = new InsurancePackage()
@@ -112,37 +115,45 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 db.InsurancePackages.Add(insurancepackages);
                 db.SaveChanges();
                 var Users = db.Users.Include(u => u.Roles).ToList();
+                new Thread(() => {
 
-                foreach (var user in Users)
-                {
-                    var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "test");
-
-                    var receivermail = new MailAddress(user.Email, "test");
-                    var passwordemail = "vtacl123";
-                    var subject = "hehe";
-                    var body = insurancePackage.Name + insurancePackage.Description + insurancePackage.Price;
-                    var smtp = new SmtpClient
+                    foreach (var user in Users)
                     {
-                        Host = "smtp.gmail.com",
-                        Port = 587,
-                        DeliveryMethod = SmtpDeliveryMethod.Network,
-                        EnableSsl = true,
-                        UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "test");
+
+                        var receivermail = new MailAddress(user.Email, "test");
+                        var passwordemail = "vtacl123";
+                        var subject = "hehe";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">";
+                        body += "</HEAD><BODY><DIV><FONT face=Arial color=#ff0000 size=2>Your account information.";
+                        body += "</FONT></DIV></BODY><br/>Name: " + insurancePackage.Name + "<br/>Price:" + insurancePackage.Price + "<br/>Price:" + insurancePackage.Description + "</HTML>";
+
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
 
 
 
-                    };
-                    using (var mess = new MailMessage(senderemail, receivermail)
-                    {
-                        Subject = subject,
-                        Body = body
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
                     }
-                    )
-                    {
-                        smtp.Send(mess);
-                    };
-                }
+                }).Start();
+
 
                 return RedirectToAction("Index");
             }

@@ -78,12 +78,11 @@ namespace Project_sem_3.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad request");
             }
             // chuyển thông tin shopping cart thành Order.
-
             var contract = new Contract
             {
                 TotalPrice = shoppingCart.GetTotalPrice(),
                 ApplicationUserId =User.Identity.GetUserId(),
-                InsuranceId = 16,
+                InsuranceId = 27,
                 MotorInsurances = new List<MotorInsurance>()
             };
 

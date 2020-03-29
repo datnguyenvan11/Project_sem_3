@@ -174,7 +174,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
             {
                 var user = new ApplicationUser
                 {
-                    UserName = model.Name,
+                    UserName = model.Email,
                     Email = model.Email,
                     PhoneNumber = model.PhoneNumber,
                     Gender = model.Gender,
