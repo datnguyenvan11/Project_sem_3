@@ -237,6 +237,23 @@ namespace Project_sem_3.Areas.Admin.Controllers
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeStatus( int[] selectedIDs)
+        {
+            foreach (int IDs in selectedIDs)
+            {
+                InsurancePackage insurancePackage = db.InsurancePackages.Find(IDs);
+                db.InsurancePackages.Attach(insurancePackage);
+                insurancePackage.Status = 1;
+            }
+            db.SaveChanges();
+            return Json(selectedIDs, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -245,10 +262,54 @@ namespace Project_sem_3.Areas.Admin.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult Deleted()
+
+
+        public ActionResult Deleted(string sortOrder, string searchString, int? page, int? pageSize)
         {
 
-            return View(db.InsurancePackages.Where(t => t.Status == -1).ToList());
+            var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x => x.Status == -1);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                insurancePackages = db.InsurancePackages.Where(x => x.Name.Contains(searchString))
+                    .Where(x => x.Status == -1);
+            }
+
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="5", Value= "5"},
+                new SelectListItem() { Text="10", Value= "10"},
+                new SelectListItem() { Text="15", Value= "15" },
+                new SelectListItem() { Text="20", Value= "20" },
+            };
+            int pagesize = (pageSize ?? 5);
+            int pageNumber = (page ?? 1);
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    insurancePackages = insurancePackages.OrderByDescending(s => s.Name);
+                    break;
+                case "Date":
+                    insurancePackages = insurancePackages.OrderBy(s => s.CreatedAt);
+                    break;
+                case "Date_desc":
+                    insurancePackages = insurancePackages.OrderByDescending(s => s.CreatedAt);
+                    break;
+                case "Price":
+                    insurancePackages = insurancePackages.OrderBy(s => s.Price);
+                    break;
+                case "Price_desc":
+                    insurancePackages = insurancePackages.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    insurancePackages = insurancePackages.OrderBy(s => s.Name);
+                    break;
+            }
+            return View(insurancePackages.ToList().ToPagedList(pageNumber, pagesize));
         }
     }
 }

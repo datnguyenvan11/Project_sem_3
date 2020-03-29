@@ -73,7 +73,7 @@
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
                                         <tr>
-                                            <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
+                                            @*<th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>*@
                                             <th rowspan="1" colspan="1">Name</th>
                                             <th rowspan="1" colspan="1">CustomerID</th>
                                             <th rowspan="1" colspan="1">Total Price</th>
@@ -90,10 +90,10 @@
                                         @foreach (var item in Model)
                                         {
                                             <tr role="row" class="odd">
-                                                <td>
+                                                @*<td>
                                                     <input type="checkbox" class="check" value="@item.Id" />
                                                     @Html.AntiForgeryToken()
-                                                </td>
+                                                </td>*@
 
                                                 <td class="sorting_1">
                                                     @item.Insurance.Name
@@ -104,19 +104,20 @@
                                                 @*<td>@item.UpdatedAt</td>*@
                                                 <td>@item.Status</td>
                                                 <td>
-                                                    <button class="btn btn-success">@Html.ActionLink("Confirm", "Edit", new { id = item.Id })</button>
-                                                    <button class="btn btn-primary">
-                                                        @if (@item.Insurance.Id == 16)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
-                                                        }
-                                                        @if (@item.Insurance.Id == 19)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
-                                                        }
-                                                    </button>
+                                                    @*<button class="btn btn-success">@Html.ActionLink("Confirm", "Edit", new { id = item.Id })</button>
+                                                        <button class="btn btn-primary">
+                                                            @if (@item.Insurance.Id == 16)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
+                                                            }
+                                                            @if (@item.Insurance.Id == 19)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
+                                                            }
+                                                        </button>
 
-                                                    <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                                                        <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>*@
+                                                    <button class="btn btn-success" id="action_return">Return Action</button>
                                                 </td>
                                             </tr>
                                         }
@@ -132,7 +133,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4"></div>
                             <div class="col-sm-12 col-md-3">
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+                                @Html.PagedListPager(Model, page => Url.Action("Deleted", new { page }),
                                new PagedListRenderOptions()
                                {
                                    LiElementClasses = new List<string> { "text-paging" }
@@ -153,46 +154,40 @@
     <script type="text/javascript">
         $(document).ready(function () {
             var selectedIDs = new Array();
-            $('#checkAll').click(function () {
+            $('#checkAll_InsurancePackage').click(function () {
                 $(".check").prop('checked',
                     $(this).prop('checked'));
             })
-        })
 
-        $('#action_contract').click(function () {
-            var selectedIDs = new Array();
-            var action = $('#select-action').val();
-            if (action == 6) {
-                alert('Please select the action you want to perform!');
-                return;
-            }
-            $('input:checkbox.check').each(function () {
-                if ($(this).prop('checked')) {
-                    selectedIDs.push($(this).val());
-                }
-            });
-            if (selectedIDs.length <= 0) {
-                alert('You have not selected a contract!');
-                return;
-            }
-            $.ajax({
-                url: "/Admin/Contracts/StatusOrder",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                    selectedIDs,
-                    action
-                },
-                success: function (res) {
-                    if (!res == false) {
-                        window.location.href = `/Admin/Contracts`;
+            $('#action_return').click(function () {
+                var selectedIDs = new Array();
+                $('input:checkbox.check').each(function () {
+                    if ($(this).prop('checked')) {
+                        selectedIDs.push($(this).val());
                     }
-                },
-                error: function () {
-                    alert('error');
+                });
+                if (selectedIDs.length <= 0) {
+                    alert('You have not selected insurance package !');
+                    return;
                 }
-            });
+                $.ajax({
+                    url: "/Admin/Contract/ChangeStatus",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                        selectedIDs
+                    },
+                    success: function (res) {
+                        if (!res == false) {
+                            window.location.reload();
+                        }
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                });
+            })
         })
         $(function () {
             $("#pageSize").change(function () {
