@@ -181,7 +181,7 @@
     <Compile Include="Areas\Admin\Controllers\HouseInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\InsurancePackagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\InsurancesController.cs" />
-    <Compile Include="Areas\Admin\Controllers\LifeInsurancesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MedicalInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\MotorInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProgrammesController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
@@ -199,7 +199,34 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-
+    <Compile Include="Migrations\202003281023107_ca.cs" />
+    <Compile Include="Migrations\202003281023107_ca.Designer.cs">
+      <DependentUpon>202003281023107_ca.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003281356136_cb.cs" />
+    <Compile Include="Migrations\202003281356136_cb.Designer.cs">
+      <DependentUpon>202003281356136_cb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003281503296_cd.cs" />
+    <Compile Include="Migrations\202003281503296_cd.Designer.cs">
+      <DependentUpon>202003281503296_cd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003281534348_cg.cs" />
+    <Compile Include="Migrations\202003281534348_cg.Designer.cs">
+      <DependentUpon>202003281534348_cg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003281633331_ch.cs" />
+    <Compile Include="Migrations\202003281633331_ch.Designer.cs">
+      <DependentUpon>202003281633331_ch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003281644163_cj.cs" />
+    <Compile Include="Migrations\202003281644163_cj.Designer.cs">
+      <DependentUpon>202003281644163_cj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202003290756287_ck.cs" />
+    <Compile Include="Migrations\202003290756287_ck.Designer.cs">
+      <DependentUpon>202003290756287_ck.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Contract.cs" />
@@ -2303,6 +2330,7 @@
     <Content Include="Areas\Admin\Views\Contracts\Confirmed.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LoginWithAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\LifeInsurances\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\MedicalInsurances\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\adapters\jquery.js" />
     <Content Include="Scripts\ckeditor\ckeditor.js" />
@@ -2714,6 +2742,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Medical\" />
     <Folder Include="Content\sass\pages\" />
     <Folder Include="Views\AccoutRole\" />
   </ItemGroup>
@@ -2725,6 +2754,29 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003281023107_ca.resx">
+      <DependentUpon>202003281023107_ca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003281356136_cb.resx">
+      <DependentUpon>202003281356136_cb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003281503296_cd.resx">
+      <DependentUpon>202003281503296_cd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003281534348_cg.resx">
+      <DependentUpon>202003281534348_cg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003281633331_ch.resx">
+      <DependentUpon>202003281633331_ch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003281644163_cj.resx">
+      <DependentUpon>202003281644163_cj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202003290756287_ck.resx">
+      <DependentUpon>202003290756287_ck.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

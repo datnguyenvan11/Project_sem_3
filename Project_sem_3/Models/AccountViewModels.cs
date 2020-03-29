@@ -236,14 +236,14 @@ namespace Project_sem_3.Models
         public DateTime Duration { get; set; }
     }
     public class ContractMedical{
-        public string InsurancePackageId { get; set; }
-        public string Totalprice { get; set; }
-        public List<Item> Items { get; set; }
+        public int Totalprice { get; set; }
+        public List<Item> items { get; set; }
     }
 
     public class Item
     {
-        public string unitprice { get; set; }
+        public string InsurancePackageId { get; set; }
+        public int unitprice { get; set; }
         public string Programmeid { get; set; }
         public string DateOfbirth { get; set; }
         public string Name { get; set; }

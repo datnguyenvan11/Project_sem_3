@@ -70,7 +70,6 @@ namespace Project_sem_3.Controllers
             }
             return Redirect("/MotorCart/ShowCart");
 
-
         }
 
     }

@@ -11,7 +11,7 @@ namespace Project_sem_3.Models
     public class Contract
     {
         public int Id { get; set; }
-        public string UserId { get; set; }
+        public string ApplicationUserId { get; set; }
         public double TotalPrice { get; set; }
         public int InsuranceId { get; set; }
         [DataType(DataType.Date)]
