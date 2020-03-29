@@ -181,6 +181,7 @@
     <Compile Include="Areas\Admin\Controllers\HouseInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\InsurancePackagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\InsurancesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LifeInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\MedicalInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\MotorInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProgrammesController.cs" />
