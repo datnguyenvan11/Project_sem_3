@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "getsesstion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>getsesstion</h2>
+<div id="ketqua"> </div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">date</th>
+            <th scope="col">program</th>
+            <th scope="col">name</th>
+            <th scope="col">email</th>
+            <th scope="col">address</th>
+            <th scope="col">phone</th>
+            <th scope="col">price</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+      
+    </tbody>
+</table>
+<div class="total"></div> 
+<button id=" order">dasdada</button>
+@section Scripts{
+    <script>
+        var obj = JSON.parse(sessionStorage.medical);
+        $(".total").text(obj.Totalprice)
+        $.each(obj.item, function (key, value) {
+            var html = `
+            <tr>
+            <td>${obj.InsurancePackageId}</td>
+                <td>${value.DateOfbirth}</td>
+                <td>${value.programname}</td>
+                <td>${value.Name}</td>
+                <td>${value.Email}</td>
+                <td>${value.Address}</td>
+                <td>${value.PhoneNumber}</td>
+                <td>${value.unitprice}</td>
+            </tr>`
+            $('.table').append(html)
+        })
+
+        $('#order').click(function () {
+            $.ajax({
+                url: "/MedicalInsurance/CreateContract",
+                type: "POST",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                error: function (response) {
+                    alert(response.responseText);
+            },
+                success: function (response) {
+                    alert(response);
+                }
+            });
+        })
+    </script>
+}
