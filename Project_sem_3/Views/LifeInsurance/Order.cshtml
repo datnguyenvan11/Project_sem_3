@@ -11,6 +11,223 @@
 
 
 
+<section>
+    <div class="banner">
+
+    </div>
+
+</section>
+
+
+<div class="container1" style="margin-left:10%;margin-right:10%;margin-top:7% ;margin-bottom:7%">
+    <div class="hd-info-pro">
+        PLEASE ENTER iNFORMATION
+    </div>
+
+    @*<form action="/HomeInsurance/CreateContract"  method="get">*@
+    <form action="#" id="formDemo" class="form-order-life-insurance bg-light">
+        <div class="row">
+            <div class="form-basic-information">
+                <div style="padding: 12px 24px" class="row col-lg-9 col-md-8 col-sm-12">
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">Name</label>
+                        <input type="text" name="name" class="form-control" id="Name" autocomplete="off" placeholder="Name">
+                    </div>
+                    @*<div class="form-group ">
+        <label class="col-sm-2 col-form-label">Pull Name:</label>
+        <div class="col-md-4">
+        <input style="height:43px" type="password" class="form-control" id="exampleInputPullName" autocomplete="off" placeholder="Pull Name">
+        </div>
+        </div>*@
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">Email</label>
+                        <input type="text" name="email" class="form-control" id="emails" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-6 my_date_picker">
+                        <label class="col-form-label">Date</label>
+                        <input type="text" name="Date_Iden" class="form-control" id="date_iden" autocomplete="off" placeholder="Date ">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="col-form-label">Place</label>
+                        <select id="place_iden" name=" Place_Iden" required="" class="form-control default ng-pristine ng-invalid ng-touched">
+                            <option disabled="" selected="" value="">Place</option>
+                            <!---->
+                            <option value="04">HÀ NỘI</option>
+                            <option value="08">HỒ CHÍ MINH</option>
+                            <option value="DN">ĐÀ NẴNG</option>
+                            <option value="61">ĐỒNG NAI</option>
+                            <option value="31">HẢI PHÒNG</option>
+                            <option value="76">AN GIANG</option>
+                            <option value="BG">BẮC GIANG</option>
+                            <option value="BC">BẮC KẠN</option>
+                            <option value="BN">BẮC NINH</option>
+                            <option value="BL">BẠC LIÊU</option>
+                            <option value="64">BÀ RỊA-VŨNG TÀU</option>
+                            <option value="75">BẾN TRE</option>
+                            <option value="56">BÌNH ĐỊNH</option>
+                            <option value="BD">BÌNH DƯƠNG</option>
+                            <option value="BP">BÌNH PHƯỚC</option>
+                            <option value="62">BÌNH THUẬN</option>
+                            <option value="26">CAO BẰNG</option>
+                            <option value="71">CẦN THƠ</option>
+                            <option value="CM">CÀ MAU</option>
+                            <option value="50">ĐĂK LĂK</option>
+                            <option value="DA">ĐĂK NÔNG</option>
+                            <option value="DB">ĐIỆN BIÊN</option>
+                            <option value="67">ĐỒNG THÁP</option>
+                            <option value="59">GIA LAI</option>
+                            <option value="HD">HẢI DƯƠNG</option>
+                            <option value="HG">HẬU GIANG</option>
+                            <option value="19">HÀ GIANG</option>
+                            <option value="HN">HÀ NAM</option>
+                            <option value="39">HÀ TĨNH</option>
+                            <option value="18">HÒA BÌNH</option>
+                            <option value="HY">HƯNG YÊN</option>
+                            <option value="58">KHÁNH HÒA</option>
+                            <option value="77">KIÊN GIANG</option>
+                            <option value="60">KON TUM</option>
+                            <option value="25">LẠNG SƠN</option>
+                            <option value="23">LAI CHÂU</option>
+                            <option value="63">LÂM ĐỒNG</option>
+                            <option value="20">LÀO CAI</option>
+                            <option value="72">LONG AN</option>
+                            <option value="ND">NAM ĐỊNH</option>
+                            <option value="38">NGHỆ AN</option>
+                            <option value="30">NINH BÌNH</option>
+                            <option value="68">NINH THUẬN</option>
+                            <option value="PT">PHÚ THỌ</option>
+                            <option value="57">PHÚ YÊN</option>
+                            <option value="52">QUẢNG BÌNH</option>
+                            <option value="QN">QUẢNG NAM</option>
+                            <option value="55">QUẢNG NGÃI</option>
+                            <option value="33">QUẢNG NINH</option>
+                            <option value="53">QUẢNG TRỊ</option>
+                            <option value="79">SÓC TRĂNG</option>
+                            <option value="22">SƠN LA</option>
+                            <option value="66">TÂY NINH</option>
+                            <option value="36">THÁI BÌNH</option>
+                            <option value="TN">THÁI NGUYÊN</option>
+                            <option value="37">THANH HÓA</option>
+                            <option value="54">THỪA THIÊN HUẾ</option>
+                            <option value="73">TIỀN GIANG</option>
+                            <option value="74">TRÀ VINH</option>
+                            <option value="27">TUYÊN QUANG</option>
+                            <option value="70">VĨNH LONG</option>
+                            <option value="VP">VĨNH PHÚC</option>
+                            <option value="29">YÊN BÁI</option>
+                            <option value="99">KHÁC</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-7">
+                        <label class="col-form-label">PhoneNumber</label>
+                        <input type="password" class="form-control" id="exampleInputPhoneNumber" autocomplete="off" placeholder="PhoneNumber">
+                    </div>
+
+                    <div class="form-group col-md-5">
+                        <label class="col-form-label">Job</label>
+                        @*<input type="text" name="Job" class="form-control" id="job" autocomplete="off" placeholder="job">*@
+                        <select id="job" name="Job" required="" class="form-control form-control-long default ng-pristine ng-valid ng-touched">
+                            @*<option disabled="" value="">Nghề nghiệp</option>*@
+                            <option disabled="" selected="" value="">Job</option>
+                            <!---->
+                            <option value="1">Chủ doanh nghiệp</option>
+                            <option value="2">Nhân viên văn phòng</option>
+                            <option value="3">Kinh doanh cá thể</option>
+                            <option value="4">Nhân viên kinh doanh/ bán hàng</option>
+                            <option value="5">Giáo viên/ giảng viên</option>
+                            <option value="6">Bác sĩ/ nha sĩ/ dược sĩ</option>
+                            <option value="7">Kiến trúc sư/ họa viên kiến trúc</option>
+                            <option value="8">Kỹ sư xây dựng/ Kỹ sư trắc địa/ Kỹ sư hóa học</option>
+                            <option value="9">Nhân viên quản lý/ giám sát/ Quản đốc</option>
+                            <option value="10">Sinh viên</option>
+                            <option value="11">Hướng dẫn viên du lịch</option>
+                            <option value="12">Nhà báo/ Nhà văn/ Nhà thơ/ Phóng viên</option>
+                            <option value="13">Kỹ sư vận hành thiết bị/ giám sát thiết bị</option>
+                            <option value="14">Ca sĩ/ Nhạc sĩ/ Diễn viên/ Nhạc công/ Họa sĩ</option>
+                            <option value="15">Biên tập/ Dẫn chương trình/ Chủ nhiệm phim</option>
+                            <option value="16">Nhân viên chụp ảnh/ Nhân viên sửa máy ảnh</option>
+                            <option value="17">Kỹ sư giàn khoan </option>
+                            <option value="18">Đầu bếp</option>
+                            <option value="-1">Khác</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group col-md-11">
+                        <label class="col-form-label">Identity Card</label>
+                        <input type="text" name="IdentityCard" class="form-control" id="identityCard" autocomplete="off" placeholder="IdentityCard">
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="col-form-label">Marital Status</label>
+                        <input type="text" name="MaritalStatus" class="form-control" id="marital" autocomplete="off" placeholder="MaritalStatus">
+                    </div>
+
+                    @*<div style="margin-top:-20px" class="form-group ">
+        <label class="col-sm-2 col-form-label">Password</label>
+        <div class="col-md-4">
+        <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        </div>
+        <div style="margin-top:70px; overflow: hidden" class="form-group ">
+        <label class="col-sm-2 col-form-label">Password</label>
+        <div class="col-md-8">
+        <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        </div>*@
+                    @*<div class="form-group row">
+        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-md-4">
+        <input type="password" class="form-control" id="inputPassword">
+        </div>
+        </div>*@
+                    @*<div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>*@
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="hd-info-pro">INSURANCE FEES</div>
+                <div class="result">
+                    <div class="item-result">
+                        <span>Total fee (including VAT):</span>
+                        <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">$0</label></strong>
+                    </div>
+                    <div id="ctl18_Promotions1_pnPromotions">
+
+
+                        <div class="item-result">
+                            <span>Discount amount:</span>
+                            <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">$0</label></strong>
+                        </div>
+                        <div class="result-red">
+                            <div>Total net charge (including VAT) actually collected:</div>
+
+                            <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">$0</label></strong>
+                        </div>
+                        <input id="ctl18_lbtBook" style="text-decoration:none" type="submit" value="Order" class="btn-pro-buynow" href="/HouseInsurance/CreateContract" />
+                        @*<input type="submit" name="submit" value="submit" class="btn btn-success" />*@
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="box-chuy col-12">
+            <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
+            <div class="cotent-box-chuy">
+                <div class="cotent-text"> Select coverage: By default, when you buy private home insurance, you will have to buy basic benefits (fire, explosion). You can choose to buy 2 additional benefits 1, 2 by CHECK on benefits. </div>
+                <div class="cotent-text"> You enter the required website information: the type of house, the number of years used, the amount of insurance for the house, the property in the house, you will see the total premium.</div>
+                <div class="cotent-text"> If you agree to order, please click <b>[Continue]</b> to move to the next order. </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
 <style>
     .form-order-life-insurance {
         background: #fdfdfd;
@@ -312,7 +529,7 @@
     .banner {
         width: 100%;
         height: 600px;
-        background-image: url(https://insurancequotes2day.com/wp-content/uploads/2017/05/life-insurance-for-seniors.jpg);
+        background-image: url("/Content/dummy/Life_Order.jpg");
         background-position: center center;
         background-size: cover;
     }
@@ -561,6 +778,7 @@
 
         $(document).ready(function () {
             $('#date_iden').datepicker()
+
             $("input[name=insurancePackageId]")
             .change(function () { 
                 if ($(this).is(":checked")) { 
@@ -615,9 +833,14 @@
                     },
                     Job: "Please enter a valid job",
                 }
-            });
+            },
+           
+            
         });
 
     </script>
+
 }
+
+
 
