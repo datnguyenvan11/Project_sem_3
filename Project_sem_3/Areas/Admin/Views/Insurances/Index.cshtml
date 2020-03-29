@@ -17,7 +17,6 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Insurance</h1>
         <p class="mb-4"> All contracts of customers about insurances .</p>
-        @*<button type="button" id="delete_checked">Delete Selected</button>*@
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/Insurances/Create" class="btn btn-info" role="button">Create Insurance</a>
             <a href="https://localhost:44362/Admin/Insurances/Deleted" class="btn btn-info float-right" role="button">Insurance Deleted</a>
@@ -61,7 +60,7 @@
                                     </div>
                                 </div>
                                 <div class="col-9">
-                                    <button type="button" class="btn btn-success" id="action_contract" style="margin-top: 8px;">Xác nhận</button>
+                                    <button type="button" class="btn btn-success" id="action_insurancePackage" style="margin-top: 8px;">Xác nhận</button>
                                 </div>
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
@@ -123,34 +122,34 @@
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        $(document).ready(function() {
-            var selectedIDs = new Array();
-            $('#checkAll').click(function() {
+        $(document).ready(function () {
+            $('#checkAll').click(function () {
                 $(".check").prop('checked',
                     $(this).prop('checked'));
             })
 
 
-            $('#action_contract').click(function() {
+            $('#action_insurancePackage').click(function () {
                 var selectedIDs = new Array();
                 var action = $('#select-action').val();
                 if (action == 6) {
                     alert('Please select the action you want to perform!');
                     return;
                 }
-                $('input:checkbox.check').each(function() {
+                $('input:checkbox.check').each(function () {
                     if ($(this).prop('checked')) {
-                        var r = confirm("Do you want to delete?");
-                        if (r == true) {
-                            selectedIDs.push($(this).val());
-                        }
+                        selectedIDs.push($(this).val());
                     }
                 });
                 if (selectedIDs.length <= 0) {
                     alert('ban chua chon insurance');
                     return;
-
                 };
+                if (confirm("Do you want to delete?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            });
+            function changeStatusPTTime(selectedIDs, action) {
                 $.ajax({
                     url: "/Admin/Insurances/DeleteAll",
                     type: "POST",
@@ -160,27 +159,26 @@
                         selectedIDs,
                         action
                     },
-                    success: function(res) {
+                    success: function (res) {
                         if (!res == false) {
                             window.location.reload();
                         }
                     },
-                    error: function() {
+                    error: function () {
                         alert('error');
                     }
                 });
-            });
-        });
-    
-        function handle(e) {
-            if (e.keyCode === 13) {
-                e.preventDefault();
             }
-        }
+            function handle(e) {
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                }
+            }
 
-        $(function () {
-            $("#pageSize").change(function () {
-                $("#pagesize").submit();
+            $(function () {
+                $("#pageSize").change(function () {
+                    $("#pagesize").submit();
+                });
             });
         });
     </script>
