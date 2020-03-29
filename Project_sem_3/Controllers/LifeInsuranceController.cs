@@ -65,8 +65,7 @@ namespace Project_sem_3.Controllers
             {
                 transaction.Rollback();
             }
-            return Redirect("/MotorCart/ShowCart");
-
+            return Redirect("/OrderNotice/Index");
 
         }
     }

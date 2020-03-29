@@ -88,7 +88,7 @@ namespace Project_sem_3.Controllers
                 Console.WriteLine(e);
                 transaction.Rollback();
             }
-            return Redirect("/MotorCart/ShowCart");
+            return Redirect("/OrderNotice/Index");
 
 
         }

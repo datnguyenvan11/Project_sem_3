@@ -118,7 +118,7 @@ namespace Project_sem_3.Controllers
                 Console.WriteLine(e);
                 transaction.Rollback();
             }
-            return Redirect("/Home");
+            return Redirect("/OrderNotice/Index");
         }
 
         private void ClearCart()
