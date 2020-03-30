@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container-fluid" style="background-color:#c4d3f6" ;>
+<div class="container-fluid">
     <div class="text-info1"><label>Information Order</label></div>
 
     <div id="ketqua">
@@ -55,16 +55,16 @@
         $(".total").text(obj.Totalprice)
         $.each(obj.items, function (key, value) {
             var html = `
-                                                          <tr>
-                                                         <td>${value.InsurancePackageId}</td>
-                                                         <td>${value.DateOfbirth}</td>
-                                                         <td>${value.programname}</td>
-                                                         <td>${value.Name}</td>
-                                                         <td>${value.Email}</td>
-                                                         <td>${value.Address}</td>
-                                                         <td>${value.PhoneNumber}</td>
-                                                         <td>${value.unitprice}</td>
-                                                          </tr>`
+                                                              <tr>
+                                                             <td>${value.InsurancePackageId}</td>
+                                                             <td>${value.DateOfbirth}</td>
+                                                             <td>${value.programname}</td>
+                                                             <td>${value.Name}</td>
+                                                             <td>${value.Email}</td>
+                                                             <td>${value.Address}</td>
+                                                             <td>${value.PhoneNumber}</td>
+                                                             <td>${value.unitprice}</td>
+                                                              </tr>`
             $('.table').append(html)
         })
 
@@ -100,7 +100,7 @@
 
     .row-tbody {
         color: #666;
-        background: #fff;
+        background: whitesmoke;
         font-size: 18px;
     }
 
