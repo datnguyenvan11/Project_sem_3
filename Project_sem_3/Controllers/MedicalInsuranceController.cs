@@ -30,7 +30,7 @@ namespace Project_sem_3.Controllers
             db.Configuration.ProxyCreationEnabled = false;
             var programme = db.Programmes.Where(x => x.Status == 0).ToList();
 
-            return Json(new { programme}, JsonRequestBehavior.AllowGet);
+            return Json(new { programme }, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult Order(int number, double price)
@@ -39,7 +39,7 @@ namespace Project_sem_3.Controllers
             TempData["price"] = price;
             return RedirectToAction("Order");
         }
-        public ActionResult getsesstion()
+        public ActionResult GetSession()
         {
             return View();
         }
