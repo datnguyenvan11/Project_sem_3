@@ -27,7 +27,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Contract</h6>
+                <h6 class="m-0 font-weight-bold text-primary">List Insurances</h6>
             </div>
             <div class="card-body">
                 <div>
@@ -51,18 +51,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3 mt-2">
-                                    <div class="form-group mr-3">
-                                        <select class="form-control mr-2" id="select-action">
-                                            <option value="6">--Chọn thao tác--</option>
-                                            <option value="0">Action</option>
-                                            <option value="-1">Deleted</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-9">
-                                    <button type="button" class="btn btn-success" id="action_contract" style="margin-top: 8px;">Xác nhận</button>
-                                </div>
+                            
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
@@ -96,8 +85,21 @@
                                             </tr>
                                         }
                                     </tbody>
-                                </table>
-                                
+                                </table> 
+                                <div class="row">
+                                    <div class="col-3 mt-2">
+                                        <div class="form-group mr-3">
+                                            <select class="form-control mr-2" id="select-action">
+                                                <option value="6">--Chọn thao tác--</option>
+                                                <option value="0">Action</option>
+                                                <option value="-1">Deleted</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-9">
+                                        <button type="button" class="btn btn-success" id="action_contract" style="margin-top: 8px;">Xác nhận</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
