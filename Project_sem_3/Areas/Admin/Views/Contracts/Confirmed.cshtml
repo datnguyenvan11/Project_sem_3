@@ -17,7 +17,9 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Contracts Confirmed</h1>
         <div style="margin-bottom:15px;">
-            <a href="https://localhost:44362/Admin/Contracts/" class="btn btn-info" role="button">Contracts</a>
+            
+            <a href="https://localhost:44362/Admin/Contracts/Index" class="btn btn-info " role="button" >List Contracts</a>
+
             <a href="https://localhost:44362/Admin/Contracts/Deleted" class="btn btn-info float-right" role="button">Contracts Deleted</a>
         </div>
         @*<p class="mb-4"> All contracts of customers about insurances .</p>
@@ -46,7 +48,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Contract</h6>
+                <h6 class="m-0 font-weight-bold text-primary">List Contracts Confirmed</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -79,8 +81,8 @@
                                             <th rowspan="1" colspan="1">CustomerID</th>
                                             <th rowspan="1" colspan="1">Total Price</th>
                                             <th rowspan="1" colspan="1">Created At</th>
-                                            @*<th rowspan="1" colspan="1">Updated At</th>*@
-                                            <th rowspan="1" colspan="1">Status</th>
+                                         
+                                            
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
                                     </thead>
@@ -100,10 +102,10 @@
                                                     @item.Insurance.Name
                                                 </td>
                                                 <td>@item.ApplicationUserId</td>
-                                                <td>@item.TotalPrice</td>
-                                                <td>@item.CreatedAt</td>
-                                                @*<td>@item.UpdatedAt</td>*@
-                                                <td>@item.Status</td>
+                                                <td>$@item.TotalPrice</td>
+                                                <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
+                                             
+                                               
                                                 <td>
                                                     <button class="btn btn-success">@Html.ActionLink("Confirm", "Edit", new { id = item.Id })</button>
                                                     <button class="btn btn-primary">
