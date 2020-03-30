@@ -21,7 +21,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/Programmes
         public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize)
         {
-            var programme = db.Programmes.Where(t => t.Status == 0);
+            var programme = db.Programmes.Where(t => t.Status == 1);
             if (!String.IsNullOrEmpty(searchString))
             {
                 programme = db.Programmes.Where(t => t.Name.Contains(searchString))

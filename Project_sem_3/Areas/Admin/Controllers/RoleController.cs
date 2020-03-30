@@ -118,7 +118,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         }
         public ActionResult UsersWithRoles()
         {
-            var usersWithRoles = (from user in context.Users.Where(x => x.Status != -1)
+            var usersWithRoles = (from user in context.Users.Where
                                   select new
                                   {
                                       UserId = user.Id,
@@ -190,11 +190,9 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     //await SignInManager.SignInAsync(user, isPersistent: true, rememberBrowser: true);
                      UserManager.AddToRole(user.Id, model.RoleName);
 
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     return Redirect("/Admin/Role");
                 }
