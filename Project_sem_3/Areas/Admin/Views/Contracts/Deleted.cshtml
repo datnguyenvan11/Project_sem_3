@@ -19,6 +19,7 @@
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/Contracts/Index" class="btn btn-info" role="button">List Contracts</a>
             
+            <a href="https://localhost:44362/Admin/Contracts/Confirmed" class="btn btn-info float-right" role="button">Contracts Confirmed</a>
         </div>
         @*<p class="mb-4"> All contracts of customers about insurances .</p>
             <div class="card-footer">
@@ -98,25 +99,35 @@
                                                 <td class="sorting_1">
                                                     @item.Insurance.Name
                                                 </td>
+
                                                 <td>@item.Insurance.Name</td>
                                                 <td>$@item.TotalPrice</td>
                                                 <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
+
+ 
                                                 @*<td>@item.UpdatedAt</td>*@
                                                 
                                                 <td>
-                                                    <button class="btn btn-success">@Html.ActionLink("Confirm", "Edit", new { id = item.Id })</button>
-                                                    <button class="btn btn-primary">
-                                                        @if (@item.Insurance.Id == 16)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
-                                                        }
-                                                        @if (@item.Insurance.Id == 19)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
-                                                        }
-                                                    </button>
-
-                                                    <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-primary">
+                                                            @if (@item.Insurance.Id == 27)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
+                                                            }
+                                                            @if (@item.Insurance.Id == 25)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
+                                                            }
+                                                            @if (@item.Insurance.Id == 26)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "LifeInsurances", Id = item.Id })
+                                                            }
+                                                            @if (@item.Insurance.Id == 28)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "MedicalInsurances", Id = item.Id })
+                                                            }
+                                                        </button>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         }
@@ -124,15 +135,30 @@
 
                                     </tbody>
                                 </table>
+                                <div class="card-footer">
+                                    <div class="row mt-3">
+                                        <div class="col-3 mt-2">
+                                            <div class="form-group mr-3">
+                                                <select class="form-control mr-2" id="select-action">
+                                                    <option value="6">--Chọn thao tác--</option>
+                                                    <option value="1">Active Return</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-9" style="margin-top: 8px;">
+                                            <button type="button" id="return_contract" class="btn btn-success">Confirm</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
                             </div>
-                            <div class="col-sm-12 col-md-4"></div>
-                            <div class="col-sm-12 col-md-3">
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+                            <div class="col-sm-12 col-md-3"></div>
+                            <div class="col-sm-12 col-md-4">
+                                @Html.PagedListPager(Model, page => Url.Action("Deleted", new { page }),
                                new PagedListRenderOptions()
                                {
                                    LiElementClasses = new List<string> { "text-paging" }
@@ -152,14 +178,13 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
-            var selectedIDs = new Array();
             $('#checkAll').click(function () {
                 $(".check").prop('checked',
                     $(this).prop('checked'));
             })
         })
 
-        $('#action_contract').click(function () {
+        $('#return_contract').click(function () {
             var selectedIDs = new Array();
             var action = $('#select-action').val();
             if (action == 6) {
@@ -175,8 +200,13 @@
                 alert('You have not selected a contract!');
                 return;
             }
+            if (confirm("Do you want to active return ?")) {
+                changeStatusPTTime(selectedIDs, action);
+            }
+        })
+        function changeStatusPTTime(selectedIDs, action) {
             $.ajax({
-                url: "/Admin/Contracts/StatusOrder",
+                url: "/Admin/Contracts/ChangeStatus",
                 type: "POST",
                 dataType: "json",
                 data: {
@@ -186,14 +216,15 @@
                 },
                 success: function (res) {
                     if (!res == false) {
-                        window.location.href = `/Admin/Contracts`;
+                        window.location.reload();
                     }
                 },
                 error: function () {
                     alert('error');
                 }
             });
-        })
+        }
+
         $(function () {
             $("#pageSize").change(function () {
                 $("#pagesize").submit();

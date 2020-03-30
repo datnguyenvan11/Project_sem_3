@@ -19,6 +19,8 @@
         <div style="margin-bottom:15px;">
             
             <a href="https://localhost:44362/Admin/Contracts/Index" class="btn btn-info " role="button" >List Contracts</a>
+
+            <a href="https://localhost:44362/Admin/Contracts/Deleted" class="btn btn-info float-right" role="button">Contracts Deleted</a>
         </div>
         @*<p class="mb-4"> All contracts of customers about insurances .</p>
             <div class="card-footer">
@@ -133,7 +135,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4"></div>
                             <div class="col-sm-12 col-md-3">
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+                                @Html.PagedListPager(Model, page => Url.Action("Confirmed", new { page }),
                                new PagedListRenderOptions()
                                {
                                    LiElementClasses = new List<string> { "text-paging" }

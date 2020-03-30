@@ -71,6 +71,20 @@ namespace Project_sem_3.Areas.Admin.Controllers
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeStatus(int action, int[] selectedIDs)
+        {
+            foreach (int IDs in selectedIDs)
+            {
+                Contract contract = db.Contracts.Find(IDs);
+                db.Contracts.Attach(contract);
+                contract.Status = action;
+            }
+            db.SaveChanges();
+            return Json(selectedIDs, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -21,7 +21,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/Programmes
         public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize)
         {
-            var programme = db.Programmes.Where(t => t.Status == 0);
+            var programme = db.Programmes.Where(t => t.Status == 1);
             if (!String.IsNullOrEmpty(searchString))
             {
                 programme = db.Programmes.Where(t => t.Name.Contains(searchString))
@@ -174,6 +174,20 @@ namespace Project_sem_3.Areas.Admin.Controllers
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeStatus(int action, int[] selectedIDs)
+        {
+            foreach (int IDs in selectedIDs)
+            {
+                Programme programme = db.Programmes.Find(IDs);
+                db.Programmes.Attach(programme);
+                programme.Status = action;
+            }
+            db.SaveChanges();
+            return Json(selectedIDs, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -183,10 +197,44 @@ namespace Project_sem_3.Areas.Admin.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Deleted()
+        public ActionResult Deleted(string sortOrder, string searchString, int? page, int? pageSize)
         {
 
-            return View(db.Programmes.Where(t => t.Status == -1).ToList());
+            var programme = db.Programmes.Where(t => t.Status == -1);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                programme = db.Programmes.Where(t => t.Name.Contains(searchString))
+                    .Where(t => t.Status == -1);
+            }
+
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="5", Value= "5"},
+                new SelectListItem() { Text="10", Value= "10"},
+                new SelectListItem() { Text="15", Value= "15" },
+                new SelectListItem() { Text="20", Value= "20" },
+            };
+            int pagesize = (pageSize ?? 5);
+            int pageNumber = (page ?? 1);
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+            ViewBag.PriceSortParm = sortOrder == "Price" ? "Price_desc" : "Price";
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    programme = programme.OrderByDescending(s => s.Name);
+                    break;
+                case "Price":
+                    programme = programme.OrderBy(s => s.Price);
+                    break;
+                case "Price_desc":
+                    programme = programme.OrderByDescending(s => s.Price);
+                    break;
+                default:
+                    programme = programme.OrderBy(s => s.Name);
+                    break;
+            }
+            return View(programme.ToList().ToPagedList(pageNumber, pagesize));
         }
     }
 }

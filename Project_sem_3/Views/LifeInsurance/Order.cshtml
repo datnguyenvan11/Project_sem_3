@@ -5,12 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-
-
-
-
 <section>
     <div class="banner">
 
@@ -233,9 +227,9 @@
         background: #fdfdfd;
     }
 
-        .form-order-life-insurance .form-group {
+        /*.form-order-life-insurance .form-group {
             display: flex;
-        }
+        }*/
 
             .form-order-life-insurance .form-group label {
                 line-height: 36px;
@@ -243,6 +237,9 @@
                 font-size: 14px;
                 text-align: end;
                 margin-right: 8px;
+            }
+            label.error{
+                color:red;
             }
 
     .my_date_picker {
@@ -254,7 +251,7 @@
             content: "\f073";
             font-family: FontAwesome;
             right: 22px;
-            top: 7px;
+            top: 45px;
             /*z-index: 0;
                 pointer-events: none;*/
         }
@@ -606,172 +603,10 @@
             font-size: 20px;
         }
 </style>
-<section>
-    <div class="banner">
-
-    </div>
-
-</section>
 
 
-<div class="container1" style="margin-left:10%;margin-right:10%;margin-top:7% ;margin-bottom:7%">
-    <div class="hd-info-pro">
-        PLEASE ENTER iNFORMATION
-    </div>
-
-    <form id="son" action="/LifeInsurance/CreateContract" method="post">
-        <div class="row">
-                @foreach (var item in Model)
-                {
-                    <div _ngcontent-c5="" class="app-checkbox agree-with-term">
-                        <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' name="insurancePackageId" required /></label>                                                           @*<input _ngcontent-c5="" id="choose1" name="choose1" type="checkbox"> <label _ngcontent-c5="" for="choose1">*@
-                        <span _ngcontent-c5="" class="checkout-term">@item.Name</span>
-                    </div>
-                }
-            <div class="form-basic-information">
-                <div style="padding: 12px 24px" class="row col-lg-9 col-md-8 col-sm-12">
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label">Name</label>
-                        <input type="text" name="name" class="form-control" id="Name" autocomplete="off" placeholder="Name">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label">Email</label>
-                        <input type="text" name="email" class="form-control" id="emails" placeholder="Email">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label">Address</label>
-                        <input type="text" name="address" class="form-control" id="address" placeholder="Email">
-                    </div>
-                    <div class="form-group col-md-6 my_date_picker">
-                        <label class="col-form-label">Date</label>
-                        <input type="text" name="Date_Iden" class="form-control" id="date_iden" autocomplete="off" placeholder="Date ">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-form-label">Place</label>
-                        <select id="place_iden" name="Place_Iden" required="" class="form-control default ng-pristine ng-invalid ng-touched">
-                            <option disabled="" selected="" value="">Place</option>
-                            <option value="HÀ NỘI">HÀ NỘI</option>
-                            <option value="HỒ CHÍ MINH">HỒ CHÍ MINH</option>
-                            <option value="ĐÀ NẴNG">ĐÀ NẴNG</option>
-                            <option value="ĐỒNG NAI">ĐỒNG NAI</option>
-                            <option value="HẢI PHÒNG">HẢI PHÒNG</option>
-                            <option value="AN GIANG">AN GIANG</option>
-                            <option value="BẮC GIANG">BẮC GIANG</option>
-                            <option value="BẮC KẠN">BẮC KẠN</option>
-                            <option value="BẮC NINH">BẮC NINH</option>
-                            <option value="BẠC LIÊU">BẠC LIÊU</option>
-                            <option value="BÀ RỊA-VŨNG TÀU">BÀ RỊA-VŨNG TÀU</option>
-                            <option value="BẾN TRE">BẾN TRE</option>
-                            <option value="BÌNH ĐỊNH">BÌNH ĐỊNH</option>
-                            <option value="BÌNH DƯƠNG">BÌNH DƯƠNG</option>
-                            <option value="BÌNH PHƯỚC">BÌNH PHƯỚC</option>
-                            <option value="BÌNH THUẬN">BÌNH THUẬN</option>
-                            <option value="CAO BẰNG">CAO BẰNG</option>
-                            <option value="CẦN THƠ">CẦN THƠ</option>
-                            <option value="CÀ MAU">CÀ MAU</option>
-                            <option value="ĐĂK LĂK">ĐĂK LĂK</option>
-                            <option value="ĐĂK NÔNG">ĐĂK NÔNG</option>
-                            <option value="ĐIỆN BIÊN">ĐIỆN BIÊN</option>
-                            <option value="ĐỒNG THÁP">ĐỒNG THÁP</option>
-                            <option value="GIA LAI">GIA LAI</option>
-                            <option value="HẢI DƯƠNG">HẢI DƯƠNG</option>
-                            <option value="HẬU GIANG">HẬU GIANG</option>
-                            <option value="HÀ GIANG">HÀ GIANG</option>
-                            <option value="HÀ NAM">HÀ NAM</option>
-                            <option value="HÀ TĨNH">HÀ TĨNH</option>
-                            <option value="HÒA BÌNH">HÒA BÌNH</option>
-                            <option value="HƯNG YÊN">HƯNG YÊN</option>
-                            <option value="KHÁNH HÒA">KHÁNH HÒA</option>
-                            <option value="KIÊN GIANG">KIÊN GIANG</option>
-                            <option value="KON TUM">KON TUM</option>
-                            <option value="LẠNG SƠN">LẠNG SƠN</option>
-                            <option value="LAI CHÂU">LAI CHÂU</option>
-                            <option value="LÂM ĐỒNG">LÂM ĐỒNG</option>
-                            <option value="LÀO CAI">LÀO CAI</option>
-                            <option value="LONG AN">LONG AN</option>
-                            <option value="NAM ĐỊNH">NAM ĐỊNH</option>
-                            <option value="NGHỆ AN">NGHỆ AN</option>
-                            <option value="NINH BÌNH">NINH BÌNH</option>
-                            <option value="NINH THUẬN">NINH THUẬN</option>
-                            <option value="PHÚ THỌ">PHÚ THỌ</option>
-                            <option value="PHÚ YÊN">PHÚ YÊN</option>
-                            <option value="QUẢNG BÌNH">QUẢNG BÌNH</option>
-                            <option value="QUẢNG NAM">QUẢNG NAM</option>
-                            <option value="QUẢNG NGÃI">QUẢNG NGÃI</option>
-                            <option value="33">QUẢNG NINH</option>
-                            <option value="QUẢNG NINH">QUẢNG TRỊ</option>
-                            <option value="SÓC TRĂNG">SÓC TRĂNG</option>
-                            <option value="SƠN LA">SƠN LA</option>
-                            <option value="TÂY NINH">TÂY NINH</option>
-                            <option value="THÁI BÌNH">THÁI BÌNH</option>
-                            <option value="THÁI NGUYÊN">THÁI NGUYÊN</option>
-                            <option value="THANH HÓA">THANH HÓA</option>
-                            <option value="THỪA THIÊN HUẾ">THỪA THIÊN HUẾ</option>
-                            <option value="TIỀN GIANG">TIỀN GIANG</option>
-                            <option value="TRÀ VINH">TRÀ VINH</option>
-                            <option value="TUYÊN QUANG">TUYÊN QUANG</option>
-                            <option value="VĨNH LONG">VĨNH LONG</option>
-                            <option value="VĨNH PHÚ">VĨNH PHÚC</option>
-                            <option value="YÊN BÁI">YÊN BÁI</option>
-                            <option value="KHÁC">KHÁC</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group col-md-8">
-                        <label class="col-form-label">PhoneNumber</label>
-                        <input type="p" name="phone" class="form-control" id="exampleInputPhoneNumber" autocomplete="off" placeholder="PhoneNumber">
-                    </div>
-
-                    <div class="form-group col-md-4">
-                        <label class="col-form-label">Job</label>
-                        <input type="text" name="Job" class="form-control" id="job" autocomplete="off" placeholder="job">
-                    </div>
-                    <div class="form-group col-md-8">
-                        <label class="col-form-label">Identity Card</label>
-                        <input type="text" name="IdentityCard" class="form-control" id="identityCard" autocomplete="off" placeholder="IdentityCard">
-                    </div>
 
 
-                </div>
-            </div>
-
-
-            <div class="col-lg-3 col-md-4 col-sm-12">
-                <div class="hd-info-pro">INSURANCE FEES</div>
-                <div class="result">
-                    <div class="item-result">
-                        <span>Total fee (including VAT):</span>
-                        <strong><label for="ctl18_lblTotalPremiumIcludeVAT" id="ctl18_lblTotalPremiumIcludeVAT">$0</label></strong>
-                    </div>
-                    <div id="ctl18_Promotions1_pnPromotions">
-
-
-                        <div class="item-result">
-                            <span>Discount amount:</span>
-                            <strong><label for="ctl18_Promotions1_lblPromotionsPercent" id="ctl18_Promotions1_lblPromotionsPercent">$0</label></strong>
-                        </div>
-                        <div class="result-red">
-                            <div>Total net charge (including VAT) actually collected:</div>
-
-                            <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">$0</label></strong>
-                        </div>
-                        <input type="submit" name="submit" value="submit" class="btn btn-success" />
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="box-chuy col-12">
-            <div class="title-box-chuy"><i class="icon-bell" aria-hidden="true"></i> TUTORIAL: </div>
-            <div class="cotent-box-chuy">
-                <div class="cotent-text"> Select coverage: By default, when you buy private home insurance, you will have to buy basic benefits (fire, explosion). You can choose to buy 2 additional benefits 1, 2 by CHECK on benefits. </div>
-                <div class="cotent-text"> You enter the required website information: the type of house, the number of years used, the amount of insurance for the house, the property in the house, you will see the total premium.</div>
-                <div class="cotent-text"> If you agree to order, please click <b>[Continue]</b> to move to the next order. </div>
-            </div>
-        </div>
-    </form>
-
-</div>
 
 @section Scripts {
     <script>
@@ -792,8 +627,9 @@
                     }, 2000);
                 }
             });
-            $("#son").validate({
+            $("#formDemo").validate({
                 rules: {
+
                     Date_Iden: "required",
                     email: {
                         required: true,
@@ -812,13 +648,15 @@
                     IdentityCard: {
                         required: true,
                         minlength: 10
-                    }
+                    },
+                    MaritalStatus: "required"
 
                 },
                 messages: {
+                    MaritalStatus: "Please enter Marital Status",
                     Date_Iden: "Please enter date_iden ",
                     email: "Please enter a valid email address",
-                    email: "Vui lòng nhập email",
+                   
                     name: {
                         required: "Please enter a valid name",
                         minlength: "Địa chỉ ngắn vậy, chém gió ah?"
@@ -833,10 +671,11 @@
                     },
                     Job: "Please enter a valid job",
                 }
-            },
+            })
            
             
         });
+         
 
     </script>
 

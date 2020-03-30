@@ -137,13 +137,10 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
-            var selectedIDs = new Array();
             $('#checkAll_programme').click(function () {
                 $(".check").prop('checked',
                     $(this).prop('checked'));
             })
-
-
 
             $('#action_contract').click(function () {
                 var selectedIDs = new Array();
@@ -154,66 +151,47 @@
                 }
                 $('input:checkbox.check').each(function () {
                     if ($(this).prop('checked')) {
-                        var r = confirm("Do you want to delete?");
-                        if (r == true) {
-                            selectedIDs.push($(this).val());
-                        }
+                        selectedIDs.push($(this).val());
                     }
                 });
                 if (selectedIDs.length <= 0) {
                     alert('You have not selected programme !');
                     return;
-
-
-                    $.ajax({
-                        url: "/Admin/Programmes/DeleteAll",
-                        type: "POST",
-                        dataType: "json",
-                        data: {
-                            __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                            selectedIDs,
-                            action
-                        },
-                        success: function (res) {
-                            if (!res == false) {
-                                window.location.reload();
-                            }
-                        },
-                    });
-                    if (selectedIDs.length <= 0) {
-                        alert('You have not selected programme !');
-                        return;
-                    }
-                    $.ajax({
-                        url: "/Admin/Programmes/DeleteAll",
-                        type: "POST",
-                        dataType: "json",
-                        data: {
-                            __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                            selectedIDs
-                        },
-                        success: function (res) {
-                            if (!res == false) {
-                                window.location.href = `/Admin/Programmes`;
-                            }
-                        },
-                        error: function () {
-                            alert('error');
-                        }
-                    });
                 };
+                if (confirm("Do you want to delete?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
             });
-        })
-
-        function handle(e) {
-            if (e.keyCode === 13) {
-                e.preventDefault();
+            function changeStatusPTTime(selectedIDs, action) {
+                $.ajax({
+                    url: "/Admin/Programmes/DeleteAll",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                        selectedIDs,
+                        action
+                    },
+                    success: function (res) {
+                        if (!res == false) {
+                            window.location.reload();
+                        }
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                });
             }
-        };
+            function handle(e) {
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                }
+            };
 
-        $(function () {
-            $("#pageSize").change(function () {
-                $("#pagesize").submit();
+            $(function () {
+                $("#pageSize").change(function () {
+                    $("#pagesize").submit();
+                });
             });
         });
     </script>

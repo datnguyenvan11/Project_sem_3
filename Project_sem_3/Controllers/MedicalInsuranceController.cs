@@ -28,7 +28,7 @@ namespace Project_sem_3.Controllers
         public JsonResult ViewProgramme()
         {
             db.Configuration.ProxyCreationEnabled = false;
-            var programme = db.Programmes.Where(x => x.Status == 0).ToList();
+            var programme = db.Programmes.Where(x => x.Status == 1).ToList();
 
             return Json(new { programme}, JsonRequestBehavior.AllowGet);
         }
@@ -46,7 +46,7 @@ namespace Project_sem_3.Controllers
         [HttpPost]
         public ActionResult CreateContract(ContractMedical medical)
         {
-           
+            List<Item> items = medical.items;
             var contract = new Contract
             {
                 TotalPrice = medical.Totalprice,
@@ -55,20 +55,20 @@ namespace Project_sem_3.Controllers
                 MedicalInsurances = new List<MedicalInsurance>()
             };
 
-            foreach (var items in medical.items)
+            foreach (var item in items)
             {
                 var medicalinsurace = new MedicalInsurance()
                 {
-                    InsurancePackageId = System.Int32.Parse(items.InsurancePackageId),
-                    ProgrammeId = System.Int32.Parse(items.Programmeid),
-                    Name = items.Name,
+                    InsurancePackageId = System.Int32.Parse(item.InsurancePackageId),
+                    ProgrammeId = System.Int32.Parse(item.Programmeid),
+                    Name = item.Name,
                     ContractId = contract.Id,
-                    PhoneNumber = items.PhoneNumber,
-                    Email = items.Email,
-                    Address = items.Address,
+                    PhoneNumber = item.PhoneNumber,
+                    Email = item.Email,
+                    Address = item.Address,
                     Quantity = 1,
-                    UnitPrice = items.unitprice,
-                    DateOfBirth = items.DateOfbirth
+                    UnitPrice = item.unitprice,
+                    DateOfBirth = item.DateOfbirth
                 };
                 contract.MedicalInsurances.Add(medicalinsurace);
                 db.Contracts.Add(contract);
@@ -88,7 +88,7 @@ namespace Project_sem_3.Controllers
                 Console.WriteLine(e);
                 transaction.Rollback();
             }
-            return Redirect("/MotorCart/ShowCart");
+            return Redirect("/OrderNotice/Index");
 
 
         }

@@ -113,13 +113,12 @@ namespace Project_sem_3.Models
 
         public string PhoneNumber { get; set; }
         public int Status { get; set; }
-        public enum OrderStatus { Done = 1, Cancel = 0, Deleted = -1 }
         public RegisterViewModel()
         {
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
          
-            Status = (int)OrderStatus.Done;
+            Status = 1;
         }
     }
     public class Users_in_Role_ViewModel

@@ -173,6 +173,20 @@ namespace Project_sem_3.Areas.Admin.Controllers
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangeStatus(int action, int[] selectedIDs)
+        {
+            foreach (int IDs in selectedIDs)
+            {
+                Insurance insurance = db.Insurances.Find(IDs);
+                db.Insurances.Attach(insurance);
+                insurance.Status = action;
+            }
+            db.SaveChanges();
+            return Json(selectedIDs, JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -182,10 +196,45 @@ namespace Project_sem_3.Areas.Admin.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Deleted()
+        public ActionResult Deleted(string sortOrder, string searchString, int? page, int? pageSize)
         {
 
-            return View(db.Insurances.Where(t => t.Status == -1).ToList());
+            var insurances = db.Insurances.Where(x => x.Status == -1);
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                insurances = db.Insurances.Where(x => x.Name.Contains(searchString))
+                    .Where(x => x.Status == -1);
+            }
+
+            ViewBag.PageSize = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="5", Value= "5"},
+                new SelectListItem() { Text="10", Value= "10"},
+                new SelectListItem() { Text="15", Value= "15" },
+                new SelectListItem() { Text="20", Value= "20" },
+            };
+            int pagesize = (pageSize ?? 5);
+            int pageNumber = (page ?? 1);
+
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
+            switch (sortOrder)
+            {
+                case "Name_desc":
+                    insurances = insurances.OrderByDescending(s => s.Name);
+                    break;
+                case "Date":
+                    insurances = insurances.OrderBy(s => s.CreatedAt);
+                    break;
+                case "Date_desc":
+                    insurances = insurances.OrderByDescending(s => s.CreatedAt);
+                    break;
+
+                default:
+                    insurances = insurances.OrderBy(s => s.Name);
+                    break;
+            }
+            return View(insurances.ToList().ToPagedList(pageNumber, pagesize));
         }
     }
 }

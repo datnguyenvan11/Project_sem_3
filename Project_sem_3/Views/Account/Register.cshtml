@@ -67,6 +67,8 @@
                     @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
                         @Html.AntiForgeryToken()
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
@@ -104,7 +106,7 @@
                                         <label class="radio-container m-r-45">
                                             Male
                                             @Html.RadioButtonFor(model => model.Gender, "Male", new { Checked = "checked" })
-                                              @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                                            @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
 
                                             <span class="checkmark"></span>
                                         </label>

@@ -181,6 +181,7 @@
     <Compile Include="Areas\Admin\Controllers\HouseInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\InsurancePackagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\InsurancesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\LifeInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\MedicalInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\MotorInsurancesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProgrammesController.cs" />
@@ -194,7 +195,6 @@
     <Compile Include="Controllers\LifeInsuranceController.cs" />
     <Compile Include="Controllers\MedicalInsuranceController.cs" />
     <Compile Include="Controllers\MotorInsuranceController.cs" />
-    <Compile Include="Controllers\MotorCartController.cs" />
     <Compile Include="Controllers\OrderNoticeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

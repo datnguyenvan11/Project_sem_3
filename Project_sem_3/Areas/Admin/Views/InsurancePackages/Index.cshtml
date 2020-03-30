@@ -138,8 +138,8 @@
                             <div class="col-sm-12 col-md-5">
                                 <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
                             </div>
-                            <div class="col-sm-12 col-md-5"></div>
-                            <div class="col-sm-12 col-md-2">
+                            <div class="col-sm-12 col-md-3"></div>
+                            <div class="col-sm-12 col-md-4">
                                 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
                                new PagedListRenderOptions()
                                {
@@ -159,13 +159,10 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         $(document).ready(function () {
-            var selectedIDs = new Array();
             $('#checkAll_InsurancePackage').click(function () {
                 $(".check").prop('checked',
                     $(this).prop('checked'));
             })
-
-
 
             $('#action_contract').click(function () {
                 var selectedIDs = new Array();
@@ -176,51 +173,49 @@
                 }
                 $('input:checkbox.check').each(function () {
                     if ($(this).prop('checked')) {
-                        var r = confirm("Do you want to delete?");
-                        if (r == true) {
-                            selectedIDs.push($(this).val());
-                        }
-
+                        selectedIDs.push($(this).val());
                     }
-
-                    if (selectedIDs.length <= 0) {
-                        alert('You have not selected insurance package !');
-                        return;
-                    }
-                    $.ajax({
-                        url: "/Admin/InsurancePackages/DeleteAll",
-                        type: "POST",
-                        dataType: "json",
-                        data: {
-                            __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                            selectedIDs,
-                            action
-                        },
-                        success: function (res) {
-                            if (!res == false) {
-                                window.location.reload();
-                            }
-                        },
-                        error: function () {
-                            alert('error');
+                });
+                if (selectedIDs.length <= 0) {
+                    alert('You have not selected insurance package !');
+                    return;
+                }
+                if (confirm("Do you want to delete?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            });
+            function changeStatusPTTime(selectedIDs, action) {
+                $.ajax({
+                    url: "/Admin/InsurancePackages/DeleteAll",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                        selectedIDs,
+                        action
+                    },
+                    success: function (res) {
+                        if (!res == false) {
+                            window.location.reload();
                         }
-                    });
+                    },
+                    error: function () {
+                        alert('error');
+                    }
+                });
+            }
+            function handle(e) {
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                }
+            }
+
+            $(function () {
+                $("#pageSize").change(function () {
+                    $("#pagesize").submit();
                 });
             });
-        })
-
-        function handle(e) {
-            if (e.keyCode === 13) {
-                e.preventDefault();
-            }
-        }
-
-        $(function () {
-            $("#pageSize").change(function () {
-                $("#pagesize").submit();
-            });
         });
-
     </script>
 }
 
