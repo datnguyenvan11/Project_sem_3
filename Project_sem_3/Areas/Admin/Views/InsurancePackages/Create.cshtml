@@ -12,7 +12,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-        <div class="box-border-pro">
+        <div class="container box-border-pro">
             <div class="frm frmpro">
                 <div class="form-group">
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })

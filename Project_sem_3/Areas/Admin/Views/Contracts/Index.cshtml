@@ -40,14 +40,15 @@
             </div>*@
 
         <div style="margin-bottom:15px;">
-            <a href="https://localhost:44362/Admin/Contracts/Confirmed" class="btn btn-info" role="button">Contracts Confirmed</a>
-            <a href="https://localhost:44362/Admin/Contracts/Deleted" class="btn btn-info float-right" role="button">Contracts Deleted</a>
+            <a href="https://localhost:44362/Admin/Contracts/Confirmed" class="btn btn-info" role="button">List Contracts Confirmed</a>
+            <a href="https://localhost:44362/Admin/Contracts/Deleted" class="btn btn-info float-right" role="button">List Contracts Deleted</a>
+
         </div>
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Contract</h6>
+                <h6 class="m-0 font-weight-bold text-primary">List Contract</h6>
             </div>
             <div class="card-body">
                 <div>
@@ -78,16 +79,11 @@
                                     <thead>
                                         <tr>
                                             <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
-
+<
                                             <th rowspan="1" colspan="1">Insurance</th>
-
                                             <th rowspan="1" colspan="1">Customer</th>
-
-
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Total Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
-
-
 
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
@@ -98,6 +94,7 @@
 
                                         @foreach (var item in Model)
                                         {
+<
                                         <tr role="row" class="odd">
                                             <td>
                                                 <input type="checkbox" class="check" value="@item.Id" />
@@ -139,6 +136,7 @@
 
                                             </td>
                                         </tr>
+
                                         }
 
                                     </tbody>

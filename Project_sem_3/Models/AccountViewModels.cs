@@ -13,6 +13,8 @@ namespace Project_sem_3.Models
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public int Status { get; set; }
+        [Required]
+        [Display(Name = "Name")]
         public string UserName { get;set; }
 
         public enum OrderStatus { Done = 1, Cancel = 0, Deleted = -1 }
