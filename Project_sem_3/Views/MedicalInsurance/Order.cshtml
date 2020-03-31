@@ -797,7 +797,7 @@
                                             <div _ngcontent-c5="" class="benefit-name-wrapper v-middle">
                                                 <h2 _ngcontent-c5="" class="benefit-name">
                                                     <div _ngcontent-c5="" class="app-checkbox agree-with-term">
-                                                        <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' name="insurancePackageId" required /></label>                                                           @*<input _ngcontent-c5="" id="choose1" name="choose1" type="checkbox"> <label _ngcontent-c5="" for="choose1">*@
+                                                        <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' name="insurancePackageId" /></label>                                                           @*<input _ngcontent-c5="" id="choose1" name="choose1" type="checkbox"> <label _ngcontent-c5="" for="choose1">*@
                                                         <span _ngcontent-c5="" class="checkout-term">@item.Name</span>
 
                                                     </div>
@@ -831,7 +831,7 @@
                                                         </div>
                                                         <div _ngcontent-c5="" class="col-xs-8">
                                                             <p _ngcontent-c5="" class="item-value">
-                                                                <span _ngcontent-c5="" style="font-weight: bold;background: white;">@item.Price/year</span>
+                                                                <span _ngcontent-c5="" style="font-weight: bold;background: white;">$@item.Price/year</span>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -890,12 +890,14 @@
                                     <input type="text" name="PhoneNumber" class="Phone form-control" value="" />
                                 </td>
                                 <td class="text-center align-middle">
-                                    <div class="price-pro"><div name="ctl18$rptPHA1$ctl00$txtPremium_" type="text" value="0" id="displayprice-1" class="total form-control txt text-right" </div></div>
+                                    <div class="price-pro"><div name="ctl18$rptPHA1$ctl00$txtPremium_" type="text" value="0" id="displayprice-1" class="total form-control txt text-right" </div>$</div>
                                 </td>
                             </tr>
 
                         </tbody>
-                        <th colspan="8" style="cursor:pointer;padding:0" class="text-center " id="click"><img src="https://cdn.onlinewebfonts.com/svg/img_248922.png" width="40px" height="40px" alt="plus" /></th>
+                        <th colspan="8" style="cursor:pointer;padding:0" class="text-center " id="click">
+                            <span id="validation" style="   margin-top: 8px; margin-left: 1%; float: left; color: red;width: 15%;"></span><img src="https://cdn.onlinewebfonts.com/svg/img_248922.png" id="img" style="    margin-right: 21%;" width="40px" height="40px" alt="plus" />
+                        </th>
 
 
                     </table>
@@ -914,7 +916,7 @@
                 </div>
                 <div class="grand_total">
                     <div class="form_text">
-                        <strong class="fee"></strong><span id="ctl18_spancoupon"></span>
+                        <strong class="fee"></strong><span id="ctl18_spancoupon"> $</span>
                     </div>
                 </div>
                 <div class="form_button  container ">
@@ -974,22 +976,52 @@
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true,
-            autoclose: true
+            autoclose: true,
 
-            /*other options goes here...*/
+            onSelect: function (date) {
+                var dob = new Date(date);
+                var today = new Date();
+
+                if (dob.getFullYear() + 1 < today.getFullYear()) {
+                    $("#validation").hide();
+                    $("#img").css("margin-right", "5%")
+
+
+                }
+                else {
+                    $('input[type=datetime]').val(null);
+                    $("#validation").text("* phai lon hon 1")
+                    $("#img").css("margin-right", "21%")
+                }
+            }
         })
+
+
         var totalprice;
         function CalPHAPremium(i) {
-            var insuranpackageId = $('input[name="insurancePackageId"]:checked').attr("class");
-            var price_programme = $('#program-selecter-' + i).children('option:selected').attr("class");
-            var TotalPrice = parseInt(insuranpackageId) + parseInt(price_programme);
-            $('#displayprice-' + i).text(TotalPrice.toString());
-            var sum = 0;
-            $('.total').each(function () {
-                sum += +$(this).text() || 0;
-            });
-            $(".price-sum").text(sum);
-            totalprice = sum
+            radio = $('input:radio[name=insurancePackageId]:checked').val();
+            if (radio == null) {
+                $("#validation").text("* Please select Insurancepackage")
+                $("#img").css("margin-right", "21%")
+                $("#validation").show()
+
+            }
+            else {
+                var insuranpackageId = $('input[name="insurancePackageId"]:checked').attr("class");
+                var price_programme = $('#program-selecter-' + i).children('option:selected').attr("class");
+                var TotalPrice = parseInt(insuranpackageId) + parseInt(price_programme);
+                $('#displayprice-' + i).text(TotalPrice.toString());
+                var sum = 0;
+                $('.total').each(function () {
+                    sum += +$(this).text() || 0;
+                });
+                $(".price-sum").text(sum);
+                totalprice = sum
+            }
+
+
+            // if radio hv checked
+
 
         }
 
@@ -1024,7 +1056,11 @@
                 if ($(this).is(":checked")) {
                     insuranpakge = $(this).val()
                     price = $(this).attr("class");
-                    //alert(price)
+                    $("#validation").hide();
+                    $("#img").css("margin-right", "5%")
+                    var LengthTr = $(".program-selecter").length
+
+
                 }
             });
         var objects = {
@@ -1040,16 +1076,17 @@
         var programnemname = [];
         var address = [];
         function getdata() {
+            var check = false;
             var insuranpackageId = $('input[name="insurancePackageId"]:checked').attr("class");
 
             $.each($(".program-selecter option:selected"), function () {
                 if ($(this).val() == '') {
                     console.log("err")
-                    return false;
+                    return check;
                 }
                 else {
+                    check = true
                     phones.push($(this).val());
-
                     selectprogram.push($(this).val());
                     var unitprice = parseInt($(this).attr("class")) + parseInt(insuranpackageId)
                     prices.push(unitprice);
@@ -1058,45 +1095,52 @@
             });
 
             $(".Email").each(function () {
-            
+
                 if ($(this).val() == '') {
                     console.log("err")
-                    return false;
+                    return check;
                 }
                 else {
-                emails.push($(this).val());
+                    check = true
+
+                    emails.push($(this).val());
                 }
 
 
 
             });
             $(".Address").each(function () {
-                 if ($(this).val() == '') {
+                if ($(this).val() == '') {
                     console.log("err")
-                    return false;
+                    return check;
                 }
                 else {
-                address.push($(this).val());
+                    check = true
+
+                    address.push($(this).val());
                 }
             });
 
             $(".Name").each(function () {
                 if ($(this).val() == '') {
                     console.log("err")
-                    return false;
+                    return check;
                 }
                 else {
-                names.push($(this).val());
+                    check = true
+
+                    names.push($(this).val());
                 }
             });
 
             $(".Phone").each(function () {
                 if ($(this).val() == '') {
                     console.log("err")
-                    return false;
+                    return check;
                 }
                 else {
-                phones.push($(this).val());
+                    check = true
+                    phones.push($(this).val());
                 }
             });
 
@@ -1126,11 +1170,34 @@
             }
 
             if (typeof (Storage) !== "undefined") {
-                sessionStorage.setItem('medical', JSON.stringify(objects));
+                for (var i = 0; i < LengthTr; i++) {
+                    if (
+                        typeof names[i] !== 'undefined' && names[i] != ""
+                        && typeof selectprogram[i] !== 'undefined' && selectprogram[i] != ""
+                        && typeof dateofbirths[i] !== 'undefined' && dateofbirths[i] != ""
+                        && typeof emails[i] !== 'undefined' && emails[i] != ""
+                        && typeof address[i] !== 'undefined' && address[i] != ""
+                        && typeof phones[i] !== 'undefined' && phones[i] != ""
+                    ) {
+                        sessionStorage.setItem('medical', JSON.stringify(objects));
+                        window.location.href = "/MedicalInsurance/getsesstion"
+                    } else {
+                        $("#validation").text("* Please enter full information")
+                        $("#img").css("margin-right", "21%")
+                        $("#validation").show()
+                        break;
+                    }
 
-            } else {
-                alert('Trình duyệt của bạn đã quá cũ. Hãy nâng cấp trình duyệt ngay!');
+                    if (insuranpakge == "undefined" || insuranpakge == null) {
+                        $("#validation").text("* Please enter full insurance")
+                        $("#img").css("margin-right", "21%")
+                        $("#validation").show()
+                    }
+
+                }
+
             }
+
 
         }
 
@@ -1147,35 +1214,42 @@
 
     <script>
 
-
         $("#click").click(function () {
+            var LengthTr = $(".program-selecter").length
+
+            if (LengthTr >= 5) {
+                $("#click").setEnabled(false);
+                $("#click").setClickable(false);
+
+
+            }
             var index = $("table tr").length
 
             var html = `<tr id="trid-${index}" class="tr">
-                                                                                                                            <td class="align-middle pos-re">
-                                                                                                                                    <input name="dateofbirth" type="datetime" class="dateofbirth form-control txt birthDay2" onblur="CalPHAPremium();" />
-                                                                                                                                   </td>
-                                                                                                                            <td class="align-middle">
-                                                                                                                            <select name="programme" class="custom-select program-selecter form-control" id="program-selecter-${index}"onchange="CalPHAPremium(${index})" >
-                                                                                                                            </select>
-                                                                                                                            </td>
-                                                                                                                             <td class="align-middle">
-                                                                                                                                                            <input type="text" name="Name" class="Name form-control" value="" />
-                                                                                                                                                        </td>
-                                                                                                                                                        <td class="align-middle">
-                                                                                                                                                            <input type="text" name="Email" class="Email form-control" value="" />
-                                                                                                                                                        </td>
-                                                                                            <td class="align-middle">
-                                                                                                                            <input type="text" name="PhoneNumber" class="Address form-control" value="" />
-                                                                                                                        </td>
-                                                                                                                                                        <td class="align-middle">
-                                                                                                                                                            <input type="text" name="PhoneNumber" class="Phone form-control" value="" />
-                                                                                                                                                        </td>
-                                                                                                                                                        <td class="text-center align-middle">
-                                                                                                                                                            <div class="price-pro"><div name="ctl18$rptPHA1$ctl00$txtPremium_" type="text" value="0" id="displayprice-${index}" class="total form-control txt text-right" </div></div>
-                                                                                                                                                        </td >
-                                                                                                                                                            <td> <button style="color:red ; text-align:center;background: red; border: none;height: 5px; width: 20px;}" onclick="deleted(${index})"></button></td>
-                                                                                                                                                           <tr/>`
+                                                                                                                                                                                    <td class="align-middle pos-re">
+                                                                                                                                                                                            <input name="dateofbirth" type="datetime" class="dateofbirth form-control txt birthDay2" onblur="CalPHAPremium();" />
+                                                                                                                                                                                           </td>
+                                                                                                                                                                                    <td class="align-middle">
+                                                                                                                                                                                    <select name="programme" class="custom-select program-selecter form-control" id="program-selecter-${index}"onchange="CalPHAPremium(${index})" >
+                                                                                                                                                                                    </select>
+                                                                                                                                                                                    </td>
+                                                                                                                                                                                     <td class="align-middle">
+                                                                                                                                                                                                                    <input type="text" name="Name" class="Name form-control" value="" />
+                                                                                                                                                                                                                </td>
+                                                                                                                                                                                                                <td class="align-middle">
+                                                                                                                                                                                                                    <input type="text" name="Email" class="Email form-control" value="" />
+                                                                                                                                                                                                                </td>
+                                                                                                                                                    <td class="align-middle">
+                                                                                                                                                                                    <input type="text" name="PhoneNumber" class="Address form-control" value="" />
+                                                                                                                                                                                </td>
+                                                                                                                                                                                                                <td class="align-middle">
+                                                                                                                                                                                                                    <input type="text" name="PhoneNumber" class="Phone form-control" value="" />
+                                                                                                                                                                                                                </td>
+                                                                                                                                                                                                                <td class="text-center align-middle">
+                                                                                                                                                                                                                    <div class="price-pro"><div name="ctl18$rptPHA1$ctl00$txtPremium_" type="text" value="0" id="displayprice-${index}" class="total form-control txt text-right" </div>$</div>
+                                                                                                                                                                                                        </td >
+                                                                                                                                                                                                                    <td> <button style="color:red ; text-align:center;background: red; border: none;height: 5px; width: 20px;}" onclick="deleted(${index})"></button></td>
+                                                                                                                                                                                                                   <tr/>`
             $(".table2").append(html)
 
             getprogramme(index)
@@ -1187,6 +1261,7 @@
 
                 /*other options goes here...*/
             })
+
         })
 
         function deleted(i) {

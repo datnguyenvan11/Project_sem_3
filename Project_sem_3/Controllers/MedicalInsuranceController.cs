@@ -19,7 +19,7 @@ namespace Project_sem_3.Controllers
         }
         public ActionResult Order()
         {
-            var insurancePackages = db.InsurancePackages.Where(i => i.InsuranceId == 28).Where(i => i.Status == 1);
+            var insurancePackages = db.InsurancePackages.Where(i => i.InsuranceId == 4).Where(i => i.Status == 1);
             ViewBag.insurancepackages = insurancePackages;
             return View();
 
@@ -46,16 +46,15 @@ namespace Project_sem_3.Controllers
         [HttpPost]
         public ActionResult CreateContract(ContractMedical medical)
         {
-            List<Item> items = medical.items;
             var contract = new Contract
             {
                 TotalPrice = medical.Totalprice,
                 ApplicationUserId = User.Identity.GetUserId(),
-                InsuranceId = 28,
+                InsuranceId = 4,
                 MedicalInsurances = new List<MedicalInsurance>()
             };
 
-            foreach (var item in items)
+            foreach (var item in medical.items)
             {
                 var medicalinsurace = new MedicalInsurance()
                 {

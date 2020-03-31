@@ -118,7 +118,8 @@ namespace Project_sem_3.Areas.Admin.Controllers
         }
         public ActionResult UsersWithRoles()
         {
-            var usersWithRoles = (from user in context.Users.Where
+            var usersWithRoles = (from user in context.Users
+
                                   select new
                                   {
                                       UserId = user.Id,

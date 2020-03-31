@@ -10,9 +10,10 @@ namespace Project_sem_3.Models
 {
     public class MedicalInsurance
     {
-        [Key, Column(Order = 0)]
+        //[Key]
+
+        public int Id { get; set; }
         public int InsurancePackageId { get; set; }
-        [Key, Column(Order = 1)]
         public int ContractId { get; set; }
         public int ProgrammeId { get; set; }
         public string Name { get; set; }
