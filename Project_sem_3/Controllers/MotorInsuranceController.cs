@@ -20,7 +20,7 @@ namespace Project_sem_3.Controllers
         }
         public ActionResult Order()
         {
-            var insurancePackages = db.InsurancePackages.Where(i=>i.InsuranceId==27).Where(i=>i.Status==1);
+            var insurancePackages = db.InsurancePackages.Where(i=>i.InsuranceId==3).Where(i=>i.Status==1);
             ViewBag.shoppingCart = LoadShoppingCart();
             ViewBag.insurancepackages = insurancePackages;
             return View();
@@ -82,7 +82,7 @@ namespace Project_sem_3.Controllers
             {
                 TotalPrice = shoppingCart.GetTotalPrice(),
                 ApplicationUserId =User.Identity.GetUserId(),
-                InsuranceId = 27,
+                InsuranceId = 3,
                 MotorInsurances = new List<MotorInsurance>()
             };
 

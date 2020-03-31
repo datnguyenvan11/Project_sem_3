@@ -601,11 +601,11 @@
             font-weight: normal;
             font-size: 20px;
         }
-        .error{
-            color:red;
-            font-size:13px
-                
-        }
+
+    .error {
+        color: red;
+        font-size: 13px
+    }
 
     .tab-pro li.active a {
         background-color: #0b665a;
@@ -951,7 +951,7 @@
 @section Scripts {
     <script>
 
-          $(".divnone").hide();
+        $(".divnone").hide();
 
         $("#rdbPackage_1").click(function () {
 
@@ -969,23 +969,23 @@
                     var ttt = valint.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
                     $('#ctl18_Promotions1_lblHasToPayPremium').text(ttt)
-                     $('html, body').animate({
+                    $('html, body').animate({
                         scrollTop: $("#divnone").offset().top
                     }, 2000);
                 }
             });
-         $("#formhouse").validate({
+        $("#formhouse").validate({
             rules: {
                 HouseType: "required",
                 DurationHouse: "required",
                 HouserAddress: "required",
-                HouseOwner:"required"
+                HouseOwner: "required"
             },
             messages: {
                 HouseType: "* Please enter HouseType",
-                DurationHouse:  "* Please enter DurationHouse",
+                DurationHouse: "* Please enter DurationHouse",
                 HouserAddress: "* Please enter HouserAddress",
-                HouseOwner:"* Please enter HouseOwner"
+                HouseOwner: "* Please enter HouseOwner"
 
 
             }

@@ -19,7 +19,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/Insurances
         public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize)
         {
-            var insurances = db.Insurances.Where(x => x.Status == 0);
+            var insurances = db.Insurances.Where(x => x.Status == 1);
             if (!String.IsNullOrEmpty(searchString))
             {
                 insurances = db.Insurances.Where(x => x.Name.Contains(searchString))

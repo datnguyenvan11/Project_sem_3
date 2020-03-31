@@ -17,7 +17,8 @@ namespace Project_sem_3.Models
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public int Status { get; set; }
-       
+        public virtual ICollection<Contract> Contracts { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -26,7 +27,6 @@ namespace Project_sem_3.Models
             //userIdentity.AddClaim(new Claim("FullName", this.FullName));
             return userIdentity;
         }
-        public virtual ICollection<Contract> Contracts { get; set; }
     }
     public class ApplicationRole : IdentityRole
     {
@@ -47,10 +47,11 @@ namespace Project_sem_3.Models
         public DbSet<LifeInsurance> LifeInsurances { get; set; }
         public DbSet<Programme> Programmes { get; set; }
         public DbSet<MotorInsurance> MotorInsurances { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
-
     }
+   
 }

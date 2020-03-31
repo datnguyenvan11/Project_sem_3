@@ -78,7 +78,6 @@
                                     <thead>
                                         <tr>
                                             <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
-                                            <th rowspan="1" colspan="1">Name</th>
 
                                             <th rowspan="1" colspan="1">Insurance</th>
 
@@ -99,50 +98,47 @@
 
                                         @foreach (var item in Model)
                                         {
-                                            <tr role="row" class="odd">
-                                                <td>
-                                                    <input type="checkbox" class="check" value="@item.Id" />
-                                                    @Html.AntiForgeryToken()
-                                                </td>
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <input type="checkbox" class="check" value="@item.Id" />
+                                                @Html.AntiForgeryToken()
+                                            </td>
 
-                                                <td class="sorting_1">
-                                                    @item.Insurance.Name
-                                                </td>
+                                            <td class="sorting_1">
+                                                @item.Insurance.Name
+                                            </td>
+                                            <td class="sorting_1">
+                                                @item.ApplicationUserId
+                                            </td>
 
+                                            <td>$@item.TotalPrice</td>
+                                            <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
 
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-primary">
+                                                        @if (@item.Insurance.Id == 3)
+                                                        {
+                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
+                                                        }
+                                                        @if (@item.Insurance.Id == 1)
+                                                        {
+                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
+                                                        }
+                                                        @if (@item.Insurance.Id == 2)
+                                                        {
+                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "LifeInsurances", Id = item.Id })
+                                                        }
+                                                        @if (@item.Insurance.Id == 4)
+                                                        {
+                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "MedicalInsurances", Id = item.Id })
+                                                        }
+                                                    </button>
+                                                    <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                                                </div>
 
-
-                                                <td>@item.Insurance.Id</td>
-
-                                                <td>@item.TotalPrice</td>
-                                                <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
-                                                <td>@item.UpdatedAt.ToString("dd-MM-yyyy")</td>
-
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-primary">
-                                                            @if (@item.Insurance.Id == 27)
-                                                            {
-                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
-                                                            }
-                                                            @if (@item.Insurance.Id == 25)
-                                                            {
-                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
-                                                            }
-                                                            @if (@item.Insurance.Id == 26)
-                                                            {
-                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "LifeInsurances", Id = item.Id })
-                                                            }
-                                                            @if (@item.Insurance.Id == 28)
-                                                            {
-                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "MedicalInsurances", Id = item.Id })
-                                                            }
-                                                        </button>
-                                                        <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-                                                    </div>
-
-                                                </td>
-                                            </tr>
+                                            </td>
+                                        </tr>
                                         }
 
                                     </tbody>

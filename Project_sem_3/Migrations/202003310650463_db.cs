@@ -3,7 +3,7 @@ namespace Project_sem_3.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class tesst : DbMigration
+    public partial class db : DbMigration
     {
         public override void Up()
         {
@@ -12,33 +12,29 @@ namespace Project_sem_3.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        CustomerId = c.Int(nullable: false),
+                        ApplicationUserId = c.String(maxLength: 128),
                         TotalPrice = c.Double(nullable: false),
                         InsuranceId = c.Int(nullable: false),
-                        CreatedAt = c.Long(nullable: false),
-                        UpdatedAt = c.Long(nullable: false),
-                        DeletedAt = c.Long(nullable: false),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        DeletedAt = c.DateTime(nullable: false),
                         Status = c.Int(nullable: false),
-                        Customer_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.AspNetUsers", t => t.Customer_Id)
+                .ForeignKey("dbo.AspNetUsers", t => t.ApplicationUserId)
                 .ForeignKey("dbo.Insurances", t => t.InsuranceId, cascadeDelete: true)
-                .Index(t => t.InsuranceId)
-                .Index(t => t.Customer_Id);
+                .Index(t => t.ApplicationUserId)
+                .Index(t => t.InsuranceId);
             
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(),
-                        Password = c.String(),
                         Address = c.String(),
-                        Gender = c.Int(nullable: false),
-                        CreatedAt = c.Long(nullable: false),
-                        UpdatedAt = c.Long(nullable: false),
-                        DeletedAt = c.Long(nullable: false),
+                        Gender = c.String(),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedAt = c.DateTime(nullable: false),
                         Status = c.Int(nullable: false),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
@@ -97,6 +93,7 @@ namespace Project_sem_3.Migrations
                 "dbo.HouseInsurances",
                 c => new
                     {
+                        Id = c.Int(nullable: false, identity: true),
                         InsurancePackageId = c.Int(nullable: false),
                         ContractId = c.Int(nullable: false),
                         HouseType = c.String(),
@@ -106,7 +103,7 @@ namespace Project_sem_3.Migrations
                         Quantity = c.Int(nullable: false),
                         UnitPrice = c.Double(nullable: false),
                     })
-                .PrimaryKey(t => new { t.InsurancePackageId, t.ContractId })
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Contracts", t => t.ContractId, cascadeDelete: true)
                 .ForeignKey("dbo.InsurancePackages", t => t.InsurancePackageId, cascadeDelete: true)
                 .Index(t => t.InsurancePackageId)
@@ -118,14 +115,15 @@ namespace Project_sem_3.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         InsuranceId = c.Int(nullable: false),
-                        Name = c.String(),
-                        Description = c.String(),
+                        Name = c.String(nullable: false),
+                        Description = c.String(nullable: false),
                         Price = c.Double(nullable: false),
-                        DurationContract = c.String(),
-                        DurationPay = c.String(),
+                        DurationContract = c.String(nullable: false),
+                        DurationPay = c.String(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),
                         DeleteAt = c.DateTime(nullable: false),
+                        Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Insurances", t => t.InsuranceId, cascadeDelete: false)
@@ -136,11 +134,12 @@ namespace Project_sem_3.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Description = c.String(),
+                        Name = c.String(nullable: false),
+                        Description = c.String(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedAt = c.DateTime(nullable: false),
                         DeleteAt = c.DateTime(nullable: false),
+                        Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -148,6 +147,7 @@ namespace Project_sem_3.Migrations
                 "dbo.LifeInsurances",
                 c => new
                     {
+                        Id = c.Int(nullable: false, identity: true),
                         InsurancePackageId = c.Int(nullable: false),
                         ContractId = c.Int(nullable: false),
                         Name = c.String(),
@@ -162,7 +162,7 @@ namespace Project_sem_3.Migrations
                         Quantity = c.Int(nullable: false),
                         UnitPrice = c.Double(nullable: false),
                     })
-                .PrimaryKey(t => new { t.InsurancePackageId, t.ContractId })
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Contracts", t => t.ContractId, cascadeDelete: true)
                 .ForeignKey("dbo.InsurancePackages", t => t.InsurancePackageId, cascadeDelete: true)
                 .Index(t => t.InsurancePackageId)
@@ -172,6 +172,7 @@ namespace Project_sem_3.Migrations
                 "dbo.MedicalInsurances",
                 c => new
                     {
+                        Id = c.Int(nullable: false, identity: true),
                         InsurancePackageId = c.Int(nullable: false),
                         ContractId = c.Int(nullable: false),
                         ProgrammeId = c.Int(nullable: false),
@@ -179,14 +180,11 @@ namespace Project_sem_3.Migrations
                         PhoneNumber = c.String(),
                         Email = c.String(),
                         Address = c.String(),
-                        IdentityCard = c.String(),
-                        DateOfIdentityCard = c.DateTime(nullable: false),
-                        PlaceOfIdentityCard = c.String(),
-                        Job = c.String(),
+                        DateOfBirth = c.String(),
                         Quantity = c.Int(nullable: false),
                         UnitPrice = c.Double(nullable: false),
                     })
-                .PrimaryKey(t => new { t.InsurancePackageId, t.ContractId })
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Contracts", t => t.ContractId, cascadeDelete: true)
                 .ForeignKey("dbo.InsurancePackages", t => t.InsurancePackageId, cascadeDelete: true)
                 .ForeignKey("dbo.Programmes", t => t.ProgrammeId, cascadeDelete: true)
@@ -199,8 +197,9 @@ namespace Project_sem_3.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(nullable: false),
                         Price = c.Double(nullable: false),
+                        Status = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -208,6 +207,7 @@ namespace Project_sem_3.Migrations
                 "dbo.MotorInsurances",
                 c => new
                     {
+                        Id = c.Int(nullable: false, identity: true),
                         InsurancePackageId = c.Int(nullable: false),
                         ContractId = c.Int(nullable: false),
                         CarOwner = c.String(),
@@ -218,7 +218,7 @@ namespace Project_sem_3.Migrations
                         Quantity = c.Int(nullable: false),
                         UnitPrice = c.Double(nullable: false),
                     })
-                .PrimaryKey(t => new { t.InsurancePackageId, t.ContractId })
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Contracts", t => t.ContractId, cascadeDelete: true)
                 .ForeignKey("dbo.InsurancePackages", t => t.InsurancePackageId, cascadeDelete: true)
                 .Index(t => t.InsurancePackageId)
@@ -230,7 +230,6 @@ namespace Project_sem_3.Migrations
                     {
                         Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(nullable: false, maxLength: 256),
-                        Description = c.String(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
@@ -254,7 +253,7 @@ namespace Project_sem_3.Migrations
             DropForeignKey("dbo.HouseInsurances", "ContractId", "dbo.Contracts");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.Contracts", "Customer_Id", "dbo.AspNetUsers");
+            DropForeignKey("dbo.Contracts", "ApplicationUserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.MotorInsurances", new[] { "ContractId" });
@@ -272,8 +271,8 @@ namespace Project_sem_3.Migrations
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.Contracts", new[] { "Customer_Id" });
             DropIndex("dbo.Contracts", new[] { "InsuranceId" });
+            DropIndex("dbo.Contracts", new[] { "ApplicationUserId" });
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.MotorInsurances");
             DropTable("dbo.Programmes");

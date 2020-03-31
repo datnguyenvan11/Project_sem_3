@@ -7,13 +7,13 @@ namespace Project_sem_3.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class insurance : IMigrationMetadata
+    public sealed partial class db : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(insurance));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(db));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003161003157_insurance"; }
+            get { return "202003310650463_db"; }
         }
         
         string IMigrationMetadata.Source

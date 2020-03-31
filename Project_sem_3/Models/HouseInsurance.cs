@@ -9,9 +9,9 @@ namespace Project_sem_3.Models
 {
     public class HouseInsurance
     {
-        [Key, Column(Order = 0)]
+        //[Key]
+        public int Id { get; set; }
         public int InsurancePackageId { get; set; }
-        [Key, Column(Order = 1)]
         public int ContractId { get; set; }
         public string HouseType { get; set; }
         public string DurationHouse { get; set; }

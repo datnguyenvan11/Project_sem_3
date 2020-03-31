@@ -18,7 +18,7 @@ namespace Project_sem_3.Controllers
         }
         public ActionResult Order()
         {
-            var insurancePackages = db.InsurancePackages.Where(i => i.InsuranceId == 26);
+            var insurancePackages = db.InsurancePackages.Where(i => i.InsuranceId == 2);
             return View(insurancePackages);
         }
         [HttpPost]
@@ -30,7 +30,7 @@ namespace Project_sem_3.Controllers
             {
                 TotalPrice = insurancepackage.Price,
                 ApplicationUserId = User.Identity.GetUserId(),
-                InsuranceId = 26,
+                InsuranceId = 2,
                 LifeInsurances = new List<LifeInsurance>()
             };
 

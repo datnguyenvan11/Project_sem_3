@@ -84,7 +84,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/InsurancePackages/Create
         public ActionResult Create()
         {
-            ViewBag.InsuranceId = new SelectList(db.Insurances, "Id", "Name");
+            ViewBag.InsuranceId = new SelectList(db.Insurances.Where(x=>x.Status!=-1), "Id", "Name");
             return View();
         }
 
