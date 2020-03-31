@@ -1,0 +1,181 @@
+﻿@model IEnumerable<Project_sem_3.Models.MedicalInsurance>
+
+@{
+    ViewBag.Title = "GetSession";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="text-info1"><label>Information Order</label></div>
+
+    <div id="ketqua">
+        <table class="table wrap-table">
+            <thead class="row-header">
+                <tr>
+                    <th scope="col" rowspan="1" colspan="1" class="column1">Id</th>
+                    <th scope="col" rowspan="1" colspan="1" class="column2">Date of birth</th>
+                    <th scope="col" rowspan="1" colspan="1" class="column3">Programme</th>
+                    <th scope="col" rowspan="1" colspan="1" class="column4">Name</th>
+                    <th scope="col" rowspan="1" colspan="1" class="column5">Email</th>
+                    <th scope="col" rowspan="1" colspan="1" class="column6">Address</th>
+                    <th scope="col" rowspan="1" colspan="1" class="column7">Phone</th>
+                    <th scope="col" rowspan="1" colspan="1" class="column8">Price</th>
+                </tr>
+            </thead>
+            <tbody class="row-tbody">
+                <tr>
+                    <td scope="col" rowspan="1" colspan="1" class="column1">1</td>
+                    <td scope="col" rowspan="1" colspan="1" class="column2">1231231</td>
+                    <td scope="col" rowspan="1" colspan="1" class="column3">1231231</td>
+                    <td scope="col" rowspan="1" colspan="1" class="column4">1231231</td>
+                    <td scope="col" rowspan="1" colspan="1" class="column5">1231231</td>
+                    <td scope="col" rowspan="1" colspan="1" class="column6">1231231</td>
+                    <td scope="col" rowspan="1" colspan="1" class="column7">1231231</td>
+                    <td scope="col" rowspan="1" colspan="1" class="column8">1231231</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="total-price">
+        <div id="total" class="text-price">50.00$</div>
+        <div style="color:black; font-size:20px">Total Price</div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-4"></div>
+        <div class="col-md-3 col-3">
+            <button class="btn-pro-buynow" id="order">Order</button>
+        </div>
+        <div class="col-md-5 col-5"></div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        var obj = JSON.parse(sessionStorage.medical);
+        $(".total").text(obj.Totalprice)
+        $.each(obj.items, function (key, value) {
+            var html = `
+                                                              <tr>
+                                                             <td>${value.InsurancePackageId}</td>
+                                                             <td>${value.DateOfbirth}</td>
+                                                             <td>${value.programname}</td>
+                                                             <td>${value.Name}</td>
+                                                             <td>${value.Email}</td>
+                                                             <td>${value.Address}</td>
+                                                             <td>${value.PhoneNumber}</td>
+                                                             <td>${value.unitprice}</td>
+                                                              </tr>`
+            $('.table').append(html)
+        })
+
+        $('#order').click(function () {
+            $.ajax({
+                url: "/MedicalInsurance/CreateContract",
+                type: "POST",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    alert('success');
+                },
+                failure: function (errMsg) {
+                    alert('error');
+                }
+            })
+        })
+    </script>
+}
+
+<style>
+    .wrap-table {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .row-header {
+        color: #fff;
+        background: #6c7ae0;
+        font-size: 20px;
+    }
+
+    .row-tbody {
+        color: #666;
+        background: whitesmoke;
+        font-size: 18px;
+    }
+
+    .text-info1 {
+        margin-top: 20px;
+        margin-bottom: 15px;
+        font-size: 25px;
+        color: blue;
+        font-family: unset;
+    }
+
+    .btn-pro-buynow {
+        display: block;
+        width: 100%;
+        background-color: #0f75bd;
+        padding: 11px;
+        padding-bottom: 14px;
+        padding-left: 0px;
+        padding-right: 0px;
+        border-radius: 5px;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        border: none;
+        font-size: larger;
+        margin-bottom: 30px;
+        margin-top: 60px;
+    }
+
+        .btn-pro-buynow:hover {
+            background-color: #ea212d;
+            color: #fff;
+        }
+
+    .column1 {
+        padding-left: 30px !important;
+        width: 117px;
+    }
+
+    .column2 {
+        width: 256px;
+    }
+
+    .column3 {
+        width: 256px;
+    }
+
+    .column4 {
+        width: 256px;
+    }
+
+    .column5 {
+        width: 256px;
+    }
+
+    .column6 {
+        width: 156px;
+    }
+
+    .column7 {
+        width: 117px;
+    }
+
+    .column8 {
+        width: 117px;
+    }
+
+    .total-price {
+        float: right;
+        margin-right: 25px;
+    }
+
+    .text-price {
+        color: red;
+        font-size: 26px;
+        margin-left: 6px;
+    }
+</style>
