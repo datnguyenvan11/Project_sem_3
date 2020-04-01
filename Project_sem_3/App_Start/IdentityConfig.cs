@@ -21,20 +21,20 @@ namespace Project_sem_3.App_Start
     {
         public Task SendAsync(IdentityMessage message)
         {
-           
+
             // Plug in your email service here to send an email.
             //return Task.FromResult(0);
-            return Task.Factory.StartNew(()=>{
+            return Task.Factory.StartNew(() =>
+            {
                 sendMail(message);
             });
         }
         void sendMail(IdentityMessage message)
         {
             #region formatter
-            string text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
-            string html = "Please confirm your account by clicking this link: <a href=\"" + message.Body + "\">link</a><br/>";
+            string text = string.Format(message.Subject, message.Body);
+            string html = message.Body;
 
-            html += HttpUtility.HtmlEncode(@"Or click on the copy the following link on the browser:" + message.Body);
             #endregion
 
             MailMessage msg = new MailMessage();
@@ -134,12 +134,13 @@ namespace Project_sem_3.App_Start
         {
             return new ApplicationSignInManager(context.GetUserManager<ApplicationUserManager>(), context.Authentication);
         }
-        
+
     }
-    public class ApplicationRoleManager:RoleManager<ApplicationRole>
+    public class ApplicationRoleManager : RoleManager<ApplicationRole>
     {
-      public ApplicationRoleManager( IRoleStore<ApplicationRole,string> roleStore) : base(roleStore) { }
-        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager>options,IOwinContext context) {
+        public ApplicationRoleManager(IRoleStore<ApplicationRole, string> roleStore) : base(roleStore) { }
+        public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
+        {
             var applicationRoleIManager = new ApplicationRoleManager(new RoleStore<ApplicationRole>(context.Get<ApplicationDbContext>()));
             return applicationRoleIManager;
         }

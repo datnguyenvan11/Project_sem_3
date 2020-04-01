@@ -40,11 +40,24 @@
             </div>*@
 
         <div style="margin-bottom:15px;">
-            <a href="https://localhost:44362/Admin/Contracts/Confirmed" class="btn btn-info" role="button">List Contracts Confirmed</a>
-            <a href="https://localhost:44362/Admin/Contracts/Deleted" class="btn btn-info float-right" role="button">List Contracts Deleted</a>
-
+            <div class="card-footer">
+                <div class="row mt-3">
+                    <div class="col-3 mt-2">
+                        <div class="form-group mr-3">
+                            <form action="/Admin/Contracts/" method="get" id="listcontracts">
+                                <div class="dataTables_length" id="dataTable_length">
+                                    <label>
+                                        List Status
+                                        @Html.DropDownList("listcontracts", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
+        @ViewBag.totalprice
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -79,7 +92,7 @@
                                     <thead>
                                         <tr>
                                             <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
-<
+                                            <
                                             <th rowspan="1" colspan="1">Insurance</th>
                                             <th rowspan="1" colspan="1">Customer</th>
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Total Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
@@ -94,48 +107,48 @@
 
                                         @foreach (var item in Model)
                                         {
-<
-                                        <tr role="row" class="odd">
-                                            <td>
-                                                <input type="checkbox" class="check" value="@item.Id" />
-                                                @Html.AntiForgeryToken()
-                                            </td>
+                                            <
+                                            <tr role="row" class="odd">
+                                                <td>
+                                                    <input type="checkbox" class="check" value="@item.Id" />
+                                                    @Html.AntiForgeryToken()
+                                                </td>
 
-                                            <td class="sorting_1">
-                                                @item.Insurance.Name
-                                            </td>
-                                            <td class="sorting_1">
-                                                @item.ApplicationUserId
-                                            </td>
+                                                <td class="sorting_1">
+                                                    @item.Insurance.Name
+                                                </td>
+                                                <td class="sorting_1">
+                                                    @item.ApplicationUserId
+                                                </td>
 
-                                            <td>$@item.TotalPrice</td>
-                                            <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
+                                                <td>$@item.TotalPrice</td>
+                                                <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
 
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button class="btn btn-primary">
-                                                        @if (@item.Insurance.Id == 3)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
-                                                        }
-                                                        @if (@item.Insurance.Id == 1)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
-                                                        }
-                                                        @if (@item.Insurance.Id == 2)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "LifeInsurances", Id = item.Id })
-                                                        }
-                                                        @if (@item.Insurance.Id == 4)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "MedicalInsurances", Id = item.Id })
-                                                        }
-                                                    </button>
-                                                    <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-                                                </div>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-primary">
+                                                            @if (@item.Insurance.Id == 3)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
+                                                            }
+                                                            @if (@item.Insurance.Id == 1)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
+                                                            }
+                                                            @if (@item.Insurance.Id == 2)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "LifeInsurances", Id = item.Id })
+                                                            }
+                                                            @if (@item.Insurance.Id == 4)
+                                                            {
+                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "MedicalInsurances", Id = item.Id })
+                                                            }
+                                                        </button>
+                                                        <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                                                    </div>
 
-                                            </td>
-                                        </tr>
+                                                </td>
+                                            </tr>
 
                                         }
 
@@ -147,8 +160,9 @@
                                             <div class="form-group mr-3">
                                                 <select class="form-control mr-2" id="select-action">
                                                     <option value="6">--Chọn thao tác--</option>
-                                                    <option value="0">Confirmed</option>
+                                                    <option value="0" onclick="SendEmail()">Confirmed</option>
                                                     <option value="-1">Deleted</option>
+                                                    <option value="3">Deleted</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -207,10 +221,26 @@
                 alert('You have not selected a contract!');
                 return;
             }
-            if (confirm("Do you want to delete?")) {
-                changeStatusPTTime(selectedIDs, action);
-            }
+
+            if (action == -1) {
+                if (confirm("Do you want to Delete?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            } else {
+                if (confirm("Do you want to Confirmed?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            };
         })
+        var SendEmail = function () {
+            $.ajax({
+                type: "Post",
+                url: "/Admin/Contracts/SendMailToUser",
+                success: function (data) {
+                    alert("Success");
+                }
+            })
+        }
         function changeStatusPTTime(selectedIDs, action) {
             $.ajax({
                 url: "/Admin/Contracts/StatusOrder",
@@ -235,6 +265,11 @@
         $(function () {
             $("#pageSize").change(function () {
                 $("#pagesize").submit();
+            });
+        });
+        $(function () {
+            $("#listcontracts").change(function () {
+                $("#listcontracts").submit();
             });
         });
     </script>
