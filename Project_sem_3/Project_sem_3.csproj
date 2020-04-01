@@ -187,7 +187,6 @@
     <Compile Include="Areas\Admin\Controllers\ProgrammesController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeInsuranceController.cs" />
@@ -2724,10 +2723,8 @@
     <Content Include="Views\MotorInsurance\Order.cshtml" />
     <Content Include="Views\MedicalInsurance\Information.cshtml" />
     <Content Include="Views\MedicalInsurance\Order.cshtml" />
-    <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Accounts\Register.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -2749,13 +2746,11 @@
     <Content Include="Views\LifeInsurance\Order.cshtml" />
     <Content Include="Views\MotorInsurance\View.cshtml" />
     <Content Include="Views\OrderNotice\Index.cshtml" />
-    <Content Include="Views\MedicalInsurance\GetSession.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Medical\" />
     <Folder Include="Content\sass\pages\" />
-    <Folder Include="Views\AccoutRole\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

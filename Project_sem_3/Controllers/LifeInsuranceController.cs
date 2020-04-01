@@ -18,8 +18,9 @@ namespace Project_sem_3.Controllers
         }
         public ActionResult Order()
         {
-            var insurancePackages = db.InsurancePackages.Where(i => i.InsuranceId == 2);
-            return View(insurancePackages);
+            var insurancePackages = db.InsurancePackages.Where(i => i.InsuranceId == 2).Where(i => i.Status == 1);
+            ViewBag.insurancepackages = insurancePackages;
+            return View();
         }
         [HttpPost]
         public ActionResult CreateContract(int InsurancePackageId, string name, string email, string address, DateTime Date_Iden, string Place_Iden, string phone, string Job, string IdentityCard)
