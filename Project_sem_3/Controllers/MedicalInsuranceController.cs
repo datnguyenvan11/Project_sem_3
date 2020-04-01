@@ -39,10 +39,7 @@ namespace Project_sem_3.Controllers
             TempData["price"] = price;
             return RedirectToAction("Order");
         }
-        public ActionResult GetSession()
-        {
-            return View();
-        }
+       
         [HttpPost]
         public ActionResult CreateContract(ContractMedical medical)
         {

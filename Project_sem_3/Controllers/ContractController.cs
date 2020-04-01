@@ -1,4 +1,5 @@
-﻿using Project_sem_3.Models;
+﻿using Microsoft.AspNet.Identity;
+using Project_sem_3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace Project_sem_3.Controllers
         // GET: Contract
         public ActionResult Index()
         {
+            string userIds = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == userIds);
+            ViewBag.currentuser = currentUser;
             return View();
         }
 

@@ -232,32 +232,27 @@
                 </div>
                 <table class="table2 table-bordered table-hover table-info-pay">
                     <tbody>
-                        <tr>
-                            <th scope="row">
-                                Order number:
-                            </th>
-                            <td><span id="ctl18_ctl00_ordInfo1_lblOrderId">103604</span></td>
-                        </tr>
+
                         <tr>
                             <th scope="row">
                                 Order date:
                             </th>
-                            <td><span id="ctl18_ctl00_ordInfo1_lblBookDate">11/03/2020 14:03</span></td>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblBookDate"></span></td>
                         </tr>
                         <tr>
                             <th scope="row">
                                 Product Type:
                             </th>
-                            <td><span id="ctl18_ctl00_ordInfo1_lblProductName">Motorcycle civil liability insurance</span></td>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblProductName"></span></td>
                         </tr>
                         <tr>
                             <th scope="row">
                                 Premium information
                             </th>
                             <td>
-                                <div>+ Total charge (including VAT): <strong class="price1"><span id="ctl18_ctl00_ordInfo1_lblFullPremium">86,000</span> VNĐ</strong></div>
-                                <div>+ Fee reduction: <strong class="price1">-<span id="ctl18_ctl00_ordInfo1_lblPremiumDiscount"> 0 </span> VNĐ</strong></div>
-                                <div><strong class="price1">+ Total net charge (including VAT): <span id="ctl18_ctl00_ordInfo1_lblTotalPremium">86,000</span> VNĐ</strong></div>
+                                <div>+ Total charge (including VAT): <strong class="price1"><span id="ctl18_ctl00_ordInfo1_lblFullPremium">86,000</span> </strong></div>
+                                <div>+ Fee reduction: <strong class="price1">-<span id="ctl18_ctl00_ordInfo1_lblPremiumDiscount"> $0 </span> </strong></div>
+                                <div><strong class="price1">+ Total net charge (including VAT): <span id="ctl18_ctl00_ordInfo1_lblTotalPremium">86,000</span> </strong></div>
                             </td>
                         </tr>
 
@@ -293,25 +288,27 @@
                 <div class="sub-hd-frm" style="margin-bottom:0">Information about delivery and receipt of insurance certificates</div>
                 <table class="table2 table-bordered table-hover table-info-pay">
                     <tbody>
+                      
+                        
                         <tr>
                             <th scope="row">Full name of recipient:</th>
-                            <td><span id="ctl18_ctl00_ordInfo1_lblFullnameDelevery">nguyen van son</span></td>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblFullnameDelevery">  @ViewBag.currentuser.UserName</span></td>
                         </tr>
                         <tr>
                             <th scope="row">Receiver's address:</th>
-                            <td><span id="ctl18_ctl00_ordInfo1_lblOrdAddressDelivery">ha noi</span></td>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblOrdAddressDelivery">  @ViewBag.currentuser.Address</span></td>
                         </tr>
                         <tr>
                             <th scope="row">
                                 Email address:
                             </th>
-                            <td><span id="ctl18_ctl00_ordInfo1_lblEmailDelevery">boydola.nvs@gmail.com</span></td>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblEmailDelevery">@ViewBag.currentuser.Email</span></td>
                         </tr>
                         <tr>
                             <th scope="row">
                                 Contact phone number:
                             </th>
-                            <td><span id="ctl18_ctl00_ordInfo1_lblPhoneDelevery">0912343212</span></td>
+                            <td><span id="ctl18_ctl00_ordInfo1_lblPhoneDelevery">@ViewBag.currentuser.PhoneNumber</span></td>
                         </tr>
                         <tr>
                             <th scope="row">Beneficiary information:</th>
@@ -357,74 +354,54 @@
                 <div class="sub-hd-frm" style="margin-bottom:0">
                     Vehicle information
                 </div>
-                <table class="table2 table-bordered table-hover table-donhang table-responsive-lg">
+                <table class="table2  table-bordered table-hover table-donhang table-responsive-lg" id="body">
                     <thead>
                         <tr>
                             <th class="text-center align-middle" scope="col">STT</th>
                             <th class="text-center align-middle" scope="col">
-                                Car owner name
+                                Insurance Packge
                             </th>
                             <th class="text-center align-middle" scope="col">
-                                Registered address
+                                Date of Birth
                             </th>
                             <th class="text-center align-middle" scope="col">
-                                Sea of ​​control
+                                Name
                             </th>
                             <th class="text-center align-middle" scope="col">
-                                Number of frames
+                                Progamme
                             </th>
                             <th class="text-center align-middle" scope="col">
-                                Car engine number
+                                Address
                             </th>
                             <th class="text-center align-middle" scope="col">
-                                Duration of insurance
+                                PhoneNumber
                             </th>
                             <th class="text-center align-middle" scope="col">
-                                Fee (VAT included)
+                                Email
+                            </th>
+                            <th class="text-center align-middle" scope="col">
+                                Price
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
-
-                        <tr>
-                            <td>
-
-                                1
-                            </td>
-                            <td>nguyen van son</td>
-                            <td>ha noi</td>
-                            <td> </td>
-                            <td>8809</td>
-                            <td>9888</td>
-                            <td>
-                                1 year from 11/03/2020
-                            </td>
-                            <td>
-                                <div align="right">
-                                    86,000
-                                    VNĐ
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="7">
-                                <strong style="float: right;">
-                                    Total charge (including VAT):
+                    <tr class="tr"></tr>
+                    <tr>
+                        <td colspan="8">
+                            <strong style="float: right;">
+                                Total charge (including VAT):
+                            </strong>
+                        </td>
+                        <td>
+                            <div align="right" style="font-size:16px;color:red" >
+                                <strong class="tt">
+                                   
                                 </strong>
-                            </td>
-                            <td>
-                                <div align="right">
-                                    <strong>
-                                        86,000
-                                        VNĐ
-                                    </strong>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                            </div>
+                        </td>
+                    </tr>
 
+                </table>
+                <button id="order">nhan</button>
             </div>
 
             <div class="box-chuy">
@@ -465,3 +442,57 @@
 
     </div>
 </section>
+@section Scripts{
+    <script>
+        cd = (new Date()).toISOString().split('T')[0];
+         $("#ctl18_ctl00_ordInfo1_lblBookDate").text(cd)
+        var obj = JSON.parse(sessionStorage.medical);
+        $("#ctl18_ctl00_ordInfo1_lblFullPremium").text('$' + obj.Totalprice)
+        $("#ctl18_ctl00_ordInfo1_lblTotalPremium").text('$' + obj.Totalprice)
+                $(".tt").text('$' + obj.Totalprice)
+
+        $('#ctl18_ctl00_ordInfo1_lblProductName').text(obj.packageName);
+        var a = 0
+        $.each(obj.items, function (key, value) {
+            a++
+            var html = `
+                                        < tr >
+                                            <td>${a}</td>
+                                        <td>${value.insuranpackageName}</td>
+                                        <td>${value.DateOfbirth}</td>
+                                        <td>${value.Name} </td>
+                                            <td>${value.programname} </td>
+
+                                          
+                                            <td>${value.Address}</td>
+       <td>
+                                                <div align="right">
+                                                    ${value.PhoneNumber}
+                                                </div>
+                                            </td>
+      <td>${value.Email}</td>
+                                            <td>
+                                                ${value.unitprice}
+                                            </td>
+                                         
+                                              </tr >`
+            $('.tr').append(html)
+        })
+
+        $('#order').click(function () {
+            $.ajax({
+                url: "/MedicalInsurance/CreateContract",
+                type: "POST",
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                window.location.href = "/OrderNotice/Index"
+                },
+                failure: function (errMsg) {
+                    alert('error');
+                }
+            })
+        })
+    </script>
+}
