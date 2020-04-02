@@ -1203,25 +1203,40 @@ form textarea {
     margin-top: 5px; }
     @media screen and (max-width: 990px) {
       .main-navigation .menu {
+
         display: none; } }
     @media screen and (min-width: 991px) {
-      .main-navigation .menu {
-        display: block; } }
+        .main-navigation .menu {
+            display: block;
+            text-decoration: none;
+        } }
     .main-navigation .menu li {
-      display: inline-block; }
-      .main-navigation .menu li a {
-        color: white;
-        padding: 0 10px;
-        border-right: 1px solid rgba(255, 255, 255, 0.3);
-        -webkit-transition: .3s ease;
-                transition: .3s ease; }
+      display: inline-block;
+
+
+    }
+        .main-navigation .menu li a {
+            color: white;
+            text-decoration: none!important;
+            padding: 0 10px;
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            -webkit-transition: .3s ease;
+            transition: .3s ease;
+        }
+
         .main-navigation .menu li a:hover {
-          color: #42a8f0; }
+          color: #42a8f0; 
+
+        }
       .main-navigation .menu li.current-menu-item a {
-        color: #1392ec; }
+
+        color: #1392ec; 
+
+      }
 
 .social-links {
-  float: right; }
+  float: right;
+}
   .social-links a {
     width: 30px;
     height: 30px;
@@ -1230,6 +1245,7 @@ form textarea {
     text-align: center;
     line-height: 1.8;
     color: white;
+
     margin-left: 5px;
     display: inline-block;
     -webkit-transition: .3s ease;
