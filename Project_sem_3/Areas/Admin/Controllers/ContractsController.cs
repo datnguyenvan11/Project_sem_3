@@ -21,16 +21,10 @@ namespace Project_sem_3.Areas.Admin.Controllers
         private ApplicationUserManager _userManager;
 
         // GET: Admin/Contracts
-        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize, string listcontracts)
+        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize, string listcontracts, DateTime? startDate, DateTime? endDate)
         {
 
-            var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 1);
-
-            //if (!String.IsNullOrEmpty(searchString))
-            //{
-            //    contracts = db.Contracts.Where(x => x.TotalPrice.Contains(searchString))
-            //        .Where(t => t.Status == 1);
-            //}
+            var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance);
             ViewBag.PageSize = new List<SelectListItem>()
             {
                 new SelectListItem() { Text="5", Value= "5"},
@@ -68,27 +62,43 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     break;
             }
 
+            if(startDate != null && endDate != null)
+            {
+                contracts = contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x =>x.CreatedAt >= startDate && x.CreatedAt <= endDate);
+            }
+           
             switch (listcontracts)
             {
                 case "1":
-                    contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 1);
+                //    var data = db.Contracts.Where(c => c.CreatedAt >= startDate && c.CreatedAt <= endDate).OrderByDescending(c => c.CreatedAt).GroupBy(x => x.CreatedAt,
+                //(key, values) => new {
+                //    Day = key,
+                //    Total = values.Sum(x => (double?)x.TotalPrice) ?? 0
+                //}).ToList();
+                    contracts = contracts.Where(x => x.Status == 1);
                     break;
                 case "2":
-                    contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 2);
+                    //contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 2);
+                    contracts = contracts.Where(x => x.Status == 2);
                     break;
                 case "3":
-                    contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 3);
-                    double totalprice = db.Contracts.Where(c => c.Status == 3).Sum(c => (double?)(c.TotalPrice)) ?? 0;
+                    //contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 3);
+                    //double totalprice = db.Contracts.Where(c => c.Status == 3).Sum(c => (double?)(c.TotalPrice)) ?? 0;
+                    contracts = contracts.Where(x => x.Status == 3);
+                    double totalprice = contracts.Sum(c => (double?)(c.TotalPrice)) ?? 0;
                     ViewBag.totalprice = totalprice;
                     break;
                 case "0":
-                    contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 0);
+                    //contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 0);
+                    contracts = contracts.Where(x => x.Status == 0);
                     break;
                 case "-1":
-                    contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == -1);
+                    //contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == -1);
+                    contracts = contracts.Where(x => x.Status == -1);
                     break;
                 default:
-                    contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 1);
+                    //contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 1);
+                    //contracts = contracts;
                     break;
             }
 

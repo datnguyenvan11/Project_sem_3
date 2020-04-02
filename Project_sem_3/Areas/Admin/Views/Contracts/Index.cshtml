@@ -6,6 +6,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <!-- Custom styles for this page -->
 <link href="/Assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="/Areas/Admin/Assets/css/custom.css" rel="stylesheet">
@@ -17,32 +18,10 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Contracts</h1>
         <p class="mb-4"> All contracts of customers about insurances .</p>
-        @*<div class="card-footer">
-                <div class="row mt-3">
-                    <div class="col-3 mt-2">
-                        <div class="form-group mr-3">
-                            <select class="form-control mr-2" id="select-action">
-                                <option value="6">--Chọn thao tác--</option>
-                                <option value="5">Pending</option>
-                                <option value="4">Confirmed</option>
-                                <option value="3">Shipping</option>
-                                <option value="2">Paid</option>
-                                <option value="1">Done</option>
-                                <option value="0">Cancel</option>
-                                <option value="-1">Deleted</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-9">
-                        <button type="button" id="action_contract">Xác nhận</button>
-                    </div>
-                </div>
-            </div>*@
-
         <div style="margin-bottom:15px;">
             <div class="card-footer">
                 <div class="row mt-3">
-                    <div class="col-3 mt-2">
+                    <div class="col-md-4 col-12 mt-2">
                         <div class="form-group mr-3">
                             <form action="/Admin/Contracts/" method="get" id="listcontracts">
                                 <div class="dataTables_length" id="dataTable_length">
@@ -54,9 +33,16 @@
                             </form>
                         </div>
                     </div>
+                    <div col-md-8 col-12 style="margin-top: 2%; margin-left: 18%;">
+                        <div class="float-right mt-2 pr-4">
+                            <div id="reportrange" class="text-primary font-weight-bold" style="cursor: pointer; border-radius: 5px">
+                                Chọn ngày:&nbsp;
+                                <i class="fa fa-calendar text-dark"></i>&nbsp;
+                                <span class="text-dark font-weight-light"></span> <i class="fa fa-caret-down text-dark"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
         @ViewBag.totalprice
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -197,7 +183,39 @@
 <!-- End of Main Content -->
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script type="text/javascript">
+        $(function () {
+            var start = moment().subtract(29, 'days');
+            var end = moment();
+            function cb(start, end) {
+                $('#reportrange span').html(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
+            }
+            $('#reportrange').daterangepicker({
+                startDate: start,
+                endDate: end,
+                ranges: {
+                    'Last week': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 days': [moment().subtract(29, 'days'), moment()],
+                    'This month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                "firstDay": 1
+            }, cb);
+            cb(start, end);
+            $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
+                $('#reportrange').val('');
+            });
+            $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                var startDate = picker.startDate.format('YYYY-MM-DD');
+                var endDate = picker.endDate.format('YYYY-MM-DD');
+                var listcontracts = $('select#listcontracts option:checked').val();
+                window.location.href = window.location.href.split('?')[0] + '?listcontracts=' + listcontracts + '&startDate=' + startDate + '&endDate=' + endDate;
+            });
+        });
+            
         $(document).ready(function () {
             $('#checkAll').click(function () {
                 $(".check").prop('checked',
