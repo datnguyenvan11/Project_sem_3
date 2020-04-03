@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -84,8 +85,7 @@ namespace Project_sem_3.Controllers
                 Console.WriteLine(e);
                 transaction.Rollback();
             }
-            return Redirect("/OrderNotice/Index");
-
+            return Json(new {status=201 });
 
         }
     }
