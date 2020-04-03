@@ -35,12 +35,15 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
             ViewBag.listcontracts = new List<SelectListItem>()
             {
-                new SelectListItem() { Text="All Status", Selected = true},
-                new SelectListItem() { Text="Deleted", Value= "-1"},
+
+                new SelectListItem() { Text="All", Value= "4" },
                 new SelectListItem() { Text="Confirmed", Value= "0"},
+
                 new SelectListItem() { Text="Pending", Value= "1" },
                 new SelectListItem() { Text="Pay", Value= "2" },
+                new SelectListItem() { Text="Deleted", Value= "-1"},
                 new SelectListItem() { Text="Done", Value= "3" },
+               
             };
             int pagesize = (pageSize ?? 5);
             int pageNumber = (page ?? 1);
@@ -98,6 +101,9 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 case "-1":
                     //contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == -1);
                     contracts = contracts.Where(x => x.Status == -1);
+                    break;
+                case "4":
+                    contracts = db.Contracts;
                     break;
                 default:
                     //contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 1);

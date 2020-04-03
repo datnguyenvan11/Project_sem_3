@@ -21,7 +21,7 @@
         @*<button type="button" id="delete_checked">Delete Selected</button>*@
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/Programmes/Create" class="btn btn-info" role="button">Create Programmes</a>
-            <a href="https://localhost:44362/Admin/Programmes/Deleted" class="btn btn-info float-right" role="button">Programmes Deleted</a>
+           
         </div>
 
         <!-- DataTales Example -->
@@ -31,7 +31,19 @@
             </div>
             <div class="card-body">
                 <div>
-                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">    
+                        <div class="col-md-4 col-12 mt-2">
+                            <div class="form-group mr-3">
+                                <form action="/Admin/Programmes/" method="get" id="listProgramme">
+                                    <div class="dataTables_length" id="dataTable_length">
+                                        <label>
+                                            List Status
+                                            @Html.DropDownList("listProgramme", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
 
                         <div class="row">
 
@@ -88,7 +100,6 @@
                                                         <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
                                                         <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
                                                     </div>
-
                                                 </td>
                                             </tr>
                                         }
@@ -99,7 +110,7 @@
                                         <div class="form-group mr-3">
                                             <select class="form-control mr-2" id="select-action">
                                                 <option value="6">--Chọn thao tác--</option>
-                                                <option value="0">Action</option>
+                                                <option value="1">Active Return</option>
                                                 <option value="-1">Deleted</option>
                                             </select>
                                         </div>
@@ -191,6 +202,11 @@
             $(function () {
                 $("#pageSize").change(function () {
                     $("#pagesize").submit();
+                });
+            });
+            $(function () {
+                $("#listProgramme").change(function () {
+                    $("#listProgramme").submit();
                 });
             });
         });
