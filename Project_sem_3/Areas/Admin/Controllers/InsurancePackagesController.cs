@@ -19,7 +19,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/InsurancePackages
-        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize)
+        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize, string listPackage)
         {
             var insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x => x.Status == 1);
 
@@ -36,6 +36,20 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 new SelectListItem() { Text="15", Value= "15" },
                 new SelectListItem() { Text="20", Value= "20" },
             };
+            ViewBag.listPackage = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="List", Value= "0" },
+                new SelectListItem() { Text="Delete", Value= "-1"},
+            };
+            switch (listPackage)
+            {
+                case "0":
+                    insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x => x.Status == 1);
+                    break;
+                case "-1":
+                    insurancePackages = db.InsurancePackages.Include(i => i.Insurance).Where(x => x.Status == -1);
+                    break;
+            }
             int pagesize = (pageSize ?? 5);
             int pageNumber = (page ?? 1);
 

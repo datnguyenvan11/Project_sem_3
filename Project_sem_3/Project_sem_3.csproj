@@ -187,7 +187,6 @@
     <Compile Include="Areas\Admin\Controllers\ProgrammesController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeInsuranceController.cs" />
@@ -226,16 +225,19 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Assets\js\countdowntime.js" />
     <Content Include="Areas\Admin\Assets\css\custom.css" />
     <Content Include="Areas\Admin\Assets\css\sb-admin-2.css" />
     <Content Include="Areas\Admin\Assets\css\sb-admin-2.min.css" />
     <Content Include="Areas\Admin\Assets\img\undraw_posting_photo.svg" />
+    <Content Include="Areas\Admin\Assets\js\jquery.formatNumber-0.1.1.min.js" />
     <Content Include="Areas\Admin\Assets\js\demo\chart-area-demo.js" />
     <Content Include="Areas\Admin\Assets\js\demo\chart-bar-demo.js" />
     <Content Include="Areas\Admin\Assets\js\demo\chart-pie-demo.js" />
     <Content Include="Areas\Admin\Assets\js\demo\datatables-demo.js" />
     <Content Include="Areas\Admin\Assets\js\sb-admin-2.js" />
     <Content Include="Areas\Admin\Assets\js\sb-admin-2.min.js" />
+    <Content Include="Areas\Admin\Assets\js\sweetalert.min.js" />
     <Content Include="Areas\Admin\Assets\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Areas\Admin\Assets\vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Areas\Admin\Assets\vendor\bootstrap\js\bootstrap.js" />
@@ -2330,11 +2332,9 @@
     <Content Include="Areas\Admin\Views\Role\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Role\CreateAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\InsurancePackages\Deleted.cshtml" />
-    <Content Include="Areas\Admin\Views\Contracts\Deleted.cshtml" />
     <Content Include="Areas\Admin\Views\Insurances\Deleted.cshtml" />
     <Content Include="Areas\Admin\Views\Programmes\Deleted.cshtml" />
     <Content Include="Areas\Admin\Views\Role\UsersWithRoles.cshtml" />
-    <Content Include="Areas\Admin\Views\Contracts\Confirmed.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LoginWithAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\LifeInsurances\Index.cshtml" />
     <Content Include="Areas\Admin\Views\MedicalInsurances\Index.cshtml" />
@@ -2724,10 +2724,8 @@
     <Content Include="Views\MotorInsurance\Order.cshtml" />
     <Content Include="Views\MedicalInsurance\Information.cshtml" />
     <Content Include="Views\MedicalInsurance\Order.cshtml" />
-    <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Accounts\Register.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
@@ -2749,13 +2747,11 @@
     <Content Include="Views\LifeInsurance\Order.cshtml" />
     <Content Include="Views\MotorInsurance\View.cshtml" />
     <Content Include="Views\OrderNotice\Index.cshtml" />
-    <Content Include="Views\MedicalInsurance\GetSession.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Medical\" />
     <Folder Include="Content\sass\pages\" />
-    <Folder Include="Views\AccoutRole\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

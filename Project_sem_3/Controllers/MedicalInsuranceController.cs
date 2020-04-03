@@ -28,7 +28,7 @@ namespace Project_sem_3.Controllers
         public JsonResult ViewProgramme()
         {
             db.Configuration.ProxyCreationEnabled = false;
-            var programme = db.Programmes.Where(x => x.Status == 1).ToList();
+            var programme = db.Programmes.Where(x => x.Status == 0).ToList();
 
             return Json(new { programme }, JsonRequestBehavior.AllowGet);
         }
@@ -39,10 +39,7 @@ namespace Project_sem_3.Controllers
             TempData["price"] = price;
             return RedirectToAction("Order");
         }
-        public ActionResult GetSession()
-        {
-            return View();
-        }
+       
         [HttpPost]
         public ActionResult CreateContract(ContractMedical medical)
         {

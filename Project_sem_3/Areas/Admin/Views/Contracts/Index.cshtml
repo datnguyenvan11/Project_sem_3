@@ -1,11 +1,13 @@
 ﻿@*@model IEnumerable<Project_sem_3.Models.Contract>*@
 @model PagedList.IPagedList<Project_sem_3.Models.Contract>
 @using PagedList.Mvc
+@using Project_sem_3.Models
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <!-- Custom styles for this page -->
 <link href="/Assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 <link href="/Areas/Admin/Assets/css/custom.css" rel="stylesheet">
@@ -17,243 +19,369 @@
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800">Contracts</h1>
         <p class="mb-4"> All contracts of customers about insurances .</p>
-        @*<div class="card-footer">
+        <div style="margin-bottom:15px;">
+            <div class="card-footer">
                 <div class="row mt-3">
-                    <div class="col-3 mt-2">
+                    <div class="col-md-4 col-12 mt-2">
                         <div class="form-group mr-3">
-                            <select class="form-control mr-2" id="select-action">
-                                <option value="6">--Chọn thao tác--</option>
-                                <option value="5">Pending</option>
-                                <option value="4">Confirmed</option>
-                                <option value="3">Shipping</option>
-                                <option value="2">Paid</option>
-                                <option value="1">Done</option>
-                                <option value="0">Cancel</option>
-                                <option value="-1">Deleted</option>
-                            </select>
+                            <form action="/Admin/Contracts/" method="get" id="listcontracts">
+                                <div class="dataTables_length" id="dataTable_length">
+                                    <label>
+                                        List Status
+                                        @Html.DropDownList("listcontracts", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
+                                    </label>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="col-9">
-                        <button type="button" id="action_contract">Xác nhận</button>
+                    <div col-md-8 col-12 style="margin-top: 2%; margin-left: 18%;">
+                        <div class="float-right mt-2 pr-4">
+                            <div id="reportrange" class="text-primary font-weight-bold" style="cursor: pointer; border-radius: 5px">
+                                Chọn ngày:&nbsp;
+                                <i class="fa fa-calendar text-dark"></i>&nbsp;
+                                <span class="text-dark font-weight-light"></span> <i class="fa fa-caret-down text-dark"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>*@
+                @ViewBag.totalprice
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">List Contract</h6>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row">
 
-        <div style="margin-bottom:15px;">
-            <a href="https://localhost:44362/Admin/Contracts/Confirmed" class="btn btn-info" role="button">List Contracts Confirmed</a>
-            <a href="https://localhost:44362/Admin/Contracts/Deleted" class="btn btn-info float-right" role="button">List Contracts Deleted</a>
-
-        </div>
-
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">List Contract</h6>
-            </div>
-            <div class="card-body">
-                <div>
-                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <div class="row">
-
-                            <div class="col-sm-12 col-md-6">
-                                <form action="/Admin/Contracts/" method="get" id="pagesize">
-                                    <div class="dataTables_length" id="dataTable_length">
-                                        <label>
-                                            Show
-                                            @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
-                                            entries
-                                        </label>
+                                    <div class="col-sm-12 col-md-6">
+                                        <form action="/Admin/Contracts/" method="get" id="pagesize">
+                                            <div class="dataTables_length" id="dataTable_length">
+                                                <label>
+                                                    Show
+                                                    @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
+                                                    entries
+                                                </label>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
-                            </div>
 
-                            <div class="col-sm-12 col-md-6">
-                                <div id="dataTable_filter" class="dataTables_filter">
-                                    <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div id="dataTable_filter" class="dataTables_filter">
+                                            <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
-<
-                                            <th rowspan="1" colspan="1">Insurance</th>
-                                            <th rowspan="1" colspan="1">Customer</th>
-                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Total Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
-                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
 
-                                            <th rowspan="1" colspan="1">Action</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
+                                                    <th rowspan="1" colspan="1">Insurance</th>
+                                                    <th rowspan="1" colspan="1">Customer</th>
+                                                    <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Total Price", "Index", new { sortOrder = ViewBag.PriceSortParm, listcontracts = Request.QueryString["listcontracts"] })</th>
+                                                    <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm, listcontracts = Request.QueryString["listcontracts"] })</th>
+                                                    <th rowspan="1" colspan="1">Status</th>
+                                                    <th rowspan="1" colspan="1">Action</th>
+                                                </tr>
+                                            </thead>
 
 
-                                        @foreach (var item in Model)
-                                        {
-<
-                                        <tr role="row" class="odd">
-                                            <td>
-                                                <input type="checkbox" class="check" value="@item.Id" />
-                                                @Html.AntiForgeryToken()
-                                            </td>
 
-                                            <td class="sorting_1">
-                                                @item.Insurance.Name
-                                            </td>
-                                            <td class="sorting_1">
-                                                @item.ApplicationUserId
-                                            </td>
+                                            <tbody>
 
-                                            <td>$@item.TotalPrice</td>
-                                            <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
 
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button class="btn btn-primary">
-                                                        @if (@item.Insurance.Id == 3)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
-                                                        }
-                                                        @if (@item.Insurance.Id == 1)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
-                                                        }
-                                                        @if (@item.Insurance.Id == 2)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "LifeInsurances", Id = item.Id })
-                                                        }
-                                                        @if (@item.Insurance.Id == 4)
-                                                        {
-                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "MedicalInsurances", Id = item.Id })
-                                                        }
-                                                    </button>
-                                                    <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr role="row" class="odd">
+                                                        <td>
+                                                            <input type="checkbox" class="check" value="@item.Id" />
+                                                            @Html.AntiForgeryToken()
+                                                        </td>
+
+                                                        <td class="sorting_1">
+                                                            @item.Insurance.Name
+                                                        </td>
+                                                        <td class="sorting_1">
+                                                            @item.ApplicationUserId
+                                                        </td>
+
+                                                        <td>$@item.TotalPrice</td>
+                                                        <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
+                                                        <td>
+                                                            @switch (@item.Status)
+                                                            {
+                                                                case (int)Contract.OrderStatus.Confirmed:
+                                                                    <p>Confirm</p>
+                                                                    break;
+
+                                                                case (int)Contract.OrderStatus.Pending:
+                                                                    <p>Pending</p>
+                                                                    break;
+
+                                                                case (int)Contract.OrderStatus.Deleted:
+                                                                    <p>Delete</p>
+                                                                    break;
+
+                                                                case (int)Contract.OrderStatus.Pay:
+                                                                    <p>Pay</p>
+                                                                    break;
+                                                                case (int)Contract.OrderStatus.Done:
+                                                                    <p>Done</p>
+                                                                    break;
+                                                                default:
+                                                                    break;
+                                                            }
+                                                        </td>
+
+                                                        <td>
+                                                            <div class="btn-group">
+                                                                <button class="btn btn-primary">
+                                                                    @if (@item.Insurance.Id == 3)
+                                                                    {
+                                                                        @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
+                                                                    }
+                                                                    @if (@item.Insurance.Id == 1)
+                                                                    {
+                                                                        @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
+                                                                    }
+                                                                    @if (@item.Insurance.Id == 2)
+                                                                    {
+                                                                        @Html.RouteLink("Detail", new { action = "Index", controller = "LifeInsurances", Id = item.Id })
+                                                                    }
+                                                                    @if (@item.Insurance.Id == 4)
+                                                                    {
+                                                                        @Html.RouteLink("Detail", new { action = "Index", controller = "MedicalInsurances", Id = item.Id })
+                                                                    }
+                                                                </button>
+
+                                                            </div>
+
+                                                        </td>
+                                                    </tr>
+
+                                                }
+
+
+                                            </tbody>
+                                        </table>
+                                        <div class="card-footer">
+                                            <div class="row mt-3">
+                                                <div class="col-3 mt-2">
+                                                    <div class="form-group mr-3">
+                                                        <select class="form-control mr-2" id="select-action">
+                                                            <option value="6">--Chọn thao tác--</option>
+                                                            <option value="0" onclick="SendEmail()">Confirmed</option>
+                                                            <option value="-1">Deleted</option>
+                                                            @*<option value="1">Pending</option>*@
+                                                            <option value="2">Pay</option>
+                                                            <option value="3">Done</option>
+                                                            <option value="4">All</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-
-                                            </td>
-                                        </tr>
-
-                                        }
-
-                                    </tbody>
-                                </table>
-                                <div class="card-footer">
-                                    <div class="row mt-3">
-                                        <div class="col-3 mt-2">
-                                            <div class="form-group mr-3">
-                                                <select class="form-control mr-2" id="select-action">
-                                                    <option value="6">--Chọn thao tác--</option>
-                                                    <option value="0">Confirmed</option>
-                                                    <option value="-1">Deleted</option>
-                                                </select>
+                                                <div class="col-9" style="margin-top: 8px;">
+                                                    <button type="button" id="action_contract" class="btn btn-success">Confirm</button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-9" style="margin-top: 8px;">
-                                            <button type="button" id="action_contract" class="btn btn-success">Confirm</button>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-4">
+                                                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3"></div>
+                                            <div class="col-sm-12 col-md-5" id="page">
+                                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.psize, listcontracts = Request.QueryString["listcontracts"] }),
+                                               new PagedListRenderOptions()
+                                               {
+                                                   LiElementClasses = new List<string> { "text-paging page" }
+                                               })
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-5">
-                                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
-                            </div>
-                            <div class="col-sm-12 col-md-4"></div>
-                            <div class="col-sm-12 col-md-3">
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
-                               new PagedListRenderOptions()
-                               {
-                                   LiElementClasses = new List<string> { "text-paging" }
-                               })
-                            </div>
-                        </div>
+
                     </div>
-                </div>
-            </div>
-        </div>
+                    <!-- /.container-fluid -->
+                </div>                <!-- End of Main Content -->
 
-    </div>
-    <!-- /.container-fluid -->
-</div>
-<!-- End of Main Content -->
-@section Scripts{
-    @Scripts.Render("~/bundles/jqueryval")
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#checkAll').click(function () {
-                $(".check").prop('checked',
-                    $(this).prop('checked'));
-            })
-        })
 
-        $('#action_contract').click(function () {
-            var selectedIDs = new Array();
-            var action = $('#select-action').val();
-            if (action == 6) {
-                alert('Please select the action you want to perform!');
-                return;
-            }
-            $('input:checkbox.check').each(function () {
-                if ($(this).prop('checked')) {
-                    selectedIDs.push($(this).val());
+                @section Scripts{
+                    @Scripts.Render("~/bundles/jqueryval")
+                    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+                    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+                    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+                    <script type="text/javascript">
+                        $(function () {
+                            var start = moment().subtract(29, 'days');
+                            var end = moment();
+
+                            function cb(start, end) {
+                                $('#reportrange span').html(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
+                            }
+
+                            $('#reportrange').daterangepicker({
+                                startDate: start,
+                                endDate: end,
+                                ranges: {
+                                    'Last week': [moment().subtract(6, 'days'), moment()],
+                                    'Last 30 days': [moment().subtract(29, 'days'), moment()],
+                                    'This month': [moment().startOf('month'), moment().endOf('month')],
+                                    'Last month': [
+                                        moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')
+                                    ]
+                                },
+                                "firstDay": 1
+                            },
+                                cb);
+                            cb(start, end);
+                            $('#reportrange').on('cancel.daterangepicker',
+                                function (ev, picker) {
+                                    $('#reportrange').val('');
+                                });
+                            $('#reportrange').on('apply.daterangepicker',
+                                function (ev, picker) {
+                                    var startDate = picker.startDate.format('YYYY-MM-DD');
+                                    var endDate = picker.endDate.format('YYYY-MM-DD');
+                                    var listcontracts = $('select#listcontracts option:checked').val();
+                                    var currLoc = $(location).attr('href');
+                                    window.location.href = window.location.href.split('?')[0] +
+                                        '?listcontracts=' +
+                                        listcontracts +
+                                        '&startDate=' +
+                                        startDate +
+                                        '&endDate=' +
+                                        endDate;
+                                });
+                        });
+
+                        $(document).ready(function () {
+                            $('#checkAll').click(function () {
+                                $(".check").prop('checked',
+                                    $(this).prop('checked'));
+                            })
+                        })
+
+                        $('#action_contract').click(function () {
+                            var selectedIDs = new Array();
+                            var action = $('#select-action').val();
+                            if (action == 6) {
+                                alert('Please select the action you want to perform!');
+                                return;
+                            }
+                            $('input:checkbox.check').each(function () {
+                                if ($(this).prop('checked')) {
+                                    selectedIDs.push($(this).val());
+                                }
+                            })
+                            if (selectedIDs.length <= 0) {
+                                alert('You have not selected a contract!');
+                                return;
+                            }
+
+                            if (action == -1) {
+                                if (confirm("Do you want to Delete?")) {
+                                    changeStatusPTTime(selectedIDs, action);
+                                }
+                            }
+                            if (action == 0) {
+                                if (confirm("Do you want to status Confirmed?")) {
+                                    changeStatusPTTime(selectedIDs, action);
+                                }
+                            }
+                            if (action == 1) {
+                                if (confirm("Do you want to status Pending?")) {
+                                    changeStatusPTTime(selectedIDs, action);
+                                }
+                            }
+                            if (action == 2) {
+                                if (confirm("Do you want to change status pay?")) {
+                                    changeStatusPTTime(selectedIDs, action);
+                                }
+                            }
+                            if (action == 3) {
+                                if (confirm("Do you want to change status done?")) {
+                                    changeStatusPTTime(selectedIDs, action);
+                                };
+                            }
+                        });
+                        var SendEmail = function () {
+                            $.ajax({
+                                type: "Post",
+                                url: "/Admin/Contracts/SendMailToUser",
+                                success: function (data) {
+                                    alert("Success");
+                                }
+                            });
+                        }
+
+                        function changeStatusPTTime(selectedIDs, action) {
+                            $.ajax({
+                                url: "/Admin/Contracts/ChangeStatus",
+                                type: "POST",
+                                dataType: "json",
+                                data: {
+                                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                                    selectedIDs,
+                                    action
+                                },
+                                success: function (res) {
+                                    if (!res == false) {
+                                        window.location.reload();
+                                    }
+                                },
+                                error: function () {
+                                    alert('error');
+                                }
+                            });
+                        }
+
+                        $(function () {
+                            $("#pageSize").change(function () {
+                                $("#pagesize").submit();
+                            });
+                        });
+                        $(function () {
+                            $("#listcontracts").change(function () {
+                                $("#listcontracts").submit();
+                            });
+                        });
+                        $(function () {
+                            $("#pageSize").change(function (ev, page, pageSize) {
+                                var page = $('page').val();
+                                var pageSize = $('select#pageSize option:checked').val();
+                                var listcontracts = $('select#listcontracts option:checked').val();
+                                window.location.href = window.location.href.split('?')[0] + '?listcontracts=' + listcontracts + '&page=' + page + '&pageSize=' + pageSize;
+                            });
+                        });
+                        $(function () {
+                            $("#listcontracts").change(function () {
+                                $("#listcontracts").submit();
+                            });
+                        });
+                    </script>
                 }
-            })
-            if (selectedIDs.length <= 0) {
-                alert('You have not selected a contract!');
-                return;
-            }
-            if (confirm("Do you want to delete?")) {
-                changeStatusPTTime(selectedIDs, action);
-            }
-        })
-        function changeStatusPTTime(selectedIDs, action) {
-            $.ajax({
-                url: "/Admin/Contracts/StatusOrder",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
-                    selectedIDs,
-                    action
-                },
-                success: function (res) {
-                    if (!res == false) {
-                        window.location.reload();
+
+                <style>
+                    .text-paging {
+                        color: brown;
                     }
-                },
-                error: function () {
-                    alert('error');
-                }
-            });
-        }
 
-        $(function () {
-            $("#pageSize").change(function () {
-                $("#pagesize").submit();
-            });
-        });
-    </script>
-}
-<style>
-    .text-paging {
-        color: brown;
-    }
+                        .text-paging > a {
+                            color: black;
+                        }
 
-        .text-paging > a {
-            color: black;
-        }
+                    /*.style-sort {
+                        background: url(https://cdn2.iconfinder.com/data/icons/music-player-icons-filled/57/Double_Arrows-512.png) no-repeat right .75rem center/9px 16px;
+                        background-position: 64px 64px;
+                    }*/
 
-    /*.style-sort {
-        background: url(https://cdn2.iconfinder.com/data/icons/music-player-icons-filled/57/Double_Arrows-512.png) no-repeat right .75rem center/9px 16px;
-        background-position: 64px 64px;
-    }*/
-
-    .style-sort > a {
-        color: crimson;
-    }
-</style>
+                    .style-sort > a {
+                        color: crimson;
+                    }
+                </style>

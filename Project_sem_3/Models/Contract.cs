@@ -24,7 +24,7 @@ namespace Project_sem_3.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DeletedAt { get; set; }
         public int Status { get; set; }
-        public enum OrderStatus { Pending = 1, Confirmed = 0, Deleted = -1 }
+        public enum OrderStatus { Done = 3, Pay = 2, Pending = 1, Confirmed = 0, Deleted = -1 }
         public Contract()
         {
             CreatedAt = DateTime.Now;

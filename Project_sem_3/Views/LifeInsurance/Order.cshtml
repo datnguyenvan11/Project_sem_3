@@ -17,8 +17,70 @@
     <div class="hd-info-pro">
         PLEASE ENTER iNFORMATION
     </div>
+    <div _ngcontent-c5="" class="row">
+        @foreach (var item in ViewBag.insurancepackages)
+        {
+            <div _ngcontent-c5="" class="col-md-6" style="margin-top:30px">
+                <div _ngcontent-c5="" class="benefit-item benefit-item-description-table">
+                    <div _ngcontent-c5="" class="benefit-item-main">
+                        <div _ngcontent-c5="" class="benefit-icon">
+                            <i _ngcontent-c5="" class="icon icon-benefit icon-benefit-shield"></i>
+                        </div>
+                        <div _ngcontent-c5="" class="benefit-image full-cover" style="background-image: url('https://ngocdiep.vn/uploads/images/img-5787-rs(1).jpg')">
+                            <div _ngcontent-c5="" class="benefit-name-wrapper v-middle">
+                                <h2 _ngcontent-c5="" class="benefit-name">
+                                    <div _ngcontent-c5="" class="app-checkbox agree-with-term">
+                                        <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="closeForm();" name="insurancePackageId" required /></label>                                                           @*<input _ngcontent-c5="" id="choose1" name="choose1" type="checkbox"> <label _ngcontent-c5="" for="choose1">*@
+                                        <span _ngcontent-c5="" class="checkout-term">@item.Name</span>
 
+                                    </div>
+                                </h2>
+                            </div>
+                        </div>
+                        <div _ngcontent-c5="" class="benefit-body">
+                            <div _ngcontent-c5="" class="benefit-description-table">
+                                <div _ngcontent-c5="" class="table-head">
+                                    <div _ngcontent-c5="" class="row item">
+                                        <div _ngcontent-c5="" class="col-xs-4">
+                                            <p _ngcontent-c5="" class="item-name">
+                                                <span _ngcontent-c5="">
+                                                    Description
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div _ngcontent-c5="" class="col-xs-8">
+                                            <p _ngcontent-c5="" class="item-value" style="color: black;">
+                                                <span _ngcontent-c5="" style="font-weight: bold;background: white;">@Html.Raw(HttpUtility.HtmlDecode(item.Description))</span>
+</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div _ngcontent-c5="" class="table-head">
+                                    <div _ngcontent-c5="" class="row item">
+                                        <div _ngcontent-c5="" class="col-xs-4">
+                                            <p _ngcontent-c5="" class="item-name">
+                                                <span _ngcontent-c5="">Charges</span>
+                                            </p>
+                                        </div>
+                                        <div _ngcontent-c5="" class="col-xs-8">
+                                            <p _ngcontent-c5="" class="item-value">
+                                                <span _ngcontent-c5="" style="font-weight: bold;background: white;">$@item.Price/year</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
     @*<form action="/HomeInsurance/CreateContract"  method="get">*@
+    <div class="form-group" style="margin-top:3%" id="divnone">
+        <h4>Enter the information on the vehicle registration</h4>
+    </div>
     <form action="#" id="formDemo" class="form-order-life-insurance bg-light">
         <div class="row">
             <div class="form-basic-information">
@@ -28,11 +90,11 @@
                         <input type="text" name="name" class="form-control" id="Name" autocomplete="off" placeholder="Name">
                     </div>
                     @*<div class="form-group ">
-        <label class="col-sm-2 col-form-label">Pull Name:</label>
-        <div class="col-md-4">
-        <input style="height:43px" type="password" class="form-control" id="exampleInputPullName" autocomplete="off" placeholder="Pull Name">
-        </div>
-        </div>*@
+                        <label class="col-sm-2 col-form-label">Pull Name:</label>
+                        <div class="col-md-4">
+                        <input style="height:43px" type="password" class="form-control" id="exampleInputPullName" autocomplete="off" placeholder="Pull Name">
+                        </div>
+                        </div>*@
                     <div class="form-group col-md-6">
                         <label class="col-form-label">Email</label>
                         <input type="text" name="email" class="form-control" id="emails" placeholder="Email">
@@ -164,28 +226,28 @@
                     </div>
 
                     @*<div style="margin-top:-20px" class="form-group ">
-        <label class="col-sm-2 col-form-label">Password</label>
-        <div class="col-md-4">
-        <input type="password" class="form-control" id="exampleInputPassword1">
-        </div>
-        </div>
-        <div style="margin-top:70px; overflow: hidden" class="form-group ">
-        <label class="col-sm-2 col-form-label">Password</label>
-        <div class="col-md-8">
-        <input type="password" class="form-control" id="exampleInputPassword1">
-        </div>
-        </div>*@
+                        <label class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-md-4">
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        </div>
+                        <div style="margin-top:70px; overflow: hidden" class="form-group ">
+                        <label class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-md-8">
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        </div>*@
                     @*<div class="form-group row">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-        <div class="col-md-4">
-        <input type="password" class="form-control" id="inputPassword">
-        </div>
-        </div>*@
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-md-4">
+                        <input type="password" class="form-control" id="inputPassword">
+                        </div>
+                        </div>*@
                     @*<div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>*@
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>*@
                 </div>
             </div>
 
@@ -230,6 +292,542 @@
 
 
 <style>
+
+
+
+
+
+
+
+
+      .subslide {
+        max-width: fit-content;
+        position: relative;
+        margin: auto;
+    }
+
+    .product-card .item-content .btn-learn-more {
+        position: absolute;
+        bottom: 20px;
+        width: calc(100% - 40px);
+    }
+
+    .shadow {
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    }
+
+    *, :after, :before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .box-border-pro {
+        position: relative;
+        background: #fff;
+        border: 1px solid #e4e4e4;
+        padding: 25px;
+    }
+
+    .tab-pro {
+        font-size: large;
+        padding: 0;
+        text-align: center;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+
+    .benefit-item.benefit-item-description-table {
+        font-size: 16px;
+    }
+
+    .benefit-item .benefit-item-main {
+        position: relative;
+        background: #fff;
+    }
+
+    .benefit-item .benefit-icon {
+        width: 50px;
+        height: 50px;
+        background: #ed1b2e;
+        color: #fff;
+        text-align: center;
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        transform: translateX(-50%);
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        z-index: 10;
+    }
+
+        .benefit-item .benefit-icon i {
+            position: relative;
+            top: 11px;
+        }
+
+    .laces-checkbox {
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.2rem;
+        line-height: 1.8rem;
+        text-align: center;
+        border: 1px solid #999;
+        border-radius: 0.3rem;
+    }
+
+    .icon-benefit-shield {
+        width: 27px;
+        height: 28px;
+        background-position: 0 -770px;
+    }
+
+    .icon-benefit {
+        background-image: url(https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngitem.com%2Fmiddle%2FmxRJbm_motorcycle-gap-cover-icon-bike-insurance-icon-png%2F&psig=AOvVaw2Wm29PAOOxFCc96L2YPndS&ust=1584883624783000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOCUouvVq-gCFQAAAAAdAAAAABAJ);
+    }
+
+    .icon {
+        display: inline-block;
+    }
+
+    .benefit-item .benefit-image {
+        position: relative;
+        height: 130px;
+    }
+
+    .full-cover {
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: 50%;
+    }
+
+    .benefit-item .benefit-name-wrapper {
+        width: 100%;
+    }
+
+    .v-middle {
+        display: block;
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .benefit-item .benefit-name {
+        font-size: 24px;
+        line-height: 28px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .app-checkbox input:checked, .app-checkbox input:not(:checked) {
+        position: absolute;
+        left: -9999px;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        margin: 4px 0 0;
+        margin-top: 1px\9;
+        line-height: normal;
+    }
+
+    input[type=checkbox], input[type=radio] {
+        box-sizing: border-box;
+        padding: 0;
+    }
+
+    .app-checkbox input:checked + label, .app-checkbox input:not(:checked) + label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 35px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .app-checkbox input:checked + label, .app-checkbox input:not(:checked) + label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 35px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-body {
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .benefit-item .benefit-body {
+        height: 190px;
+        text-align: center;
+        padding: 40px 50px 0;
+        -webkit-box-shadow: 0 0 20px rgba(0,0,0,.1);
+        -moz-box-shadow: 0 0 20px rgba(0,0,0,.1);
+        box-shadow: 0 0 20px rgba(0,0,0,.1);
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item {
+        padding: 14px 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .row {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item-name {
+        text-align: right;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .table-head .item-name span, .benefit-item.benefit-item-description-table .benefit-description-table .table-head .item-value span {
+        background: #b8e986;
+        padding: 3px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item-value {
+        text-align: left;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item {
+        padding: 14px 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .benefit-item.benefit-item-description-table .benefit-description-table .item-name {
+        text-align: right;
+    }
+
+    .app-checkbox input:checked + label:before, .app-checkbox input:not(:checked) + label:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 24px;
+        height: 24px;
+        background: #fff;
+        border: 2px solid grey;
+    }
+
+    app-checkbox input:checked + label, .app-checkbox input:not(:checked) + label {
+        position: relative;
+        cursor: pointer;
+        padding-left: 35px;
+    }
+
+    label {
+        display: inline-block;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .app-checkbox input:checked, .app-checkbox input:not(:checked) {
+        position: absolute;
+        left: 91px;
+        background-color: white;
+        top: -4px;
+    }
+
+    .tab-pro li.active a {
+        background-color: #0b665a;
+        display: inline-block;
+        color: #fff;
+        padding: 15px;
+    }
+
+    .tab-pro li a {
+        display: inline-block;
+        padding: 15px;
+    }
+
+        .tab-pro li a:hover {
+            background-color: #0b665a;
+            color: #fff;
+        }
+
+    .tab-pro li {
+        display: inline-block;
+    }
+
+    label {
+        display: inline;
+        max-width: 100%;
+        margin-bottom: 5px;
+        font-weight: 300;
+    }
+
+    #ctl18_fullname {
+        width: 60%
+    }
+
+    #ctl18_txtAddress {
+        width: 70%;
+        height: 124px
+    }
+
+    #ctl18_plates {
+        width: 67%
+    }
+
+    #ctl18_ChassisNumber {
+        width: 67%
+    }
+
+    #datepicker {
+        width: 55%
+    }
+
+    .mb-15 {
+        margin-bottom: 15px;
+    }
+
+    .hd-info-pro {
+        background-color: #337ab7;
+        color: #fff;
+        font-family: inherit;
+        text-transform: uppercase;
+        font-size: 15px;
+        padding: 15px;
+        border-bottom: solid 1px #fff
+    }
+
+    .tab-pane.active {
+        display: block;
+        margin-bottom: 42px;
+    }
+
+    .tab-pane {
+        display: none;
+        opacity: 1;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .list-header {
+        border-bottom-width: 1px;
+        background-color: #0b665a;
+        font-size: 14px;
+        color: #fff;
+        padding: .75rem;
+        font-weight: bold;
+        border: solid 1px #fff;
+    }
+
+    .box-border-pro {
+        position: relative;
+        background: #fff;
+        border: 1px solid #e4e4e4;
+        padding: 25px;
+    }
+
+    .frmpro {
+        width: 100%;
+        color: #3e3e3e;
+    }
+
+    .frm .custom-control-label {
+        font-size: 16px;
+        line-height: 24px;
+        margin-top: 10px;
+    }
+
+    .frm .custom-control-input:checked ~ .custom-control-label::before {
+        background-color: #0b665a;
+        border-color: #0b665a;
+    }
+
+    .frmpro .col-form-label {
+        line-height: 1.7em;
+        font-size: 18px;
+        color: #3e3e3e;
+    }
+
+    .col-form-label-first {
+        text-align: left;
+    }
+
+    .frmpro i {
+        font-size: 12px;
+        line-height: normal !important;
+    }
+
+    .pad-top-5 {
+        display: block;
+        padding-top: 5px;
+    }
+
+    .btn-pro {
+        background-color: #ea212d;
+        padding: 12px;
+        padding-left: 0;
+        padding-right: 0;
+        border: none;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: 700;
+        width: 100%;
+        transition: all 0.15s ease-in-out;
+        font-size: large;
+    }
+
+    .btn-pro-buynow {
+        display: block;
+        width: 100%;
+        background-color: #0f75bd;
+        padding: 11px;
+        padding-bottom: 14px;
+        padding-left: 0px;
+        padding-right: 0px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        margin-top: 5px;
+        border: none;
+        font-size: large;
+    }
+
+    .banner {
+        width: 100%;
+        height: 600px;
+        background-image: url("/Content/dummy/Motor_Order.jpeg");
+        background-position: center center;
+        background-size: cover;
+    }
+
+    input[type=radio] {
+        border: 1px solid gray;
+        padding: 0.5em;
+        -webkit-appearance: none;
+    }
+
+        input[type=radio]:checked {
+            background: url(data:image/gif;base64,R0lGODlhAQABAPAAAP///////yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==) no-repeat center center;
+            background-size: 9px 9px;
+        }
+
+        input[type=radio]:focus {
+            outline-color: transparent;
+        }
+
+
+    .m-0 {
+        margin: 0 !important;
+    }
+
+    .btn-pro-buynow:hover {
+        background-color: #ea212d;
+        color: #fff;
+    }
+
+    .btn-pro:hover {
+        background-color: #0b665a;
+        color: #fff;
+    }
+
+    .frmpro .txt {
+        padding: .375rem .75rem;
+    }
+
+    .frm .txt {
+        padding: 14px;
+        border: solid 2px #c8c8c8;
+    }
+
+    .frm .form-control {
+        height: calc(3em + 0.75rem + 4px);
+    }
+
+    .icondate {
+        position: absolute;
+        right: 385px;
+        top: 13px;
+        background-image: url("https://baohiemtructuyen.com.vn/images/icon/cal.png");
+        background-repeat: no-repeat;
+        width: 26px;
+        height: 26px;
+    }
+
+
+    *, :after, :before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    .result {
+        background-color: #f7f7f7;
+    }
+
+        .result .item-result {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border-bottom: solid 1px #c8c8c8;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+            .result .item-result span {
+                display: block;
+                font-size: 14px;
+                color: #7c7c7c;
+            }
+
+    .result-red {
+        background-color: #ea212d;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        padding-left: 0px;
+        padding-right: 0px;
+        font-size: large;
+    }
+
+        .result-red strong {
+            font-weight: normal;
+            font-size: 20px;
+        }
+        .error{
+            color:red;
+            font-size:13px
+                
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     .form-order-life-insurance {
         background: #fdfdfd;
     }
