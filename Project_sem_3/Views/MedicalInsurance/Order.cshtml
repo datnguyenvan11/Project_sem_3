@@ -793,7 +793,7 @@
                                         <div _ngcontent-c5="" class="benefit-icon">
                                             <i _ngcontent-c5="" class="icon icon-benefit icon-benefit-shield"></i>
                                         </div>
-                                        <div _ngcontent-c5="" class="benefit-image full-cover" style="background-image: url('https://ngocdiep.vn/uploads/images/img-5787-rs(1).jpg')">
+                                        <div _ngcontent-c5="" class="benefit-image full-cover" style="background-image: url('https://cdn.hsbc.com.vn/content/dam/hsbc/hbvn/images/21-9/HSBC_MCI_1240X400.jpg')">
                                             <div _ngcontent-c5="" class="benefit-name-wrapper v-middle">
                                                 <h2 _ngcontent-c5="" class="benefit-name">
                                                     <div _ngcontent-c5="" class="app-checkbox agree-with-term">
@@ -817,8 +817,10 @@
                                                         </div>
                                                         <div _ngcontent-c5="" class="col-xs-8">
                                                             <p _ngcontent-c5="" class="item-value" style="color: black;">
-                                                                <span _ngcontent-c5="" style="font-weight: bold;background: white;">@Html.Raw(HttpUtility.HtmlDecode(item.Description))</span>
-</p>
+
+                                                                <span _ngcontent-c5="" style="font-weight: bold;background: white;">@item.Description<span _ngcontent-c5="" class="new-line" style="background: white;">@Html.Raw(HttpUtility.HtmlDecode(item.Description))</span>
+                                                            </p>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -896,7 +898,7 @@
 
                         </tbody>
                         <th colspan="8" style="cursor:pointer;padding:0" class="text-center " id="click">
-                            <span id="validation" style="   margin-top: 8px; margin-left: 1%; float: left; color: red;width: 15%;"></span><img src="https://cdn.onlinewebfonts.com/svg/img_248922.png" id="img" style="    margin-right: 21%;" width="40px" height="40px" alt="plus" />
+                            <span id="validation" style="   margin-top: 8px; margin-left: 1%; float: left; color: red;width: 15%;"></span><img src="https://cdn2.iconfinder.com/data/icons/thin-line-color-1/21/42_1-512.png" id="img" style="    margin-right: 16%;" width="40px" height="40px" alt="plus" />
                         </th>
 
 
@@ -912,7 +914,8 @@
 
                 <div class="text-center mr-top-20">
                     <strong>Total net charge (VAT exempt):</strong>
-                    <p class="price-sum">$0</p>
+                    <p class="price-sum"><span id="ctl18_lblTotalPremiumPaid"></span>$ 0 </p>
+
                 </div>
                 <div class="grand_total">
                     <div class="form_text">
@@ -1412,9 +1415,10 @@
     }
 
     .price-sum {
-        font-size: 24px;
+        font-size: 32px;
         color: #ea212d;
         font-family: "fantasy";
+        margin-top:33px
     }
 
     .box-chuy {
