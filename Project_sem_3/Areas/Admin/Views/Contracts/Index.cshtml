@@ -44,52 +44,55 @@
                         </div>
                     </div>
                 </div>
-        @ViewBag.totalprice
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">List Contract</h6>
-            </div>
-            <div class="card-body">
-                <div>
-                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <div class="row">
+                @ViewBag.totalprice
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">List Contract</h6>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row">
 
-                            <div class="col-sm-12 col-md-6">
-                                <form action="/Admin/Contracts/" method="get" id="pagesize">
-                                    <div class="dataTables_length" id="dataTable_length">
-                                        <label>
-                                            Show
-                                            @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
-                                            entries
-                                        </label>
+                                    <div class="col-sm-12 col-md-6">
+                                        <form action="/Admin/Contracts/" method="get" id="pagesize">
+                                            <div class="dataTables_length" id="dataTable_length">
+                                                <label>
+                                                    Show
+                                                    @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
+                                                    entries
+                                                </label>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
-                            </div>
 
-                            <div class="col-sm-12 col-md-6">
-                                <div id="dataTable_filter" class="dataTables_filter">
-                                    <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div id="dataTable_filter" class="dataTables_filter">
+                                            <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
-                                    <thead>
-                                        <tr>
-                                            <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
-                                            <
-                                            <th rowspan="1" colspan="1">Insurance</th>
-                                            <th rowspan="1" colspan="1">Customer</th>
-                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Total Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
-                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
-                                            <th rowspan="1" colspan="1">Status</th>                                
-                                            <th rowspan="1" colspan="1">Action</th>
-                                        </tr>
-                                    </thead>
 
-                                    <tbody>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
+                                                    <
+                                                    <th rowspan="1" colspan="1">Insurance</th>
+                                                    <th rowspan="1" colspan="1">Customer</th>
+                                                    <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Total Price", "Index", new { sortOrder = ViewBag.PriceSortParm, listcontracts = Request.QueryString["listcontracts"] })</th>
+                                                    <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm, listcontracts = Request.QueryString["listcontracts"] })</th>
+                                                    <th rowspan="1" colspan="1">Status</th>
+                                                    <th rowspan="1" colspan="1">Action</th>
+                                                </tr>
+                                            </thead>
+                        
+
+
+                                            <tbody>
 
 
                                         @foreach (var item in Model)
@@ -161,7 +164,8 @@
                                             </td>
                                         </tr>
 
-                                        }
+                                                }
+
 
                                     </tbody>
                                 </table>
@@ -180,30 +184,65 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-9" style="margin-top: 8px;">
-                                            <button type="button" id="action_contract" class="btn btn-success">Confirm</button>
-                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-4">
+                                        <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-3"></div>
+                                    <div class="col-sm-12 col-md-5" id="page">
+                                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.psize, listcontracts = Request.QueryString["listcontracts"] }),
+                                       new PagedListRenderOptions()
+                                       {
+                                           LiElementClasses = new List<string> { "text-paging page" }
+                                       })
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-12 col-md-5">
-                                <div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
-                            </div>
-                            <div class="col-sm-12 col-md-4"></div>
-                            <div class="col-sm-12 col-md-3">
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
-                               new PagedListRenderOptions()
-                               {
-                                   LiElementClasses = new List<string> { "text-paging" }
-                               })
-                            </div>
-                        </div>
                     </div>
                 </div>
+
             </div>
+            <!-- /.container-fluid -->
         </div>
+        <!-- End of Main Content -->
+        @section Scripts{
+            @Scripts.Render("~/bundles/jqueryval")
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+            <script type="text/javascript">
+                $(function () {
+                    var start = moment().subtract(29, 'days');
+                    var end = moment();
+                    function cb(start, end) {
+                        $('#reportrange span').html(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
+                    }
+                    $('#reportrange').daterangepicker({
+                        startDate: start,
+                        endDate: end,
+                        ranges: {
+                            'Last week': [moment().subtract(6, 'days'), moment()],
+                            'Last 30 days': [moment().subtract(29, 'days'), moment()],
+                            'This month': [moment().startOf('month'), moment().endOf('month')],
+                            'Last month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                        },
+                        "firstDay": 1
+                    }, cb);
+                    cb(start, end);
+                    $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
+                        $('#reportrange').val('');
+                    });
+                    $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
+                        var startDate = picker.startDate.format('YYYY-MM-DD');
+                        var endDate = picker.endDate.format('YYYY-MM-DD');
+                        var listcontracts = $('select#listcontracts option:checked').val();
+                        window.location.href = window.location.href.split('?')[0] + '?listcontracts=' + listcontracts + '&startDate=' + startDate + '&endDate=' + endDate;
+                    });
+                });
+
 
     </div>
     <!-- /.container-fluid -->
@@ -349,6 +388,19 @@
                 $("#listcontracts").submit();
             });
         });
+       $(function () {
+                    $("#pageSize").change(function (ev, page, pageSize) {
+                        var page = $('page').val();
+                        var pageSize = $('select#pageSize option:checked').val();
+                        var listcontracts = $('select#listcontracts option:checked').val();
+                        window.location.href = window.location.href.split('?')[0] + '?listcontracts=' + listcontracts + '&page=' + page + '&pageSize=' + pageSize;
+                    });
+                });
+        $(function () {
+                    $("#listcontracts").change(function () {
+                        $("#listcontracts").submit();
+                    });
+                });
     </script>
 }
 <style>
@@ -356,16 +408,24 @@
         color: brown;
     }
 
-        .text-paging > a {
-            color: black;
+              
+            </script>
         }
+        <style>
+            .text-paging {
+                color: brown;
+            }
 
-    /*.style-sort {
-        background: url(https://cdn2.iconfinder.com/data/icons/music-player-icons-filled/57/Double_Arrows-512.png) no-repeat right .75rem center/9px 16px;
-        background-position: 64px 64px;
-    }*/
+                .text-paging > a {
+                    color: black;
+                }
 
-    .style-sort > a {
-        color: crimson;
-    }
-</style>
+            /*.style-sort {
+                background: url(https://cdn2.iconfinder.com/data/icons/music-player-icons-filled/57/Double_Arrows-512.png) no-repeat right .75rem center/9px 16px;
+                background-position: 64px 64px;
+            }*/
+
+            .style-sort > a {
+                color: crimson;
+            }
+        </style>
