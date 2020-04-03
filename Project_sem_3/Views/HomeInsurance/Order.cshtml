@@ -64,8 +64,8 @@
                                                                     </div>
                                                                     <div _ngcontent-c5="" class="col-xs-8">
                                                                         <p _ngcontent-c5="" class="item-value" style="color: black;">
-                                                                            <span _ngcontent-c5="" style="font-weight: bold;background: white;">@item.Description<span _ngcontent-c5="" class="new-line" style="background: white;"><span _ngcontent-c5="" style="font-weight: bold;background: white;">10 triệu đồng</span> trước rủi ro Tử vong</span>
-                                                                        </p>
+                                                                            <span _ngcontent-c5="" style="font-weight: bold;background: white;">@Html.Raw(HttpUtility.HtmlDecode(item.Description))</span>
+</p>
                                                                     </div>
                                                                 </div>
                                                             </div>

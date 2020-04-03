@@ -173,5 +173,24 @@ namespace Project_sem_3.Areas.Admin.Controllers
             }
             return View(contracts.ToList().ToPagedList(pageNumber, pagesize));
         }
+        public JsonResult getChartDataApi(DateTime startDate, DateTime endDate)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            //var data = db.Orders.Where(o => o.CreatedAt >= startDate && o.CreatedAt <= endDate).OrderByDescending(o => o.CreatedAt).GroupBy(o => o.CreatedAt, (day, orders) => new{Key = day.ToString("YYYY-MM-DD"), Total = orders.Sum(o => o.TotalPrice)}).ToList();
+            var Result = db.Contracts.Where(o => o.CreatedAt >= startDate && o.CreatedAt <= endDate).OrderByDescending(o => o.CreatedAt).GroupBy(x => DbFunctions.TruncateTime(x.CreatedAt),
+                (key, values) => new {
+                    day = key,
+                    revenue = values.Sum(x => x.TotalPrice)
+                }).ToList();
+
+
+            return Json(Result, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult getPieChartDataApi()
+        {
+
+            return View();
+
+        }
     }
 }

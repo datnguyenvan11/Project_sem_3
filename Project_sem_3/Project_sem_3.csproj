@@ -225,16 +225,19 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Assets\js\countdowntime.js" />
     <Content Include="Areas\Admin\Assets\css\custom.css" />
     <Content Include="Areas\Admin\Assets\css\sb-admin-2.css" />
     <Content Include="Areas\Admin\Assets\css\sb-admin-2.min.css" />
     <Content Include="Areas\Admin\Assets\img\undraw_posting_photo.svg" />
+    <Content Include="Areas\Admin\Assets\js\jquery.formatNumber-0.1.1.min.js" />
     <Content Include="Areas\Admin\Assets\js\demo\chart-area-demo.js" />
     <Content Include="Areas\Admin\Assets\js\demo\chart-bar-demo.js" />
     <Content Include="Areas\Admin\Assets\js\demo\chart-pie-demo.js" />
     <Content Include="Areas\Admin\Assets\js\demo\datatables-demo.js" />
     <Content Include="Areas\Admin\Assets\js\sb-admin-2.js" />
     <Content Include="Areas\Admin\Assets\js\sb-admin-2.min.js" />
+    <Content Include="Areas\Admin\Assets\js\sweetalert.min.js" />
     <Content Include="Areas\Admin\Assets\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Areas\Admin\Assets\vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Areas\Admin\Assets\vendor\bootstrap\js\bootstrap.js" />
