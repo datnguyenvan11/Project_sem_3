@@ -19,9 +19,8 @@
         <p class="mb-4"> All contracts of customers about insurances .</p>
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/Insurances/Create" class="btn btn-info" role="button">Create Insurance</a>
-            <a href="https://localhost:44362/Admin/Insurances/Deleted" class="btn btn-info float-right" role="button">Insurance Deleted</a>
+            
         </div>
-
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
@@ -31,12 +30,24 @@
             <div class="card-body">
                 <div>
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="col-md-4 col-12 mt-2">
+                            <div class="form-group mr-3">
+                                <form action="/Admin/Insurances/" method="get" id="listInsurance">
+                                    <div class="dataTables_length" id="dataTable_length">
+                                        <label>
+                                            List Status
+                                            @Html.DropDownList("listInsurance", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <form action="/Admin/Insurances/" method="get" id="pagesize">
                                     <div class="dataTables_length" id="dataTable_length">
                                         <label>
-                                            Show   @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" }) entries
+                                            Show @Html.DropDownList("pageSize", null, new {@class = "custom-select custom-select-sm form-control form-control-sm"}) entries
                                         </label>
                                     </div>
                                 </form>
@@ -51,63 +62,52 @@
                         </div>
                         <div class="row">
 
-                            <div class="col-3 mt-2">
-                                    <div class="form-group mr-3">
-                                        <select class="form-control mr-2" id="select-action">
-                                            <option value="6">--Chọn thao tác--</option>
-                                            <option value="-1">Deleted</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-9">
-                                    <button type="button" class="btn btn-success" id="action_insurancePackage" style="margin-top: 8px;">Xác nhận</button>
-                                </div>
+                           
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
-                                        <tr>
-                                            <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
-                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
-                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
-                                            <th rowspan="1" colspan="1">Action</th>
-                                        </tr>
+                                    <tr>
+                                        <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll"/>Select All</th>
+                                        <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Name", "Index", new {sortOrder = ViewBag.NameSortParm})</th>
+                                        <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new {sortOrder = ViewBag.DateSortParm})</th>
+                                        <th rowspan="1" colspan="1">Action</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr role="row" class="odd">
-                                                <td>
-                                                    <input type="checkbox" class="check" value="@item.Id" />
-                                                    @Html.AntiForgeryToken()
-                                                </td>
-                                                <td class="sorting_1">
-                                                    @item.Name
-                                                </td>
-                                                <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <input type="checkbox" class="check" value="@item.Id"/>
+                                                @Html.AntiForgeryToken()
+                                            </td>
+                                            <td class="sorting_1">
+                                                @item.Name
+                                            </td>
+                                            <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
 
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
-                                                        <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
-                                                        <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        }
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new {id = item.Id})</button>
+                                                    <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new {id = item.Id})</button>
+                                                    <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new {id = item.Id})</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
                                     </tbody>
-                                </table> 
+                                </table>
                                 <div class="row">
                                     <div class="col-3 mt-2">
                                         <div class="form-group mr-3">
                                             <select class="form-control mr-2" id="select-action">
-                                                <option value="6">--Chọn thao tác--</option>
-                                                <option value="0">Action</option>
+                                                <option value="1">Active Return</option>
                                                 <option value="-1">Deleted</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-9">
-                                        <button type="button" class="btn btn-success" id="action_contract" style="margin-top: 8px;">Xác nhận</button>
+                                        <button type="button" class="btn btn-success" id="action_insurancePackage" style="margin-top: 8px;">Xác nhận</button>
                                     </div>
                                 </div>
                             </div>
@@ -118,11 +118,11 @@
                             </div>
                             <div class="col-sm-12 col-md-5"></div>
                             <div class="col-sm-12 col-md-2">
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
-                               new PagedListRenderOptions()
-                               {
-                                   LiElementClasses = new List<string> { "text-paging" }
-                               })
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new {page}),
+                                    new PagedListRenderOptions()
+                                    {
+                                        LiElementClasses = new List<string> {"text-paging"}
+                                    })
                             </div>
                         </div>
                     </div>
@@ -191,6 +191,11 @@
             $(function () {
                 $("#pageSize").change(function () {
                     $("#pagesize").submit();
+                });
+            });
+            $(function () {
+                $("#listInsurance").change(function () {
+                    $("#listInsurance").submit();
                 });
             });
         });

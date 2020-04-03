@@ -1,6 +1,7 @@
 ﻿@*@model IEnumerable<Project_sem_3.Models.Contract>*@
 @model PagedList.IPagedList<Project_sem_3.Models.Contract>
 @using PagedList.Mvc
+@using Project_sem_3.Models
 
 @{
     ViewBag.Title = "Index";
@@ -83,7 +84,7 @@
                                             <th rowspan="1" colspan="1">Customer</th>
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Total Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
                                             <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
-
+                                            <th rowspan="1" colspan="1">Status</th>                                
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
                                     </thead>
@@ -93,48 +94,72 @@
 
                                         @foreach (var item in Model)
                                         {
-                                            <
-                                            <tr role="row" class="odd">
-                                                <td>
-                                                    <input type="checkbox" class="check" value="@item.Id" />
-                                                    @Html.AntiForgeryToken()
-                                                </td>
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <input type="checkbox" class="check" value="@item.Id" />
+                                                @Html.AntiForgeryToken()
+                                            </td>
 
-                                                <td class="sorting_1">
-                                                    @item.Insurance.Name
-                                                </td>
-                                                <td class="sorting_1">
-                                                    @item.ApplicationUserId
-                                                </td>
+                                            <td class="sorting_1">
+                                                @item.Insurance.Name
+                                            </td>
+                                            <td class="sorting_1">
+                                                @item.ApplicationUserId
+                                            </td>
 
-                                                <td>$@item.TotalPrice</td>
-                                                <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
+                                            <td>$@item.TotalPrice</td>
+                                            <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
+                                            <td>
+                                                @switch (@item.Status)
+                                                {
+                                                    case (int)Contract.OrderStatus.Confirmed:
+                                                        <p>Confirm</p>  
+                                                        break;
 
-                                                <td>
-                                                    <div class="btn-group">
-                                                        <button class="btn btn-primary">
-                                                            @if (@item.Insurance.Id == 3)
-                                                            {
-                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
-                                                            }
-                                                            @if (@item.Insurance.Id == 1)
-                                                            {
-                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
-                                                            }
-                                                            @if (@item.Insurance.Id == 2)
-                                                            {
-                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "LifeInsurances", Id = item.Id })
-                                                            }
-                                                            @if (@item.Insurance.Id == 4)
-                                                            {
-                                                                @Html.RouteLink("Detail", new { action = "Index", controller = "MedicalInsurances", Id = item.Id })
-                                                            }
-                                                        </button>
-                                                        <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
-                                                    </div>
+                                                    case (int)Contract.OrderStatus.Pending:
+                                                        <p>Pending</p>  
+                                                        break;
 
-                                                </td>
-                                            </tr>
+                                                    case (int)Contract.OrderStatus.Deleted:
+                                                        <p>Delete</p>  
+                                                        break;
+
+                                                    case (int)Contract.OrderStatus.Pay:
+                                                        <p>Pay</p>  
+                                                        break;
+                                                    case (int)Contract.OrderStatus.Done:
+                                                        <p>Done</p>  
+                                                        break;
+                                                    default:
+                                                        break;
+                                                }  
+                                            </td>
+
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button class="btn btn-primary">
+                                                        @if (@item.Insurance.Id == 3)
+                                                        {
+                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "MotorInsurances", Id = item.Id })
+                                                        }
+                                                        @if (@item.Insurance.Id == 1)
+                                                        {
+                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "HouseInsurances", Id = item.Id })
+                                                        }
+                                                        @if (@item.Insurance.Id == 2)
+                                                        {
+                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "LifeInsurances", Id = item.Id })
+                                                        }
+                                                        @if (@item.Insurance.Id == 4)
+                                                        {
+                                                            @Html.RouteLink("Detail", new { action = "Index", controller = "MedicalInsurances", Id = item.Id })
+                                                        }
+                                                    </button>
+                                                   
+                                                </div>
+
+                                            </td>
+                                        </tr>
 
                                         }
 
@@ -148,7 +173,10 @@
                                                     <option value="6">--Chọn thao tác--</option>
                                                     <option value="0" onclick="SendEmail()">Confirmed</option>
                                                     <option value="-1">Deleted</option>
-                                                    <option value="3">Deleted</option>
+                                                    @*<option value="1">Pending</option>*@
+                                                    <option value="2">Pay</option>
+                                                    <option value="3">Done</option>
+                                                    <option value="4">All</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -187,50 +215,64 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script type="text/javascript">
-        $(function () {
+        $(function() {
             var start = moment().subtract(29, 'days');
             var end = moment();
+
             function cb(start, end) {
                 $('#reportrange span').html(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
             }
+
             $('#reportrange').daterangepicker({
-                startDate: start,
-                endDate: end,
-                ranges: {
-                    'Last week': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 days': [moment().subtract(29, 'days'), moment()],
-                    'This month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    startDate: start,
+                    endDate: end,
+                    ranges: {
+                        'Last week': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 days': [moment().subtract(29, 'days'), moment()],
+                        'This month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last month': [
+                            moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')
+                        ]
+                    },
+                    "firstDay": 1
                 },
-                "firstDay": 1
-            }, cb);
+                cb);
             cb(start, end);
-            $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
-                $('#reportrange').val('');
-            });
-            $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
-                var startDate = picker.startDate.format('YYYY-MM-DD');
-                var endDate = picker.endDate.format('YYYY-MM-DD');
-                var listcontracts = $('select#listcontracts option:checked').val();
-                window.location.href = window.location.href.split('?')[0] + '?listcontracts=' + listcontracts + '&startDate=' + startDate + '&endDate=' + endDate;
-            });
+            $('#reportrange').on('cancel.daterangepicker',
+                function(ev, picker) {
+                    $('#reportrange').val('');
+                });
+            $('#reportrange').on('apply.daterangepicker',
+                function(ev, picker) {
+                    var startDate = picker.startDate.format('YYYY-MM-DD');
+                    var endDate = picker.endDate.format('YYYY-MM-DD');
+                    var listcontracts = $('select#listcontracts option:checked').val();
+                    var currLoc = $(location).attr('href');
+                    window.location.href = window.location.href.split('?')[0] +
+                        '?listcontracts=' +
+                        listcontracts +
+                        '&startDate=' +
+                        startDate +
+                        '&endDate=' +
+                        endDate;
+                });
         });
-            
-        $(document).ready(function () {
-            $('#checkAll').click(function () {
+
+        $(document).ready(function() {
+            $('#checkAll').click(function() {
                 $(".check").prop('checked',
                     $(this).prop('checked'));
             })
         })
 
-        $('#action_contract').click(function () {
+        $('#action_contract').click(function() {
             var selectedIDs = new Array();
             var action = $('#select-action').val();
             if (action == 6) {
                 alert('Please select the action you want to perform!');
                 return;
             }
-            $('input:checkbox.check').each(function () {
+            $('input:checkbox.check').each(function() {
                 if ($(this).prop('checked')) {
                     selectedIDs.push($(this).val());
                 }
@@ -244,21 +286,38 @@
                 if (confirm("Do you want to Delete?")) {
                     changeStatusPTTime(selectedIDs, action);
                 }
-            } else {
-                if (confirm("Do you want to Confirmed?")) {
+            }
+            if (action == 0){
+                if (confirm("Do you want to status Confirmed?")) {
                     changeStatusPTTime(selectedIDs, action);
                 }
-            };
-        })
-        var SendEmail = function () {
+            }
+            if (action == 1){
+                if (confirm("Do you want to status Pending?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            }
+            if (action == 2) {
+                if (confirm("Do you want to change status pay?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            }
+            if (action == 3) {
+                if (confirm("Do you want to change status done?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                };
+            }
+        });
+        var SendEmail = function() {
             $.ajax({
                 type: "Post",
                 url: "/Admin/Contracts/SendMailToUser",
-                success: function (data) {
+                success: function(data) {
                     alert("Success");
                 }
-            })
+            });
         }
+
         function changeStatusPTTime(selectedIDs, action) {
             $.ajax({
                 url: "/Admin/Contracts/StatusOrder",
@@ -269,24 +328,24 @@
                     selectedIDs,
                     action
                 },
-                success: function (res) {
+                success: function(res) {
                     if (!res == false) {
                         window.location.reload();
                     }
                 },
-                error: function () {
+                error: function() {
                     alert('error');
                 }
             });
         }
 
-        $(function () {
-            $("#pageSize").change(function () {
+        $(function() {
+            $("#pageSize").change(function() {
                 $("#pagesize").submit();
             });
         });
-        $(function () {
-            $("#listcontracts").change(function () {
+        $(function() {
+            $("#listcontracts").change(function() {
                 $("#listcontracts").submit();
             });
         });

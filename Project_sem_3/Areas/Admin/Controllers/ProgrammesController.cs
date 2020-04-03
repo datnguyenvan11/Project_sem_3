@@ -17,11 +17,11 @@ namespace Project_sem_3.Areas.Admin.Controllers
     public class ProgrammesController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        List<Programme> list = new List<Programme>();
+       
         // GET: Admin/Programmes
-        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize)
+        public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize, string listProgramme)
         {
-            var programme = db.Programmes.Where(t => t.Status == 1);
+            var programme = db.Programmes.Where(t => t.Status == 0);
             if (!String.IsNullOrEmpty(searchString))
             {
                 programme = db.Programmes.Where(t => t.Name.Contains(searchString))
@@ -35,6 +35,20 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 new SelectListItem() { Text="15", Value= "15" },
                 new SelectListItem() { Text="20", Value= "20" },
             };
+            ViewBag.listProgramme = new List<SelectListItem>()
+            {
+                new SelectListItem() { Text="List", Value= "0", Selected = true},
+                new SelectListItem() { Text="Delete", Value= "-1"},
+            };
+            switch (listProgramme)
+            {
+                case "0":
+                    programme = db.Programmes.Where(t => t.Status == 0);
+                    break;
+                case "-1":
+                    programme = db.Programmes.Where(t => t.Status == -1);
+                    break;
+            }
             int pagesize = (pageSize ?? 5);
             int pageNumber = (page ?? 1);
 
@@ -82,26 +96,25 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
         // POST: Admin/Programmes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price")] Programme programme)
+       
+        public ActionResult Create(string name, double price)
         {
             if (ModelState.IsValid)
             {
-                list.Add(programme);
-                FileStream fs = new FileStream("C:/Users/Windows 10 Version 2/Desktop/test.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-                StreamWriter streamWriter = new StreamWriter(fs, Encoding.UTF8);
-                streamWriter.WriteLine(new JavaScriptSerializer().Serialize(list));
-                streamWriter.Flush();
-                fs.Close();
-                db.Programmes.Add(programme);
+                var programmes = new Programme()
+                {
+                    Name = name,
+                    Price = price,
+                };
+                db.Programmes.Add(programmes);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(programme);
+            return View();
         }
+
 
         // GET: Admin/Programmes/Edit/5
         public ActionResult Edit(int? id)
