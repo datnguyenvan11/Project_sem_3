@@ -178,84 +178,26 @@ namespace Project_sem_3.Areas.Admin.Controllers
             base.Dispose(disposing);
         }
 
-        //public ActionResult Deleted(string sortOrder, string searchString, int? page, int? pageSize)
-        //{
 
-        //    var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == -1);
+        public JsonResult getChartDataApi(DateTime startDate, DateTime endDate)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            //var data = db.Orders.Where(o => o.CreatedAt >= startDate && o.CreatedAt <= endDate).OrderByDescending(o => o.CreatedAt).GroupBy(o => o.CreatedAt, (day, orders) => new{Key = day.ToString("YYYY-MM-DD"), Total = orders.Sum(o => o.TotalPrice)}).ToList();
+            var Result = db.Contracts.Where(o => o.CreatedAt >= startDate && o.CreatedAt <= endDate).OrderByDescending(o => o.CreatedAt).GroupBy(x => DbFunctions.TruncateTime(x.CreatedAt),
+                (key, values) => new {
+                    day = key,
+                    revenue = values.Sum(x => x.TotalPrice)
+                }).ToList();
 
-        //    //if (!String.IsNullOrEmpty(searchString))
-        //    //{
-        //    //    contracts = db.Contracts.Where(x => x.TotalPrice.Contains(searchString))
-        //    //        .Where(t => t.Status == -1);
-        //    //}
-        //    ViewBag.PageSize = new List<SelectListItem>()
-        //    {
-        //        new SelectListItem() { Text="5", Value= "5"},
-        //        new SelectListItem() { Text="10", Value= "10"},
-        //        new SelectListItem() { Text="15", Value= "15" },
-        //        new SelectListItem() { Text="20", Value= "20" },
-        //    };
-        //    int pagesize = (pageSize ?? 5);
-        //    int pageNumber = (page ?? 1);
 
-        //    ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "TotalPrice_desc" : "";
-        //    ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
-        //    switch (sortOrder)
-        //    {
-        //        case "Date":
-        //            contracts = contracts.OrderBy(s => s.CreatedAt);
-        //            break;
-        //        case "Date_desc":
-        //            contracts = contracts.OrderByDescending(s => s.CreatedAt);
-        //            break;
-        //        case "TotalPrice_desc":
-        //            contracts = contracts.OrderByDescending(s => s.TotalPrice);
-        //            break;
-        //        default:
-        //            contracts = contracts.OrderBy(s => s.TotalPrice);
-        //            break;
-        //    }
-        //    return View(contracts.ToList().ToPagedList(pageNumber, pagesize));
-        //}
+            return Json(Result, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult getPieChartDataApi()
+        {
 
-        //public ActionResult Confirmed(string sortOrder, string searchString, int? page, int? pageSize)
-        //{
+            return View();
 
-        //    var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.Status == 0);
+        }
 
-        //    //if (!String.IsNullOrEmpty(searchString))
-        //    //{
-        //    //    contracts = db.Contracts.Where(x => x.TotalPrice.Contains(searchString))
-        //    //        .Where(t => t.Status == 0);
-        //    //}
-        //    ViewBag.PageSize = new List<SelectListItem>()
-        //    {
-        //        new SelectListItem() { Text="5", Value= "5"},
-        //        new SelectListItem() { Text="10", Value= "10"},
-        //        new SelectListItem() { Text="15", Value= "15" },
-        //        new SelectListItem() { Text="20", Value= "20" },
-        //    };
-        //    int pagesize = (pageSize ?? 5);
-        //    int pageNumber = (page ?? 1);
-
-        //    ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "TotalPrice_desc" : "";
-        //    ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";
-        //    switch (sortOrder)
-        //    {
-        //        case "Date":
-        //            contracts = contracts.OrderBy(s => s.CreatedAt);
-        //            break;
-        //        case "Date_desc":
-        //            contracts = contracts.OrderByDescending(s => s.CreatedAt);
-        //            break;
-        //        case "TotalPrice_desc":
-        //            contracts = contracts.OrderByDescending(s => s.TotalPrice);
-        //            break;
-        //        default:
-        //            contracts = contracts.OrderBy(s => s.TotalPrice);
-        //            break;
-        //    }
-        //    return View(contracts.ToList().ToPagedList(pageNumber, pagesize));
-        //}
     }
 }
