@@ -43,7 +43,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 new SelectListItem() { Text="Pay", Value= "2" },
                 new SelectListItem() { Text="Deleted", Value= "-1"},
                 new SelectListItem() { Text="Done", Value= "3" },
-               
+
             };
             int pagesize = (pageSize ?? 5);
             int pageNumber = (page ?? 1);
@@ -183,8 +183,9 @@ namespace Project_sem_3.Areas.Admin.Controllers
         {
             db.Configuration.ProxyCreationEnabled = false;
             //var data = db.Orders.Where(o => o.CreatedAt >= startDate && o.CreatedAt <= endDate).OrderByDescending(o => o.CreatedAt).GroupBy(o => o.CreatedAt, (day, orders) => new{Key = day.ToString("YYYY-MM-DD"), Total = orders.Sum(o => o.TotalPrice)}).ToList();
-            var Result = db.Contracts.Where(o => o.CreatedAt >= startDate && o.CreatedAt <= endDate).OrderByDescending(o => o.CreatedAt).GroupBy(x => DbFunctions.TruncateTime(x.CreatedAt),
-                (key, values) => new {
+            var Result = db.Contracts.Where(o => o.CreatedAt >= startDate && o.CreatedAt <= endDate).OrderByDescending(o => o.CreatedAt).Where(o => o.Status==3).GroupBy(x => DbFunctions.TruncateTime(x.CreatedAt),
+                (key, values) => new
+                {
                     day = key,
                     revenue = values.Sum(x => x.TotalPrice)
                 }).ToList();

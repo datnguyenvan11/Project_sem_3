@@ -71,6 +71,28 @@
         padding-bottom: 10px
     }
 
+    .btn-pro-buynow {
+        display: block;
+        width: 100%;
+        background-color: #0f75bd;
+        padding: 11px;
+        padding-bottom: 14px;
+        padding-left: 0px;
+        padding-right: 0px;
+        border-radius: 5px;
+        color: #fff;
+        font-family: "Helb";
+        text-align: center;
+        margin-top: 5px;
+        border: none;
+        font-size: large;
+    }
+
+        .btn-pro-buynow:hover {
+            background-color: #ea212d;
+            color: #fff;
+        }
+
     .table2 {
         width: 100%;
         margin-bottom: 1rem;
@@ -150,7 +172,7 @@
 
     .table-donhang thead th {
         border-bottom-width: 1px;
-        background-color:  #0f75bd;
+        background-color: #0f75bd;
         font-size: 14px;
         color: #fff;
     }
@@ -289,8 +311,8 @@
                 <div class="sub-hd-frm" style="margin-bottom:0">Information about delivery and receipt of insurance certificates</div>
                 <table class="table2 table-bordered table-hover table-info-pay">
                     <tbody>
-                      
-                        
+
+
                         <tr>
                             <th scope="row">Full name of recipient:</th>
                             <td><span id="ctl18_ctl00_ordInfo1_lblFullnameDelevery">  @ViewBag.currentuser.UserName</span></td>
@@ -393,16 +415,23 @@
                             </strong>
                         </td>
                         <td>
-                            <div align="right" style="font-size:16px;color:red" >
+                            <div align="right" style="font-size:16px;color:red">
                                 <strong class="tt">
-                                   
+
                                 </strong>
                             </div>
                         </td>
                     </tr>
 
                 </table>
-                <button id="order">nhan</button>
+                <div class="row">
+                    <div class="col-md-4 col-4"></div>
+                    <div class="col-md-4 col-4" id="order">
+                        <input type="submit" value="Order" class="btn-pro-buynow " />
+                    </div>
+                    <div class="col-md-4 col-4"></div>
+                </div>
+
             </div>
 
             <div class="box-chuy">
@@ -446,37 +475,37 @@
 @section Scripts{
     <script>
         cd = (new Date()).toISOString().split('T')[0];
-         $("#ctl18_ctl00_ordInfo1_lblBookDate").text(cd)
+        $("#ctl18_ctl00_ordInfo1_lblBookDate").text(cd)
         var obj = JSON.parse(sessionStorage.medical);
         $("#ctl18_ctl00_ordInfo1_lblFullPremium").text('$' + obj.Totalprice)
         $("#ctl18_ctl00_ordInfo1_lblTotalPremium").text('$' + obj.Totalprice)
-                $(".tt").text('$' + obj.Totalprice)
+        $(".tt").text('$' + obj.Totalprice)
 
         $('#ctl18_ctl00_ordInfo1_lblProductName').text(obj.packageName);
         var a = 0
         $.each(obj.items, function (key, value) {
             a++
             var html = `
-                                        < tr >
-                                            <td>${a}</td>
-                                        <td>${value.insuranpackageName}</td>
-                                        <td>${value.DateOfbirth}</td>
-                                        <td>${value.Name} </td>
-                                            <td>${value.programname} </td>
+                                                    < tr >
+                                                        <td>${a}</td>
+                                                    <td>${value.insuranpackageName}</td>
+                                                    <td>${value.DateOfbirth}</td>
+                                                    <td>${value.Name} </td>
+                                                        <td>${value.programname} </td>
 
-                                          
-                                            <td>${value.Address}</td>
-       <td>
-                                                <div align="right">
-                                                    ${value.PhoneNumber}
-                                                </div>
-                                            </td>
-      <td>${value.Email}</td>
-                                            <td>
-                                                ${value.unitprice}
-                                            </td>
-                                         
-                                              </tr >`
+
+                                                        <td>${value.Address}</td>
+                   <td>
+                                                            <div align="right">
+                                                                ${value.PhoneNumber}
+                                                            </div>
+                                                        </td>
+                  <td>${value.Email}</td>
+                                                        <td>
+                                                            ${value.unitprice}
+                                                        </td>
+
+                                                          </tr >`
             $('.tr').append(html)
         })
 
@@ -488,7 +517,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                window.location.href = "/OrderNotice/Index"
+                    window.location.href = "/OrderNotice/Index"
                 },
                 failure: function (errMsg) {
                     alert('error');

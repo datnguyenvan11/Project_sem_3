@@ -9,7 +9,7 @@
     <section class="wrapper">
         <div class="panel panel-default">
             <h2 class="panel-heading font-weight-bold text-center text-primary">
-                THỐNG KÊ
+                STATISTICAL
             </h2>
             <div class="row pr-4 pl-4 mt-3">
                 <!-- Earnings (Monthly) Card Example -->
@@ -112,16 +112,16 @@
             <div class="float-right mt-2 pr-4">
                 <div id="reportrange" class="text-primary font-weight-bold"
                      style="cursor: pointer; border-radius: 5px">
-                    Chọn ngày:&nbsp;
+                    Select a date:&nbsp;
                     <i class="fa fa-calendar text-dark"></i>&nbsp;
                     <span class="text-dark font-weight-light"></span> <i class="fa fa-caret-down text-dark"></i>
                 </div>
             </div>
             <h5 class="font-weight-bold ml-4 mt-3 text-primary">
-                Doanh thu : <span class="total-revenue text-dark"></span>
+                Turnover : <span class="total-revenue text-dark"></span>
             </h5>
             <div class="pl-4 mb-3 mt-3">
-                <div class="text-primary"><h5 class="font-weight-bold">Trạng thái doanh thu :</h5></div>
+                <div class="text-primary"><h5 class="font-weight-bold">Revenue status :</h5></div>
                 <div class="advice-content text-success" style="font-style: italic"></div>
             </div>
             <!-- Content Row -->
@@ -129,8 +129,8 @@
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 align-items-center justify-content-between">
-                        <h5 class="m-0 font-weight-bold text-primary">Thống kê thu nhập</h5>
-                        <div class="m-0 text-secondary">Currency ( VNĐ )</div>
+                        <h5 class="m-0 font-weight-bold text-primary">Income statistics</h5>
+                        <div class="m-0 text-secondary">Currency ( $ )</div>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
@@ -141,14 +141,14 @@
                 </div>
             </div>
             <div class="advice ml-5 mb-4">
-                <div class="text-primary"><h5 class="font-weight-bold">Huấn luyện viên xuất sắc:</h5></div>
+                <div class="text-primary"><h5 class="font-weight-bold">Excellent coach:</h5></div>
                 <h6 class="advice-content-best-seller" style="font-style: italic;"></h6>
             </div>
             <div class="col-5 pl-4">
                 <div class="card shadow mb-4" style="width: 650px">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h5 class="m-0 font-weight-bold text-primary">Thống kê huấn luyện viên</h5>
+                        <h5 class="m-0 font-weight-bold text-primary">Coach statistics</h5>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
@@ -193,23 +193,23 @@
                     console.log(difference)
                     if (difference < 0) {
                         if (-difference > 1500) {
-                            $('.advice-content').text('Đi xuống nhưng không đáng kể => Bạn nên để ý 5 huấn luyện viên được thuê nhiều nhất để có chiến lược tiếp thị hiệu quả');
+                            $('.advice-content').text('Going down but not significantly => You should notice the 5 coaches hired the most for effective marketing strategies');
                         } else {
-                            $('.advice-content').text('Đi xuống nhưng không đáng kể => Bạn không nên quá lo lắng , hãy tiếp tục truyền thông, tiếp thị');
+                            $('.advice-content').text('Going down but not significantly => You should not be too worried, continue communication, marketing');
                         }
                     }
                     if (difference > 0) {
                         if (difference > 6000) {
-                            $('.advice-content').text('Tăng lên đáng kể => Bạn đang có một chiến lược tiếp thị hiệu quả! Hãy tiếp tục cố gắng');
+                            $('.advice-content').text('Significant increase => You are having an effective marketing strategy! Keep trying');
                         } else {
-                            $('.advice-content').text('Tăng lên nhưng không đáng kể => Bạn không nên quá lo lắng , hãy tiếp tục truyền thông, tiếp thị');
+                            $('.advice-content').text('Increased but not significant => You should not be too worried, continue communication, marketing');
                         }
                     }
                     for (var i = 0; i < resp.length; i++) {
                         totalRevenue += parseInt(resp[i].revenue);
                     }
                     ;
-                    $('.total-revenue').text('$'+totalRevenue );
+                    $('.total-revenue').text('$' + totalRevenue);
                 },
                 error: function () {
                     swal('Something is wrong', 'Cannot retrieve data from API', 'error');
@@ -271,21 +271,21 @@
             $('#reportrange').on('apply.daterangepicker', function (ev, picker) {
                 var startDate = picker.startDate.format('YYYY-MM-DD');
                 var endDate = picker.endDate.format('YYYY-MM-DD');
-            //    $.ajax({
-            //        url: '/api-get-pie-chart-data?startDate=' + startDate + '&endDate=' + endDate,
-            //        method: 'GET',
-            //        success: function (resp) {
-            //            if (resp.length == 0) {
-            //                swal('Không có dữ liệu', 'Hãy chọn khoảng thời gian.', 'warning');
-            //                return;
-            //            }
-            //            ;
-            //            drawPieChart(resp);
-            //        },
-            //        error: function (r) {
-            //            swal('Có lỗi xảy ra', 'Không lấy được dữ liệu từ api', 'error');
-            //        }
-            //    });
+                //    $.ajax({
+                //        url: '/api-get-pie-chart-data?startDate=' + startDate + '&endDate=' + endDate,
+                //        method: 'GET',
+                //        success: function (resp) {
+                //            if (resp.length == 0) {
+                //                swal('Không có dữ liệu', 'Hãy chọn khoảng thời gian.', 'warning');
+                //                return;
+                //            }
+                //            ;
+                //            drawPieChart(resp);
+                //        },
+                //        error: function (r) {
+                //            swal('Có lỗi xảy ra', 'Không lấy được dữ liệu từ api', 'error');
+                //        }
+                //    });
                 $.ajax({
                     url: '/Contracts/getChartDataApi?startDate=' + startDate + '&endDate=' + endDate,
                     method: 'GET',
@@ -320,7 +320,7 @@
                             totalRevenue += parseInt(resp[i].revenue);
                         }
                         ;
-                        $('.total-revenue').text('$'+totalRevenue );
+                        $('.total-revenue').text('$' + totalRevenue);
                     },
                     error: function () {
                         swal('Action failed', 'Cannot retrieve data from API', 'error');
@@ -328,68 +328,68 @@
                 });
             });
         });
-        //google.charts.load('current', { 'packages': ['corechart'] });
-        //google.charts.setOnLoadCallback(function () {
-        //    var start = moment().subtract(29, 'days');
-        //    var end = moment();
-        //    $.ajax({
-        //        url: '/api-get-pie-chart-data?startDate=' + start.format('YYYY-MM-DD') + '&endDate=' + end.format('YYYY-MM-DD'),
-        //        method: 'GET',
-        //        success: function (resp) {
-        //            if (resp.length == 0) {
-        //                swal('No data exists for pie chart', 'Please choose another time range.', 'warning');
-        //                return;
-        //            }
-        //            ;
-        //            // console.log(resp);
-        //            drawPieChart(resp);
-        //        },
-        //        error: function (r) {
-        //            swal('Something is wrong', 'Cannot retrieve data from API', 'error');
-        //        }
-        //    });
-        //});
-        //function drawPieChart(chart_data) {
-        //    var data = new google.visualization.DataTable();
-        //    data.addColumn('string', 'Product Name');
-        //    data.addColumn('number', 'Quantity');
-        //    for (var i = 0; i < 5; i++) {
-        //        data.addRow([chart_data[i].product.name, Number(chart_data[i].totalQuantity)]);
-        //    }
-        //    ;
-        //    var rest = 0;
-        //    for (var i = 5; i < chart_data.length; i++) {
-        //        rest += Number(chart_data[i].totalQuantity);
-        //    }
-        //    ;
-        //    var all = 0;
-        //    for (var i = 0; i < chart_data.length; i++) {
-        //        all += Number(chart_data[i].totalQuantity);
-        //    }
-        //    ;
-        //    var percentage1 = (chart_data[0].totalQuantity / all) * 100;
-        //    if (percentage1 <= 20) {
-        //        $('.advice-content-best-seller').html('<span>The <a href="' + '/admin/orders?personal_training_id=' + chart_data[0].product.id + '">' + chart_data[0].product.name + '</a> đang làm rất tốt nhưng so với tất cả phần trăm không quá lớn. </span>');
-        //    } else if (percentage1 < 50 && percentage1 > 20) {
-        //        $('.advice-content-best-seller').html('<span>The <a href="' + '/admin/orders?personal_training_id=' + chart_data[0].product.id + '">' + chart_data[0].product.name + '</a> đang làm rất tốt thời gian này. </span>');
-        //    } else if (percentage1 <= 50) {
-        //        $('.advice-content-best-seller').html('<span>The <a href="' + '/admin/orders?personal_training_id=' + chart_data[0].product.id + '">' + chart_data[0].product.name + '</a> chiếm hơn một nửa doanh số của bạn, bạn không chỉ nên nhập khẩu nhiều hơn mà còn quảng bá các sản phẩm khác nữa. <a href="' + '/admin/order?product_id=' + chart_data[1].product_id + '">' + chart_data[1].product.name + '</span>');
-        //    }
-        //    data.addRow(['Huấn luyện viên khác', rest]);
-        //    var options = {
-        //        title: '5 Best-sellers'
-        //    };
-        //    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        //    chart.draw(data, options);
-        //    google.visualization.events.addListener(chart, 'select', selectHandler);
-        //    function selectHandler(e) {
-        //        for (var i = 0; i < chart.getSelection().length; i++) {
-        //            var item = chart.getSelection()[i];
-        //            window.location.href = '/admin/orders?personal_training_id=' + chart_data[item.row].product.id;
-        //        }
-        //    }
-        //}
-        //$('#monthly').attr('href', 'admin/orders?startDate=' + moment().startOf('month').format('YYYY-MM-DD') + '&endDate=' + moment().endOf('month').format('YYYY-MM-DD'))
+            //google.charts.load('current', { 'packages': ['corechart'] });
+            //google.charts.setOnLoadCallback(function () {
+            //    var start = moment().subtract(29, 'days');
+            //    var end = moment();
+            //    $.ajax({
+            //        url: '/api-get-pie-chart-data?startDate=' + start.format('YYYY-MM-DD') + '&endDate=' + end.format('YYYY-MM-DD'),
+            //        method: 'GET',
+            //        success: function (resp) {
+            //            if (resp.length == 0) {
+            //                swal('No data exists for pie chart', 'Please choose another time range.', 'warning');
+            //                return;
+            //            }
+            //            ;
+            //            // console.log(resp);
+            //            drawPieChart(resp);
+            //        },
+            //        error: function (r) {
+            //            swal('Something is wrong', 'Cannot retrieve data from API', 'error');
+            //        }
+            //    });
+            //});
+            //function drawPieChart(chart_data) {
+            //    var data = new google.visualization.DataTable();
+            //    data.addColumn('string', 'Product Name');
+            //    data.addColumn('number', 'Quantity');
+            //    for (var i = 0; i < 5; i++) {
+            //        data.addRow([chart_data[i].product.name, Number(chart_data[i].totalQuantity)]);
+            //    }
+            //    ;
+            //    var rest = 0;
+            //    for (var i = 5; i < chart_data.length; i++) {
+            //        rest += Number(chart_data[i].totalQuantity);
+            //    }
+            //    ;
+            //    var all = 0;
+            //    for (var i = 0; i < chart_data.length; i++) {
+            //        all += Number(chart_data[i].totalQuantity);
+            //    }
+            //    ;
+            //    var percentage1 = (chart_data[0].totalQuantity / all) * 100;
+            //    if (percentage1 <= 20) {
+            //        $('.advice-content-best-seller').html('<span>The <a href="' + '/admin/orders?personal_training_id=' + chart_data[0].product.id + '">' + chart_data[0].product.name + '</a> đang làm rất tốt nhưng so với tất cả phần trăm không quá lớn. </span>');
+            //    } else if (percentage1 < 50 && percentage1 > 20) {
+            //        $('.advice-content-best-seller').html('<span>The <a href="' + '/admin/orders?personal_training_id=' + chart_data[0].product.id + '">' + chart_data[0].product.name + '</a> đang làm rất tốt thời gian này. </span>');
+            //    } else if (percentage1 <= 50) {
+            //        $('.advice-content-best-seller').html('<span>The <a href="' + '/admin/orders?personal_training_id=' + chart_data[0].product.id + '">' + chart_data[0].product.name + '</a> chiếm hơn một nửa doanh số của bạn, bạn không chỉ nên nhập khẩu nhiều hơn mà còn quảng bá các sản phẩm khác nữa. <a href="' + '/admin/order?product_id=' + chart_data[1].product_id + '">' + chart_data[1].product.name + '</span>');
+            //    }
+            //    data.addRow(['Huấn luyện viên khác', rest]);
+            //    var options = {
+            //        title: '5 Best-sellers'
+            //    };
+            //    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            //    chart.draw(data, options);
+            //    google.visualization.events.addListener(chart, 'select', selectHandler);
+            //    function selectHandler(e) {
+            //        for (var i = 0; i < chart.getSelection().length; i++) {
+            //            var item = chart.getSelection()[i];
+            //            window.location.href = '/admin/orders?personal_training_id=' + chart_data[item.row].product.id;
+            //        }
+            //    }
+            //}
+            //$('#monthly').attr('href', 'admin/orders?startDate=' + moment().startOf('month').format('YYYY-MM-DD') + '&endDate=' + moment().endOf('month').format('YYYY-MM-DD'))
     </script>
 
 
