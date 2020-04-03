@@ -2332,11 +2332,9 @@
     <Content Include="Areas\Admin\Views\Role\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Role\CreateAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\InsurancePackages\Deleted.cshtml" />
-    <Content Include="Areas\Admin\Views\Contracts\Deleted.cshtml" />
     <Content Include="Areas\Admin\Views\Insurances\Deleted.cshtml" />
     <Content Include="Areas\Admin\Views\Programmes\Deleted.cshtml" />
     <Content Include="Areas\Admin\Views\Role\UsersWithRoles.cshtml" />
-    <Content Include="Areas\Admin\Views\Contracts\Confirmed.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_LoginWithAdmin.cshtml" />
     <Content Include="Areas\Admin\Views\LifeInsurances\Index.cshtml" />
     <Content Include="Areas\Admin\Views\MedicalInsurances\Index.cshtml" />
