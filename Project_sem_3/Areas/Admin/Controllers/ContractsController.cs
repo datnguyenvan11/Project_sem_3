@@ -24,7 +24,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize, string listcontracts, DateTime? startDate, DateTime? endDate)
         {
 
-            var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance);
+            var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where( c => c.Status != 5);
             ViewBag.PageSize = new List<SelectListItem>()
             {
                 new SelectListItem() { Text="5", Value= "5"},
@@ -55,16 +55,16 @@ namespace Project_sem_3.Areas.Admin.Controllers
             switch (sortOrder)
             {
                 case "Date":
-                    contracts = contracts.OrderBy(s => s.CreatedAt);
+                    contracts = contracts.OrderBy(s => s.CreatedAt).Where(c => c.Status != 5);
                     break;
                 case "Date_desc":
-                    contracts = contracts.OrderByDescending(s => s.CreatedAt);
+                    contracts = contracts.OrderByDescending(s => s.CreatedAt).Where(c => c.Status != 5); 
                     break;
                 case "TotalPrice_desc":
-                    contracts = contracts.OrderByDescending(s => s.TotalPrice);
+                    contracts = contracts.OrderByDescending(s => s.TotalPrice).Where(c => c.Status != 5); 
                     break;
                 default:
-                    contracts = contracts.OrderBy(s => s.TotalPrice);
+                    contracts = contracts.OrderBy(s => s.TotalPrice).Where(c => c.Status != 5); 
                     break;
             }
 
@@ -92,6 +92,10 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 case "-1":
                     contracts = contracts.Where(x => x.Status == -1);
                     break;
+                case "4":
+                    contracts = db.Contracts.Where(c => c.Status != 5); ;
+                    break;
+
                 default:
                     break;
             }

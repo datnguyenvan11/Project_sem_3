@@ -25,7 +25,7 @@ namespace Project_sem_3.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateContract(int InsurancePackageId, string name, string email, string address, DateTime Date_Iden, string Place_Iden, string phone, string Job, string IdentityCard)
+        public ActionResult CreateContract(int InsurancePackageId, string name, string email, string address, DateTime Date_Iden, string Place_Iden, string phone, string Job, string IdentityCard, string MaritalStatus)
         {
             var insurancepackage = db.InsurancePackages.Find(InsurancePackageId);
 
@@ -49,6 +49,7 @@ namespace Project_sem_3.Controllers
                 IdentityCard = IdentityCard,
                 DateOfIdentityCard = Date_Iden,
                 PlaceOfIdentityCard = Place_Iden,
+                MaritalStatus= MaritalStatus,
                 Job = Job,
                 Quantity = 1,
                 UnitPrice = insurancepackage.Price
