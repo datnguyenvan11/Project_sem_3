@@ -309,7 +309,7 @@
                 </table>
 
                 <div class="sub-hd-frm" style="margin-bottom:0">Information about delivery and receipt of insurance certificates</div>
-                <table class="table2 table-bordered table-hover table-info-pay">
+                <table class="table table-bordered table-hover table-info-pay">
                     <tbody>
 
 
@@ -377,7 +377,7 @@
                 <div class="sub-hd-frm" style="margin-bottom:10px">
                     Vehicle information
                 </div>
-                <table class="table2  table-bordered table-hover table-donhang table-responsive-lg" id="body">
+                <table class="table tb  table-bordered table-hover table-donhang table-responsive-lg" width="100%" id="body">
                     <thead>
                         <tr>
                             <th class="text-center align-middle" scope="col">STT</th>
@@ -396,20 +396,19 @@
                             <th class="text-center align-middle" scope="col">
                                 Address
                             </th>
+
                             <th class="text-center align-middle" scope="col">
-                                PhoneNumber
-                            </th>
-                            <th class="text-center align-middle" scope="col">
-                                Email
+                                Gender
                             </th>
                             <th class="text-center align-middle" scope="col">
                                 Price
                             </th>
                         </tr>
                     </thead>
-                    <tr class="tr"></tr>
-                    <tr>
-                        <td colspan="8">
+                    <tbody>
+                    </tbody>
+                    <th>
+                        <td colspan="6">
                             <strong style="float: right;">
                                 Total charge (including VAT):
                             </strong>
@@ -421,8 +420,7 @@
                                 </strong>
                             </div>
                         </td>
-                    </tr>
-
+                    </th>
                 </table>
                 <div class="row">
                     <div class="col-md-4 col-4"></div>
@@ -480,33 +478,31 @@
         $("#ctl18_ctl00_ordInfo1_lblFullPremium").text('$' + obj.Totalprice)
         $("#ctl18_ctl00_ordInfo1_lblTotalPremium").text('$' + obj.Totalprice)
         $(".tt").text('$' + obj.Totalprice)
-
-        $('#ctl18_ctl00_ordInfo1_lblProductName').text(obj.packageName);
         var a = 0
         $.each(obj.items, function (key, value) {
             a++
-            var html = `
-                                                    < tr >
-                                                        <td>${a}</td>
-                                                    <td>${value.insuranpackageName}</td>
-                                                    <td>${value.DateOfbirth}</td>
-                                                    <td>${value.Name} </td>
+            $('#ctl18_ctl00_ordInfo1_lblProductName').append(value.packageName);
+
+            var html = `          < tr >
+                                                        <td class="text-center align-middle">${a}</td>
+                                                    <td class="text-center align-middle">${value.insuranpackageName}</td>
+                                                    <td class="text-center align-middle">${value.DateOfbirth}</td>
+                                                    <td class="text-center align-middle">${value.Name} </td>
                                                         <td>${value.programname} </td>
 
 
-                                                        <td>${value.Address}</td>
-                   <td>
-                                                            <div align="right">
-                                                                ${value.PhoneNumber}
-                                                            </div>
+                                                        <td class="text-center align-middle">${value.Address}</td>
+                   <td class="text-center align-middle">
+                                                      
+                                                                ${value.Gender}
+                                                         
                                                         </td>
-                  <td>${value.Email}</td>
-                                                        <td>
-                                                            ${value.unitprice}
+                                                        <td class="text-center align-middle">
+                                                          $${value.unitprice}
                                                         </td>
 
                                                           </tr >`
-            $('.tr').append(html)
+            $('.tb').append('<tr>'+html+"</tr>")
         })
 
         $('#order').click(function () {
