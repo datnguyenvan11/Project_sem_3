@@ -3,6 +3,8 @@ using Project_sem_3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -61,6 +63,67 @@ namespace Project_sem_3.Controllers
             var transaction = db.Database.BeginTransaction();
             try
             {
+                var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                var receivermail = new MailAddress(em.Email, "Insurance Company");
+                var passwordemail = "vtacl123";
+                var subject = "Notification Order";
+                string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                    "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                    "<style> p {font-size: 18px}</style>"
+                    ;
+                body += "<p>" + "Your order information is : " + "</p>"
+                 + "<p>" + "Name Insurance : LifeInsurance</p>"
+                 + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                "<br>";
+                body += "</HEAD><BODY>" +
+                    "<tr>" +
+                    "<th>Package Insurance</th>" +
+                    "<th>Name</th>" +
+                    "<th>PhoneNumber</th>" +
+                    "<th>Email</th>" +
+                    "<th>Address</th>" +
+                    "<th>IdentityCard</th>" +
+                    "<th>DateOfIdentityCard</th>" +
+                    "<th>PlaceOfIdentityCard</th>" +
+                    "<th>Job</th>" +
+                    "<th>Quantity</th>" +
+                    "<th>UnitPrice</th>" +
+                    "</tr>";
+                    body +=
+                        "<tr>" +
+                        "<td>" + insurancepackage.Name + "</td>" +
+                        "<td>" + name + "</td>" +
+                        "<td>" + phone + "</td>" +
+                        "<td>" + email + "</td>" +
+                        "<td>" + address + "</td>" +
+                        "<td>" + IdentityCard + "</td>" +
+                        "<td>" + Date_Iden + "</td>" +
+                        "<td>" + Place_Iden + "</td>" +
+                        "<td>" + Job + "</td>" +
+                        "<td>" + 1 + "</td>" +
+                        "<td>" + insurancepackage.Price + "</td>" +
+                        "</tr>";
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    EnableSsl = true,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                };
+                using (var mess = new MailMessage(senderemail, receivermail)
+                {
+                    IsBodyHtml = true,
+                    Subject = subject,
+                    Body = body
+                }
+                )
+                {
+                    smtp.Send(mess);
+                };
                 transaction.Commit();
             }
             catch (Exception e)

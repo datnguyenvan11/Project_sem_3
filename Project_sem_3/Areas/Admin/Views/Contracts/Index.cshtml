@@ -174,9 +174,8 @@
                                                     <div class="form-group mr-3">
                                                         <select class="form-control mr-2" id="select-action">
                                                             <option value="6">--Chọn thao tác--</option>
-                                                            <option value="0" onclick="SendEmail()">Confirmed</option>
+                                                            <option value="0">Confirmed</option>
                                                             <option value="-1">Deleted</option>
-                                                            @*<option value="1">Pending</option>*@
                                                             <option value="2">Pay</option>
                                                             <option value="3">Done</option>
                                                             <option value="4">All</option>
@@ -208,8 +207,7 @@
                         </div>
 
                     </div>
-                    <!-- /.container-fluid -->
-                </div>                <!-- End of Main Content -->
+                </div>                
 
 
                 @section Scripts{
@@ -219,13 +217,13 @@
                     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
                     <script type="text/javascript">
                         $(function () {
+                            var startDate, endDate;
                             var start = moment().subtract(29, 'days');
                             var end = moment();
 
                             function cb(start, end) {
                                 $('#reportrange span').html(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'));
                             }
-
                             $('#reportrange').daterangepicker({
                                 startDate: start,
                                 endDate: end,
@@ -238,19 +236,16 @@
                                     ]
                                 },
                                 "firstDay": 1
-                            },
-                                cb);
+                            },cb);
                             cb(start, end);
-                            $('#reportrange').on('cancel.daterangepicker',
-                                function (ev, picker) {
+                            $('#reportrange').on('cancel.daterangepicker',function (ev, picker) {
                                     $('#reportrange').val('');
                                 });
                             $('#reportrange').on('apply.daterangepicker',
                                 function (ev, picker) {
-                                    var startDate = picker.startDate.format('YYYY-MM-DD');
-                                    var endDate = picker.endDate.format('YYYY-MM-DD');
+                                     startDate = picker.startDate.format('YYYY-MM-DD');
+                                     endDate = picker.endDate.format('YYYY-MM-DD');
                                     var listcontracts = $('select#listcontracts option:checked').val();
-                                    var currLoc = $(location).attr('href');
                                     window.location.href = window.location.href.split('?')[0] +
                                         '?listcontracts=' +
                                         listcontracts +
@@ -312,15 +307,6 @@
                             }
                         
                         });
-                        var SendEmail = function () {
-                            $.ajax({
-                                type: "Post",
-                                url: "/Admin/Contracts/SendMailToUser",
-                                success: function (data) {
-                                    alert("Success");
-                                }
-                            });
-                        }
 
                         function changeStatusPTTime(selectedIDs, action) {
                             $.ajax({
