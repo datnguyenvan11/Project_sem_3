@@ -818,7 +818,7 @@
                                                         <div _ngcontent-c5="" class="col-xs-8">
                                                             <p _ngcontent-c5="" class="item-value" style="color: black;">
 
-                                                                <span _ngcontent-c5="" style="font-weight: bold;background: white;">@item.Description<span _ngcontent-c5="" class="new-line" style="background: white;">@Html.Raw(HttpUtility.HtmlDecode(item.Description))</span>
+                                                                <span _ngcontent-c5="" style="font-weight: bold;background: white;">@Html.Raw(HttpUtility.HtmlDecode(item.Description))</span>
                                                             </p>
 
                                                         </div>
@@ -846,72 +846,74 @@
                             </div>
                         }
                     </div>
+
+
+                    <div style="margin-top:6%" class="hd-info-pro">ENTER THE INSURED'S INFORMATION TO CHARGE</div>
+                    <input class="price_packageInsurance" value=" @ViewBag.Price" type="hidden" />
+
+                    <div id="ctl18_DivOption2">
+                        <table class="table2 table table-bordered table-hover table-donhang table-responsive-lg" style="width:100%">
+                            <thead>
+                                <tr>
+
+                                    @*<th class="text-center align-middle" style="width:5%" scope="col">No.</th>*@
+                                    <th class="text-center align-middle" scope="col">Date of birth</th>
+                                    <th class="text-center align-middle" scope="col">Programme</th>
+                                    <th class="text-center align-middle" scope="col">Name</th>
+                                    <th class="text-center align-middle" scope="col">Address</th>
+                                    <th class="text-center align-middle" scope="col">Gender</th>
+                                    <th class="text-center align-middle" scope="col">Price</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @Html.AntiForgeryToken()
+
+                                <tr class="tr">
+                                    <td class="align-middle pos-re">
+                                        <input name="dateofbirth " type="datetime" class="dateofbirth form-control txt birthDay2" readonly="readonly"  style="background-color:none!important"/>
+                                    </td>
+                                    <td class="align-middle">
+                                        <select name="programme" class="custom-select program-selecter" id="program-selecter-1" onchange="CalPHAPremium(1)">
+                                            <option value="0">Choose a program</option>";
+                                        </select>
+                                    </td>
+                                    <td class="align-middle">
+                                        <input type="text" name="Name" class="Name form-control" value="" />
+                                    </td>
+                                    
+                                    <td class="align-middle">
+                                        <input type="text" name="PhoneNumber" class="Address form-control" value="" />
+                                    </td>
+                                    <td class="align-middle">
+                                        <div class="form-group">
+                                            <select class="form-control Gender" name="Gender" id="sel1">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>                                    
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <div class="price-pro"><div name="ctl18$rptPHA1$ctl00$txtPremium_" type="text" value="0" id="displayprice-1" class="total form-control txt text-right" </div>$</div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                            <th colspan="8" style="cursor:pointer;padding:0" class="text-center " id="click">
+                                <span id="validation" style="   margin-top: 8px; margin-left: 1%; float: left; color: red;width: 15%;"></span><img src="https://cdn2.iconfinder.com/data/icons/thin-line-color-1/21/42_1-512.png" id="img" style="    margin-right: 16%;" width="40px" height="40px" alt="plus" />
+                            </th>
+
+
+                        </table>
+
+                        <i>
+                            (Date of birth in correct format: day / month / year, age: enter age from 1 to 65 years old)
+                        </i>
+                        <div class="c5"></div>
+                        <i>(Maternity extension is only applicable to customers from 19 to 45 years of age and participating in the Premium Plus package) </i>
+                        <div class="c5"></div>
+                    </div>
                 </div>
-
-                <div class="hd-info-pro">ENTER THE INSURED'S INFORMATION TO CHARGE</div>
-                <input class="price_packageInsurance" value=" @ViewBag.Price" type="hidden" />
-
-                <div id="ctl18_DivOption2">
-                    <table class="table2 table table-bordered table-hover table-donhang table-responsive-lg" style="width:100%">
-                        <thead>
-                            <tr>
-
-                                @*<th class="text-center align-middle" style="width:5%" scope="col">No.</th>*@
-                                <th class="text-center align-middle" scope="col">Date of birth</th>
-                                <th class="text-center align-middle" scope="col">Programme</th>
-                                <th class="text-center align-middle" scope="col">Name</th>
-                                <th class="text-center align-middle" scope="col">Email</th>
-                                <th class="text-center align-middle" scope="col">Address</th>
-                                <th class="text-center align-middle" scope="col">PhoneNumber</th>
-                                <th class="text-center align-middle" scope="col">Price</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @Html.AntiForgeryToken()
-
-                            <tr class="tr">
-                                <td class="align-middle pos-re">
-                                    <input name="dateofbirth" type="datetime" class="dateofbirth form-control txt birthDay2" />
-                                </td>
-                                <td class="align-middle">
-                                    <select name="programme" class="custom-select program-selecter" id="program-selecter-1" onchange="CalPHAPremium(1)">
-                                        <option value="0">Choose a program</option>";
-                                    </select>
-                                </td>
-                                <td class="align-middle">
-                                    <input type="text" name="Name" class="Name form-control" value="" />
-                                </td>
-                                <td class="align-middle">
-                                    <input type="text" name="Email" class="Email form-control" value="" />
-                                </td>
-                                <td class="align-middle">
-                                    <input type="text" name="PhoneNumber" class="Address form-control" value="" />
-                                </td>
-                                <td class="align-middle">
-                                    <input type="text" name="PhoneNumber" class="Phone form-control" value="" />
-                                </td>
-                                <td class="text-center align-middle">
-                                    <div class="price-pro"><div name="ctl18$rptPHA1$ctl00$txtPremium_" type="text" value="0" id="displayprice-1" class="total form-control txt text-right" </div>$</div>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                        <th colspan="8" style="cursor:pointer;padding:0" class="text-center " id="click">
-                            <span id="validation" style="   margin-top: 8px; margin-left: 1%; float: left; color: red;width: 15%;"></span><img src="https://cdn2.iconfinder.com/data/icons/thin-line-color-1/21/42_1-512.png" id="img" style="    margin-right: 16%;" width="40px" height="40px" alt="plus" />
-                        </th>
-
-
-                    </table>
-
-                    <i>
-                        (Date of birth in correct format: day / month / year, age: enter age from 1 to 65 years old)
-                    </i>
-                    <div class="c5"></div>
-                    <i>(Maternity extension is only applicable to customers from 19 to 45 years of age and participating in the Premium Plus package) </i>
-                    <div class="c5"></div>
-                </div>
-
                 <div class="text-center mr-top-20">
                     <strong>Total net charge (VAT exempt):</strong>
                     <p class="price-sum"><span id="ctl18_lblTotalPremiumPaid"></span>$ 0 </p>
@@ -972,6 +974,8 @@
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
+        document.getElementsByClassName("dateofbirth").disabled = true;
+
         $('input[type=datetime]').datepicker({
             dateFormat: 'yy-mm-dd',
             changeMonth: true,
@@ -990,7 +994,7 @@
                 }
                 else {
                     $('input[type=datetime]').val(null);
-                    $("#validation").text("* phai lon hon 1")
+                    $("#validation").text("* Must be older than 1 year old")
                     $("#img").css("margin-right", "21%")
                 }
             }
@@ -1045,7 +1049,13 @@
                 }
             });
         })
+        function deleted(i) {
+            var pricedelete = $('#displayprice-' + i).text().replace("$","")
+            totalprice = totalprice - parseInt(pricedelete)
+             $(".price-sum").text('$' + totalprice);
+             $(`#trid-${i}`).remove();
 
+        }
 
 
 
@@ -1070,11 +1080,10 @@
             'items': []
         };
         var prices = [];
-        var emails = [];
+        var genders = [];
         var selectprogram = [];
         var dateofbirths = [];
         var names = [];
-        var phones = [];
         var programnemname = [];
         var address = [];
         function getdata() {
@@ -1087,7 +1096,6 @@
                 }
                 else {
                     check = true
-                    phones.push($(this).val());
                     selectprogram.push($(this).val());
                     var unitprice = parseInt($(this).attr("class")) + parseInt(insuranpackageId)
                     prices.push(unitprice);
@@ -1095,21 +1103,7 @@
                 }
             });
 
-            $(".Email").each(function () {
-
-                if ($(this).val() == '') {
-                    console.log("err")
-                    return check;
-                }
-                else {
-                    check = true
-
-                    emails.push($(this).val());
-                }
-
-
-
-            });
+           
             $(".Address").each(function () {
                 if ($(this).val() == '') {
                     console.log("err")
@@ -1134,17 +1128,17 @@
                 }
             });
 
-            $(".Phone").each(function () {
+            $.each($(".Gender option:selected"), function () {
                 if ($(this).val() == '') {
                     console.log("err")
                     return check;
                 }
                 else {
                     check = true
-                    phones.push($(this).val());
+                    genders.push($(this).val());
+                   
                 }
             });
-
             $(".dateofbirth").each(function () {
                 dateofbirths.push($(this).val());
             });
@@ -1164,9 +1158,8 @@
                     'DateOfbirth': dateofbirths[i],
                     'Programmeid': selectprogram[i],
                     'Name': names[i],
-                    'Email': emails[i],
+                    'Gender': genders[i],
                     'Address': address[i],
-                    'PhoneNumber': phones[i]
                 };
 
 
@@ -1179,9 +1172,8 @@
                         typeof names[i] !== 'undefined' && names[i] != ""
                         && typeof selectprogram[i] !== 'undefined' && selectprogram[i] != ""
                         && typeof dateofbirths[i] !== 'undefined' && dateofbirths[i] != ""
-                        && typeof emails[i] !== 'undefined' && emails[i] != ""
+                        && typeof genders[i] !== 'undefined' && genders[i] != ""
                         && typeof address[i] !== 'undefined' && address[i] != ""
-                        && typeof phones[i] !== 'undefined' && phones[i] != ""
                     ) {
                         sessionStorage.setItem('medical', JSON.stringify(objects));
                         window.location.href = "/Contract/Index"
@@ -1240,15 +1232,18 @@
                                                                                                                                                                                          <td class="align-middle">
                                                                                                                                                                                                                         <input type="text" name="Name" class="Name form-control" value="" />
                                                                                                                                                                                                                     </td>
-                                                                                                                                                                                                                    <td class="align-middle">
-                                                                                                                                                                                                                        <input type="text" name="Email" class="Email form-control" value="" />
-                                                                                                                                                                                                                    </td>
+                                                                                                                                                                                                                  
                                                                                                                                                         <td class="align-middle">
                                                                                                                                                                                         <input type="text" name="PhoneNumber" class="Address form-control" value="" />
                                                                                                                                                                                     </td>
                                                                                                                                                                                                                     <td class="align-middle">
-                                                                                                                                                                                                                        <input type="text" name="PhoneNumber" class="Phone form-control" value="" />
-                                                                                                                                                                                                                    </td>
+                                        <div class="form-group">
+                                            <select class="form-control Gender" name"Gender" id="sel1">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>                                    
+                                    </td>                                                                                                                                                                                                                    </td>
                                                                                                                                                                                                                     <td class="text-center align-middle">
                                                                                                                                                                                                                         <div class="price-pro"><div name="ctl18$rptPHA1$ctl00$txtPremium_" type="text" value="0" id="displayprice-${index}" class="total form-control txt text-right" </div></div>
                                                                                                                                                                                                             </td >
@@ -1268,9 +1263,7 @@
 
         })
 
-        function deleted(i) {
-            $(`#trid-${i}`).remove();
-        }
+       
 
         $(document).ready(function () {
             $.getJSON("/MedicalInsurance/ViewProgramme",
@@ -1320,6 +1313,10 @@
 
 
 <style>
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+   background-color: white !important;
+}
     a {
         text-decoration: none;
         transition: all 0.15s ease-in-out;
