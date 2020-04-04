@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,7 +14,6 @@ namespace Project_sem_3.Controllers
     public class MotorInsuranceController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: MotorInsurance
         public ActionResult Index()
         {
@@ -26,33 +27,20 @@ namespace Project_sem_3.Controllers
             return View();
         }
         private static string SHOPPING_CART_NAME = "shoppingCart";
-        // GET: ShoppingCart
-
-        //public ActionResult Add()
-        //{
-
-        //var insurancePackages = db.InsurancePackages.Where(i=>i.InsuranceId==2);
-        //return View(insurancePackages);
-        //}
         public ActionResult AddCart(int insurancePackageId, int quantity, string CarOwner, string RegisteredAddress, string LicensePlate, string ChassisNumber, DateTime Duration)
         {
 
-            // Check số lượng có hợp lệ không?
             if (quantity <= 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Invalid Quantity");
             }
-            // Check sản phẩm có hợp lệ không?
             var insurancePackage = db.InsurancePackages.Find(insurancePackageId);
             if (insurancePackage == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound, "Product's' not found");
             }
-            // Lấy thông tin shopping cart từ session.
             var sc = LoadShoppingCart();
-            // Thêm sản phẩm vào shopping cart.
             sc.AddCart(insurancePackage, quantity, CarOwner, RegisteredAddress, LicensePlate, ChassisNumber, Duration);
-            // lưu thông tin cart vào session.
             SaveShoppingCart(sc);
             return Redirect("/MotorInsurance/Order");
         }
@@ -60,24 +48,19 @@ namespace Project_sem_3.Controllers
 
         public ActionResult RemoveCart(string LicensePlate)
         {
-            // Lấy thông tin shopping cart từ session.
             var sc = LoadShoppingCart();
-            // Thêm sản phẩm vào shopping cart.
             sc.RemoveFromCart(LicensePlate);
-            // lưu thông tin cart vào session.
             SaveShoppingCart(sc);
             return Redirect("/MotorInsurance/Order");
         }
         [HttpGet]
         public ActionResult CreateContract()
         {
-            // load cart trong session.
             var shoppingCart = LoadShoppingCart();
             if (shoppingCart.GetCartItems().Count <= 0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "Bad request");
             }
-            // chuyển thông tin shopping cart thành Order.
             var contract = new Contract
             {
                 TotalPrice = shoppingCart.GetTotalPrice(),
@@ -85,10 +68,10 @@ namespace Project_sem_3.Controllers
                 InsuranceId = 3,
                 MotorInsurances = new List<MotorInsurance>()
             };
-
+            var mt = db.MotorInsurances.ToList();
             foreach (var cartItem in shoppingCart.GetCartItems())
             {
-                var motorinsurance = new MotorInsurance()
+                var motorInsurance = new MotorInsurance()
                 {
                     InsurancePackageId = cartItem.Value.InsurancePackageId,
                     RegisteredAddress = cartItem.Value.RegisteredAddress,
@@ -100,17 +83,73 @@ namespace Project_sem_3.Controllers
                     Quantity = cartItem.Value.Quantity,
                     UnitPrice = cartItem.Value.Price
                 };
-                contract.MotorInsurances.Add(motorinsurance);
+                contract.MotorInsurances.Add(motorInsurance);
                 db.Contracts.Add(contract);
             }
-
             db.SaveChanges();
-            ClearCart();
             // lưu vào database.
             var transaction = db.Database.BeginTransaction();
             try
             {
-
+                var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                var receivermail = new MailAddress(em.Email, "Insurance Company");
+                var passwordemail = "vtacl123";
+                var subject = "Notification Order";
+                string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">"+
+                    "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                    "<style> p {font-size: 18px}</style>"
+                    ;
+                body += "<p>" + "Your order information." + "</p>" 
+                 + "<p>" + "Name Insurance : MotorInsurance</p>" 
+                 + "<p>"+"Total Price :" + contract.TotalPrice + "$"+"</p>" +
+                "<br>";
+                body += "</HEAD><BODY>"+
+                    "<tr>" +
+                    "<th>Package Insurance</th>" +
+                    "<th>RegisteredAddress</th>" +
+                    "<th>CarOwner</th>" +
+                    "<th>ChassisNumber</th>" +
+                    "<th>LicensePlate</th>" +
+                    "<th>Duration</th>" +
+                    "<th>Quantity</th>" +
+                    "<th>UnitPrice</th>" +
+                    "</tr>";
+                foreach (var item in shoppingCart.GetCartItems())
+                {
+                    body +=
+                        "<tr>" +
+                        "<td>" + item.Value.InsurancePackageName + "</td>" +
+                        "<td>" + item.Value.RegisteredAddress + "</td>" +
+                        "<td>" + item.Value.CarOwner + "</td>" +
+                        "<td>" + item.Value.ChassisNumber + "</td>" +
+                        "<td>" + item.Value.LicensePlate + "</td>" +
+                        "<td>" + item.Value.Duration + "</td>" +
+                        "<td>" + item.Value.Quantity + "</td>" +
+                        "<td>" + item.Value.Price + "</td>" +
+                        "</tr>";
+                }
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    EnableSsl = true,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                };
+                using (var mess = new MailMessage(senderemail, receivermail)
+                {
+                    IsBodyHtml = true,
+                    Subject = subject,
+                    Body = body
+                }
+                )
+                {
+                    smtp.Send(mess);
+                };
+                ClearCart();
                 transaction.Commit();
             }
             catch (Exception e)
@@ -126,22 +165,12 @@ namespace Project_sem_3.Controllers
             Session.Remove(SHOPPING_CART_NAME);
         }
 
-        /**
-         * Tham số nhận vào là một đối tượng shopping cart.
-         * Hàm sẽ lưu đối tượng vào session với key được define từ trước.
-         */
         private void SaveShoppingCart(MotorShopingCart shoppingCart)
         {
             Session[SHOPPING_CART_NAME] = shoppingCart;
         }
-
-        /**
-         * Lấy thông tin shopping cart từ trong session ra. Trong trường hợp không tồn tại
-         * trong session thì tạo mới đối tượng shopping cart.
-         */
         private MotorShopingCart LoadShoppingCart()
         {
-            // lấy thông tin giỏ hàng ra.
             if (!(Session[SHOPPING_CART_NAME] is MotorShopingCart sc))
             {
                 sc = new MotorShopingCart();

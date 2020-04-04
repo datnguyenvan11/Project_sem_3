@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Project_sem_3.App_Start;
 using Project_sem_3.Models;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -13,6 +17,7 @@ namespace Project_sem_3.Controllers
     public class MedicalInsuranceController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: MedicalInsurance
         public ActionResult Information()
         {
@@ -70,14 +75,69 @@ namespace Project_sem_3.Controllers
                 contract.MedicalInsurances.Add(medicalinsurace);
                 db.Contracts.Add(contract);
             }
-
             db.SaveChanges();
-
-            // lưu vào database.
             var transaction = db.Database.BeginTransaction();
             try
             {
-
+                var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                var receivermail = new MailAddress(em.Email, "Insurance Company");
+                var passwordemail = "vtacl123";
+                var subject = "Notification Order";
+                string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                    "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                    "<style> p {font-size: 18px}</style>"
+                    ;
+                body += "<p>" + "Your order information is : " + "</p>"
+                 + "<p>" + "Name Insurance : MedicalInsurance</p>"
+                 + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                "<br>";
+                body += "</HEAD><BODY>" +
+                    "<tr>" +
+                    "<th>Package Insurance</th>" +
+                    "<th>Name</th>" +
+                    "<th>PhoneNumber</th>" +
+                    "<th>Email</th>" +
+                    "<th>Address</th>" +
+                    "<th>Quantity</th>" +
+                    "<th>UnitPrice</th>" +
+                    "<th>DateOfBirth</th>" +
+                    "</tr>";
+                foreach (var data in medical.items)
+                {
+                    var a = db.InsurancePackages.Find(data.InsurancePackageId);
+                    body +=
+                        "<tr>" +
+                        "<td>" + a.Name + "</td>" +
+                        "<td>" + data.Name + "</td>" +
+                        "<td>" + data.PhoneNumber + "</td>" +
+                        "<td>" + data.Email + "</td>" +
+                        "<td>" + data.Address + "</td>" +
+                        "<td>" + 1 + "</td>" +
+                        "<td>" + data.unitprice + "</td>" +
+                        "<td>" + data.DateOfbirth + "</td>" +
+                        "</tr>";
+                }
+                var smtp = new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    EnableSsl = true,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                };
+                using (var mess = new MailMessage(senderemail, receivermail)
+                {
+                    IsBodyHtml = true,
+                    Subject = subject,
+                    Body = body
+                }
+                )
+                {
+                    smtp.Send(mess);
+                };
                 transaction.Commit();
             }
             catch (Exception e)
