@@ -12,76 +12,76 @@
 
 </section>
 
+<form action="#" id="formDemo" class="form-order-life-insurance bg-light">
 
-<div class="container1" style="margin-left:10%;margin-right:10%;margin-top:7% ;margin-bottom:7%">
-    <div class="hd-info-pro">
-        PLEASE ENTER iNFORMATION
-    </div>
-    <div _ngcontent-c5="" class="row">
-        @foreach (var item in ViewBag.insurancepackages)
-        {
-            <div _ngcontent-c5="" class="col-md-6" style="margin-top:30px">
-                <div _ngcontent-c5="" class="benefit-item benefit-item-description-table">
-                    <div _ngcontent-c5="" class="benefit-item-main">
-                        <div _ngcontent-c5="" class="benefit-icon">
-                            <i _ngcontent-c5="" class="icon icon-benefit icon-benefit-shield"></i>
-                        </div>
-                        <div _ngcontent-c5="" class="benefit-image full-cover" style="background-image: url('https://ngocdiep.vn/uploads/images/img-5787-rs(1).jpg')">
-                            <div _ngcontent-c5="" class="benefit-name-wrapper v-middle">
-                                <h2 _ngcontent-c5="" class="benefit-name">
-                                    <div _ngcontent-c5="" class="app-checkbox agree-with-term">
-                                        <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="closeForm();" name="insurancePackageId" required /></label>                                                           @*<input _ngcontent-c5="" id="choose1" name="choose1" type="checkbox"> <label _ngcontent-c5="" for="choose1">*@
-                                        <span _ngcontent-c5="" class="checkout-term">@item.Name</span>
-
-                                    </div>
-                                </h2>
+    <div class="container1" style="margin-left:10%;margin-right:10%;margin-top:7% ;margin-bottom:7%">
+        <div class="hd-info-pro">
+            PLEASE ENTER iNFORMATION
+        </div>
+        <div _ngcontent-c5="" class="row">
+            @foreach (var item in ViewBag.insurancepackages)
+            {
+                <div _ngcontent-c5="" class="col-md-6" style="margin-top:30px">
+                    <div _ngcontent-c5="" class="benefit-item benefit-item-description-table">
+                        <div _ngcontent-c5="" class="benefit-item-main">
+                            <div _ngcontent-c5="" class="benefit-icon">
+                                <i _ngcontent-c5="" class="icon icon-benefit icon-benefit-shield"></i>
                             </div>
-                        </div>
-                        <div _ngcontent-c5="" class="benefit-body">
-                            <div _ngcontent-c5="" class="benefit-description-table">
-                                <div _ngcontent-c5="" class="table-head">
-                                    <div _ngcontent-c5="" class="row item">
-                                        <div _ngcontent-c5="" class="col-xs-4">
-                                            <p _ngcontent-c5="" class="item-name">
-                                                <span _ngcontent-c5="">
-                                                    Description
-                                                </span>
-                                            </p>
+                            <div _ngcontent-c5="" class="benefit-image full-cover" style="background-image: url('https://ngocdiep.vn/uploads/images/img-5787-rs(1).jpg')">
+                                <div _ngcontent-c5="" class="benefit-name-wrapper v-middle">
+                                    <h2 _ngcontent-c5="" class="benefit-name">
+                                        <div _ngcontent-c5="" class="app-checkbox agree-with-term">
+                                            <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="closeForm();" name="insurancePackageId"  /></label>                                                           @*<input _ngcontent-c5="" id="choose1" name="choose1" type="checkbox"> <label _ngcontent-c5="" for="choose1">*@
+                                            <span _ngcontent-c5="" class="checkout-term">@item.Name</span>
+
                                         </div>
-                                        <div _ngcontent-c5="" class="col-xs-8">
-                                            <p _ngcontent-c5="" class="item-value" style="color: black;">
-                                                <span _ngcontent-c5="" style="font-weight: bold;background: white;">@Html.Raw(HttpUtility.HtmlDecode(item.Description))</span>
-</p>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div _ngcontent-c5="" class="benefit-body">
+                                <div _ngcontent-c5="" class="benefit-description-table">
+                                    <div _ngcontent-c5="" class="table-head">
+                                        <div _ngcontent-c5="" class="row item">
+                                            <div _ngcontent-c5="" class="col-xs-4">
+                                                <p _ngcontent-c5="" class="item-name">
+                                                    <span _ngcontent-c5="">
+                                                        Description
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div _ngcontent-c5="" class="col-xs-8">
+                                                <p _ngcontent-c5="" class="item-value" style="color: black;">
+                                                    <span _ngcontent-c5="" style="font-weight: bold;background: white;">@Html.Raw(HttpUtility.HtmlDecode(item.Description))</span>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div _ngcontent-c5="" class="table-head">
-                                    <div _ngcontent-c5="" class="row item">
-                                        <div _ngcontent-c5="" class="col-xs-4">
-                                            <p _ngcontent-c5="" class="item-name">
-                                                <span _ngcontent-c5="">Charges</span>
-                                            </p>
-                                        </div>
-                                        <div _ngcontent-c5="" class="col-xs-8">
-                                            <p _ngcontent-c5="" class="item-value">
-                                                <span _ngcontent-c5="" style="font-weight: bold;background: white;">$@item.Price/year</span>
-                                            </p>
+                                    <div _ngcontent-c5="" class="table-head">
+                                        <div _ngcontent-c5="" class="row item">
+                                            <div _ngcontent-c5="" class="col-xs-4">
+                                                <p _ngcontent-c5="" class="item-name">
+                                                    <span _ngcontent-c5="">Charges</span>
+                                                </p>
+                                            </div>
+                                            <div _ngcontent-c5="" class="col-xs-8">
+                                                <p _ngcontent-c5="" class="item-value">
+                                                    <span _ngcontent-c5="" style="font-weight: bold;background: white;">$@item.Price/year</span>
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
-        }
-    </div>
-    @*<form action="/HomeInsurance/CreateContract"  method="get">*@
-    <div class="form-group" style="margin-top:3%" id="divnone">
-        <h4>Enter the information on the vehicle registration</h4>
-    </div>
-    <form action="#" id="formDemo" class="form-order-life-insurance bg-light">
+                </div>
+            }
+        </div>
+        @*<form action="/HomeInsurance/CreateContract"  method="get">*@
+        <div class="form-group" style="margin-top:3%" id="divnone">
+            <h4>Enter the information on the vehicle registration</h4>
+        </div>
         <div class="row">
             <div class="form-basic-information">
                 <div style="padding: 12px 24px" class="row col-lg-9 col-md-8 col-sm-12">
@@ -177,7 +177,7 @@
 
                     <div class="form-group col-md-7">
                         <label class="col-form-label">PhoneNumber</label>
-                        <input type="password" class="form-control" id="exampleInputPhoneNumber" autocomplete="off" placeholder="PhoneNumber">
+                        <input type="text" class="form-control" id="exampleInputPhoneNumber" autocomplete="off" placeholder="PhoneNumber">
                     </div>
 
                     <div class="form-group col-md-5">
@@ -215,13 +215,13 @@
                     </div>
                     <div class="form-group col-md-5">
                         <label class="col-form-label">Marital Status</label>
-                        <select id="job" name="Job" required="" class="form-control form-control-long default ng-pristine ng-valid ng-touched">
+                        <select id="job" name="MaritalStatus" required="" class="form-control form-control-long default ng-pristine ng-valid ng-touched">
                             @*<input type="text" name="MaritalStatus" class="form-control" id="marital" autocomplete="off" placeholder="MaritalStatus">*@
                             <option disabled="" selected="" value="">Marital Status</option>
                             <!---->
                             <option value="1">đã kết hôn </option>
                             <option value="2"> chưa kết hôn </option>
-                           
+
                         </select>
                     </div>
 
@@ -271,7 +271,7 @@
 
                             <strong><label for="ctl18_Promotions1_lblHasToPayPremium" id="ctl18_Promotions1_lblHasToPayPremium">$0</label></strong>
                         </div>
-                        <input id="ctl18_lbtBook" style="text-decoration:none" type="submit" value="Order" class="btn-pro-buynow" href="/HouseInsurance/CreateContract" />
+                        <input id="ctl18_lbtBook" style="text-decoration:none" type="submit" value="Order" class="btn-pro-buynow" formmethod="post" formaction="/LifeInsurance/CreateContract" />
                         @*<input type="submit" name="submit" value="submit" class="btn btn-success" />*@
                     </div>
                 </div>
@@ -286,9 +286,9 @@
                 <div class="cotent-text"> If you agree to order, please click <b>[Continue]</b> to move to the next order. </div>
             </div>
         </div>
-    </form>
 
-</div>
+    </div>
+</form>
 
 
 <style>
@@ -300,7 +300,7 @@
 
 
 
-      .subslide {
+    .subslide {
         max-width: fit-content;
         position: relative;
         margin: auto;
@@ -806,11 +806,11 @@
             font-weight: normal;
             font-size: 20px;
         }
-        .error{
-            color:red;
-            font-size:13px
-                
-        }
+
+    .error {
+        color: red;
+        font-size: 13px
+    }
 
 
 
@@ -836,16 +836,17 @@
             display: flex;
         }*/
 
-            .form-order-life-insurance .form-group label {
-                line-height: 36px;
-                min-width: 100px;
-                font-size: 14px;
-                text-align: end;
-                margin-right: 8px;
-            }
-            label.error{
-                color:red;
-            }
+        .form-order-life-insurance .form-group label {
+            line-height: 36px;
+            min-width: 100px;
+            font-size: 14px;
+            text-align: end;
+            margin-right: 8px;
+        }
+
+    label.error {
+        color: red;
+    }
 
     .my_date_picker {
         position: relative;
@@ -1159,8 +1160,8 @@
         border: solid 2px #c8c8c8;
     }
 
-    .form-control{
-            height: 45px;
+    .form-control {
+        height: 45px;
     }
 
     .frm .form-control {
@@ -1224,18 +1225,18 @@
             $('#date_iden').datepicker()
 
             $("input[name=insurancePackageId]")
-            .change(function () { 
-                if ($(this).is(":checked")) { 
-                    var val = $(this).attr("class"); 
-                    var valint = parseInt(val)
-                    var ttt = valint.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+                .change(function () {
+                    if ($(this).is(":checked")) {
+                        var val = $(this).attr("class");
+                        var valint = parseInt(val)
+                        var ttt = valint.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
 
-                    $('#ctl18_Promotions1_lblHasToPayPremium').text(ttt)
-                     $('html, body').animate({
-                        scrollTop: $("#divnone").offset().top
-                    }, 2000);
-                }
-            });
+                        $('#ctl18_Promotions1_lblHasToPayPremium').text(ttt)
+                        $('html, body').animate({
+                            scrollTop: $("#divnone").offset().top
+                        }, 2000);
+                    }
+                });
             $("#formDemo").validate({
                 rules: {
 
@@ -1265,7 +1266,7 @@
                     MaritalStatus: "Please enter Marital Status",
                     Date_Iden: "Please enter date_iden ",
                     email: "Please enter a valid email address",
-                   
+
                     name: {
                         required: "Please enter a valid name",
                         minlength: "Your name is too short, please enter again"
@@ -1281,10 +1282,10 @@
                     Job: "Please enter a valid job",
                 }
             })
-           
-            
+
+
         });
-         
+
 
     </script>
 
