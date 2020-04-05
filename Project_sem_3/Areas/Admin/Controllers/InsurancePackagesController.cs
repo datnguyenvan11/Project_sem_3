@@ -14,6 +14,8 @@ using System.Threading;
 
 namespace Project_sem_3.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class InsurancePackagesController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

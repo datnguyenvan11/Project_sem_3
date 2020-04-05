@@ -12,6 +12,8 @@ using Project_sem_3.Models;
 
 namespace Project_sem_3.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class InsurancesController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

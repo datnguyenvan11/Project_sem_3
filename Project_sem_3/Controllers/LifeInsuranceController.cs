@@ -24,7 +24,9 @@ namespace Project_sem_3.Controllers
             ViewBag.insurancepackages = insurancePackages;
             return View();
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
+
         public ActionResult CreateContract(int InsurancePackageId, string name, string email, string address, DateTime Date_Iden, string Place_Iden, string phone, string Job, string IdentityCard, string MaritalStatus)
         {
             var insurancepackage = db.InsurancePackages.Find(InsurancePackageId);
