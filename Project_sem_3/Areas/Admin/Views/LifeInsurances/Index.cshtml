@@ -5,95 +5,200 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<!-- Custom styles for this page -->
+<link href="/Assets/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="/Areas/Admin/Assets/css/custom.css" rel="stylesheet">
+<!-- Main Content -->
+<div id="content">
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Contract.ApplicationUserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.InsurancePackage.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdentityCard)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateOfIdentityCard)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PlaceOfIdentityCard)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Job)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaritalStatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Quantity)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UnitPrice)
-        </th>
-        <th></th>
-    </tr>
+        <!-- Page Heading -->
+        @*<h1 class="h3 mb-2 text-gray-800">Contracts</h1>
+            <p class="mb-4"> All contracts of customers about insurances .</p>*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Contract.ApplicationUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InsurancePackage.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdentityCard)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfIdentityCard)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlaceOfIdentityCard)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Job)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaritalStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Quantity)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UnitPrice)
-        </td>
-   
-    </tr>
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Information Contract</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive container">
+                    @foreach (var item in Model)
+                    {
+                        <input type="hidden" name="name" value="@item.ContractId" id="contract_id" />
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="row form-group">
+                            <b>InsurancePackage : </b>
+                            <div>@item.InsurancePackage.Name</div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <b>Name : </b>
+                            <div>@item.Name</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>PhoneNumber : </b>
+                            <div>@item.PhoneNumber</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>Email : </b>
+                            <div>@item.Email</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>Address : </b>
+                            <div>@item.Address</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>IdentityCard : </b>
+                            <div>@item.IdentityCard</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>DateOfIdentityCard : </b>
+                            <div>@item.DateOfIdentityCard</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>PlaceOfIdentityCard : </b>
+                            <div>@item.PlaceOfIdentityCard</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>Job : </b>
+                            <div>@item.Job</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>MaritalStatus : </b>
+                            <div>@item.MaritalStatus</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>Quantity :</b>
+                            <div>@item.Quantity</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>UnitPrice :</b>
+                            <div>$@item.UnitPrice</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                           
+                            <div>
+                                <div class="row mt-3">
+                                    <div class="col-3 mt-2">
+                                        <div class="form-group mr-3">
+                                            <select class="form-control mr-2" id="select-action" style="width: auto;">
+                                                <option value="6">--Chọn thao tác--</option>
+                                                <option value="0">Confirmed</option>
+                                                <option value="-1">Deleted</option>
+                                                <option value="2">Pay</option>
+                                                <option value="3">Done</option>
+                                                <option value="4">All</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-9" style="margin-top: 8px;">
+                                        <button type="button" id="action_contract" class="btn btn-success" style="float: right;">Confirm</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            </div>
+        </div>
+@section scripts
+{
+    <script>
+
+
+        $('#action_contract').click(function () {
+            var selectedID = $('#contract_id').val();
+            var selectedIDs = new Array();
+            selectedIDs.push(selectedID);
+            console.log(selectedIDs);
+            var action = $('#select-action').val();
+            if (action == 6) {
+                alert('Please select the action you want to perform!');
+                return;
+            }
+
+            if (selectedIDs.length <= 0) {
+                alert('You have not selected a contract!');
+                return;
+            }
+
+            if (action == -1) {
+                if (confirm("Do you want to Delete?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            }
+            if (action == 0) {
+                if (confirm("Do you want to status Confirmed?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            }
+            if (action == 1) {
+                if (confirm("Do you want to status Pending?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            }
+            if (action == 2) {
+                if (confirm("Do you want to change status pay?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            }
+            if (action == 3) {
+                if (confirm("Do you want to change status done?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                };
+            }
+
+        });
+
+        function changeStatusPTTime(selectedIDs, action) {
+            $.ajax({
+                url: "/Admin/Contracts/ChangeStatus",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                    selectedIDs,
+                    action
+                },
+                success: function (res) {
+                    if (!res == false) {
+                        window.location.reload();
+                    }
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        }
+    </script>
+
 }
 
-</table>
