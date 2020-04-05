@@ -15,32 +15,118 @@
 
         <!-- Page Heading -->
         @*<h1 class="h3 mb-2 text-gray-800">Contracts</h1>
-        <p class="mb-4"> All contracts of customers about insurances .</p>*@
+            <p class="mb-4"> All contracts of customers about insurances .</p>*@
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">DataTables Contract</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Information Contract</h6>
             </div>
             <div class="card-body">
+                <div class="table-responsive container">
+                    @foreach (var item in Model)
+                    {
+                        <input type="hidden" name="name" value="@item.ContractId" id="contract_id" />
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="row form-group">
+                            <b>Insurance Packages : </b>
+                            <div>@item.InsurancePackage.Name</div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <b>House Type : </b>
+                            <div>@item.HouseType</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>DurationHouse : </b>
+                            <div>@item.DurationHouse</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>HouseOwner : </b>
+                            <div>@item.HouseOwner</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>HouserAddress : </b>
+                            <div>@item.HouserAddress</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>Quantity : </b>
+                            <div>@item.Quantity</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <b>UnitPrice : </b>
+                            <div>@item.UnitPrice</div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                           
+                            <div>
+                                <div class="row mt-3">
+                                    <div class="col-3 mt-2">
+                                        <div class="form-group mr-3">
+                                            <select class="form-control mr-2" id="select-action" style="width: auto;">
+                                                <option value="6">--Chọn thao tác--</option>
+                                                <option value="0">Confirmed</option>
+                                                <option value="-1">Deleted</option>
+                                                <option value="2">Pay</option>
+                                                <option value="3">Done</option>
+                                                <option value="4">All</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-9" style="margin-top: 8px;">
+                                        <button type="button" id="action_contract" class="btn btn-success" style="float: right;">Confirm</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            @*<div class="card-body">
                 <div class="table-responsive">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                        <div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTable_length">@*<label>Show <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label>*@</div></div><div class="col-sm-12 col-md-6">@*<div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div>*@</div></div>
+                        <div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div></div></div>
                         <div class="row">
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
-                                        <tr>@*<th rowspan="1" colspan="1">Contract ID</th>*@<th rowspan="1" colspan="1">Insurance Packages</th><th rowspan="1" colspan="1">House Type</th><th rowspan="1" colspan="1">DurationHouse</th><th rowspan="1" colspan="1">HouseOwner</th><th rowspan="1" colspan="1">HouserAddress</th><th rowspan="1" colspan="1">Quantity</th><th rowspan="1" colspan="1">UnitPrice</th>@*<th rowspan="1" colspan="1">Action</th>*@</tr>
+
+                                        <tr>
+                                            <th rowspan="1" colspan="1">Insurance Packages</th>
+                                            <th rowspan="1" colspan="1">House Type</th>
+                                            <th rowspan="1" colspan="1">DurationHouse</th>
+                                            <th rowspan="1" colspan="1">HouseOwner</th>
+                                            <th rowspan="1" colspan="1">HouserAddress</th>
+                                            <th rowspan="1" colspan="1">Quantity</th>
+                                            <th rowspan="1" colspan="1">UnitPrice</th>
+                                            <th rowspan="1" colspan="1">Action</th>
+                                        </tr>
                                     </thead>
 
                                     <tbody>
 
                                         @foreach (var item in Model)
                                         {
+                                            <input type="hidden" name="name" value="@item.ContractId" id="contract_id" />
+                                            @Html.AntiForgeryToken()
+
                                             <tr role="row" class="odd">
-                                                @*<td class="sorting_1">
-                                                    @item.ContractId
-                                                </td>*@
+
                                                 <td>@item.InsurancePackage.Name</td>
                                                 <td>@item.HouseType</td>
                                                 <td>@item.DurationHouse</td>
@@ -48,94 +134,112 @@
                                                 <td>@item.HouserAddress</td>
                                                 <td>@item.Quantity</td>
                                                 <td>$@item.UnitPrice</td>
-                                                @*<td>
-                                                    <button class="button button1">@Html.ActionLink("Edit", "Edit", new {id = item.ContractId})</button>
-                                                    <button class="button button2">@Html.ActionLink("Details", "Details", new {id = item.ContractId})</button>
-                                                    <button class="button button3">@Html.ActionLink("Delete", "Delete", new {id = item.ContractId})</button>
-                                                </td>*@
+                                                <td>
+                                                    <div class="card-footer">
+                                                        <div class="row mt-3">
+                                                            <div class="col-3 mt-2">
+                                                                <div class="form-group mr-3">
+                                                                    <select class="form-control mr-2" id="select-action" style="width: 100px;">
+                                                                        <option value="6">--Chọn thao tác--</option>
+                                                                        <option value="0">Confirmed</option>
+                                                                        <option value="-1">Deleted</option>
+                                                                        <option value="2">Pay</option>
+                                                                        <option value="3">Done</option>
+                                                                        <option value="4">All</option>
+
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-9" style="margin-top: 8px;">
+                                                                <button type="button" id="action_contract" class="btn btn-success" style="float: right;">Confirm</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         }
-
                                     </tbody>
                                 </table>
                             </div>
-                        </div><div class="row"><div class="col-sm-12 col-md-5">@*<div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>*@</div><div class="col-sm-12 col-md-7">@*<div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTable" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li></ul></div>*@</div></div>
-                    </div>
+                        </div>
                 </div>
             </div>
-        </div>
+        </div>*@
 
-    </div>
+        </div>
     <!-- /.container-fluid -->
 </div>
-<!-- End of Main Content -->  
+<!-- End of Main Content -->
+@section scripts
+{
+    <script>
+        
 
-@*<h2>Index</h2>
+        $('#action_contract').click(function () {
+            var selectedID = $('#contract_id').val();
+            var selectedIDs = new Array();
+            selectedIDs.push(selectedID);
+            console.log(selectedIDs);
+            var action = $('#select-action').val();
+            if (action == 6) {
+                alert('Please select the action you want to perform!');
+                return;
+            }
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Contract.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InsurancePackage.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HouseType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DurationHouse)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HouseOwner)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HouserAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitPrice)
-            </th>
-            <th></th>
-        </tr>
+            if (selectedIDs.length <= 0) {
+                alert('You have not selected a contract!');
+                return;
+            }
 
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Contract.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InsurancePackage.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HouseType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DurationHouse)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HouseOwner)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HouserAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-    }
+            if (action == -1) {
+                if (confirm("Do you want to Delete?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            }
+            if (action == 0) {
+                if (confirm("Do you want to status Confirmed?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            }
+            if (action == 1) {
+                if (confirm("Do you want to status Pending?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            }
+            if (action == 2) {
+                if (confirm("Do you want to change status pay?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                }
+            }
+            if (action == 3) {
+                if (confirm("Do you want to change status done?")) {
+                    changeStatusPTTime(selectedIDs, action);
+                };
+            }
 
-    </table>*@
+        });
+
+        function changeStatusPTTime(selectedIDs, action) {
+            $.ajax({
+                url: "/Admin/Contracts/ChangeStatus",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    __RequestVerificationToken: $('input[name=__RequestVerificationToken]').val(),
+                    selectedIDs,
+                    action
+                },
+                success: function (res) {
+                    if (!res == false) {
+                        window.location.reload();
+                    }
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+        }
+    </script>
+
+}
+
