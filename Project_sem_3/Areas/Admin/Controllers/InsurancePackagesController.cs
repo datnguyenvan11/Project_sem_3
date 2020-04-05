@@ -151,9 +151,6 @@ namespace Project_sem_3.Areas.Admin.Controllers
                             EnableSsl = true,
                             UseDefaultCredentials = false,
                             Credentials = new NetworkCredential(senderemail.Address, passwordemail)
-
-
-
                         };
                         using (var mess = new MailMessage(senderemail, receivermail)
                         {
