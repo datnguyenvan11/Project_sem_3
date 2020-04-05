@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Project_sem_3.App_Start;
 using Microsoft.AspNet.Identity.Owin;
+using System.Threading;
+using System.Net.Mail;
 
 namespace Project_sem_3.Areas.Admin.Controllers
 {
     public class ContractsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
-        private ApplicationUserManager _userManager;
-
         // GET: Admin/Contracts
         public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize, string listcontracts, DateTime? startDate, DateTime? endDate)
         {
@@ -92,10 +92,6 @@ namespace Project_sem_3.Areas.Admin.Controllers
                 case "-1":
                     contracts = contracts.Where(x => x.Status == -1);
                     break;
-                case "4":
-                    contracts = db.Contracts.Where(c => c.Status != 5); ;
-                    break;
-
                 default:
                     break;
             }
@@ -103,55 +99,1106 @@ namespace Project_sem_3.Areas.Admin.Controllers
             return View(contracts.ToList().ToPagedList(pageNumber, pagesize));
         }
 
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-
-        // GET: Admin/Contracts/Details/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult StatusOrder(int action, int[] selectedIDs)
+        public ActionResult ChangeStatus(int action, int[] selectedIDs)
         {
             foreach (int IDs in selectedIDs)
             {
                 Contract contract = db.Contracts.Find(IDs);
                 db.Contracts.Attach(contract);
                 contract.Status = action;
-                var motor = db.MotorInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                foreach (var mt in motor)
+                    if (action == 0)
+                    {
+                        // HouseInsurance
+                        if (contract.InsuranceId == 1)
+                        {
+                            var homeInsurance = db.HouseInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                            var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                            var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                            var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                            var receivermail = new MailAddress(em.Email, "Insurance Company");
+                            var passwordemail = "vtacl123";
+                            var subject = "Notification Order";
+                            string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                            body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                                "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                                "<style> p {font-size: 18px}</style>"
+                                ;
+                            body += "<p>" + "Your contract has been confirmed, we will get back to you!" + " </p>"
+                             + "<p>" + "Name Insurance : HouseInsurance</p>"
+                             + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                            "<br>";
+                            body += "</HEAD><BODY>" +
+                                "<tr>" +
+                                "<th>ContractId</th>" +
+                                "<th>Package Insurance</th>" +
+                                "<th>HouseOwner</th>" +
+                                "<th>HouseType</th>" +
+                                "<th>HouserAddress</th>" +
+                                "<th>DurationHouse</th>" +
+                                "<th>Quantity</th>" +
+                                "<th>UnitPrice</th>" +
+                                "</tr>";
+                            foreach (var data in homeInsurance)
+                            {
+                                body +=
+                                    "<tr>" +
+                                    "<td>" + contract.Id + "</td>" +
+                                    "<td>" + e.Name + "</td>" +
+                                    "<td>" + data.HouseOwner + "</td>" +
+                                    "<td>" + data.HouseType + "</td>" +
+                                    "<td>" + data.HouserAddress + "</td>" +
+                                    "<td>" + data.DurationHouse + "</td>" +
+                                    "<td>" + 1 + "</td>" +
+                                    "<td>" + e.Price + "</td>" +
+                                    "</tr>";
+                            }
+                            var smtp = new SmtpClient
+                            {
+                                Host = "smtp.gmail.com",
+                                Port = 587,
+                                DeliveryMethod = SmtpDeliveryMethod.Network,
+                                EnableSsl = true,
+                                UseDefaultCredentials = false,
+                                Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                            };
+                            using (var mess = new MailMessage(senderemail, receivermail)
+                            {
+                                IsBodyHtml = true,
+                                Subject = subject,
+                                Body = body
+                            }
+                            )
+                            {
+                                smtp.Send(mess);
+                            };
+                        }
+
+                        // LifeInsurance
+                        if (contract.InsuranceId == 2)
+                        {
+                            var lifeInsurance = db.LifeInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                            var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                            var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                            var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                            var receivermail = new MailAddress(em.Email, "Insurance Company");
+                            var passwordemail = "vtacl123";
+                            var subject = "Notification Order";
+                            string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                            body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                                "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                                "<style> p {font-size: 18px}</style>"
+                                ;
+                            body += "<p>" + "Your contract has been confirmed, we will get back to you!" + " </p>"
+                             + "<p>" + "Name Insurance : LifeInsurance</p>"
+                             + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                            "<br>";
+                            body += "</HEAD><BODY>" +
+                                "<tr>" +
+                                "<th>ContractId</th>" +
+                                "<th>Package Insurance</th>" +
+                                "<th>Name</th>" +
+                                "<th>PhoneNumber</th>" +
+                                "<th>Email</th>" +
+                                "<th>Address</th>" +
+                                "<th>IdentityCard</th>" +
+                                "<th>DateOfIdentityCard</th>" +
+                                "<th>PlaceOfIdentityCard</th>" +
+                                "<th>Job</th>" +
+                                "<th>Quantity</th>" +
+                                "<th>UnitPrice</th>" +
+                                "</tr>";
+                            foreach (var data in lifeInsurance)
+                            {
+                                body +=
+                                    "<tr>" +
+                                    "<td>" + contract.Id + "</td>" +
+                                    "<td>" + e.Name + "</td>" +
+                                    "<td>" + data.Name + "</td>" +
+                                    "<td>" + data.PhoneNumber + "</td>" +
+                                    "<td>" + data.Email + "</td>" +
+                                    "<td>" + data.Address + "</td>" +
+                                    "<td>" + data.IdentityCard + "</td>" +
+                                    "<td>" + data.DateOfIdentityCard + "</td>" +
+                                    "<td>" + data.PlaceOfIdentityCard + "</td>" +
+                                    "<td>" + data.Job + "</td>" +
+                                    "<td>" + 1 + "</td>" +
+                                    "<td>" + e.Price + "</td>" +
+                                    "</tr>";
+                            }
+                            var smtp = new SmtpClient
+                            {
+                                Host = "smtp.gmail.com",
+                                Port = 587,
+                                DeliveryMethod = SmtpDeliveryMethod.Network,
+                                EnableSsl = true,
+                                UseDefaultCredentials = false,
+                                Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                            };
+                            using (var mess = new MailMessage(senderemail, receivermail)
+                            {
+                                IsBodyHtml = true,
+                                Subject = subject,
+                                Body = body
+                            }
+                            )
+                            {
+                                smtp.Send(mess);
+                            };
+                        }
+
+                        // MotorInsurance
+                        if (contract.InsuranceId == 3)
+                        {
+                            var motorInsurance = db.MotorInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                            var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                            var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                            var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                            var receivermail = new MailAddress(em.Email, "Insurance Company");
+                            var passwordemail = "vtacl123";
+                            var subject = "Notification Order";
+                            string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                            body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                                "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                                "<style> p {font-size: 18px}</style>"
+                                ;
+                            body += "<p>" + "Your contract has been confirmed, we will get back to you!" + " </p>"
+                             + "<p>" + "Name Insurance : MotorInsurance</p>"
+                             + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                            "<br>";
+                            body += "</HEAD><BODY>" +
+                                "<tr>" +
+                                "<th>ContractId</th>" +
+                                "<th>Package Insurance</th>" +
+                                "<th>RegisteredAddress</th>" +
+                                "<th>CarOwner</th>" +
+                                "<th>ChassisNumber</th>" +
+                                "<th>LicensePlate</th>" +
+                                "<th>Duration</th>" +
+                                "<th>Quantity</th>" +
+                                "<th>UnitPrice</th>" +
+                                "</tr>";
+                            foreach (var data in motorInsurance)
+                            {
+                                body +=
+                                    "<tr>" +
+                                    "<td>" + contract.Id + "</td>" +
+                                    "<td>" + e.Name + "</td>" +
+                                    "<td>" + data.RegisteredAddress + "</td>" +
+                                    "<td>" + data.CarOwner + "</td>" +
+                                    "<td>" + data.ChassisNumber + "</td>" +
+                                    "<td>" + data.LicensePlate + "</td>" +
+                                    "<td>" + data.Duration + "</td>" +
+                                    "<td>" + 1 + "</td>" +
+                                    "<td>" + e.Price + "</td>" +
+                                    "</tr>";
+                            }
+                            var smtp = new SmtpClient
+                            {
+                                Host = "smtp.gmail.com",
+                                Port = 587,
+                                DeliveryMethod = SmtpDeliveryMethod.Network,
+                                EnableSsl = true,
+                                UseDefaultCredentials = false,
+                                Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                            };
+                            using (var mess = new MailMessage(senderemail, receivermail)
+                            {
+                                IsBodyHtml = true,
+                                Subject = subject,
+                                Body = body
+                            }
+                            )
+                            {
+                                smtp.Send(mess);
+                            };
+                        }
+
+                        // MedicalInsurance
+                        if (contract.InsuranceId == 4)
+                        {
+                            var medicalInsurances = db.MedicalInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                            var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                            var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                            var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                            var receivermail = new MailAddress(em.Email, "Insurance Company");
+                            var passwordemail = "vtacl123";
+                            var subject = "Notification Order";
+                            string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                            body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                                "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                                "<style> p {font-size: 18px}</style>"
+                                ;
+                            body += "<p>" + "Your contract has been confirmed, we will get back to you!" + " </p>"
+                             + "<p>" + "Name Insurance : MedicalInsurance</p>"
+                             + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                            "<br>";
+                            body += "</HEAD><BODY>" +
+                                "<tr>" +
+                                "<th>ContractId</th>" +
+                                "<th>Package Insurance</th>" +
+                                "<th>Name</th>" +
+                                "<th>Gender</th>" +
+                                "<th>Address</th>" +
+                                "<th>Quantity</th>" +
+                                "<th>UnitPrice</th>" +
+                                "<th>DateOfBirth</th>" +
+                                "</tr>";
+                            foreach (var data in medicalInsurances)
+                            {
+                                body +=
+                                    "<tr>" +
+                                    "<td>" + contract.Id + "</td>" +
+                                    "<td>" + e.Name + "</td>" +
+                                    "<td>" + data.Name + "</td>" +
+                                    "<td>" + data.Gender + "</td>" +
+                                    "<td>" + data.Address + "</td>" +
+                                    "<td>" + 1 + "</td>" +
+                                    "<td>" + e.Price + "</td>" +
+                                    "<td>" + data.DateOfBirth + "</td>" +
+                                    "</tr>";
+                            }
+                            var smtp = new SmtpClient
+                            {
+                                Host = "smtp.gmail.com",
+                                Port = 587,
+                                DeliveryMethod = SmtpDeliveryMethod.Network,
+                                EnableSsl = true,
+                                UseDefaultCredentials = false,
+                                Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                            };
+                            using (var mess = new MailMessage(senderemail, receivermail)
+                            {
+                                IsBodyHtml = true,
+                                Subject = subject,
+                                Body = body
+                            }
+                            )
+                            {
+                                smtp.Send(mess);
+                            };
+                        }
+                    }
+                // 2 : Pay
+                if (action == 2)
                 {
-                    var ms = mt.InsurancePackage.Name;
-                }
-            }
-            db.SaveChanges();
-            return Json(selectedIDs, JsonRequestBehavior.AllowGet);
-        }
+                    // HouseInsurance
+                    if (contract.InsuranceId == 1)
+                    {
+                        var homeInsurance = db.HouseInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                        var receivermail = new MailAddress(em.Email, "Insurance Company");
+                        var passwordemail = "vtacl123";
+                        var subject = "Notification Order";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                            "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                            "<style> p {font-size: 18px}</style>"
+                            ;
+                        body += "<p>" + "Your contract has been pay, we will get back to you!" + " </p>"
+                         + "<p>" + "Name Insurance : HouseInsurance</p>"
+                         + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                        "<br>";
+                        body += "</HEAD><BODY>" +
+                            "<tr>" +
+                            "<th>ContractId</th>" +
+                            "<th>Package Insurance</th>" +
+                            "<th>HouseOwner</th>" +
+                            "<th>HouseType</th>" +
+                            "<th>HouserAddress</th>" +
+                            "<th>DurationHouse</th>" +
+                            "<th>Quantity</th>" +
+                            "<th>UnitPrice</th>" +
+                            "</tr>";
+                        foreach (var data in homeInsurance)
+                        {
+                            body +=
+                                "<tr>" +
+                                "<td>" + contract.Id + "</td>" +
+                                "<td>" + e.Name + "</td>" +
+                                "<td>" + data.HouseOwner + "</td>" +
+                                "<td>" + data.HouseType + "</td>" +
+                                "<td>" + data.HouserAddress + "</td>" +
+                                "<td>" + data.DurationHouse + "</td>" +
+                                "<td>" + 1 + "</td>" +
+                                "<td>" + e.Price + "</td>" +
+                                "</tr>";
+                        }
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
+                    }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ChangeStatus(int action, int[] selectedIDs)
-        {
-            foreach (int IDs in selectedIDs)
-            {
-                Contract contract = db.Contracts.Find(IDs);
-                db.Contracts.Attach(contract);
-                contract.Status = action;
-                await UserManager.SendEmailAsync(contract.ApplicationUserId,
-                    "Congratulation: You have successfully created order",
-                     "<b> Your order has been is : </b> " + contract.Insurance.Name
-                       + "<br>" + "<b> With a total price: </b>" + contract.TotalPrice + "$"
-                       + "<br>" + "<b> Total products are: </b>"
-                       + "<br>" + "<b>We will ship your order in the next 2 - 3 days. </b>"
-                       + "<br>" + "<b>Any questions please contact the hotline : +1 823 424 9134.<b>");
+                    // LifeInsurance
+                    if (contract.InsuranceId == 2)
+                    {
+                        var lifeInsurance = db.LifeInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                        var receivermail = new MailAddress(em.Email, "Insurance Company");
+                        var passwordemail = "vtacl123";
+                        var subject = "Notification Order";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                            "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                            "<style> p {font-size: 18px}</style>"
+                            ;
+                        body += "<p>" + "Your contract has been pay, we will get back to you!" + " </p>"
+                         + "<p>" + "Name Insurance : LifeInsurance</p>"
+                         + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                        "<br>";
+                        body += "</HEAD><BODY>" +
+                            "<tr>" +
+                            "<th>ContractId</th>" +
+                            "<th>Package Insurance</th>" +
+                            "<th>Name</th>" +
+                            "<th>PhoneNumber</th>" +
+                            "<th>Email</th>" +
+                            "<th>Address</th>" +
+                            "<th>IdentityCard</th>" +
+                            "<th>DateOfIdentityCard</th>" +
+                            "<th>PlaceOfIdentityCard</th>" +
+                            "<th>Job</th>" +
+                            "<th>Quantity</th>" +
+                            "<th>UnitPrice</th>" +
+                            "</tr>";
+                        foreach (var data in lifeInsurance)
+                        {
+                            body +=
+                                "<tr>" +
+                                "<td>" + contract.Id + "</td>" +
+                                "<td>" + e.Name + "</td>" +
+                                "<td>" + data.Name + "</td>" +
+                                "<td>" + data.PhoneNumber + "</td>" +
+                                "<td>" + data.Email + "</td>" +
+                                "<td>" + data.Address + "</td>" +
+                                "<td>" + data.IdentityCard + "</td>" +
+                                "<td>" + data.DateOfIdentityCard + "</td>" +
+                                "<td>" + data.PlaceOfIdentityCard + "</td>" +
+                                "<td>" + data.Job + "</td>" +
+                                "<td>" + 1 + "</td>" +
+                                "<td>" + e.Price + "</td>" +
+                                "</tr>";
+                        }
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
+                    }
+
+                    // MotorInsurance
+                    if (contract.InsuranceId == 3)
+                    {
+                        var motorInsurance = db.MotorInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                        var receivermail = new MailAddress(em.Email, "Insurance Company");
+                        var passwordemail = "vtacl123";
+                        var subject = "Notification Order";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                            "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                            "<style> p {font-size: 18px}</style>"
+                            ;
+                        body += "<p>" + "Your contract has been pay, we will get back to you!" + " </p>"
+                         + "<p>" + "Name Insurance : MotorInsurance</p>"
+                         + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                        "<br>";
+                        body += "</HEAD><BODY>" +
+                            "<tr>" +
+                            "<th>ContractId</th>" +
+                            "<th>Package Insurance</th>" +
+                            "<th>RegisteredAddress</th>" +
+                            "<th>CarOwner</th>" +
+                            "<th>ChassisNumber</th>" +
+                            "<th>LicensePlate</th>" +
+                            "<th>Duration</th>" +
+                            "<th>Quantity</th>" +
+                            "<th>UnitPrice</th>" +
+                            "</tr>";
+                        foreach (var data in motorInsurance)
+                        {
+                            body +=
+                                "<tr>" +
+                                "<td>" + contract.Id + "</td>" +
+                                "<td>" + e.Name + "</td>" +
+                                "<td>" + data.RegisteredAddress + "</td>" +
+                                "<td>" + data.CarOwner + "</td>" +
+                                "<td>" + data.ChassisNumber + "</td>" +
+                                "<td>" + data.LicensePlate + "</td>" +
+                                "<td>" + data.Duration + "</td>" +
+                                "<td>" + 1 + "</td>" +
+                                "<td>" + e.Price + "</td>" +
+                                "</tr>";
+                        }
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
+                    }
+
+                    // MedicalInsurance
+                    if (contract.InsuranceId == 4)
+                    {
+                        var medicalInsurances = db.MedicalInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                        var receivermail = new MailAddress(em.Email, "Insurance Company");
+                        var passwordemail = "vtacl123";
+                        var subject = "Notification Order";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                            "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                            "<style> p {font-size: 18px}</style>"
+                            ;
+                        body += "<p>" + "Your contract has been pay, we will get back to you!" + " </p>"
+                         + "<p>" + "Name Insurance : MedicalInsurance</p>"
+                         + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                        "<br>";
+                        body += "</HEAD><BODY>" +
+                            "<tr>" +
+                            "<th>ContractId</th>" +
+                            "<th>Package Insurance</th>" +
+                            "<th>Name</th>" +
+                            "<th>Gender</th>" +
+                            "<th>Address</th>" +
+                            "<th>Quantity</th>" +
+                            "<th>UnitPrice</th>" +
+                            "<th>DateOfBirth</th>" +
+                            "</tr>";
+                        foreach (var data in medicalInsurances)
+                        {
+                            body +=
+                                "<tr>" +
+                                "<td>" + contract.Id + "</td>" +
+                                "<td>" + e.Name + "</td>" +
+                                "<td>" + data.Name + "</td>" +
+                                "<td>" + data.Gender + "</td>" +
+                                "<td>" + data.Address + "</td>" +
+                                "<td>" + 1 + "</td>" +
+                                "<td>" + e.Price + "</td>" +
+                                "<td>" + data.DateOfBirth + "</td>" +
+                                "</tr>";
+                        }
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
+                    }
+                }
+                // 3 Done
+                if (action == 3)
+                {
+                    // HouseInsurance
+                    if (contract.InsuranceId == 1)
+                    {
+                        var homeInsurance = db.HouseInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                        var receivermail = new MailAddress(em.Email, "Insurance Company");
+                        var passwordemail = "vtacl123";
+                        var subject = "Notification Order";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                            "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                            "<style> p {font-size: 18px}</style>"
+                            ;
+                        body += "<p>" + "Your contract has been done, we will get back to you!" + " </p>"
+                         + "<p>" + "Name Insurance : HouseInsurance</p>"
+                         + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                        "<br>";
+                        body += "</HEAD><BODY>" +
+                            "<tr>" +
+                            "<th>ContractId</th>" +
+                            "<th>Package Insurance</th>" +
+                            "<th>HouseOwner</th>" +
+                            "<th>HouseType</th>" +
+                            "<th>HouserAddress</th>" +
+                            "<th>DurationHouse</th>" +
+                            "<th>Quantity</th>" +
+                            "<th>UnitPrice</th>" +
+                            "</tr>";
+                        foreach (var data in homeInsurance)
+                        {
+                            body +=
+                                "<tr>" +
+                                "<td>" + contract.Id + "</td>" +
+                                "<td>" + e.Name + "</td>" +
+                                "<td>" + data.HouseOwner + "</td>" +
+                                "<td>" + data.HouseType + "</td>" +
+                                "<td>" + data.HouserAddress + "</td>" +
+                                "<td>" + data.DurationHouse + "</td>" +
+                                "<td>" + 1 + "</td>" +
+                                "<td>" + e.Price + "</td>" +
+                                "</tr>";
+                        }
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
+                    }
+
+                    // LifeInsurance
+                    if (contract.InsuranceId == 2)
+                    {
+                        var lifeInsurance = db.LifeInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                        var receivermail = new MailAddress(em.Email, "Insurance Company");
+                        var passwordemail = "vtacl123";
+                        var subject = "Notification Order";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                            "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                            "<style> p {font-size: 18px}</style>"
+                            ;
+                        body += "<p>" + "Your contract has been done, we will get back to you!" + " </p>"
+                         + "<p>" + "Name Insurance : LifeInsurance</p>"
+                         + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                        "<br>";
+                        body += "</HEAD><BODY>" +
+                            "<tr>" +
+                            "<th>ContractId</th>" +
+                            "<th>Package Insurance</th>" +
+                            "<th>Name</th>" +
+                            "<th>PhoneNumber</th>" +
+                            "<th>Email</th>" +
+                            "<th>Address</th>" +
+                            "<th>IdentityCard</th>" +
+                            "<th>DateOfIdentityCard</th>" +
+                            "<th>PlaceOfIdentityCard</th>" +
+                            "<th>Job</th>" +
+                            "<th>Quantity</th>" +
+                            "<th>UnitPrice</th>" +
+                            "</tr>";
+                        foreach (var data in lifeInsurance)
+                        {
+                            body +=
+                                "<tr>" +
+                                "<td>" + contract.Id + "</td>" +
+                                "<td>" + e.Name + "</td>" +
+                                "<td>" + data.Name + "</td>" +
+                                "<td>" + data.PhoneNumber + "</td>" +
+                                "<td>" + data.Email + "</td>" +
+                                "<td>" + data.Address + "</td>" +
+                                "<td>" + data.IdentityCard + "</td>" +
+                                "<td>" + data.DateOfIdentityCard + "</td>" +
+                                "<td>" + data.PlaceOfIdentityCard + "</td>" +
+                                "<td>" + data.Job + "</td>" +
+                                "<td>" + 1 + "</td>" +
+                                "<td>" + e.Price + "</td>" +
+                                "</tr>";
+                        }
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
+                    }
+
+                    // MotorInsurance
+                    if (contract.InsuranceId == 3)
+                    {
+                        var motorInsurance = db.MotorInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                        var receivermail = new MailAddress(em.Email, "Insurance Company");
+                        var passwordemail = "vtacl123";
+                        var subject = "Notification Order";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                            "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                            "<style> p {font-size: 18px}</style>"
+                            ;
+                        body += "<p>" + "Your contract has been done, we will get back to you!" + " </p>"
+                         + "<p>" + "Name Insurance : MotorInsurance</p>"
+                         + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                        "<br>";
+                        body += "</HEAD><BODY>" +
+                            "<tr>" +
+                            "<th>ContractId</th>" +
+                            "<th>Package Insurance</th>" +
+                            "<th>RegisteredAddress</th>" +
+                            "<th>CarOwner</th>" +
+                            "<th>ChassisNumber</th>" +
+                            "<th>LicensePlate</th>" +
+                            "<th>Duration</th>" +
+                            "<th>Quantity</th>" +
+                            "<th>UnitPrice</th>" +
+                            "</tr>";
+                        foreach (var data in motorInsurance)
+                        {
+                            body +=
+                                "<tr>" +
+                                "<td>" + contract.Id + "</td>" +
+                                "<td>" + e.Name + "</td>" +
+                                "<td>" + data.RegisteredAddress + "</td>" +
+                                "<td>" + data.CarOwner + "</td>" +
+                                "<td>" + data.ChassisNumber + "</td>" +
+                                "<td>" + data.LicensePlate + "</td>" +
+                                "<td>" + data.Duration + "</td>" +
+                                "<td>" + 1 + "</td>" +
+                                "<td>" + e.Price + "</td>" +
+                                "</tr>";
+                        }
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
+                    }
+
+                    // MedicalInsurance
+                    if (contract.InsuranceId == 4)
+                    {
+                        var medicalInsurances = db.MedicalInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                        var receivermail = new MailAddress(em.Email, "Insurance Company");
+                        var passwordemail = "vtacl123";
+                        var subject = "Notification Order";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                            "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                            "<style> p {font-size: 18px}</style>"
+                            ;
+                        body += "<p>" + "Your contract has been done, we will get back to you!" + " </p>"
+                         + "<p>" + "Name Insurance : MedicalInsurance</p>"
+                         + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                        "<br>";
+                        body += "</HEAD><BODY>" +
+                            "<tr>" +
+                            "<th>ContractId</th>" +
+                            "<th>Package Insurance</th>" +
+                            "<th>Name</th>" +
+                            "<th>Gender</th>" +
+                            "<th>Address</th>" +
+                            "<th>Quantity</th>" +
+                            "<th>UnitPrice</th>" +
+                            "<th>DateOfBirth</th>" +
+                            "</tr>";
+                        foreach (var data in medicalInsurances)
+                        {
+                            body +=
+                                "<tr>" +
+                                "<td>" + contract.Id + "</td>" +
+                                "<td>" + e.Name + "</td>" +
+                                "<td>" + data.Name + "</td>" +
+                                "<td>" + data.Gender + "</td>" +
+                                "<td>" + data.Address + "</td>" +
+                                "<td>" + 1 + "</td>" +
+                                "<td>" + e.Price + "</td>" +
+                                "<td>" + data.DateOfBirth + "</td>" +
+                                "</tr>";
+                        }
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
+                    }
+                }
+                //-1: deleted
+                if (action == -1)
+                {
+                    // HouseInsurance
+                    if (contract.InsuranceId == 1)
+                    {
+                        var homeInsurance = db.HouseInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                        var receivermail = new MailAddress(em.Email, "Insurance Company");
+                        var passwordemail = "vtacl123";
+                        var subject = "Notification Order";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                            "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                            "<style> p {font-size: 18px}</style>"
+                            ;
+                        body += "<p>" + "Your contract has been deleted, we will get back to you!" + " </p>"
+                         + "<p>" + "Name Insurance : HouseInsurance</p>"
+                         + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                        "<br>";
+                        body += "</HEAD><BODY>" +
+                            "<tr>" +
+                            "<th>ContractId</th>" +
+                            "<th>Package Insurance</th>" +
+                            "<th>HouseOwner</th>" +
+                            "<th>HouseType</th>" +
+                            "<th>HouserAddress</th>" +
+                            "<th>DurationHouse</th>" +
+                            "<th>Quantity</th>" +
+                            "<th>UnitPrice</th>" +
+                            "</tr>";
+                        foreach (var data in homeInsurance)
+                        {
+                            body +=
+                                "<tr>" +
+                                "<td>" + contract.Id + "</td>" +
+                                "<td>" + e.Name + "</td>" +
+                                "<td>" + data.HouseOwner + "</td>" +
+                                "<td>" + data.HouseType + "</td>" +
+                                "<td>" + data.HouserAddress + "</td>" +
+                                "<td>" + data.DurationHouse + "</td>" +
+                                "<td>" + 1 + "</td>" +
+                                "<td>" + e.Price + "</td>" +
+                                "</tr>";
+                        }
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
+                    }
+
+                    // LifeInsurance
+                    if (contract.InsuranceId == 2)
+                    {
+                        var lifeInsurance = db.LifeInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                        var receivermail = new MailAddress(em.Email, "Insurance Company");
+                        var passwordemail = "vtacl123";
+                        var subject = "Notification Order";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                            "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                            "<style> p {font-size: 18px}</style>"
+                            ;
+                        body += "<p>" + "Your contract has been deleted, we will get back to you!" + " </p>"
+                         + "<p>" + "Name Insurance : LifeInsurance</p>"
+                         + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                        "<br>";
+                        body += "</HEAD><BODY>" +
+                            "<tr>" +
+                            "<th>ContractId</th>" +
+                            "<th>Package Insurance</th>" +
+                            "<th>Name</th>" +
+                            "<th>PhoneNumber</th>" +
+                            "<th>Email</th>" +
+                            "<th>Address</th>" +
+                            "<th>IdentityCard</th>" +
+                            "<th>DateOfIdentityCard</th>" +
+                            "<th>PlaceOfIdentityCard</th>" +
+                            "<th>Job</th>" +
+                            "<th>Quantity</th>" +
+                            "<th>UnitPrice</th>" +
+                            "</tr>";
+                        foreach (var data in lifeInsurance)
+                        {
+                            body +=
+                                "<tr>" +
+                                "<td>" + contract.Id + "</td>" +
+                                "<td>" + e.Name + "</td>" +
+                                "<td>" + data.Name + "</td>" +
+                                "<td>" + data.PhoneNumber + "</td>" +
+                                "<td>" + data.Email + "</td>" +
+                                "<td>" + data.Address + "</td>" +
+                                "<td>" + data.IdentityCard + "</td>" +
+                                "<td>" + data.DateOfIdentityCard + "</td>" +
+                                "<td>" + data.PlaceOfIdentityCard + "</td>" +
+                                "<td>" + data.Job + "</td>" +
+                                "<td>" + 1 + "</td>" +
+                                "<td>" + e.Price + "</td>" +
+                                "</tr>";
+                        }
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
+                    }
+
+                    // MotorInsurance
+                    if (contract.InsuranceId == 3)
+                    {
+                        var motorInsurance = db.MotorInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                        var receivermail = new MailAddress(em.Email, "Insurance Company");
+                        var passwordemail = "vtacl123";
+                        var subject = "Notification Order";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                            "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                            "<style> p {font-size: 18px}</style>"
+                            ;
+                        body += "<p>" + "Your contract has been deleted, we will get back to you!" + " </p>"
+                         + "<p>" + "Name Insurance : MotorInsurance</p>"
+                         + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                        "<br>";
+                        body += "</HEAD><BODY>" +
+                            "<tr>" +
+                            "<th>ContractId</th>" +
+                            "<th>Package Insurance</th>" +
+                            "<th>RegisteredAddress</th>" +
+                            "<th>CarOwner</th>" +
+                            "<th>ChassisNumber</th>" +
+                            "<th>LicensePlate</th>" +
+                            "<th>Duration</th>" +
+                            "<th>Quantity</th>" +
+                            "<th>UnitPrice</th>" +
+                            "</tr>";
+                        foreach (var data in motorInsurance)
+                        {
+                            body +=
+                                "<tr>" +
+                                "<td>" + contract.Id + "</td>" +
+                                "<td>" + e.Name + "</td>" +
+                                "<td>" + data.RegisteredAddress + "</td>" +
+                                "<td>" + data.CarOwner + "</td>" +
+                                "<td>" + data.ChassisNumber + "</td>" +
+                                "<td>" + data.LicensePlate + "</td>" +
+                                "<td>" + data.Duration + "</td>" +
+                                "<td>" + 1 + "</td>" +
+                                "<td>" + e.Price + "</td>" +
+                                "</tr>";
+                        }
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
+                    }
+
+                    // MedicalInsurance
+                    if (contract.InsuranceId == 4)
+                    {
+                        var medicalInsurances = db.MedicalInsurances.Where(x => x.ContractId == contract.Id).ToList();
+                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
+                        var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
+                        var receivermail = new MailAddress(em.Email, "Insurance Company");
+                        var passwordemail = "vtacl123";
+                        var subject = "Notification Order";
+                        string body = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\">";
+                        body += "<HTML><HEAD><META http-equiv=Content-Type content=\"text/html; charset=iso-8859-1\">" +
+                            "<style>table, td, th {border: 1px solid black; font-size: 15px}</style>" +
+                            "<style> p {font-size: 18px}</style>"
+                            ;
+                        body += "<p>" + "Your contract has been deleted, we will get back to you!" + " </p>"
+                         + "<p>" + "Name Insurance : MedicalInsurance</p>"
+                         + "<p>" + "Total Price :" + contract.TotalPrice + "$" + "</p>" +
+                        "<br>";
+                        body += "</HEAD><BODY>" +
+                            "<tr>" +
+                            "<th>ContractId</th>" +
+                            "<th>Package Insurance</th>" +
+                            "<th>Name</th>" +
+                            "<th>Gender</th>" +
+                            "<th>Address</th>" +
+                            "<th>Quantity</th>" +
+                            "<th>UnitPrice</th>" +
+                            "<th>DateOfBirth</th>" +
+                            "</tr>";
+                        foreach (var data in medicalInsurances)
+                        {
+                            body +=
+                                "<tr>" +
+                                "<td>" + contract.Id + "</td>" +
+                                "<td>" + e.Name + "</td>" +
+                                "<td>" + data.Name + "</td>" +
+                                "<td>" + data.Gender + "</td>" +
+                                "<td>" + data.Address + "</td>" +
+                                "<td>" + 1 + "</td>" +
+                                "<td>" + e.Price + "</td>" +
+                                "<td>" + data.DateOfBirth + "</td>" +
+                                "</tr>";
+                        }
+                        var smtp = new SmtpClient
+                        {
+                            Host = "smtp.gmail.com",
+                            Port = 587,
+                            DeliveryMethod = SmtpDeliveryMethod.Network,
+                            EnableSsl = true,
+                            UseDefaultCredentials = false,
+                            Credentials = new NetworkCredential(senderemail.Address, passwordemail)
+                        };
+                        using (var mess = new MailMessage(senderemail, receivermail)
+                        {
+                            IsBodyHtml = true,
+                            Subject = subject,
+                            Body = body
+                        }
+                        )
+                        {
+                            smtp.Send(mess);
+                        };
+                    }
+                }
             }
             db.SaveChanges();
             return Json(selectedIDs, JsonRequestBehavior.AllowGet);

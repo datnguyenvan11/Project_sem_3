@@ -65,8 +65,7 @@ namespace Project_sem_3.Controllers
                     ProgrammeId = System.Int32.Parse(item.Programmeid),
                     Name = item.Name,
                     ContractId = contract.Id,
-                    PhoneNumber = item.PhoneNumber,
-                    Email = item.Email,
+                    Gender = item.Gender,
                     Address = item.Address,
                     Quantity = 1,
                     UnitPrice = item.unitprice,
@@ -80,6 +79,7 @@ namespace Project_sem_3.Controllers
             try
             {
                 var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                 var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                 var receivermail = new MailAddress(em.Email, "Insurance Company");
                 var passwordemail = "vtacl123";
@@ -97,8 +97,7 @@ namespace Project_sem_3.Controllers
                     "<tr>" +
                     "<th>Package Insurance</th>" +
                     "<th>Name</th>" +
-                    "<th>PhoneNumber</th>" +
-                    "<th>Email</th>" +
+                    "<th>Gender</th>" +
                     "<th>Address</th>" +
                     "<th>Quantity</th>" +
                     "<th>UnitPrice</th>" +
@@ -106,13 +105,11 @@ namespace Project_sem_3.Controllers
                     "</tr>";
                 foreach (var data in medical.items)
                 {
-                    var a = db.InsurancePackages.Find(data.InsurancePackageId);
                     body +=
                         "<tr>" +
-                        "<td>" + a.Name + "</td>" +
+                        "<td>" + e.Name + "</td>" +
                         "<td>" + data.Name + "</td>" +
-                        "<td>" + data.PhoneNumber + "</td>" +
-                        "<td>" + data.Email + "</td>" +
+                        "<td>" + data.Gender + "</td>" +
                         "<td>" + data.Address + "</td>" +
                         "<td>" + 1 + "</td>" +
                         "<td>" + data.unitprice + "</td>" +
