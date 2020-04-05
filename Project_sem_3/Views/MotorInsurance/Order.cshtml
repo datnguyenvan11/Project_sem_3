@@ -29,7 +29,7 @@
                     <div class="tab-content">
                         <div id="tab1" class="tab-pane active ">
                             <div class="col-lg-12 col-md-12 col-sm-12 d-none d-md-block">
-                                
+
 
                                 <div class="row">
                                     <table class="table">
@@ -57,18 +57,18 @@
                                         <tbody>
                                             @foreach (var item in cart.GetCartItems())
                                             {
-                                            <tr>
-                                                <td>@item.Value.InsurancePackageName</td>
-                                                <td>@item.Value.CarOwner</td>
-                                                <td>@item.Value.RegisteredAddress</td>
-                                                <td>@item.Value.LicensePlate</td>
-                                                <td>@item.Value.ChassisNumber</td>
-                                                <td>@item.Value.Duration.ToString("yyyy-MM-dd")</td>
-                                                <td>
-                                                    @String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C}", @item.Value.Price)
-                                                </td>
-                                                <td><a onclick="return confirm('Ban co chac muon xoa san pham tuyet voi cua chung toi ra khoi gio hang khong.')" href="/MotorInsurance/RemoveCart?LicensePlate=@item.Value.LicensePlate">Remove</a></td>
-                                            </tr>
+                                                <tr>
+                                                    <td>@item.Value.InsurancePackageName</td>
+                                                    <td>@item.Value.CarOwner</td>
+                                                    <td>@item.Value.RegisteredAddress</td>
+                                                    <td>@item.Value.LicensePlate</td>
+                                                    <td>@item.Value.ChassisNumber</td>
+                                                    <td>@item.Value.Duration.ToString("yyyy-MM-dd")</td>
+                                                    <td>
+                                                        @String.Format(new System.Globalization.CultureInfo("en-US"), "{0:C}", @item.Value.Price)
+                                                    </td>
+                                                    <td><a onclick="return confirm('Ban co chac muon xoa san pham tuyet voi cua chung toi ra khoi gio hang khong.')" href="/MotorInsurance/RemoveCart?LicensePlate=@item.Value.LicensePlate">Remove</a></td>
+                                                </tr>
 
                                             }
                                         </tbody>
@@ -84,23 +84,23 @@
                     <div class="col-lg-9 col-md-8 col-sm-12">
                         <div class="frm frmpro">
                             @*<div class="form-group">
-            <div class="row">
-                <label for="rdbPackage_0" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Select product package</label>
-                <div class="col-lg-8">
-                    @foreach (var item in Model)
-                    {
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="closeForm();" name="insurancePackageId" required />
-                            <label class="custom-control-label" for='rdbPackage_1'><b>@String.Format("{0:c}", @item.Price) </b> @item.Description</label>
-                        </div>
-                    }
+                                    <div class="row">
+                                        <label for="rdbPackage_0" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">Select product package</label>
+                                        <div class="col-lg-8">
+                                            @foreach (var item in Model)
+                                            {
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="closeForm();" name="insurancePackageId" required />
+                                                    <label class="custom-control-label" for='rdbPackage_1'><b>@String.Format("{0:c}", @item.Price) </b> @item.Description</label>
+                                                </div>
+                                            }
 
-                    <i class="pad-top-5">
-                        <span id="ctl18_lblPackageReq" class="req" style="color:Red;"></span>
-                    </i>
-                </div>
-            </div>
-        </div>*@
+                                            <i class="pad-top-5">
+                                                <span id="ctl18_lblPackageReq" class="req" style="color:Red;"></span>
+                                            </i>
+                                        </div>
+                                    </div>
+                                </div>*@
                             <div for="rdbPackage_0" style="margin-left:1px" class="row col-form-label col-form-label-first">Select InsurancePackages :</div>
 
                             <div _ngcontent-c5="" class="row">
@@ -117,8 +117,8 @@
                                                     <div _ngcontent-c5="" class="benefit-name-wrapper v-middle">
                                                         <h2 _ngcontent-c5="" class="benefit-name">
                                                             <div _ngcontent-c5="" class="app-checkbox agree-with-term">
-                                                                <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="closeForm();" name="insurancePackageId" required /></label>                                                           @*<input _ngcontent-c5="" id="choose1" name="choose1" type="checkbox"> <label _ngcontent-c5="" for="choose1">*@
-                                                                <span _ngcontent-c5="" class="checkout-term">@item.Name</span>
+                                                                <label for="muhRadio4"><input type="radio" class="@item.Price" id='rdbPackage_1' value='@item.Id' onclick="closeForm();" name="insurancePackageId" required /></label>
+                                                                <span _ngcontent-c5="" class="checkout-term" style="padding-left:28px;">@item.Name</span>
                                                                 @Html.ValidationMessageFor(m => m.insurancePackageId, "", new { @class = "text-danger" })
 
                                                             </div>
@@ -139,9 +139,9 @@
                                                                 <div _ngcontent-c5="" class="col-xs-8">
                                                                     <p _ngcontent-c5="" class="item-value" style="color: black;">
                                                                         <span _ngcontent-c5="" style="font-weight: bold;background: white;">
-                                                                        @Html.Raw(HttpUtility.HtmlDecode(item.Description))
+                                                                            @Html.Raw(HttpUtility.HtmlDecode(item.Description))
                                                                         </span>
-</p>
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -288,10 +288,10 @@
                             {
                             }
                             @if (cart.GetCartItems().Count > 0)
-                            { 
+                            {
                                 <a id="ctl18_lbtBook" style="text-decoration:none" class="btn-pro-buynow" href="/MotorInsurance/CreateContract">Order</a>
-                                }
-                            </div>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -807,11 +807,11 @@
             font-weight: normal;
             font-size: 20px;
         }
-        .error{
-            color:red;
-            font-size:13px
-                
-        }
+
+    .error {
+        color: red;
+        font-size: 13px
+    }
 </style>
 @section Scripts {
 
@@ -820,19 +820,19 @@
     <script type="text/javascript">
 
         $('input[type=datetime]').datepicker({
-           dateFormat:'yy-mm-dd',
-    changeMonth: true,
-    changeYear: true,
-    autoclose: true
+            dateFormat: 'yy-mm-dd',
+            changeMonth: true,
+            changeYear: true,
+            autoclose: true
 
-    /*other options goes here...*/
+            /*other options goes here...*/
         }).on('change', function (ev) {
             $(this).datepicker('hide');
-             $('html, body').animate({
-                        scrollTop: $("#divnone").offset().top
-                    }, 2000);
-});
-          $('input[type=datetime]').datepicker('setDate', 'now')
+            $('html, body').animate({
+                scrollTop: $("#divnone").offset().top
+            }, 2000);
+        });
+        $('input[type=datetime]').datepicker('setDate', 'now')
 
 
         $("input[name=insurancePackageId]") // select the radio by its id
@@ -907,9 +907,9 @@
             },
             messages: {
                 CarOwner: "* Please enter CarOwner",
-                RegisteredAddress:  "* Please enter RegisteredAddress",
+                RegisteredAddress: "* Please enter RegisteredAddress",
                 LicensePlate: "* Please enter RegisteredAddress",
-                ChassisNumber:"* Please enter ChassisNumber"
+                ChassisNumber: "* Please enter ChassisNumber"
 
             }
         });
