@@ -19,7 +19,7 @@
         <p class="mb-4"> All contracts of customers about insurances .</p>
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/Insurances/Create" class="btn btn-info" role="button">Create Insurance</a>
-            
+
         </div>
 
         <!-- DataTales Example -->
@@ -47,7 +47,7 @@
                                 <form action="/Admin/Insurances/" method="get" id="pagesize">
                                     <div class="dataTables_length" id="dataTable_length">
                                         <label>
-                                            Show @Html.DropDownList("pageSize", null, new {@class = "custom-select custom-select-sm form-control form-control-sm"}) entries
+                                            Show @Html.DropDownList("pageSize", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" }) entries
                                         </label>
                                     </div>
                                 </form>
@@ -62,39 +62,39 @@
                         </div>
                         <div class="row">
 
-                           
+
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
-                                    <tr>
-                                        <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll"/>Select All</th>
-                                        <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Name", "Index", new {sortOrder = ViewBag.NameSortParm})</th>
-                                        <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new {sortOrder = ViewBag.DateSortParm})</th>
-                                        <th rowspan="1" colspan="1">Action</th>
-                                    </tr>
+                                        <tr>
+                                            <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll" />Select All</th>
+                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, listInsurance = Request.QueryString["listInsurance"] })</th>
+                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm, listInsurance = Request.QueryString["listInsurance"] })</th>
+                                            <th rowspan="1" colspan="1">Action</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr role="row" class="odd">
-                                            <td>
-                                                <input type="checkbox" class="check" value="@item.Id"/>
-                                                @Html.AntiForgeryToken()
-                                            </td>
-                                            <td class="sorting_1">
-                                                @item.Name
-                                            </td>
-                                            <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr role="row" class="odd">
+                                                <td>
+                                                    <input type="checkbox" class="check" value="@item.Id" />
+                                                    @Html.AntiForgeryToken()
+                                                </td>
+                                                <td class="sorting_1">
+                                                    @item.Name
+                                                </td>
+                                                <td>@item.CreatedAt.ToString("dd-MM-yyyy")</td>
 
-                                            <td>
-                                                <div class="btn-group">
-                                                    <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new {id = item.Id})</button>
-                                                    <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new {id = item.Id})</button>
-                                                    <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new {id = item.Id})</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    }
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button class="btn btn-success">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
+                                                        <button class="btn btn-primary">@Html.ActionLink("Details", "Details", new { id = item.Id })</button>
+                                                        <button class="btn btn-danger">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                                 <div class="row">
@@ -118,10 +118,10 @@
                             </div>
                             <div class="col-sm-12 col-md-5"></div>
                             <div class="col-sm-12 col-md-2">
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new {page}),
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.psize, listInsurance = Request.QueryString["listInsurance"] }),
                                     new PagedListRenderOptions()
                                     {
-                                        LiElementClasses = new List<string> {"text-paging"}
+                                        LiElementClasses = new List<string> { "text-paging" }
                                     })
                             </div>
                         </div>
@@ -191,6 +191,14 @@
             $(function () {
                 $("#pageSize").change(function () {
                     $("#pagesize").submit();
+                });
+            });
+            $(function () {
+                $("#pageSize").change(function (ev, page, pageSize) {
+                    var page = $('page').val();
+                    var pageSize = $('select#pageSize option:checked').val();
+                    var listInsurance = $('select#listInsurance option:checked').val();
+                    window.location.href = window.location.href.split('?')[0] + '?listInsurance=' + listInsurance + '&page=' + page + '&pageSize=' + pageSize;
                 });
             });
             $(function () {
