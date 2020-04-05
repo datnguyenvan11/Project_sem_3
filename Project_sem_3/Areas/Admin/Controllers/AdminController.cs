@@ -19,6 +19,7 @@ using System.Net;
 
 namespace Project_sem_3.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private ApplicationRoleManager _rolenManager;

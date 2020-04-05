@@ -47,6 +47,7 @@ namespace Project_sem_3.Controllers
         }
        
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult CreateContract(ContractMedical medical)
         {
             var contract = new Contract

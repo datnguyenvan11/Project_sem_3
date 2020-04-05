@@ -17,6 +17,7 @@ using System.Net.Mail;
 
 namespace Project_sem_3.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ContractsController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();

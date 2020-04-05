@@ -14,7 +14,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Project_sem_3.Areas.Admin.Controllers
 {
-   //[Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
         ApplicationDbContext context = new ApplicationDbContext();
