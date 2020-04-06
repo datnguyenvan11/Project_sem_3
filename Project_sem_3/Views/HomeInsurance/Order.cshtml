@@ -64,7 +64,7 @@
                                                                         </p>
                                                                     </div>
                                                                     <div _ngcontent-c5="" class="col-xs-8">
-                                                                        <p _ngcontent-c5="" class="item-value" style="color: black;">
+                                                                        <p _ngcontent-c5="" class="item-value" style="color: #768089;">
                                                                             <span _ngcontent-c5="" style="font-weight: bold;background: white;">@Html.Raw(HttpUtility.HtmlDecode(item.Description))</span>
 </p>
                                                                     </div>
@@ -79,7 +79,7 @@
                                                                     </div>
                                                                     <div _ngcontent-c5="" class="col-xs-8">
                                                                         <p _ngcontent-c5="" class="item-value">
-                                                                            <span _ngcontent-c5="" style="font-weight: bold;background: white;">@item.Price/year</span>
+                                                                            <span _ngcontent-c5="" style="font-weight: bold;background: white;color:#ea212d">@item.Price/year</span>
                                                                         </p>
                                                                     </div>
                                                                 </div>
@@ -94,7 +94,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group" id="divnone">
+                        <div style="color:#ea212d" class="form-group" id="divnone">
                             <h4>Enter the information on the vehicle registration</h4>
                         </div>
                         <div class="form-group divnone">
@@ -127,8 +127,8 @@
                             <div class="row">
                                 <label for="plates" class="col-lg-4 col-sm-12 col-form-label col-form-label-first">DurationHouse:</label>
                                 <div class="col-lg-8">
-                                    <select class="form-control mr-2" id="select-action" name="DurationHouse" style="    width: 40%;
-    height: 40px;">
+                                    <select  class="form-control mr-2" id="select-action" name="DurationHouse" style=" border: solid 2px #ddd;    width: 40%;
+    height: 40px;color:#9ba1a6">
                                         <option selected="selected" value="01 – 15 years">01 – 15 years</option>
                                         <option value=">15 – 25 years">15 – 25 years</option>
                                     </select>
@@ -148,7 +148,7 @@
                             </div>
                         </div>
 
-                        <input id="ctl18_lbtBook" style="text-decoration:none" type="submit" value="Continue" class="btn-pro-buynow divnone" href="/HouseInsurance/CreateContract" />
+                        <input id="ctl18_lbtBook" style="text-decoration:none; width:20%; margin-top:20px;padding:13px; margin-left:35%" type="submit" value="Continue" class="btn-pro-buynow divnone" href="/HouseInsurance/CreateContract" />
 
 
                     </div>
@@ -280,7 +280,7 @@
 
     .benefit-item.benefit-item-description-table .benefit-description-table .item {
         padding: 14px 0;
-        font-size: 14px;
+        font-size: 16px!important;
         line-height: 20px;
     }
 
@@ -338,7 +338,7 @@
 
     .app-checkbox input:checked, .app-checkbox input:not(:checked) {
         position: absolute;
-        left: 91px;
+        left: 23px;
         background-color: white;
         top: -4px;
     }
@@ -437,7 +437,7 @@
 
     .frmpro {
         width: 100%;
-        color: #3e3e3e;
+        color: #768089!important;
     }
 
     .frm .custom-control-label {
@@ -454,7 +454,7 @@
     .frmpro .col-form-label {
         line-height: 1.7em;
         font-size: 18px;
-        color: #3e3e3e;
+        color: #768089!important;
     }
 
     .col-form-label-first {
@@ -548,7 +548,7 @@
 
     .frm .txt {
         padding: 14px;
-        border: solid 2px #c8c8c8;
+        border: solid 2px #ddd;
     }
 
     .frm .form-control {
