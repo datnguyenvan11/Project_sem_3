@@ -12,6 +12,8 @@ using Project_sem_3.Models;
 
 namespace Project_sem_3.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class InsurancesController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
@@ -49,6 +51,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
             }
             int pagesize = (pageSize ?? 5);
             int pageNumber = (page ?? 1);
+            ViewBag.psize = pagesize;
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "Date_desc" : "Date";

@@ -21,7 +21,7 @@
         @*<button type="button" id="delete_checked">Delete Selected</button>*@
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/Programmes/Create" class="btn btn-info" role="button">Create Programmes</a>
-           
+
         </div>
 
         <!-- DataTales Example -->
@@ -31,7 +31,7 @@
             </div>
             <div class="card-body">
                 <div>
-                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">    
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="col-md-4 col-12 mt-2">
                             <div class="form-group mr-3">
                                 <form action="/Admin/Programmes/" method="get" id="listProgramme">
@@ -69,14 +69,14 @@
 
                         </div>
                         <div class="row">
-                            
+
                             <div class="col-sm-12">
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll_programme" />Select All</th>
-                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
-                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
+                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, listProgramme = Request.QueryString["listProgramme"] })</th>
+                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, listProgramme = Request.QueryString["listProgramme"] })</th>
                                             <th rowspan="1" colspan="1">Action</th>
                                         </tr>
                                     </thead>
@@ -104,12 +104,12 @@
                                             </tr>
                                         }
                                     </tbody>
-                                </table>  
+                                </table>
                                 <div class="row">
                                     <div class="col-3 mt-2">
                                         <div class="form-group mr-3">
                                             <select class="form-control mr-2" id="select-action">
-                                                <option value="6">--Chọn thao tác--</option>
+                                                <option value="6">--Choose Action--</option>
                                                 <option value="1">Active Return</option>
                                                 <option value="-1">Deleted</option>
                                             </select>
@@ -127,7 +127,7 @@
                             </div>
                             <div class="col-sm-12 col-md-5"></div>
                             <div class="col-sm-12 col-md-2">
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.psize, listProgramme = Request.QueryString["listProgramme"] }),
                                new PagedListRenderOptions()
                                {
                                    LiElementClasses = new List<string> { "text-paging" }
@@ -202,6 +202,14 @@
             $(function () {
                 $("#pageSize").change(function () {
                     $("#pagesize").submit();
+                });
+            });
+            $(function () {
+                $("#pageSize").change(function (ev, page, pageSize) {
+                    var page = $('page').val();
+                    var pageSize = $('select#pageSize option:checked').val();
+                    var listProgramme = $('select#listProgramme option:checked').val();
+                    window.location.href = window.location.href.split('?')[0] + '?listProgramme=' + listProgramme + '&page=' + page + '&pageSize=' + pageSize;
                 });
             });
             $(function () {

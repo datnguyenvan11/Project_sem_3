@@ -22,7 +22,7 @@
         @*<button type="button" id="delete_checked">Delete Selected</button>*@
         <div style="margin-bottom:15px;">
             <a href="https://localhost:44362/Admin/InsurancePackages/Create" class="btn btn-info" role="button">Create Insurance Packages</a>
-            
+
         </div>
 
 
@@ -33,19 +33,19 @@
             </div>
             <div class="card-body">
                 <div>
-                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">      
-                      <div class="col-md-4 col-12 mt-2">
-                        <div class="form-group mr-3">
-                            <form action="/Admin/InsurancePackages/" method="get" id="listPackage">
-                                <div class="dataTables_length" id="dataTable_length">
-                                    <label>
-                                        List Status
-                                        @Html.DropDownList("listPackage", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
-                                    </label>
-                                </div>
-                            </form>
+                    <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                        <div class="col-md-4 col-12 mt-2">
+                            <div class="form-group mr-3">
+                                <form action="/Admin/InsurancePackages/" method="get" id="listPackage">
+                                    <div class="dataTables_length" id="dataTable_length">
+                                        <label>
+                                            List Status
+                                            @Html.DropDownList("listPackage", null, new { @class = "custom-select custom-select-sm form-control form-control-sm" })
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
 
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
@@ -70,7 +70,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                
+
                                 <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                                     <thead>
 
@@ -78,14 +78,14 @@
                                         <tr>
                                             <th rowspan="1" colspan="1"><input type="checkbox" id="checkAll_InsurancePackage" />Select All</th>
                                             <th rowspan="1" colspan="1">Insurance Name</th>
-                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })</th>
+                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, listPackage = Request.QueryString["listPackage"] })</th>
                                             <th rowspan="1" colspan="1">Description</th>
-                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm })</th>
+                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, listPackage = Request.QueryString["listPackage"] })</th>
                                             <th rowspan="1" colspan="1">DurationContract</th>
                                             <th rowspan="1" colspan="1">DurationPay</th>
 
 
-                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm })</th>
+                                            <th rowspan="1" colspan="1" class="style-sort">@Html.ActionLink("CreatedAt", "Index", new { sortOrder = ViewBag.DateSortParm, listPackage = Request.QueryString["listPackage"] })</th>
 
 
 
@@ -96,7 +96,7 @@
 
                                     <tbody>
 
-                                       @foreach (var item in Model)
+                                        @foreach (var item in Model)
                                         {
 
                                             <tr role="row" class="odd">
@@ -133,7 +133,7 @@
                                         <div class="col-3 mt-2">
                                             <div class="form-group mr-3">
                                                 <select class="form-control mr-2" id="select-action">
-                                                    <option value="6">--Chọn thao tác--</option>
+                                                    <option value="6">--Choose Action--</option>
                                                     <option value="1">Active Return</option>
                                                     <option value="-1">Deleted</option>
                                                 </select>
@@ -152,7 +152,7 @@
                             </div>
                             <div class="col-sm-12 col-md-3"></div>
                             <div class="col-sm-12 col-md-4">
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }),
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, pageSize = ViewBag.psize, listPackage = Request.QueryString["listPackage"] }),
                                new PagedListRenderOptions()
                                {
                                    LiElementClasses = new List<string> { "text-paging" }
@@ -227,8 +227,16 @@
                     $("#pagesize").submit();
                 });
             });
-            $(function() {
-                $("#listPackage").change(function() {
+            $(function () {
+                $("#pageSize").change(function (ev, page, pageSize) {
+                    var page = $('page').val();
+                    var pageSize = $('select#pageSize option:checked').val();
+                    var listPackage = $('select#listPackage option:checked').val();
+                    window.location.href = window.location.href.split('?')[0] + '?listPackage=' + listPackage + '&page=' + page + '&pageSize=' + pageSize;
+                });
+            });
+            $(function () {
+                $("#listPackage").change(function () {
                     $("#listPackage").submit();
                 });
             });

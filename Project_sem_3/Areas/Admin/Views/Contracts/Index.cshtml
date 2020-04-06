@@ -21,8 +21,14 @@
         <p class="mb-4"> All contracts of customers about insurances .</p>
         <div style="margin-bottom:15px;">
             <div class="card-footer">
-                
-                @ViewBag.totalprice
+                @foreach (var item in Model)
+                {
+                    if(item.Status == 3){
+                        <div>Total Price: $@ViewBag.totalprice</div>
+                        break;
+                    }
+                }
+
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -42,7 +48,7 @@
                             <div col-md-8 col-12 style="margin-top: 2%; margin-left: 18%;">
                                 <div class="float-right mt-2 pr-4">
                                     <div id="reportrange" class="text-primary font-weight-bold" style="cursor: pointer; border-radius: 5px">
-                                        Chọn ngày:&nbsp;
+                                        Choose Time:&nbsp;
                                         <i class="fa fa-calendar text-dark"></i>&nbsp;
                                         <span class="text-dark font-weight-light"></span> <i class="fa fa-caret-down text-dark"></i>
                                     </div>
@@ -173,13 +179,13 @@
                                                 <div class="col-3 mt-2">
                                                     <div class="form-group mr-3">
                                                         <select class="form-control mr-2" id="select-action">
-                                                            <option value="6">--Chọn thao tác--</option>
+                                                            <option value="6">--Choose Action--</option>
                                                             <option value="0">Confirmed</option>
                                                             <option value="-1">Deleted</option>
                                                             <option value="2">Pay</option>
                                                             <option value="3">Done</option>
-                                                            <option value="4">All</option>
-                                                            
+                                                           
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -207,7 +213,7 @@
                         </div>
 
                     </div>
-                </div>                
+                </div>
 
 
                 @section Scripts{
@@ -236,15 +242,15 @@
                                     ]
                                 },
                                 "firstDay": 1
-                            },cb);
+                            }, cb);
                             cb(start, end);
-                            $('#reportrange').on('cancel.daterangepicker',function (ev, picker) {
-                                    $('#reportrange').val('');
-                                });
+                            $('#reportrange').on('cancel.daterangepicker', function (ev, picker) {
+                                $('#reportrange').val('');
+                            });
                             $('#reportrange').on('apply.daterangepicker',
                                 function (ev, picker) {
-                                     startDate = picker.startDate.format('YYYY-MM-DD');
-                                     endDate = picker.endDate.format('YYYY-MM-DD');
+                                    startDate = picker.startDate.format('YYYY-MM-DD');
+                                    endDate = picker.endDate.format('YYYY-MM-DD');
                                     var listcontracts = $('select#listcontracts option:checked').val();
                                     window.location.href = window.location.href.split('?')[0] +
                                         '?listcontracts=' +
@@ -305,7 +311,7 @@
                                     changeStatusPTTime(selectedIDs, action);
                                 };
                             }
-                        
+
                         });
 
                         function changeStatusPTTime(selectedIDs, action) {

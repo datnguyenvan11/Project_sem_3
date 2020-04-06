@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Project_sem_3.Controllers
 {
+    [Authorize]
     public class OrderNoticeController : Controller
     {
         // GET: OrderNotice

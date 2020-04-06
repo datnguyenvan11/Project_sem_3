@@ -27,6 +27,7 @@ namespace Project_sem_3.Controllers
             return View();
         }
         private static string SHOPPING_CART_NAME = "shoppingCart";
+        [Authorize(Roles = "Admin")]
         public ActionResult AddCart(int insurancePackageId, int quantity, string CarOwner, string RegisteredAddress, string LicensePlate, string ChassisNumber, DateTime Duration)
         {
 
@@ -54,6 +55,7 @@ namespace Project_sem_3.Controllers
             return Redirect("/MotorInsurance/Order");
         }
         [HttpGet]
+        [Authorize]
         public ActionResult CreateContract()
         {
             var shoppingCart = LoadShoppingCart();

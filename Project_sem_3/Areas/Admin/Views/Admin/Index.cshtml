@@ -36,7 +36,7 @@
 
                  
                 <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="/admin/orders?status=2" class="text-decoration-none">
+                        <a href="" class="text-decoration-none">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -62,7 +62,7 @@
 
                  
                 <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="/admin/order/list-order" class="text-decoration-none">
+                        <a href="/Admin/Contracts/?listcontracts=1" class="text-decoration-none">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -85,7 +85,7 @@
 
 
                 <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="admin/review" class="text-decoration-none">
+                        <a href="/Admin/Contracts/?listcontracts=3" class="text-decoration-none">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -318,22 +318,22 @@
                                 if (-difference > 1500) {
                                     $('.advice-content')
                                         .text(
-                                            'Đi xuống nhưng không đáng kể => Bạn nên để ý 5 huấn luyện viên được thuê nhiều nhất để có chiến lược tiếp thị hiệu quả');
+                                            'Going down but not significantly => You should notice the 5 coaches hired the most for effective marketing strategies');
                                 } else {
                                     $('.advice-content')
                                         .text(
-                                            'Đi xuống nhưng không đáng kể => Bạn không nên quá lo lắng , hãy tiếp tục truyền thông, tiếp thị');
+                                            'Going down but not significantly => You should not be too worried, continue communication, marketing');
                                 }
                             }
                             if (difference > 0) {
                                 if (difference > 6000) {
                                     $('.advice-content')
                                         .text(
-                                            'Tăng lên đáng kể => Bạn đang có một chiến lược tiếp thị hiệu quả! Hãy tiếp tục cố gắng');
+                                            'Significant increase => You are having an effective marketing strategy! Keep trying');
                                 } else {
                                     $('.advice-content')
                                         .text(
-                                            'Tăng lên nhưng không đáng kể => Bạn không nên quá lo lắng , hãy tiếp tục truyền thông, tiếp thị');
+                                            'Increased but not significant => You should not be too worried, continue communication, marketing');
                                 }
                             }
                             for (var i = 0; i < resp.length; i++) {
