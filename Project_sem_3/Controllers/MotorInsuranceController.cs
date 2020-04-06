@@ -55,7 +55,7 @@ namespace Project_sem_3.Controllers
             return Redirect("/MotorInsurance/Order");
         }
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize]
         public ActionResult CreateContract()
         {
             var shoppingCart = LoadShoppingCart();

@@ -12,6 +12,7 @@ namespace Project_sem_3.Controllers
     {
         ApplicationDbContext db = new ApplicationDbContext();
         // GET: Contract
+        [Authorize]
         public ActionResult Index()
         {
             string userIds = User.Identity.GetUserId();

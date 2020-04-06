@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace Project_sem_3.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class OrderNoticeController : Controller
     {
         // GET: OrderNotice
