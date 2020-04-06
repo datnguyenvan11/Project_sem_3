@@ -25,7 +25,7 @@ namespace Project_sem_3.Controllers
             var insurancePackages = db.InsurancePackages.Where(i => i.InsuranceId == 1);
             return View(insurancePackages);
         }
-        [Authorize(Roles ="Admin")]
+        [Authorize]
         public ActionResult CreateContract(int InsurancePackageId, string HouseType, string DurationHouse, string HouseOwner, string HouserAddress)
         {
             // load cart trong session.
