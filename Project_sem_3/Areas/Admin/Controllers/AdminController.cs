@@ -76,7 +76,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         // GET: Admin/Admin
         public ActionResult Index()
         {
-            var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance);
+            var contracts = db.Contracts.Include(c => c.User).Include(c => c.Insurance);
             contracts = contracts.Where(x => x.Status == 3);
             double totalprice = contracts.Sum(c => (double?)(c.TotalPrice)) ?? 0;
             ViewBag.totalprice = totalprice;

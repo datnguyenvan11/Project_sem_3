@@ -53,7 +53,7 @@ namespace Project_sem_3.Controllers
             var contract = new Contract
             {
                 TotalPrice = medical.Totalprice,
-                ApplicationUserId = User.Identity.GetUserId(),
+                UserID = User.Identity.GetUserId(),
                 InsuranceId = 4,
                 MedicalInsurances = new List<MedicalInsurance>()
             };
@@ -79,7 +79,7 @@ namespace Project_sem_3.Controllers
             var transaction = db.Database.BeginTransaction();
             try
             {
-                var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                 var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                 var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                 var receivermail = new MailAddress(em.Email, "Insurance Company");

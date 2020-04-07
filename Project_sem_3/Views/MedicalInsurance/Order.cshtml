@@ -1051,9 +1051,7 @@
             });
         })
         function deleted(i) {
-            var pricedelete = $('#displayprice-' + i).text().replace("$","")
-            totalprice = totalprice - parseInt(pricedelete)
-             $(".price-sum").text('$' + totalprice);
+      
              $(`#trid-${i}`).remove();
 
         }

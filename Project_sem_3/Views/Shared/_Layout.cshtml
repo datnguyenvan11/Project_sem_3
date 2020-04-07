@@ -16,6 +16,8 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/themes/base/minified/jquery-ui.min.css")" rel="stylesheet" />
+
 
     @* Syncfusion Essential JS 2 Scripts *@
     <!-- Loading main css file -->
@@ -28,14 +30,15 @@
         .no-bullet li {
             margin-bottom: 6px
         }
+
         .main-navigation .menu li {
-         display: inline-block;
-         font-size:20px
+            display: inline-block;
+            font-size: 20px
         }
-            
-        
-        .menu-item{
-            margin:0
+
+
+        .menu-item {
+            margin: 0
         }
     </style>
 </head>
@@ -70,13 +73,13 @@
                     <div class="main-navigation" style="font-size:20px;    margin-top: 10px;">
                         <ul class="menu">
                             @*<li class="menu-item"><a href="about.html">About us</a></li>
-        <li class="menu-item"><a href="insurance.html">Insurance plans</a></li>
-        <li class="menu-item"><a href="resource.html">Resources</a></li>
-        <li class="menu-item"><a href="contact.html">Contact</a></li>*@
+                                <li class="menu-item"><a href="insurance.html">Insurance plans</a></li>
+                                <li class="menu-item"><a href="resource.html">Resources</a></li>
+                                <li class="menu-item"><a href="contact.html">Contact</a></li>*@
                             @*<li class="menu-item">@Html.ActionLink("Home", "Index", "Home")</li>*@
 
                             @*<li class="menu-item">@Html.ActionLink("Insurance plans", "Insurance", "Home")</li>
-        <li class="menu-item">@Html.ActionLink("Resource", "Resource", "Home")</li>*@
+                                <li class="menu-item">@Html.ActionLink("Resource", "Resource", "Home")</li>*@
 
                             <li class="menu-item">@Html.ActionLink("Home", "index", "Home")</li>
                             <li class="menu-item">@Html.ActionLink("Medical", "MedicalInsurance", "Home")</li>
@@ -449,6 +452,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryui")
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.10.4.min.js")"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
     @RenderSection("scripts", required: false)
 

@@ -23,8 +23,9 @@
             <div class="card-footer">
                 @foreach (var item in Model)
                 {
-                    if(item.Status == 3){
-                        <div>Total Price: $@ViewBag.totalprice</div>
+                    if (item.Status == 3)
+                    {
+                        <div style="color:black">Total Price: $@ViewBag.totalprice</div>
                         break;
                     }
                 }
@@ -112,7 +113,7 @@
                                                             @item.Insurance.Name
                                                         </td>
                                                         <td class="sorting_1">
-                                                            @item.ApplicationUserId
+                                                            @item.User.UserName
                                                         </td>
 
                                                         <td>$@item.TotalPrice</td>
@@ -184,7 +185,7 @@
                                                             <option value="-1">Deleted</option>
                                                             <option value="2">Pay</option>
                                                             <option value="3">Done</option>
-                                                           
+
 
                                                         </select>
                                                     </div>
@@ -216,7 +217,28 @@
                 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 @section Scripts{
+
+
+
+                    </script>
                     @Scripts.Render("~/bundles/jqueryval")
                     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
                     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
