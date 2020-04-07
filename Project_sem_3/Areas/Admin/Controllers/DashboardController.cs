@@ -22,9 +22,6 @@ namespace Project_sem_3.Areas.Dashboard.Controllers
     [Authorize(Roles = "Admin")]
     public class DashboardController : Controller
     {
-        private ApplicationRoleManager _rolenManager;
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
         ApplicationDbContext db = new ApplicationDbContext();
 
       
