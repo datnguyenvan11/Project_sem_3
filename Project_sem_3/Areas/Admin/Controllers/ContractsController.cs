@@ -15,7 +15,7 @@ using Microsoft.AspNet.Identity.Owin;
 using System.Threading;
 using System.Net.Mail;
 
-namespace Project_sem_3.Areas.Admin.Controllers
+namespace Project_sem_3.Areas.Dashboard.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class ContractsController : Controller

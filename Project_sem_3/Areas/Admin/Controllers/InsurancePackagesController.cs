@@ -12,7 +12,7 @@ using System.Web.Mvc;
 using Project_sem_3.Models;
 using System.Threading;
 
-namespace Project_sem_3.Areas.Admin.Controllers
+namespace Project_sem_3.Areas.Dashboard.Controllers
 {
     [Authorize(Roles = "Admin")]
 

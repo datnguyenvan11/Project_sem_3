@@ -12,7 +12,7 @@ using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Project_sem_3.Areas.Admin.Controllers
+namespace Project_sem_3.Areas.Dashboard.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class RoleController : Controller
