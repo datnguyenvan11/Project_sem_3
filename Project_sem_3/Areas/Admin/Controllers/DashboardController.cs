@@ -17,10 +17,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Net;
 
-namespace Project_sem_3.Areas.Admin.Controllers
+namespace Project_sem_3.Areas.Dashboard.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class AdminController : Controller
+    public class DashboardController : Controller
     {
         private ApplicationRoleManager _rolenManager;
         private ApplicationSignInManager _signInManager;
@@ -28,51 +28,9 @@ namespace Project_sem_3.Areas.Admin.Controllers
         ApplicationDbContext db = new ApplicationDbContext();
 
       
-        public AdminController()
-        {
-        }
+    
 
-        public AdminController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager)
-        {
-            RoleManager = roleManager;
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
-
-        public ApplicationSignInManager SignInManager
-        {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
-            private set
-            {
-                _signInManager = value;
-            }
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get
-            {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
-        }
-        public ApplicationRoleManager RoleManager
-        {
-            get
-            {
-                return _rolenManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
-            }
-            private set
-            {
-                _rolenManager = value;
-            }
-        }
+      
         // GET: Admin/Admin
         public ActionResult Index()
         {
