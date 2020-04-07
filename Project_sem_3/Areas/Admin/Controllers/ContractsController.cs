@@ -25,7 +25,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
         public ActionResult Index(string sortOrder, string searchString, int? page, int? pageSize, string listcontracts, DateTime? startDate, DateTime? endDate)
         {
 
-            var contracts = db.Contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where( c => c.Status != 5);
+            var contracts = db.Contracts.Include(c => c.User).Include(c => c.Insurance).Where( c => c.Status != 5);
             ViewBag.PageSize = new List<SelectListItem>()
             {
                 new SelectListItem() { Text="5", Value= "5"},
@@ -71,7 +71,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
             if (startDate != null && endDate != null)
             {
-                contracts = contracts.Include(c => c.ApplicationUser).Include(c => c.Insurance).Where(x => x.CreatedAt >= startDate && x.CreatedAt <= endDate);
+                contracts = contracts.Include(c => c.User).Include(c => c.Insurance).Where(x => x.CreatedAt >= startDate && x.CreatedAt <= endDate);
             }
 
             switch (listcontracts)
@@ -115,7 +115,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                         if (contract.InsuranceId == 1)
                         {
                             var homeInsurance = db.HouseInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                            var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                            var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                             var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                             var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                             var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -180,7 +180,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                         if (contract.InsuranceId == 2)
                         {
                             var lifeInsurance = db.LifeInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                            var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                            var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                             var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                             var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                             var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -253,7 +253,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                         if (contract.InsuranceId == 3)
                         {
                             var motorInsurance = db.MotorInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                            var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                            var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                             var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                             var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                             var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -320,7 +320,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                         if (contract.InsuranceId == 4)
                         {
                             var medicalInsurances = db.MedicalInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                            var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                            var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                             var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                             var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                             var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -388,7 +388,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     if (contract.InsuranceId == 1)
                     {
                         var homeInsurance = db.HouseInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                         var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                         var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                         var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -453,7 +453,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     if (contract.InsuranceId == 2)
                     {
                         var lifeInsurance = db.LifeInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                         var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                         var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                         var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -526,7 +526,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     if (contract.InsuranceId == 3)
                     {
                         var motorInsurance = db.MotorInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                         var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                         var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                         var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -593,7 +593,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     if (contract.InsuranceId == 4)
                     {
                         var medicalInsurances = db.MedicalInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                         var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                         var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                         var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -661,7 +661,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     if (contract.InsuranceId == 1)
                     {
                         var homeInsurance = db.HouseInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                         var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                         var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                         var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -726,7 +726,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     if (contract.InsuranceId == 2)
                     {
                         var lifeInsurance = db.LifeInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                         var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                         var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                         var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -799,7 +799,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     if (contract.InsuranceId == 3)
                     {
                         var motorInsurance = db.MotorInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                         var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                         var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                         var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -866,7 +866,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     if (contract.InsuranceId == 4)
                     {
                         var medicalInsurances = db.MedicalInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                         var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                         var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                         var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -934,7 +934,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     if (contract.InsuranceId == 1)
                     {
                         var homeInsurance = db.HouseInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                         var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                         var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                         var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -999,7 +999,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     if (contract.InsuranceId == 2)
                     {
                         var lifeInsurance = db.LifeInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                         var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                         var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                         var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -1072,7 +1072,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     if (contract.InsuranceId == 3)
                     {
                         var motorInsurance = db.MotorInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                         var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                         var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                         var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -1139,7 +1139,7 @@ namespace Project_sem_3.Areas.Admin.Controllers
                     if (contract.InsuranceId == 4)
                     {
                         var medicalInsurances = db.MedicalInsurances.Where(x => x.ContractId == contract.Id).ToList();
-                        var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                        var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                         var e = db.InsurancePackages.Where(x => x.InsuranceId == contract.InsuranceId).FirstOrDefault();
                         var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                         var receivermail = new MailAddress(em.Email, "Insurance Company");
@@ -1234,6 +1234,27 @@ namespace Project_sem_3.Areas.Admin.Controllers
 
             return View();
 
+        }
+        public ActionResult GetData()
+        {
+            int bhyt = db.Contracts.Where(x => x.InsuranceId == 4 ).Count();
+            int bhnt = db.Contracts.Where(x => x.InsuranceId == 2).Count();
+            int bhxm = db.Contracts.Where(x => x.InsuranceId ==3 ).Count();
+            int bhn = db.Contracts.Where(x => x.InsuranceId == 1).Count();
+            Insurance obj = new Insurance();
+            obj.Bhyt = bhyt;
+            obj.Bhxm = bhxm;
+            obj.Bhnt = bhnt;
+            obj.Bhn = bhn;
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+        public class Insurance
+        {
+            public int Bhyt { get; set; }
+            public int Bhnt { get; set; }
+            public int Bhxm { get; set; }
+            public int Bhn { get; set; }
         }
 
     }

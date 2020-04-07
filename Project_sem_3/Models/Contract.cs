@@ -11,7 +11,8 @@ namespace Project_sem_3.Models
     public class Contract
     {
         public int Id { get; set; }
-        public string ApplicationUserId { get; set; }
+        [ForeignKey("User")]
+        public string UserID { get; set; }
         public double TotalPrice { get; set; }
         public int InsuranceId { get; set; }
         [DataType(DataType.Date)]
@@ -36,7 +37,7 @@ namespace Project_sem_3.Models
         public virtual ICollection<HouseInsurance> HouseInsurances { get; set; }
         public virtual ICollection<MedicalInsurance> MedicalInsurances { get; set; }
         public virtual ICollection<LifeInsurance> LifeInsurances { get; set; }
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        public virtual ApplicationUser User { get; set; }
         public virtual Insurance Insurance { get; set; }
 
 

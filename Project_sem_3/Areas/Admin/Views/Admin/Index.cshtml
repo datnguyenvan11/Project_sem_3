@@ -4,7 +4,52 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<style>
 
+    .highcharts-figure, .highcharts-data-table table {
+        min-width: 320px;
+        max-width: 800px;
+        margin: 1em auto;
+    }
+
+    .highcharts-data-table table {
+        font-family: Verdana, sans-serif;
+        border-collapse: collapse;
+        border: 1px solid #EBEBEB;
+        margin: 10px auto;
+        text-align: center;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .highcharts-data-table caption {
+        padding: 1em 0;
+        font-size: 1.2em;
+        color: #555;
+    }
+
+    .highcharts-data-table th {
+        font-weight: 600;
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+        padding: 0.5em;
+    }
+
+    .highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+        background: #f8f8f8;
+    }
+
+    .highcharts-data-table tr:hover {
+        background: #f1f7ff;
+    }
+
+
+    input[type="number"] {
+        min-width: 50px;
+    }
+</style>
 <section id="main-content">
     <section class="wrapper">
         <div class="panel panel-default">
@@ -13,96 +58,96 @@
             </h2>
             <div class="row pr-4 pl-4 mt-3">
                 <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="" id="monthly" class="text-decoration-none">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Revenue
-                                                (Month)
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalMonth" >
-                                            </div>
+                    <a href="" id="monthly" class="text-decoration-none">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Revenue
+                                            (Month)
                                         </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300" ></i>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalMonth">
                                         </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                    </div>
-
-                 
-                <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="" class="text-decoration-none">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                
-                                                Revenue
-                                                (Total) 
-
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                $@ViewBag.totalprice
-                                            </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                 
-                <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="/Admin/Contracts/?listcontracts=1" class="text-decoration-none">
-                            <div class="card border-left-info shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                
-                                                Contract waiting for approval  
-                                                
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"> @ViewBag.totalpending</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
+                </div>
 
 
                 <div class="col-xl-3 col-md-6 mb-4">
-                        <a href="/Admin/Contracts/?listcontracts=3" class="text-decoration-none">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Contract approved
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.totaldone</div>
+                    <a href="" class="text-decoration-none">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+
+                                            Revenue
+                                            (Total)
+
                                         </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            $@ViewBag.totalprice
                                         </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <a href="/Admin/Contracts/?listcontracts=1" class="text-decoration-none">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+
+                                            Contract waiting for approval
+
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800"> @ViewBag.totalpending</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <a href="/Admin/Contracts/?listcontracts=3" class="text-decoration-none">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            Contract approved
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.totaldone</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
             <div class="float-right mt-2 pr-4">
                 <div id="reportrange" class="text-primary font-weight-bold"
@@ -136,19 +181,28 @@
                 </div>
             </div>
             <div class="advice ml-5 mb-4">
-                <div class="text-primary"><h5 class="font-weight-bold">Excellent coach:</h5></div>
+             
                 <h6 class="advice-content-best-seller" style="font-style: italic;"></h6>
             </div>
             <div class="col-5 pl-4">
                 <div class="card shadow mb-4" style="width: 650px">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h5 class="m-0 font-weight-bold text-primary">Coach statistics</h5>
+                        <h5 class="m-0 font-weight-bold text-primary">
+                            Insurance statistics
+                        </h5>
                     </div>
                     <!-- Card Body -->
-                    <div class="card-body">
-                        <div id="piechart" style="width: 600px; height: 300px" class="mr-5"></div>
+              
+
+                    <div class="jumbotron">
+                        <figure class="highcharts-figure">
+                            @*<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>*@
+                            <div id="container"></div>
+
+                        </figure>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -165,19 +219,95 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    @*<script src="~/Content/chart/highcharts.js"></script>
+        <script src="~/Content/chart/accessibility.js"></script>
+        <script src="~/Content/chart/export-data.js"></script>
+        <script src="~/Content/chart/exporting.js"></script>*@
+    <script src="https://code.highcharts.com/highcharts.src.js"></script>
+
     <script type="text/javascript">
+
+
+
+        $(document).ready(function () {
+
+            $.getJSON("/Admin/Contracts/GetData", function (data) {
+
+                Highcharts.chart('container', {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie'
+                    },
+                    title: {
+                        text: 'Browser market shares in January, 2018'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                    },
+                    accessibility: {
+                        point: {
+                            valueSuffix: '%'
+                        }
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Brands',
+                        colorByPoint: true,
+                        data: [{
+                            name: 'MedicalInsurance',
+                            y: data.Bhyt,
+                            sliced: true,
+                            selected: true
+                        }, {
+                            name: 'MotorInsurance',
+                            y: data.Bhxm
+                        }, {
+                            name: 'LifeInsurance',
+                            y: data.Bhnt
+                        }, {
+                            name: 'HomeInsurance',
+                            y: data.Bhn
+                        }]
+                    }]
+                });
+            });
+
+        });
+
+
+
+
+
+
+
+
+
+
+
+
         google.charts.load('current', { 'packages': ['line'] });
-        google.charts.setOnLoadCallback(function() {
+        google.charts.setOnLoadCallback(function () {
             var start = moment().subtract(29, 'days');
             var end = moment();
-            
+
             $.ajax({
                 url: '/Contracts/getChartDataApi?startDate=' +
                     start.format('YYYY-MM-DD') +
                     '&endDate=' +
                     end.format('YYYY-MM-DD'),
                 method: 'GET',
-                success: function(resp) {
+                success: function (resp) {
                     if (resp.length == 0) {
                         swal('No data exists for line chart', 'Please choose another time range.', 'warning');
                         return;
@@ -217,7 +347,7 @@
                     $('.total-revenue').text('$' + totalRevenue);
                     $('#totalMonth').text('$' + totalRevenue);
                 },
-                error: function() {
+                error: function () {
                     swal('Something is wrong', 'Cannot retrieve data from API', 'error');
                 }
 
@@ -252,7 +382,7 @@
         }
 
 
-        $(function() {
+        $(function () {
             var start = moment().subtract(29, 'days');
             var end = moment();
 
@@ -261,27 +391,27 @@
             }
 
             $('#reportrange').daterangepicker({
-                    startDate: start,
-                    endDate: end,
-                    ranges: {
-                        'Last week': [moment().subtract(6, 'days'), moment()],
-                        'Last 30 days': [moment().subtract(29, 'days'), moment()],
-                        'This month': [moment().startOf('month'), moment().endOf('month')],
-                        'Last month': [
-                            moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')
-                        ]
-                    },
-                    "firstDay": 1
+                startDate: start,
+                endDate: end,
+                ranges: {
+                    'Last week': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 days': [moment().subtract(29, 'days'), moment()],
+                    'This month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last month': [
+                        moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')
+                    ]
                 },
+                "firstDay": 1
+            },
                 cb);
             cb(start, end);
             $('#reportrange').on('cancel.daterangepicker',
-                function(ev, picker) {
+                function (ev, picker) {
                     //do something, like clearing an input
                     $('#reportrange').val('');
                 });
             $('#reportrange').on('apply.daterangepicker',
-                function(ev, picker) {
+                function (ev, picker) {
                     var startDate = picker.startDate.format('YYYY-MM-DD');
                     var endDate = picker.endDate.format('YYYY-MM-DD');
                     //    $.ajax({
@@ -302,7 +432,7 @@
                     $.ajax({
                         url: '/Contracts/getChartDataApi?startDate=' + startDate + '&endDate=' + endDate,
                         method: 'GET',
-                        success: function(resp) {
+                        success: function (resp) {
                             if (resp.length == 0) {
                                 swal('Không có dữ liệu', 'Hãy chọn khoảng thời gian.', 'warning');
                                 return;
@@ -341,74 +471,74 @@
                             };
                             $('.total-revenue').text('$' + totalRevenue);
                         },
-                        error: function() {
+                        error: function () {
                             swal('Action failed', 'Cannot retrieve data from API', 'error');
                         }
                     });
                 });
         });
-        //google.charts.load('current', { 'packages': ['corechart'] });
-        //google.charts.setOnLoadCallback(function () {
-        //    var start = moment().subtract(29, 'days');
-        //    var end = moment();
-        //    $.ajax({
-        //        url: '/api-get-pie-chart-data?startDate=' + start.format('YYYY-MM-DD') + '&endDate=' + end.format('YYYY-MM-DD'),
-        //        method: 'GET',
-        //        success: function (resp) {
-        //            if (resp.length == 0) {
-        //                swal('No data exists for pie chart', 'Please choose another time range.', 'warning');
-        //                return;
-        //            }
-        //            ;
-        //            // console.log(resp);
-        //            drawPieChart(resp);
-        //        },
-        //        error: function (r) {
-        //            swal('Something is wrong', 'Cannot retrieve data from API', 'error');
-        //        }
-        //    });
-        //});
-        //function drawPieChart(chart_data) {
-        //    var data = new google.visualization.DataTable();
-        //    data.addColumn('string', 'Product Name');
-        //    data.addColumn('number', 'Quantity');
-        //    for (var i = 0; i < 5; i++) {
-        //        data.addRow([chart_data[i].product.name, Number(chart_data[i].totalQuantity)]);
-        //    }
-        //    ;
-        //    var rest = 0;
-        //    for (var i = 5; i < chart_data.length; i++) {
-        //        rest += Number(chart_data[i].totalQuantity);
-        //    }
-        //    ;
-        //    var all = 0;
-        //    for (var i = 0; i < chart_data.length; i++) {
-        //        all += Number(chart_data[i].totalQuantity);
-        //    }
-        //    ;
-        //    var percentage1 = (chart_data[0].totalQuantity / all) * 100;
-        //    if (percentage1 <= 20) {
-        //        $('.advice-content-best-seller').html('<span>The <a href="' + '/admin/orders?personal_training_id=' + chart_data[0].product.id + '">' + chart_data[0].product.name + '</a> đang làm rất tốt nhưng so với tất cả phần trăm không quá lớn. </span>');
-        //    } else if (percentage1 < 50 && percentage1 > 20) {
-        //        $('.advice-content-best-seller').html('<span>The <a href="' + '/admin/orders?personal_training_id=' + chart_data[0].product.id + '">' + chart_data[0].product.name + '</a> đang làm rất tốt thời gian này. </span>');
-        //    } else if (percentage1 <= 50) {
-        //        $('.advice-content-best-seller').html('<span>The <a href="' + '/admin/orders?personal_training_id=' + chart_data[0].product.id + '">' + chart_data[0].product.name + '</a> chiếm hơn một nửa doanh số của bạn, bạn không chỉ nên nhập khẩu nhiều hơn mà còn quảng bá các sản phẩm khác nữa. <a href="' + '/admin/order?product_id=' + chart_data[1].product_id + '">' + chart_data[1].product.name + '</span>');
-        //    }
-        //    data.addRow(['Huấn luyện viên khác', rest]);
-        //    var options = {
-        //        title: '5 Best-sellers'
-        //    };
-        //    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-        //    chart.draw(data, options);
-        //    google.visualization.events.addListener(chart, 'select', selectHandler);
-        //    function selectHandler(e) {
-        //        for (var i = 0; i < chart.getSelection().length; i++) {
-        //            var item = chart.getSelection()[i];
-        //            window.location.href = '/admin/orders?personal_training_id=' + chart_data[item.row].product.id;
-        //        }
-        //    }
-        //}
-        //$('#monthly').attr('href', 'admin/orders?startDate=' + moment().startOf('month').format('YYYY-MM-DD') + '&endDate=' + moment().endOf('month').format('YYYY-MM-DD'))
+                        //google.charts.load('current', {'packages': ['corechart'] });
+                        //google.charts.setOnLoadCallback(function () {
+                        //    var start = moment().subtract(29, 'days');
+                        //    var end = moment();
+                        //    $.ajax({
+                        //        url: '/api-get-pie-chart-data?startDate=' + start.format('YYYY-MM-DD') + '&endDate=' + end.format('YYYY-MM-DD'),
+                        //        method: 'GET',
+                        //        success: function (resp) {
+                        //            if (resp.length == 0) {
+                        //                swal('No data exists for pie chart', 'Please choose another time range.', 'warning');
+                        //                return;
+                        //            }
+                        //            ;
+                        //            // console.log(resp);
+                        //            drawPieChart(resp);
+                        //        },
+                        //        error: function (r) {
+                        //            swal('Something is wrong', 'Cannot retrieve data from API', 'error');
+                        //        }
+                        //    });
+                        //});
+                        //function drawPieChart(chart_data) {
+                        //    var data = new google.visualization.DataTable();
+                        //    data.addColumn('string', 'Product Name');
+                        //    data.addColumn('number', 'Quantity');
+                        //    for (var i = 0; i < 5; i++) {
+                        //        data.addRow([chart_data[i].product.name, Number(chart_data[i].totalQuantity)]);
+                        //    }
+                        //    ;
+                        //    var rest = 0;
+                        //    for (var i = 5; i < chart_data.length; i++) {
+                        //        rest += Number(chart_data[i].totalQuantity);
+                        //    }
+                        //    ;
+                        //    var all = 0;
+                        //    for (var i = 0; i < chart_data.length; i++) {
+                        //        all += Number(chart_data[i].totalQuantity);
+                        //    }
+                        //    ;
+                        //    var percentage1 = (chart_data[0].totalQuantity / all) * 100;
+                        //    if (percentage1 <= 20) {
+                        //        $('.advice-content-best-seller').html('<span>The <a href="' + '/admin/orders?personal_training_id=' + chart_data[0].product.id + '">' + chart_data[0].product.name + '</a> đang làm rất tốt nhưng so với tất cả phần trăm không quá lớn. </span>');
+                        //    } else if (percentage1 < 50 && percentage1 > 20) {
+                        //        $('.advice-content-best-seller').html('<span>The <a href="' + '/admin/orders?personal_training_id=' + chart_data[0].product.id + '">' + chart_data[0].product.name + '</a> đang làm rất tốt thời gian này. </span>');
+                        //    } else if (percentage1 <= 50) {
+                        //        $('.advice-content-best-seller').html('<span>The <a href="' + '/admin/orders?personal_training_id=' + chart_data[0].product.id + '">' + chart_data[0].product.name + '</a> chiếm hơn một nửa doanh số của bạn, bạn không chỉ nên nhập khẩu nhiều hơn mà còn quảng bá các sản phẩm khác nữa. <a href="' + '/admin/order?product_id=' + chart_data[1].product_id + '">' + chart_data[1].product.name + '</span>');
+                        //    }
+                        //    data.addRow(['Huấn luyện viên khác', rest]);
+                        //    var options = {
+                        //        title: '5 Best-sellers'
+                        //    };
+                        //    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                        //    chart.draw(data, options);
+                        //    google.visualization.events.addListener(chart, 'select', selectHandler);
+                        //    function selectHandler(e) {
+                        //        for (var i = 0; i < chart.getSelection().length; i++) {
+                        //            var item = chart.getSelection()[i];
+                        //            window.location.href = '/admin/orders?personal_training_id=' + chart_data[item.row].product.id;
+                        //        }
+                        //    }
+                        //}
+                        //$('#monthly').attr('href', 'admin/orders?startDate=' + moment().startOf('month').format('YYYY-MM-DD') + '&endDate=' + moment().endOf('month').format('YYYY-MM-DD'))
     </script>
 
 

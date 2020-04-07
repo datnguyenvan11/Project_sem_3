@@ -35,7 +35,7 @@ namespace Project_sem_3.Controllers
             {
                 TotalPrice = insurancepackage.Price,
 
-                ApplicationUserId = User.Identity.GetUserId(),
+                UserID = User.Identity.GetUserId(),
                 InsuranceId = 1,
                 HouseInsurances = new List<HouseInsurance>()
             };
@@ -62,7 +62,7 @@ namespace Project_sem_3.Controllers
             var transaction = db.Database.BeginTransaction();
             try
             {
-                var em = db.Users.Where(x => x.Id == contract.ApplicationUserId).FirstOrDefault();
+                var em = db.Users.Where(x => x.Id == contract.UserID).FirstOrDefault();
                 var senderemail = new MailAddress("nguyenvandatvtacl16@gmail.com", "Insurance Company");
                 var receivermail = new MailAddress(em.Email, "Insurance Company");
                 var passwordemail = "vtacl123";
